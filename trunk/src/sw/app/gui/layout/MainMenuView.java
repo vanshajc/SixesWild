@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
-public class MainMenuView extends JPanel {
+public class MainMenuView extends JPanel implements IView{
 	public MainMenuView() {
 		
 		JPanel panel = new JPanel();
@@ -74,5 +74,17 @@ public class MainMenuView extends JPanel {
 		);
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
+	}
+
+	@Override
+	public void initialize() {
+		
+		
+	}
+
+	@Override
+	public void cleanup() {
+		
+		
 	}
 }
