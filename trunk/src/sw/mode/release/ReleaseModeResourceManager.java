@@ -16,7 +16,7 @@ import sw.resource.IResourceManager;
  */
 public class ReleaseModeResourceManager implements IResourceManager {
 
-	HashMap<Square, Image> resources = new HashMap<Square, Image>();
+	HashMap<Square, String> resources = new HashMap<Square, String>();
 	
 	public ReleaseModeResourceManager() {
 		// load all images
@@ -26,11 +26,13 @@ public class ReleaseModeResourceManager implements IResourceManager {
 	 * @see sw.resource.IResourceManager#getImages()
 	 */
 	@Override
-	public HashMap<Square, Image> getImages() {
+	public HashMap<Square, String> getImages() {
 		return resources;
 	}
-	
-	private Image loadImage(String fileName) {
+
+	@Override
+	public String getImage(Square square) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
