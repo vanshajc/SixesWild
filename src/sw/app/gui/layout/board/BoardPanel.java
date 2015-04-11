@@ -1,33 +1,35 @@
 package sw.app.gui.layout.board;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 
 public class BoardPanel extends JPanel {
 
 	/** GENERATED DO NOT CHANGE */
 	private static final long serialVersionUID = 5914218859027914106L;
-
-	int imgWidth = 48;
-	int imgHeight = 48;
-	int count = 9;
 	
-	int xPos = 0;
-	int yPos = 0;
+	int numCol = 9;
 	
-	Dimension size = new Dimension(imgWidth, imgHeight * count);
+	BoardColumn columns[] = new BoardColumn[numCol];
 	
 	/**
 	 * Create the panel.
 	 */
 	public BoardPanel() {
 		setLayout(null);
-		setPreferredSize(size);
+		setPreferredSize(new Dimension(800, 600));
 		
-		JLabel lblTest = new JLabel("test");
-		lblTest.setBounds(xPos, yPos, imgWidth, imgHeight);
-		add(lblTest);
+		int x = 0;
+		for (int i = 0; i < numCol; i++) {
+			columns[i] = new BoardColumn();
+			Rectangle rec = new Rectangle(columns[i].getPreferredSize());
+			rec.setLocation(x, 0);
+			columns[i].setBounds(rec);
+			x += rec.width;
+			add(columns[i]);
+		}
+		
 	}
 }

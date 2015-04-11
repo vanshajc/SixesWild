@@ -15,7 +15,6 @@ public class QuitButtonActionListener implements ActionListener {
 
 	LayoutManager manager;
 	
-	
 	public QuitButtonActionListener(LayoutManager manager) {
 		super();
 		this.manager = manager;
