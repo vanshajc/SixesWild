@@ -1,4 +1,4 @@
-package sw.builder.gui.layout;
+package sw.app.gui.layout;
 
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
