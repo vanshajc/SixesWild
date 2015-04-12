@@ -5,9 +5,7 @@
  */
 package sw.common.model.entity;
 
-import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -37,17 +35,25 @@ public class Board {
 	/** Create a new Board
 	 * @param fill the board with randomly generated value or not
 	 */
+	public Board() {
+		createBoard(true);
+	}
+	
 	public Board(boolean fill) {
+		createBoard(fill);
+	}
+	
+	private void createBoard(boolean fill) {
 		// Create the board
-		for (int x = 0; x < Board.COLUMN; x++) {			
+		for (int x = 0; x < Board.COLUMN; x++) {
 			// Create rows first since we want easy access to columns
 			ArrayList<Square> row = new ArrayList<Square>();
-			for (int y = 0; y < Board.ROW; y++) {				
-				row.add(SquareFactory.getSquare(fill));				
+			for (int y = 0; y < Board.ROW; y++) {
+				row.add(SquareFactory.getSquare(fill));
 			}
 			// Add the new row to the grid
 			grid.add(row);
-		}		
+		}
 	}
 	
 	/**

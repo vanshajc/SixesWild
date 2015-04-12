@@ -13,6 +13,54 @@ public class Level {
 	Game game;
 	Statistics winStats;
 	IMode mode;
+	int levelNum;
 	
+	public Level(int levelNum, Game game, Statistics winStats, IMode mode) {
+		this.game = game;
+		this.winStats = winStats;
+		this.mode = mode;
+		this.levelNum = levelNum;
+	}
+
+	/**
+	 * @return the game
+	 */
+	public Game getGame() {
+		return game;
+	}
+
+	/**
+	 * @return the winStats
+	 */
+	public Statistics getWinStats() {
+		return winStats;
+	}
+
+	/**
+	 * @return the mode
+	 */
+	public IMode getMode() {
+		return mode;
+	}
+	
+	public int getStars() {
+		return 1;
+	}
+	
+	public void initialize() {
+		
+	}
+	
+	public boolean hasWon() {
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return mode.toString().concat(Integer.toString(levelNum));
+	}
 	
 }
