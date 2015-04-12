@@ -5,7 +5,6 @@
  */
 package sw.common.system.factory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -26,8 +25,8 @@ public class TileFrequency {
 	static Random rand = new Random();
 	
 	public TileFrequency() {
-		double val  = 100 / maxVal; // Equal frequency for each value
-		double mult = 100 / maxMul; // Equal frequency for each multiplier
+		double val  = 100.0 / maxVal; // Equal frequency for each value
+		double mult = 100.0 / maxMul; // Equal frequency for each multiplier
 		double sum;                 // Keep track of percentile for each subsequent value
 		
 		// Set freq for each value
@@ -75,7 +74,7 @@ public class TileFrequency {
 		try {
 			f = mulFreq.get(i);
 		} catch (IndexOutOfBoundsException e) {
-			e.printStackTrace();			
+			//e.printStackTrace();			
 		}			
 		return f;
 	}
