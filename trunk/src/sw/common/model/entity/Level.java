@@ -5,9 +5,14 @@
  */
 package sw.common.model.entity;
 
-/** The model for an arbitrary game level */
-public class Level implements IMode {
-	
-	
+import sw.common.model.controller.IMode;
 
+/** The model for an arbitrary game level */
+public class Level {
+	
+	Game game;
+	Statistics winStats;
+	IMode mode;
+	
+	
 }
