@@ -7,10 +7,11 @@ import javax.swing.JFrame;
 
 import sw.app.gui.layout.SixesWildJFrame;
 import sw.app.gui.layout.SixesWildJFrame_BoardPanel;
+import javax.swing.JButton;
 
 public class Application_BoardPanel {
 
-	private SixesWildJFrame_BoardPanel app;
+	private SixesWildJFrame_BoardPanel app;	
 
 	/**
 	 * Launch the application.

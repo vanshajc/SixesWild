@@ -29,16 +29,14 @@ public class TileFrequency {
 		double mult = 100.0 / maxMul; // Equal frequency for each multiplier
 		double sum;                 // Keep track of percentile for each subsequent value
 		
-		// Set freq for each value
-		//valFreq.put(0, 0.0);  // Don't want to generate 0's
+		// Set freq for each value		
 		sum = 0;
 		for (int i = 0; i <= maxVal; i++) {			
 			valFreq.put(i, sum);
 			sum += val;
 		}
 		
-		// Set freq for each multiplier value
-		//mulFreq.put(0, 0.0);
+		// Set freq for each multiplier value		
 		sum = 0;
 		for (int i = 0; i <= maxMul; i++) {			
 			mulFreq.put(i, sum);

@@ -24,9 +24,7 @@ public class BoardColumn extends JPanel {
 	int xPos = 0;
 	int yPos = 0;
 	
-	Image img;
-	
-	String resourcePath = "/sw/resource/image/icon50x50.png";
+	Image img;	
 	
 	IResourceManager resourceManager;
 	
@@ -35,11 +33,21 @@ public class BoardColumn extends JPanel {
 	
 	int stop;
 	
+	/** Design note:
+	 *  Should treat each column like a queue, add in from tail, take from head, but we can also
+	 *  remove square from somewhere in the middle, the next one will take its place, so it's also like 
+	 *  a doubly-linked list
+	 * 
+	 * @param resManager
+	 * @param stop
+	 */
+
+	
 	public BoardColumn(IResourceManager resManager, int stop) {
 		Dimension size = new Dimension(imgWidth, imgHeight * count);
 		setPreferredSize(size);
 		
-		String path = resManager.getImage(new Square(TileFactory.createTile()));
+		String path = resManager.getImage(new Square(TileFactory.getTile()));
 		ImageIcon ii = new ImageIcon(BoardColumn.class.getResource(path));		
 		img = ii.getImage();
 		
@@ -51,14 +59,33 @@ public class BoardColumn extends JPanel {
 	}
 
 	public void updatePosition() {
-		if (yPos < rows[stop]) {
-			yPos++;		
+		if (yPos == 0) {
+			yPos = 1;
+		} else if (yPos < rows[stop]) {
+			yPos += 2;		
 		}
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.copyArea(xPos, yPos, imgWidth, imgHeight, 0, 0);
 		g.drawImage(img, xPos, yPos, null);
+		
+	}
+
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private class BoardSquare {
+		int yPos; // y position, in term of index, 0 is the lowest position
+		Square square;
+		
+		public BoardSquare(Square square) {
+			this.yPos = count - 1;  // insert at the top
+			this.square = square;
+		}
 	}
 
 }
