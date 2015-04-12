@@ -22,7 +22,7 @@ public class SplashScreenView extends JPanel implements IView{
 			Thread.sleep(5000);
 		} catch (Exception e) {
 		}
-		new MainMenuController(this);
+		//new MainMenuController(this);
 		
 	}
 
