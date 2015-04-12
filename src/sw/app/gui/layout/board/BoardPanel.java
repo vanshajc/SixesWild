@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import sw.app.gui.layout.IView;
+import sw.common.model.entity.Board;
 import sw.mode.release.Release;
 
 public class BoardPanel extends JPanel implements IView, ActionListener {
@@ -17,13 +18,12 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	/** GENERATED DO NOT CHANGE */
 	private static final long serialVersionUID = 5914218859027914106L;
 	
-	/** Default dimension of Board */
-	int numColumn = 9;
-	int numRow    = 9;
+	/* The Board to manage */
+	Board board = new Board(true);
 	
 	Dimension preferredSize = new Dimension(800, 600);
 	
-	BoardColumn columns[] = new BoardColumn[numColumn];
+	BoardColumn columns[];
 	
 	// Timer to update columns
 	Timer timer;
@@ -37,8 +37,11 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 		setPreferredSize(preferredSize);
 		setDoubleBuffered(true);
 		
+		// Initialize the columns
+		columns = new BoardColumn[board.COLUMN];
+		
 		int x = 0;
-		for (int i = 0; i < numColumn; i++) {
+		for (int i = 0; i < board.COLUMN; i++) {
 			columns[i] = new BoardColumn(new Release(), i);
 			
 			// Use the column's preferred size
@@ -56,7 +59,7 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		for (int i = 0; i < numColumn; i++) {
+		for (int i = 0; i < board.COLUMN; i++) {
 			columns[i].updatePosition();
 		}
 		repaint();
@@ -65,7 +68,7 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (int i = 0; i < numColumn; i++) {
+		for (int i = 0; i < board.COLUMN; i++) {
 			columns[i].repaint();
 		}
 	}
@@ -78,6 +81,12 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	@Override
 	public void cleanup() {
 		timer.stop();		
+	}
+
+	public void clear() {
+		for (int i = 0; i < board.COLUMN; i++) {
+			columns[i].clear();
+		}		
 	}
 	
 }

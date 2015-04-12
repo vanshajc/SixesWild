@@ -36,7 +36,7 @@ public class TileFactoryTest {
 	public void uninitializeTest() {
 		int run = 10;
 		for (int i = 0; i < run; i++) {
-			Tile tile1 = TileFactory.createTile();
+			Tile tile1 = TileFactory.getTile();
 			assertNotNull(tile1);		
 			System.out.print(tile1.toString());
 		}

@@ -20,7 +20,7 @@ public class Square {
 	boolean selected = false;
 	
 	/** Whether this Square can be selected in a move */
-	boolean unUsed = false;
+	boolean selectable = true;
 
 	/** Constructors */
 	public Square() {}
@@ -72,17 +72,17 @@ public class Square {
 	}
 
 	/**
-	 * @return the unUsed
+	 * @return the selectable
 	 */
-	public boolean isUnUsed() {
-		return unUsed;
+	public boolean isSelectable() {
+		return selectable;
 	}
 
 	/**
-	 * @param unUsed the unUsed to set
+	 * @param selectable the selectable to set
 	 */
-	public void setUnUsed(boolean unUsed) {
-		this.unUsed = unUsed;
+	public void setSelectable(boolean selectable) {
+		this.selectable = selectable;
 	}
 
 	/* (non-Javadoc)
@@ -95,7 +95,7 @@ public class Square {
 			return (tile.equals(s.tile)) &&
 					(isUsed() == s.isUsed()) &&
 					(isSelected() == s.isSelected()) &&
-					(isUnUsed() == s.isUnUsed());					
+					(isSelectable() == s.isSelectable());					
 		}
 		return false;
 	}
@@ -105,6 +105,13 @@ public class Square {
 	 */
 	boolean isUsed() {
 		return useCount > 0;
+	}
+	
+	/**
+	 * @return whether this Square has a Tile associated with it
+	 */
+	boolean isEmpty() {
+		return tile == null;
 	}
 
 }

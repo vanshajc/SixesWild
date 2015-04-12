@@ -23,7 +23,7 @@ public class TileFactory {
 	/**
 	 * @return a Tile generated based on the frequencies
 	 */
-	static public Tile createTile() {		
+	static public Tile getTile() {		
 		return new Tile(frequencies.nextVal(), frequencies.nextMul());
 	}
 
