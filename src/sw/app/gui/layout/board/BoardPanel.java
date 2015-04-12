@@ -11,6 +11,7 @@ import javax.swing.Timer;
 
 import sw.app.gui.layout.IView;
 import sw.common.model.entity.Board;
+import sw.common.model.entity.Level;
 import sw.mode.release.Release;
 
 public class BoardPanel extends JPanel implements IView, ActionListener {
@@ -18,8 +19,11 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	/** GENERATED DO NOT CHANGE */
 	private static final long serialVersionUID = 5914218859027914106L;
 	
+	/* Keep reference to the current level being played */
+	Level level;
+	
 	/* The Board to manage */
-	Board board = new Board(true);
+	Board board;
 	
 	Dimension preferredSize = new Dimension(800, 600);
 	
@@ -32,17 +36,23 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public BoardPanel() {
+	public BoardPanel(Level level) {
+		this.level = level;
+		this.board = level.getGame().getBoard();
+		initializeLayout();		
+	}
+	
+	void initializeLayout() {
 		setLayout(null);
 		setPreferredSize(preferredSize);
 		setDoubleBuffered(true);
 		
 		// Initialize the columns
-		columns = new BoardColumn[board.COLUMN];
+		columns = new BoardColumn[Board.COLUMN];
 		
 		int x = 0;
-		for (int i = 0; i < board.COLUMN; i++) {
-			columns[i] = new BoardColumn(new Release(), i);
+		for (int i = 0; i < Board.COLUMN; i++) {
+			columns[i] = new BoardColumn(level.getMode().getResourceManger(), i);
 			
 			// Use the column's preferred size
 			Rectangle rec = new Rectangle(columns[i].getPreferredSize());
@@ -59,7 +69,7 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		for (int i = 0; i < board.COLUMN; i++) {
+		for (int i = 0; i < Board.COLUMN; i++) {
 			columns[i].updatePosition();
 		}
 		repaint();
@@ -68,7 +78,7 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (int i = 0; i < board.COLUMN; i++) {
+		for (int i = 0; i < Board.COLUMN; i++) {
 			columns[i].repaint();
 		}
 	}
@@ -83,8 +93,9 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 		timer.stop();		
 	}
 
+	/** Remove every Tile from the board */
 	public void clear() {
-		for (int i = 0; i < board.COLUMN; i++) {
+		for (int i = 0; i < Board.COLUMN; i++) {
 			columns[i].clear();
 		}		
 	}

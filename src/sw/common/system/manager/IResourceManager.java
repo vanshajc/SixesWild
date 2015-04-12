@@ -5,13 +5,20 @@
  */
 package sw.common.system.manager;
 
+import java.util.HashMap;
+
 import sw.common.model.entity.Square;
 
 
 /** Every game mode will need to get its own resource manager */
 public interface IResourceManager {
 	
-	/** Get image for a particular state of the Tile */
+	/** Get the image file path for every possible Square
+	 * @return the hashmap with Square as key
+	 */
+	HashMap<Square, String> getImage();
+	
+	/** Get image file path for a particular Square */
 	String getImage(Square square);
 	
 }

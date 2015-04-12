@@ -5,6 +5,8 @@
  */
 package sw.mode;
 
+import java.util.HashMap;
+
 import sw.common.model.entity.Square;
 import sw.common.system.manager.IResourceManager;
 
@@ -14,6 +16,15 @@ import sw.common.system.manager.IResourceManager;
 public abstract class CommonResourceManager implements IResourceManager {
 	
 	String imagePath = "/sw/resource/image/";
+
+	/* (non-Javadoc)
+	 * @see sw.common.system.manager.IResourceManager#getImage()
+	 */
+	@Override
+	public HashMap<Square, String> getImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public String getImage(Square square) {

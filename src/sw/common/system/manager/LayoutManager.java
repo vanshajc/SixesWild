@@ -33,7 +33,8 @@ public class LayoutManager {
 		// Create new View
 		switch (newView) {
 		case GAMEPLAY:
-			current = new GameplayView(this);
+			LevelManager lm = new LevelManager();
+			current = new GameplayView(this, lm);
 			break;
 		default:
 			break;

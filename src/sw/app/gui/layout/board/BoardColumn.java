@@ -47,11 +47,13 @@ public class BoardColumn extends JPanel {
 		Dimension size = new Dimension(imgWidth, imgHeight * count);
 		setPreferredSize(size);
 		
+		// Save a reference to the resource manager so we can load images
 		String path = resManager.getImage(new Square(TileFactory.getTile()));
+		
 		ImageIcon ii = new ImageIcon(BoardColumn.class.getResource(path));		
 		img = ii.getImage();
 		
-		// Calculate rows
+		// Calculate row positions
 		for (int i = 0; i < count; i++) {
 			rows[i] = size.height - ((i+1)*imgHeight);
 		}
