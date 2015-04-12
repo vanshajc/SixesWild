@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -74,11 +75,14 @@ public class MainMenuView extends JPanel implements IView{
 		);
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
+		
+		btnPlay.addActionListener(new PlayGameScreenController(this));
+		btnScoreboard.addActionListener(new ScoreboardScreenController(this));
+		btnCredits.addActionListener(new CreditScreenController(this));
 	}
 
 	@Override
 	public void initialize() {
-		
 		
 	}
 
