@@ -10,11 +10,14 @@ public class SplashScreenView extends JPanel implements IView{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public SplashScreenView() {
+	LayoutManager lm;
+	public SplashScreenView(LayoutManager lm) {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(SplashScreenView.class.getResource("/sw/resource/image/SplashScreenResizedtest.png")));
 		add(lblNewLabel);
+		
+		this.lm = lm;
 		//initialize();
 	}
 	

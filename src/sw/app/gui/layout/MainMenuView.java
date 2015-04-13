@@ -1,8 +1,6 @@
 package sw.app.gui.layout;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -14,9 +12,14 @@ public class MainMenuView extends JPanel implements IView{
 	 * 
 	 */
 	private static final long serialVersionUID = -1717902879125448300L;
+	LayoutManager lm;
+	public MainMenuView(LayoutManager lm) {
+		this.lm = lm;
+		initialize();
+	}
 
-	public MainMenuView() {
-		
+	@Override
+	public void initialize() {
 		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -34,20 +37,13 @@ public class MainMenuView extends JPanel implements IView{
 		
 		JButton btnPlay = new JButton("Play");
 		btnPlay.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnPlay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		
 		JButton btnScoreboard = new JButton("Scoreboard");
 		btnScoreboard.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JButton btnCredits = new JButton("Credits");
-		btnCredits.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCredits.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -78,14 +74,9 @@ public class MainMenuView extends JPanel implements IView{
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
 		
-		btnPlay.addActionListener(new PlayGameScreenController(this));
-		btnScoreboard.addActionListener(new ScoreboardScreenController(this));
-		btnCredits.addActionListener(new CreditScreenController(this));
-	}
-
-	@Override
-	public void initialize() {
-		
+		btnPlay.addActionListener(new PlayGameScreenController(lm));
+		btnScoreboard.addActionListener(new ScoreboardScreenController(lm));
+		btnCredits.addActionListener(new CreditScreenController(lm));
 	}
 
 	@Override

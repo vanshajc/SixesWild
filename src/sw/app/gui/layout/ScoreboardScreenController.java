@@ -5,20 +5,15 @@ import java.awt.event.ActionListener;
 
 public class ScoreboardScreenController implements ActionListener {
 	
-	MainMenuView mainMenu;
+	LayoutManager lm;
 	
-	public ScoreboardScreenController(MainMenuView mm) {
-		this.mainMenu = mm;
+	public ScoreboardScreenController(LayoutManager lm) {
+		this.lm = lm;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		mainMenu.setVisible(false);
-		
-		// create screen
-		ScoreBoardView scoreboard = new ScoreBoardView();
-		scoreboard.setVisible(true);
-
+		lm.switchToScoreBoardView();
 		// set controller for previous button
 	}
 

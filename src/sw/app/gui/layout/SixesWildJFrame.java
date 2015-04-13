@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class SixesWildJFrame extends JFrame implements IView{
 	/*
@@ -21,8 +22,9 @@ public class SixesWildJFrame extends JFrame implements IView{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	SplashScreenView ssv = new SplashScreenView();
-	MainMenuView mmv = new MainMenuView();
+	LayoutManager lm = new LayoutManager(this);
+	SplashScreenView ssv = new SplashScreenView(lm);
+	//MainMenuView mmv = new MainMenuView(lm);
 	Container pane = getContentPane();
 	long startTime;
 
@@ -61,11 +63,7 @@ public class SixesWildJFrame extends JFrame implements IView{
 		ssv.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Switch to next screen");
-				pane.remove(ssv);
-				pane.add(mmv);
-				pane.revalidate();
-				pane.repaint();
+				lm.switchToMainMenu();
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {	
@@ -80,16 +78,21 @@ public class SixesWildJFrame extends JFrame implements IView{
 			public void mouseExited(MouseEvent e) {
 			}
 		});
-
-
-
-
-
 	}
 
 	@Override
 	public void cleanup() {
 
 	}
+	
+	void switchToScreen(JPanel screen){
+		System.out.println("Switch to next screen");
+		pane.removeAll();
+		pane.add(screen);
+		pane.revalidate();
+		pane.repaint();
+	}
+	
+	
 }
 
