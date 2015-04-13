@@ -109,6 +109,10 @@ public class GameplayView extends JPanel implements IView {
 	public void initialize() {
 		// TODO Auto-generated method stub
 		boardPanel.initialize();
+		
+		scorePanel.setMinimum(0);
+		scorePanel.setMaximum(1000);
+		scorePanel.setScore(300);
 	}
 
 	@Override
