@@ -8,7 +8,7 @@ package sw.common.model.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import sw.common.system.manager.LayoutManager;
+import sw.app.gui.layout.LayoutManager;
 
 /** Common controller for quit buttons */
 public class ButtonQuitActionListener implements ActionListener {
@@ -25,7 +25,7 @@ public class ButtonQuitActionListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		manager.backToMain();
+		manager.switchToMainMenu();
 	}
 
 }

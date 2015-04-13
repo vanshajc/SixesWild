@@ -5,23 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 import sw.app.gui.layout.board.BoardPanel;
 import sw.app.gui.layout.board.GameInfoPanel;
 import sw.app.gui.layout.board.PowerUpPanel;
 import sw.app.gui.layout.board.ScorePanel;
 import sw.app.gui.layout.board.TimeMovePanel;
-import sw.common.model.controller.ButtonQuitActionListener;
 import sw.common.model.entity.Level;
-import sw.common.system.manager.LayoutManager;
 import sw.common.system.manager.LevelManager;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ImageIcon;
 
 public class GameplayView extends JPanel implements IView {
 
@@ -45,8 +42,8 @@ public class GameplayView extends JPanel implements IView {
 	/**
 	 * Create the panel.
 	 */
-	public GameplayView(LayoutManager manager, LevelManager levelManager) {
-		this.manager = manager;
+	public GameplayView(sw.app.gui.layout.LayoutManager layoutManager, LevelManager levelManager) {
+		this.manager = layoutManager;
 		this.levelManager = levelManager;
 		
 		Level level = levelManager.getCurrent();
@@ -60,8 +57,10 @@ public class GameplayView extends JPanel implements IView {
 		quitButton.setIcon(new ImageIcon(GameplayView.class.getResource(quitBtnPath)));
 		
 		initializeLayout();
+		initialize();
 	}
 	
+
 	private void initializeLayout() {
 		setPreferredSize(new Dimension(685, 564));
 		setMinimumSize(getPreferredSize());
@@ -123,7 +122,7 @@ public class GameplayView extends JPanel implements IView {
 		scorePanel.setScore(300);
 		scorePanel.setStar(2);		
 		
-		quitButton.addActionListener(new ButtonQuitActionListener(manager));
+		quitButton.addActionListener(new MainMenuController(manager));
 		
 		timeMovePanel.startTimer();
 	}
