@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 public class CreditScreenView extends JPanel implements IView{
+	
 	LayoutManager lm;
 	public CreditScreenView(LayoutManager lm) {
 		this.lm = lm;
