@@ -5,21 +5,15 @@ import java.awt.event.ActionListener;
 
 public class CreditScreenController implements ActionListener {
 	
-	MainMenuView mainMenu;
+	LayoutManager lm;
 	
-	public CreditScreenController(MainMenuView mm) {
-		this.mainMenu = mm;
+	public CreditScreenController(LayoutManager lm) {
+		this.lm = lm;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		mainMenu.setVisible(false);
-		
-		// create screen
-		//CreditView credits = new CreditView();
-		//credits.setVisible(true);
-
-
+		lm.switchToCreditView();
 	}
 
 }

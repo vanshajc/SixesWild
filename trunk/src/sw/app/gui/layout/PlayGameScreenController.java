@@ -6,15 +6,15 @@ import java.awt.event.ActionListener;
 
 public class PlayGameScreenController implements ActionListener {
 
-	MainMenuView mainMenu;
+	LayoutManager lm;
 	
-	public PlayGameScreenController(MainMenuView mm){
-		this.mainMenu = mm;
+	public PlayGameScreenController(LayoutManager lm){
+		this.lm = lm;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		mainMenu.setVisible(false);
+		lm.switchToPlayView();
 		
 		// create screen
 		/*

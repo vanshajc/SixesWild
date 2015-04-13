@@ -1,20 +1,24 @@
 package sw.app.gui.layout;
-import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 
 
-public class ScoreBoardView extends JPanel {
-	public ScoreBoardView() {
+public class ScoreBoardView extends JPanel implements IView{
+	LayoutManager lm;
+	public ScoreBoardView(LayoutManager lm) {
+		this.lm = lm;
+		initialize();
 	}
 	
-	
-	{
+	public void initialize(){
 		
 		JLabel lblHighScores = new JLabel("High Scores");
 		
@@ -438,5 +442,13 @@ public class ScoreBoardView extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
+		
+		btnBack.addActionListener(new MainMenuController(lm));
+	}
+
+	@Override
+	public void cleanup() {
+		// TODO Auto-generated method stub
+		
 	}
 }

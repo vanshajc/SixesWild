@@ -5,15 +5,15 @@ import java.awt.event.ActionListener;
 
 public class MainMenuController implements ActionListener {
 	
-	MainMenuView mainMenu;
+	LayoutManager lm;
 	
-	public MainMenuController() {
-		// TODO Auto-generated constructor stub
+	public MainMenuController(LayoutManager lm) {
+		this.lm = lm;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		mainMenu.setVisible(true);
+		lm.switchToMainMenu();
 	}
 
 }
