@@ -35,8 +35,6 @@ public class GameplayView extends JPanel implements IView {
 	
 	LayoutManager manager;
 	LevelManager levelManager;
-	//private JButton btnNewButton;
-	
 	
 	/**
 	 * Create the panel.
@@ -50,7 +48,7 @@ public class GameplayView extends JPanel implements IView {
 		this.timeMovePanel = new TimeMovePanel();
 		this.scorePanel    = new ScorePanel();
 		this.gameInfoPanel = new GameInfoPanel(level.toString());
-		gameInfoPanel.setBorder(null);
+		
 		this.powerUpPanel  = new PowerUpPanel();
 		this.quitButton    = new JButton("");		
 		quitButton.setIcon(new ImageIcon(GameplayView.class.getResource("/sw/resource/image/button_quit.png")));
