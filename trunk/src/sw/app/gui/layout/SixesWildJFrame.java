@@ -1,24 +1,31 @@
 package sw.app.gui.layout;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JFrame;
 
 public class SixesWildJFrame extends JFrame implements IView{
 	/*
 	public static void main(String[] args) {
 		SixesWildJFrame swj = new SixesWildJFrame();
-		
+
 		swj.setVisible(true);
 		swj.initialize();
 	}*/
-	
-	
+
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	SplashScreenView ssv = new SplashScreenView();
 	MainMenuView mmv = new MainMenuView();
-	
+	Container pane = getContentPane();
+	long startTime;
+
 	public SixesWildJFrame() {
 		/*
 		JPanel panel = new JPanel();
@@ -36,34 +43,53 @@ public class SixesWildJFrame extends JFrame implements IView{
 		panel.add(ssv);
 		setSize(1060, 850);
 		getContentPane().setLayout(groupLayout);*/
+		startTime = System.currentTimeMillis();
+		
 		this.setSize(1060,850);
+		this.setLayout(new BorderLayout());
 		this.setVisible(true);
+		
 		this.initialize();
-	
+
 
 	}
 
 	@Override
 	public void initialize() {
-		this.add(ssv);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		System.out.println("Doing stuff?");
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Switching to Main Menu View");
-		this.add(mmv);
-		
-		
-		
-		
+		this.add(ssv);
+		ssv.addMouseListener(new MouseListener(){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Switch to next screen");
+				pane.remove(ssv);
+				pane.add(mmv);
+				pane.revalidate();
+				pane.repaint();
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {	
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {	
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+		});
+
+
+
+
+
 	}
 
 	@Override
 	public void cleanup() {
-		
+
 	}
 }
 
