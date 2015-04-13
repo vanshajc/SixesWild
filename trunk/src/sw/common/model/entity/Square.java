@@ -92,7 +92,8 @@ public class Square {
 	public boolean equals(Object obj) {
 		if (obj instanceof Square) {
 			Square s = (Square) obj;
-			return (tile.equals(s.tile)) &&
+			return (tile.value == s.tile.value) &&
+					(tile.multiplier == s.tile.multiplier) &&
 					(isUsed() == s.isUsed()) &&
 					(isSelected() == s.isSelected()) &&
 					(isSelectable() == s.isSelectable());					
@@ -103,14 +104,14 @@ public class Square {
 	/**
 	 * @return whether this Square has been used in a valid move
 	 */
-	boolean isUsed() {
+	public boolean isUsed() {
 		return useCount > 0;
 	}
 	
 	/**
 	 * @return whether this Square has a Tile associated with it
 	 */
-	boolean isEmpty() {
+	public boolean isEmpty() {
 		return tile == null;
 	}
 

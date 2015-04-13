@@ -32,18 +32,21 @@ public class Tile {
 		return multiplier;
 	}	
 
+	// Can't override this, Hashmap will use this to find a match
+	// we want to find the exact instance of this object, not another
+	// instance with the same value
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Tile) {
-			Tile t = (Tile) obj;
-			return (value == t.value) &&
-					(multiplier == t.multiplier);			
-		}
-		return false;
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (obj instanceof Tile) {
+//			Tile t = (Tile) obj;
+//			return (value == t.value) &&
+//					(multiplier == t.multiplier);			
+//		}
+//		return false;
+//	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

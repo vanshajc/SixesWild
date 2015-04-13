@@ -8,48 +8,51 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 
 public class TimeMovePanel extends JPanel {
 	
-	JLabel lblTime;
+	JLabel timeLabel;
 	JLabel time;
-	JLabel lblMove;
+	JLabel moveLabel;
 	JLabel move;
 	
 	public TimeMovePanel() {
-		setPreferredSize(new Dimension(300, 15));
+		setPreferredSize(new Dimension(450, 15));
 		
-		lblTime = new JLabel("Time");
+		timeLabel = new JLabel("Time");
+		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		time = new JLabel();
-		time.setPreferredSize(new Dimension(70,15));		
+		time = new JLabel("testTime");
+		time.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		move = new JLabel();
-		move.setPreferredSize(new Dimension(70,15));
+		move = new JLabel("testMove");
+		move.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		lblMove = new JLabel("Move");
+		moveLabel = new JLabel("Move");
+		moveLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(lblTime)
-					.addGap(18)
-					.addComponent(time)
-					.addPreferredGap(ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-					.addComponent(move)
+					.addComponent(timeLabel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblMove))
+					.addComponent(time, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+					.addComponent(moveLabel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(move, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTime)
-						.addComponent(time)
-						.addComponent(lblMove)
-						.addComponent(move))
-					.addContainerGap(285, Short.MAX_VALUE))
+						.addComponent(timeLabel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+						.addComponent(time, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+						.addComponent(move, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+						.addComponent(moveLabel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);		
 	}

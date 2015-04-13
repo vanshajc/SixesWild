@@ -3,11 +3,14 @@ package sw.app.gui.layout.board;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 
+import sw.common.model.entity.Board;
 import sw.common.model.entity.Square;
 import sw.common.system.factory.TileFactory;
 import sw.common.system.manager.IResourceManager;
@@ -17,21 +20,20 @@ public class BoardColumn extends JPanel {
 	/** GENERATED DO NOT CHANGE */
 	private static final long serialVersionUID = -7989466787176501882L;
 
-	int imgWidth = 50;
-	int imgHeight = 50;
 	int count = 9;
 	
 	int xPos = 0;
 	int yPos = 0;
 	
-	Image img;	
-	
+	Dimension imgSize;
 	IResourceManager resourceManager;
 	
 	Square squares[] = new Square[count];
 	int rows[] = new int[count];
 	
-	int stop;
+	ArrayList<Square> col;
+	
+	HashMap<Square, Image> imageMap;
 	
 	/** Design note:
 	 *  Should treat each column like a queue, add in from tail, take from head, but we can also
@@ -39,55 +41,72 @@ public class BoardColumn extends JPanel {
 	 *  a doubly-linked list
 	 * 
 	 * @param resManager
-	 * @param stop
+	 * @param imageMap 
+	 * @param column
 	 */
 
 	
-	public BoardColumn(IResourceManager resManager, int stop) {
-		Dimension size = new Dimension(imgWidth, imgHeight * count);
+	public BoardColumn(IResourceManager resManager, HashMap<Square, Image> imageMap, ArrayList<Square> column) {
+		this.resourceManager = resManager;
+		this.imageMap = imageMap;
+		this.col = column;		
+		this.imgSize = resManager.getImageSize();
+		
+		Dimension size = new Dimension(imgSize.width, imgSize.height * count);
 		setPreferredSize(size);
-		
-		// Save a reference to the resource manager so we can load images
-		String path = resManager.getImage(new Square(TileFactory.getTile()));
-		
-		ImageIcon ii = new ImageIcon(BoardColumn.class.getResource(path));		
-		img = ii.getImage();
 		
 		// Calculate row positions
 		for (int i = 0; i < count; i++) {
-			rows[i] = size.height - ((i+1)*imgHeight);
+			rows[i] = size.height - ((i+1)*imgSize.height);
 		}
-		this.stop = stop;
+		
+		// Load the images we need, will add in more as needed
+		for (int y = 0; y < Board.ROW; y++) {
+			Square s = column.get(y);
+			if (!imageMap.containsKey(s)) {
+				Image img = new ImageIcon(BoardColumn.class.getResource(resManager.getImage(s))).getImage();
+				imageMap.put(s, img);
+			}
+		}		
+		
 	}
 
 	public void updatePosition() {
 		if (yPos == 0) {
 			yPos = 1;
-		} else if (yPos < rows[stop]) {
+		} else if (yPos < rows[0]) {
 			yPos += 2;		
 		}
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.copyArea(xPos, yPos, imgWidth, imgHeight, 0, 0);
-		g.drawImage(img, xPos, yPos, null);
 		
+		// paint the squares
+		paintSquares(g);
+		
+		// paint the tiles
+		//g.copyArea(xPos, yPos, imgSize.width, imgSize.height, 0, 0);
+		//g.drawImage(img, xPos, yPos, null);
+	}
+	
+	void paintSquares(Graphics g) {
+		Image img;
+		for (int y = 0; y < Board.ROW; y++) {
+			Square s = col.get(y);
+			if (!imageMap.containsKey(s)) {
+				img = new ImageIcon(BoardColumn.class.getResource(resourceManager.getImage(s))).getImage();
+				imageMap.put(s, img);
+			} else {
+				img = imageMap.get(s);
+			}
+			g.drawImage(img, 0, rows[y], null);
+		}
 	}
 
 	public void clear() {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	private class BoardSquare {
-		int yPos; // y position, in term of index, 0 is the lowest position
-		Square square;
-		
-		public BoardSquare(Square square) {
-			this.yPos = count - 1;  // insert at the top
-			this.square = square;
-		}
 	}
 
 }

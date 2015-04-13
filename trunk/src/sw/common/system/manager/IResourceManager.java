@@ -5,6 +5,7 @@
  */
 package sw.common.system.manager;
 
+import java.awt.Dimension;
 import java.util.HashMap;
 
 import sw.common.model.entity.Square;
@@ -21,4 +22,5 @@ public interface IResourceManager {
 	/** Get image file path for a particular Square */
 	String getImage(Square square);
 	
+	Dimension getImageSize();
 }

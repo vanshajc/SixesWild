@@ -5,6 +5,8 @@
  */
 package sw.mode.release;
 
+import java.awt.Dimension;
+
 import sw.common.model.controller.IMode;
 import sw.common.system.manager.IResourceManager;
 import sw.mode.CommonResourceManager;
