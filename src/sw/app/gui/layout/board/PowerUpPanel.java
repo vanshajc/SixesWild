@@ -4,30 +4,25 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import sw.common.model.controller.PwrUpRemoveActionListener;
+import sw.common.model.controller.PwrUpShuffleActionListener;
+import sw.common.model.controller.PwrUpSwapActionListener;
 
 public class PowerUpPanel extends JPanel {
 	public PowerUpPanel() {
 		
 		JButton btnSwap = new JButton("Swap");
-		btnSwap.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnSwap.addActionListener(new PwrUpSwapActionListener());
 		
 		JButton btnShuffle = new JButton("Shuffle");
-		btnShuffle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnShuffle.addActionListener(new PwrUpShuffleActionListener());
 		
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		btnRemove.addActionListener(new PwrUpRemoveActionListener());
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

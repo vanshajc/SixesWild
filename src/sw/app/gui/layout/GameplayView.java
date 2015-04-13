@@ -16,6 +16,8 @@ import sw.common.system.manager.LevelManager;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ImageIcon;
 
 public class GameplayView extends JPanel implements IView {
 
@@ -33,8 +35,8 @@ public class GameplayView extends JPanel implements IView {
 	
 	LayoutManager manager;
 	LevelManager levelManager;
-	//private JPanel panel;
-	//private JPanel panel;
+	//private JButton btnNewButton;
+	
 	
 	/**
 	 * Create the panel.
@@ -48,37 +50,41 @@ public class GameplayView extends JPanel implements IView {
 		this.timeMovePanel = new TimeMovePanel();
 		this.scorePanel    = new ScorePanel();
 		this.gameInfoPanel = new GameInfoPanel(level.toString());
+		gameInfoPanel.setBorder(null);
 		this.powerUpPanel  = new PowerUpPanel();
-		this.quitButton    = new JButton("Quit");
+		this.quitButton    = new JButton("");		
+		quitButton.setIcon(new ImageIcon(GameplayView.class.getResource("/sw/resource/image/button_quit.png")));
 		
-		//panel = new JPanel();
+		initializeLayout();
+	}
+	
+	private void initializeLayout() {
+		setPreferredSize(new Dimension(685, 564));
+		setMinimumSize(getPreferredSize());
 		
-		//panel = new JPanel();
-		
-		//JPanel panel = new JPanel();
-		
-		//JPanel panel_1 = new JPanel();
-
-		//JPanel panel_2 = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(30)
-							.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addGap(30)
+							.addGap(20)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+							.addGap(20)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(boardPanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
 									.addGap(30)
-									.addComponent(scorePanel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
-								.addComponent(timeMovePanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(scorePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(timeMovePanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(220)
-							.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(52, Short.MAX_VALUE))
+							.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 196, Short.MAX_VALUE)
+							.addGap(290)))
+					.addGap(0))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -87,22 +93,18 @@ public class GameplayView extends JPanel implements IView {
 					.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
 					.addGap(15)
 					.addComponent(timeMovePanel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-					.addGap(20)
+					.addGap(15)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(scorePanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
-						.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
-						.addComponent(boardPanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+							.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+							.addComponent(boardPanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(44, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
-		
-		initializeLayout();
-		//quitButton.addActionListener(new QuitButtonActionListener(manager));
-		//initialize();
-	}
-	
-	private void initializeLayout() {		
-		
 	}
 
 	@Override

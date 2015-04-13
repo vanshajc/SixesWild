@@ -11,11 +11,11 @@ import java.awt.event.ActionListener;
 import sw.common.system.manager.LayoutManager;
 
 /** Common controller for quit buttons */
-public class QuitButtonActionListener implements ActionListener {
+public class ButtonQuitActionListener implements ActionListener {
 
 	LayoutManager manager;
 	
-	public QuitButtonActionListener(LayoutManager manager) {
+	public ButtonQuitActionListener(LayoutManager manager) {
 		super();
 		this.manager = manager;
 	}

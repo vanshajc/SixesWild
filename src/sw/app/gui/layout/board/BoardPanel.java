@@ -2,9 +2,12 @@ package sw.app.gui.layout.board;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -12,6 +15,9 @@ import javax.swing.Timer;
 import sw.app.gui.layout.IView;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
+import sw.common.model.entity.Square;
+import sw.common.model.entity.Tile;
+import sw.common.system.manager.IResourceManager;
 import sw.mode.release.Release;
 
 public class BoardPanel extends JPanel implements IView, ActionListener {
@@ -27,18 +33,22 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	
 	Dimension preferredSize = new Dimension(800, 600);
 	
-	BoardColumn columns[];
+	BoardColumn columns[] = new BoardColumn[Board.COLUMN];
 	
 	// Timer to update columns
 	Timer timer;
 	int refreshPeriod = 10; // msec
+	
+	HashMap<Point, Tile> location = new HashMap<Point, Tile>();
+	HashMap<Square, Image> imageMap = new HashMap<Square, Image>();
 	
 	/**
 	 * Create the panel.
 	 */
 	public BoardPanel(Level level) {
 		this.level = level;
-		this.board = level.getGame().getBoard();
+		this.board = level.getGame().getBoard();		
+		
 		initializeLayout();		
 	}
 	
@@ -47,12 +57,11 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 		setPreferredSize(preferredSize);
 		setDoubleBuffered(true);
 		
-		// Initialize the columns
-		columns = new BoardColumn[Board.COLUMN];
+		IResourceManager resManager = level.getMode().getResourceManger();
 		
 		int x = 0;
 		for (int i = 0; i < Board.COLUMN; i++) {
-			columns[i] = new BoardColumn(level.getMode().getResourceManger(), i);
+			columns[i] = new BoardColumn(resManager, imageMap, board.getColumn(i));
 			
 			// Use the column's preferred size
 			Rectangle rec = new Rectangle(columns[i].getPreferredSize());
@@ -99,5 +108,5 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 			columns[i].clear();
 		}		
 	}
-	
+
 }

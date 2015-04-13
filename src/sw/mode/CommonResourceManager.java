@@ -5,6 +5,7 @@
  */
 package sw.mode;
 
+import java.awt.Dimension;
 import java.util.HashMap;
 
 import sw.common.model.entity.Square;
@@ -14,6 +15,8 @@ import sw.common.system.manager.IResourceManager;
  *
  */
 public abstract class CommonResourceManager implements IResourceManager {
+	
+	Dimension imgSize = new Dimension(50,50);
 	
 	String imagePath = "/sw/resource/image/";
 
@@ -33,6 +36,14 @@ public abstract class CommonResourceManager implements IResourceManager {
 	
 	String getUnusedImage(int i) {
 		return imagePath.concat(String.format("%d_unused.png", i));
+	}
+
+	/* (non-Javadoc)
+	 * @see sw.common.system.manager.IResourceManager#getImageSize()
+	 */
+	@Override
+	public Dimension getImageSize() {
+		return imgSize;
 	}
 
 }
