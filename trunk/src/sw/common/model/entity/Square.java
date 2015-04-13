@@ -86,6 +86,14 @@ public class Square {
 	}
 
 	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return 0; // returns the same number so method equals is called by HashMap
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
