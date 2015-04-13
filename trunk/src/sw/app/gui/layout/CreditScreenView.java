@@ -1,18 +1,21 @@
 package sw.app.gui.layout;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
+import java.awt.Font;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Font;
 import javax.swing.SwingConstants;
 
 public class CreditScreenView extends JPanel implements IView{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	LayoutManager lm;
 	public CreditScreenView(LayoutManager lm) {
 		this.lm = lm;
