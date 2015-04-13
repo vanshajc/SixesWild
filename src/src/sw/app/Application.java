@@ -38,8 +38,8 @@ public class Application {
 	 */
 	private void initialize() {
 		app = new SixesWildJFrame();
-		app.setBounds(100, 100, 450, 300);
-		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//app.setBounds(100, 100, 450, 300);
+		//app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }

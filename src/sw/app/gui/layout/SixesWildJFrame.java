@@ -1,31 +1,26 @@
 package sw.app.gui.layout;
 
-import java.awt.Dimension;
-import java.awt.SplashScreen;
-
 import javax.swing.JFrame;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.SpringLayout;
-
-import org.omg.CORBA.INITIALIZE;
-import javax.swing.JPanel;
 
 public class SixesWildJFrame extends JFrame implements IView{
-	
+	/*
 	public static void main(String[] args) {
 		SixesWildJFrame swj = new SixesWildJFrame();
 		
 		swj.setVisible(true);
-		swj.ssv.initialize();
-	}
+		swj.initialize();
+	}*/
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	SplashScreenView ssv = new SplashScreenView();
-	
+	MainMenuView mmv = new MainMenuView();
 	
 	public SixesWildJFrame() {
-		
+		/*
 		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -40,18 +35,34 @@ public class SixesWildJFrame extends JFrame implements IView{
 		);
 		panel.add(ssv);
 		setSize(1060, 850);
-		getContentPane().setLayout(groupLayout);
+		getContentPane().setLayout(groupLayout);*/
+		this.setSize(1060,850);
+		this.setVisible(true);
+		this.initialize();
+	
 
 	}
 
 	@Override
 	public void initialize() {
+		this.add(ssv);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		System.out.println("Doing stuff?");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Switching to Main Menu View");
+		this.add(mmv);
+		
+		
+		
 		
 	}
 
 	@Override
 	public void cleanup() {
-		// TODO Auto-generated method stub
 		
 	}
 }
