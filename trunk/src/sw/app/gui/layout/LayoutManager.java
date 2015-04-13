@@ -7,13 +7,14 @@ public class LayoutManager {
 	MainMenuView mmv;
 	SplashScreenView ssv;
 	GameplayView gv;
-	//CreditView cv;
+	CreditScreenView csv;
 	ScoreBoardView sbv;
 	
 	public LayoutManager(SixesWildJFrame f){
 		this.f = f;
 		mmv = new MainMenuView(this);
 		//gv = new GameplayView();
+		csv = new CreditScreenView(this);
 		sbv = new ScoreBoardView(this);
 	}
 	
@@ -32,9 +33,10 @@ public class LayoutManager {
 		f.switchToScreen(sbv);
 	}
 	
-	void switchToCreditView(){
+	void switchToCreditScreenView(){
 		System.out.println("Going to credit view");
 		//TODO Need to make credit view object
+		f.switchToScreen(csv);
 	}
 	
 	void switchToPlayView(){

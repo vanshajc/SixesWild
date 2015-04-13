@@ -12,8 +12,8 @@ public class CreditScreenController implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		lm.switchToCreditView();
+	public void actionPerformed(ActionEvent arg0) {
+		lm.switchToCreditScreenView();
 	}
 
 }
