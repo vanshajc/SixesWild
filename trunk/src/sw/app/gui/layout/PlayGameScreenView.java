@@ -1,17 +1,19 @@
 package sw.app.gui.layout;
 
-import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PlayGameScreenView extends JPanel implements IView{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	LayoutManager lm;
 	public PlayGameScreenView(LayoutManager lm) {
 		this.lm = lm;
@@ -24,10 +26,11 @@ public class PlayGameScreenView extends JPanel implements IView{
 		btnBack.addActionListener(new MainMenuController(lm));
 		
 		JButton btnStartGame = new JButton("Start Game");
+		btnStartGame.addActionListener(new PlayGameScreenController(lm));
 		
 		JLabel lblLevel = new JLabel("Level");
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
