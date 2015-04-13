@@ -5,9 +5,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 
-import sw.app.gui.layout.SixesWildJFrame;
 import sw.app.gui.layout.SixesWildJFrame_BoardPanel;
-import javax.swing.JButton;
 
 public class Application_BoardPanel {
 

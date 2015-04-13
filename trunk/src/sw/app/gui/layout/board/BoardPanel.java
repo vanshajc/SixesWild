@@ -18,7 +18,6 @@ import sw.common.model.entity.Level;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 import sw.common.system.manager.IResourceManager;
-import sw.mode.release.Release;
 
 public class BoardPanel extends JPanel implements IView, ActionListener {
 
