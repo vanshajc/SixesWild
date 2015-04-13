@@ -22,17 +22,17 @@ public class MainMenuView extends JPanel implements IView{
 	@Override
 	public void initialize() {
 		this.setBackground(Color.WHITE);
-		JButton btnPlay = new JButton("Play");
+		JButton btnPlay = new JButton();
 		add(btnPlay);
-		btnPlay.setBounds(300, 150, 185, 50);
+		btnPlay.setBounds(300, 150, 190, 50);
 		btnPlay.setIcon(new ImageIcon("src/sw/resource/image/PlayButton.png"));
 		
-		JButton btnScoreboard = new JButton("Scoreboard");
+		JButton btnScoreboard = new JButton();
 		add(btnScoreboard);
 		btnScoreboard.setBounds(300, 225, 190, 50);
 		btnScoreboard.setIcon(new ImageIcon("src/sw/resource/image/ScoreboardButton.png"));
 		
-		JButton btnCredits = new JButton("Credits");
+		JButton btnCredits = new JButton();
 		add(btnCredits);
 		btnCredits.setBounds(300, 300, 190, 50);
 		btnCredits.setIcon(new ImageIcon("src/sw/resource/image/CreditsButton.png"));
