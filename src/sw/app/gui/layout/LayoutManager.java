@@ -9,6 +9,7 @@ public class LayoutManager {
 	GameplayView gv;
 	CreditScreenView csv;
 	ScoreBoardView sbv;
+	PlayGameScreenView pgs;
 	
 	public LayoutManager(SixesWildJFrame f){
 		this.f = f;
@@ -16,6 +17,7 @@ public class LayoutManager {
 		//gv = new GameplayView();
 		csv = new CreditScreenView(this);
 		sbv = new ScoreBoardView(this);
+		pgs = new PlayGameScreenView(this);
 	}
 	
 	void switchToMainMenu(){
@@ -41,6 +43,7 @@ public class LayoutManager {
 	
 	void switchToPlayView(){
 		System.out.println("Going to play view");
+		f.switchToScreen(pgs);
 		//TODO Need to make play view object
 	}
 	
