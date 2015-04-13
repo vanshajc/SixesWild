@@ -22,5 +22,13 @@ public interface IResourceManager {
 	/** Get image file path for a particular Square */
 	String getImage(Square square);
 	
+	/**
+	 * @return size of the common icon square image
+	 */
 	Dimension getImageSize();
+	
+	/**
+	 * @return image file path for star image
+	 */
+	String getStarImage();
 }

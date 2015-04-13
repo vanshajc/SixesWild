@@ -4,11 +4,13 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import java.awt.Dimension;
 
 public class GameInfoPanel extends JPanel {
 	JLabel info = new JLabel();
 	
 	public GameInfoPanel(String levelName) {
+		setSize(new Dimension(150, 15));
 		info.setText(levelName);
 		info.setHorizontalAlignment(JLabel.CENTER);
 		

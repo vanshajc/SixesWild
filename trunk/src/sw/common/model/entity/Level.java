@@ -60,7 +60,7 @@ public class Level {
 	 */
 	@Override
 	public String toString() {
-		return mode.toString().concat(Integer.toString(levelNum));
+		return mode.toString().concat(" ".concat(Integer.toString(levelNum)));
 	}
 	
 }
