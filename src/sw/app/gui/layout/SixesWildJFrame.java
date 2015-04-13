@@ -45,10 +45,11 @@ public class SixesWildJFrame extends JFrame implements IView{
 		panel.add(ssv);
 		setSize(1060, 850);
 		getContentPane().setLayout(groupLayout);*/
-		startTime = System.currentTimeMillis();
+		
 		
 		this.setSize(1060,850);
 		this.setLayout(new BorderLayout());
+		setResizable(false);
 		this.setVisible(true);
 		
 		this.initialize();
