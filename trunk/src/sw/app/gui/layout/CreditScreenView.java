@@ -40,7 +40,7 @@ public class CreditScreenView extends JPanel implements IView{
 		label_2.setFont(new Font("French Script MT", Font.PLAIN, 25));
 		
 		JLabel label_3 = new JLabel("Steven Yevchak");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
+		label_3.setHorizontalAlignment(SwingConstants.RIGHT);
 		label_3.setFont(new Font("French Script MT", Font.PLAIN, 25));
 		
 		JLabel label_4 = new JLabel("Dr. George Heineman");
@@ -51,7 +51,7 @@ public class CreditScreenView extends JPanel implements IView{
 		lblNewLabel_1.setFont(new Font("Forte", Font.PLAIN, 35));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(191)
 					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -65,10 +65,6 @@ public class CreditScreenView extends JPanel implements IView{
 					.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(356, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(133)
-					.addComponent(label_2, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-					.addGap(305))
-				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(135)
 					.addComponent(lblNewLabel_1)
 					.addContainerGap(306, Short.MAX_VALUE))
@@ -76,14 +72,15 @@ public class CreditScreenView extends JPanel implements IView{
 					.addGap(204)
 					.addComponent(label_4)
 					.addContainerGap(334, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(18)
+					.addComponent(label_2, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+					.addGap(100))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(72)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnBack))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(72)
-							.addComponent(label_3, GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)))
+						.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 389, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnBack))
 					.addGap(243))
 		);
 		groupLayout.setVerticalGroup(

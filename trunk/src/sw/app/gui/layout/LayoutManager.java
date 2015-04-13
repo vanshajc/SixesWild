@@ -10,6 +10,7 @@ public class LayoutManager {
 	CreditScreenView csv;
 	ScoreBoardView sbv;
 	PlayGameScreenView pgs;
+	PostGameView pgv;
 	
 	public LayoutManager(SixesWildJFrame f){
 		this.f = f;
@@ -18,6 +19,7 @@ public class LayoutManager {
 		csv = new CreditScreenView(this);
 		sbv = new ScoreBoardView(this);
 		pgs = new PlayGameScreenView(this);
+		pgv = new PostGameView(this);
 	}
 	
 	public LayoutManager(SixesWildJFrame_BoardPanel f){
@@ -56,7 +58,10 @@ public class LayoutManager {
 		//TODO Need to make play view object
 	}
 	
-	
+	public void switchToPostGameView() {
+		System.out.println("Going to postgame view");
+		f.switchToScreen(pgv);
+	}
 	
 	
 }
