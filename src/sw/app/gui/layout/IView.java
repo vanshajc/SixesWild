@@ -1,6 +1,5 @@
 package sw.app.gui.layout;
 
-import sw.common.system.manager.LayoutManager;
 
 public interface IView {
 

@@ -6,13 +6,11 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Square;
-import sw.common.system.factory.TileFactory;
 import sw.common.system.manager.IResourceManager;
 
 public class BoardColumn extends JPanel {

@@ -1,16 +1,14 @@
 package sw.app.gui.layout.board;
 
-import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JProgressBar;
-import javax.swing.JLabel;
-
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 import sw.common.system.manager.IResourceManager;
 
