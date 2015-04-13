@@ -47,7 +47,7 @@ public class SixesWildJFrame extends JFrame implements IView{
 		getContentPane().setLayout(groupLayout);*/
 		
 		
-		this.setSize(1060,850);
+		this.setSize(800,600);
 		this.setLayout(new BorderLayout());
 		setResizable(false);
 		this.setVisible(true);
