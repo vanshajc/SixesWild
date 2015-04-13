@@ -14,34 +14,43 @@ public class LayoutManager {
 	public LayoutManager(SixesWildJFrame f){
 		this.f = f;
 		mmv = new MainMenuView(this);
-		//gv = new GameplayView();
+		gv = new GameplayView(this, f.getLevelManager());
 		csv = new CreditScreenView(this);
 		sbv = new ScoreBoardView(this);
 		pgs = new PlayGameScreenView(this);
 	}
 	
-	void switchToMainMenu(){
+	public LayoutManager(SixesWildJFrame_BoardPanel f){
+		///this.f = f;
+		mmv = new MainMenuView(this);
+		//gv = new GameplayView(this, f.getLevelManager());
+		csv = new CreditScreenView(this);
+		sbv = new ScoreBoardView(this);
+		pgs = new PlayGameScreenView(this);
+	}
+	
+	public void switchToMainMenu(){
 		System.out.println("Going to Main Menu");
 		f.switchToScreen(mmv);
 	}
 	
-	void switchToGameplayView(){
+	public void switchToGameplayView(){
 		System.out.println("Going to gameplay view");
 		f.switchToScreen(gv);
 	}
 	
-	void switchToScoreBoardView(){
+	public void switchToScoreBoardView(){
 		System.out.println("Going to score board view");
 		f.switchToScreen(sbv);
 	}
 	
-	void switchToCreditScreenView(){
+	public void switchToCreditScreenView(){
 		System.out.println("Going to credit view");
 		//TODO Need to make credit view object
 		f.switchToScreen(csv);
 	}
 	
-	void switchToPlayView(){
+	public void switchToPlayView(){
 		System.out.println("Going to play view");
 		f.switchToScreen(pgs);
 		//TODO Need to make play view object

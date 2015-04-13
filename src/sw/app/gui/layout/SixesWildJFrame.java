@@ -8,6 +8,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import sw.common.system.manager.LevelManager;
+
 public class SixesWildJFrame extends JFrame implements IView{
 	/*
 	public static void main(String[] args) {
@@ -22,8 +24,12 @@ public class SixesWildJFrame extends JFrame implements IView{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	LevelManager levelManager = new LevelManager();
 	LayoutManager lm = new LayoutManager(this);
+	
+	
 	SplashScreenView ssv = new SplashScreenView(lm);
+	
 	//MainMenuView mmv = new MainMenuView(lm);
 	Container pane = getContentPane();
 	long startTime;
@@ -92,6 +98,10 @@ public class SixesWildJFrame extends JFrame implements IView{
 		pane.add(screen);
 		pane.revalidate();
 		pane.repaint();
+	}
+	
+	public LevelManager getLevelManager(){
+		return levelManager;
 	}
 	
 	

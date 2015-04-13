@@ -26,7 +26,7 @@ public class PlayGameScreenView extends JPanel implements IView{
 		btnBack.addActionListener(new MainMenuController(lm));
 		
 		JButton btnStartGame = new JButton("Start Game");
-		btnStartGame.addActionListener(new PlayGameScreenController(lm));
+		btnStartGame.addActionListener(new StartGameController(lm));
 		
 		JLabel lblLevel = new JLabel("Level");
 		

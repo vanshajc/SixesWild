@@ -1,21 +1,14 @@
 package sw.app.gui.layout;
 
 import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JFrame;
 
-import sw.app.gui.layout.board.BoardPanel;
-import sw.common.system.manager.LayoutManager;
 import sw.common.system.manager.LevelManager;
-
-import javax.swing.JPanel;
-import javax.swing.JButton;
 
 public class SixesWildJFrame_BoardPanel extends JFrame implements ActionListener {
 	/** GENERATED DO NOT CHANGE */
@@ -29,7 +22,7 @@ public class SixesWildJFrame_BoardPanel extends JFrame implements ActionListener
 	
 	public SixesWildJFrame_BoardPanel() {
 		getContentPane().setMinimumSize(new Dimension(685, 564));
-		layoutManager = new LayoutManager();
+		layoutManager = new LayoutManager(this);
 		levelManager = new LevelManager();
 		
 		panel = new GameplayView(layoutManager, levelManager);
@@ -53,7 +46,6 @@ public class SixesWildJFrame_BoardPanel extends JFrame implements ActionListener
 		);
 		getContentPane().setLayout(groupLayout);
 		
-		this.layoutManager = new LayoutManager();
 		panel.initialize();
 	}
 
