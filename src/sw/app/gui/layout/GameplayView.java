@@ -1,6 +1,9 @@
 package sw.app.gui.layout;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Time;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -10,6 +13,7 @@ import sw.app.gui.layout.board.GameInfoPanel;
 import sw.app.gui.layout.board.PowerUpPanel;
 import sw.app.gui.layout.board.ScorePanel;
 import sw.app.gui.layout.board.TimeMovePanel;
+import sw.common.model.controller.ButtonQuitActionListener;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LayoutManager;
 import sw.common.system.manager.LevelManager;
@@ -36,6 +40,8 @@ public class GameplayView extends JPanel implements IView {
 	LayoutManager manager;
 	LevelManager levelManager;
 	
+	String quitBtnPath = "/sw/resource/image/button_quit.png";
+	
 	/**
 	 * Create the panel.
 	 */
@@ -45,13 +51,13 @@ public class GameplayView extends JPanel implements IView {
 		
 		Level level = levelManager.getCurrent();
 		this.boardPanel    = new BoardPanel(level);
-		this.timeMovePanel = new TimeMovePanel();
-		this.scorePanel    = new ScorePanel();
-		this.gameInfoPanel = new GameInfoPanel(level.toString());
-		
+		this.timeMovePanel = new TimeMovePanel(false);
+		this.scorePanel    = new ScorePanel(level.getMode().getResourceManger());
+		this.gameInfoPanel = new GameInfoPanel(level.toString());		
 		this.powerUpPanel  = new PowerUpPanel();
+		
 		this.quitButton    = new JButton("");		
-		quitButton.setIcon(new ImageIcon(GameplayView.class.getResource("/sw/resource/image/button_quit.png")));
+		quitButton.setIcon(new ImageIcon(GameplayView.class.getResource(quitBtnPath)));
 		
 		initializeLayout();
 	}
@@ -64,7 +70,7 @@ public class GameplayView extends JPanel implements IView {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(20)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -80,8 +86,8 @@ public class GameplayView extends JPanel implements IView {
 							.addPreferredGap(ComponentPlacement.RELATED))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(220)
-							.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 196, Short.MAX_VALUE)
-							.addGap(290)))
+							.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 290, Short.MAX_VALUE)))
 					.addGap(0))
 		);
 		groupLayout.setVerticalGroup(
@@ -107,17 +113,39 @@ public class GameplayView extends JPanel implements IView {
 
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
+		timeMovePanel.initialize();
+		timeMovePanel.setTimerAlarm(new dummyAlarm(), Time.valueOf("00:00:05"));
+		
 		boardPanel.initialize();
 		
 		scorePanel.setMinimum(0);
 		scorePanel.setMaximum(1000);
 		scorePanel.setScore(300);
+		scorePanel.setStar(2);		
+		
+		quitButton.addActionListener(new ButtonQuitActionListener(manager));
+		
+		timeMovePanel.startTimer();
+	}
+	
+	class dummyAlarm implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			timeMovePanel.setMove(25);
+		}		
 	}
 
 	@Override
 	public void cleanup() {
 		// TODO Auto-generated method stub
 		boardPanel.cleanup();
+		
+		// Remove all action listeners for this button
+		ActionListener[] listeners = quitButton.getActionListeners();
+		for (int i = 0; i < listeners.length; i++) {
+			quitButton.removeActionListener(listeners[i]);
+		}
 	}
 }

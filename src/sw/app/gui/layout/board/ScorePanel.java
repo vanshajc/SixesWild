@@ -8,14 +8,25 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import sw.common.system.manager.IResourceManager;
+
 public class ScorePanel extends JPanel {
 	
+	JLabel star0;
+	JLabel star1;
+	JLabel star2;
+	
+	ImageIcon starImg;
 	JProgressBar score;
 	
-	public ScorePanel() {
+	public ScorePanel(IResourceManager resManager) {
+		String path = resManager.getStarImage();
+		starImg = new ImageIcon(ScorePanel.class.getResource(path));
+		
 		setSize(new Dimension(100, 450));
 		setMinimumSize(new Dimension(90, 450));
 		
@@ -23,14 +34,10 @@ public class ScorePanel extends JPanel {
 		score.setStringPainted(true);
 		score.setForeground(Color.GREEN);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(ScorePanel.class.getResource("/sw/resource/image/star.png")));
+		star0 = new JLabel("");		
+		star1 = new JLabel("");		
+		star2 = new JLabel("");
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(ScorePanel.class.getResource("/sw/resource/image/star.png")));
-		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(ScorePanel.class.getResource("/sw/resource/image/star.png")));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -38,10 +45,10 @@ public class ScorePanel extends JPanel {
 					.addComponent(score, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 					.addGap(20)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(star2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addComponent(star1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addComponent(star0, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(26, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -49,12 +56,12 @@ public class ScorePanel extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(score, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(70)
+							.addComponent(star2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 							.addGap(87)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addComponent(star1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 							.addGap(87)
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-							.addGap(87)
-							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(star0, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
@@ -73,6 +80,20 @@ public class ScorePanel extends JPanel {
 		this.score.setString(Integer.toString(score));
 	}
 
+	public void setStar(int numStar) {
+		if (numStar > 0 && numStar <= 3) {			
+			if (numStar >= 1) {
+				star0.setIcon(starImg);
+			}
+			if (numStar >= 2) {
+				star1.setIcon(starImg);
+			}
+			if (numStar >= 3) {
+				star2.setIcon(starImg);
+			}
+		}
+	}
+	
 	/**
 	 * 
 	 */

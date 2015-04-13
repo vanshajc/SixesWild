@@ -1,6 +1,8 @@
 package sw.app.gui.layout.board;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Time;
 
 import javax.swing.JPanel;
@@ -9,24 +11,38 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
-public class TimeMovePanel extends JPanel {
+import sw.app.gui.layout.IView;
+
+public class TimeMovePanel extends JPanel implements IView, ActionListener {
 	
 	JLabel timeLabel;
 	JLabel time;
 	JLabel moveLabel;
 	JLabel move;
 	
-	public TimeMovePanel() {
+	Timer timer;
+	int timerPeriod;
+	boolean countDown;
+	
+	Time alarm;
+	ActionListener listener;
+	
+	int ONE_SEC = 1000;  // msec per second
+	
+	public TimeMovePanel(boolean countDown) {
+		this.countDown = countDown;
+		
 		setPreferredSize(new Dimension(450, 15));
 		
 		timeLabel = new JLabel("Time");
 		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		time = new JLabel("testTime");
+		time = new JLabel();
 		time.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		move = new JLabel("testMove");
+		move = new JLabel();
 		move.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		moveLabel = new JLabel("Move");
@@ -74,9 +90,74 @@ public class TimeMovePanel extends JPanel {
 	public int getMove() {
 		return Integer.parseInt(this.move.getText());
 	}
+	
+	/**
+	 * @param period in seconds
+	 */
+	public void setTimerPeriod(int period) {
+		this.timerPeriod = period * ONE_SEC; // timer takes period in msec
+		
+		stopTimer();
+		timer = new Timer(timerPeriod, this);
+	}
 
+	public void startTimer() {
+		if (timer != null && !timer.isRunning()) {
+			timer.start();
+		}
+	}
+	
+	public void stopTimer() {
+		if (timer != null && timer.isRunning()) {
+			timer.stop();
+		}
+	}
+	
+	public void setTimerAlarm(ActionListener al, Time time) {
+		listener = al;
+		alarm = time;
+	}
+	
+	public void reset() {		
+		setTime(Time.valueOf("00:00:00"));
+		setMove(0);
+		
+		stopTimer();
+		setTimerPeriod(1);
+	}
+	
+	@Override
+	public void initialize() {
+		reset();		
+	}
+
+	@Override
+	public void cleanup() {
+		stopTimer();		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Time currentTime = getTime();
+		long time = currentTime.getTime();  // msec
+		
+		if (currentTime.compareTo(alarm) == 0) {
+			// Fire action event
+			listener.actionPerformed(new ActionEvent(this, 0, null));
+		}
+		
+		if (countDown && time >= timerPeriod) {
+			time -= timerPeriod;			
+		} else {
+			time += timerPeriod;
+		}
+		
+		setTime(new Time(time));
+	}
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8208502195019158726L;
+
 }

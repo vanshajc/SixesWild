@@ -3,13 +3,12 @@
  * @date Apr 11, 2015 5:11:30 PM
  * @author Tony Vu (quangvu@wpi.edu)
  */
-package sw.mode;
+package sw.common.system.manager;
 
 import java.awt.Dimension;
 import java.util.HashMap;
 
 import sw.common.model.entity.Square;
-import sw.common.system.manager.IResourceManager;
 
 /**
  *
@@ -45,5 +44,11 @@ public abstract class CommonResourceManager implements IResourceManager {
 	public Dimension getImageSize() {
 		return imgSize;
 	}
+	
+	public String getStarImage() {
+		return imagePath.concat("star.png");
+	}
+	
+	
 
 }
