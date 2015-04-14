@@ -1,4 +1,4 @@
-package sw.app.gui.view;
+package sw.builder.gui.layout;
 
 import java.awt.Graphics;
 
@@ -6,14 +6,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SpashScreenBuilderView extends JPanel implements IView{
+import sw.app.gui.view.IView;
+
+public class SplashScreenBuilderView extends JPanel implements IView{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	BuilderLayoutManager blm;
-	public SpashScreenBuilderView(BuilderLayoutManager bblm) {
+	public SplashScreenBuilderView(BuilderLayoutManager bblm) {
 //		
 //		JLabel lblNewLabel = new JLabel("");
 //		lblNewLabel.setIcon(new ImageIcon(SpashScreenBuilderView.class.getResource("/sw/resource/image/SplashScreenResizedtest.png")));
@@ -41,6 +43,6 @@ public class SpashScreenBuilderView extends JPanel implements IView{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(new ImageIcon(SpashScreenBuilderView.class.getResource("/sw/resource/image/SplashScreenImage.png")).getImage(), 0, 0, null);
+		g.drawImage(new ImageIcon(SplashScreenBuilderView.class.getResource("/sw/resource/image/SplashScreenImage.png")).getImage(), 0, 0, null);
 	}
 }
