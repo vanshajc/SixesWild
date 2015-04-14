@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import sw.app.gui.controller.MainMenuController;
+import java.awt.Color;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
 public class CreditScreenView extends JPanel implements IView{
 	
 	/**
@@ -18,18 +22,20 @@ public class CreditScreenView extends JPanel implements IView{
 	private static final long serialVersionUID = 1L;
 	LayoutManager lm;
 	public CreditScreenView(LayoutManager lm) {
+		setBackground(Color.WHITE);
 		this.lm = lm;
 		initialize();
 	}
 	
 	public void initialize() {
 		
-		setPreferredSize(new Dimension(800,550));
+		setPreferredSize(new Dimension(800, 600));
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new MainMenuController(lm));
 		
 		JLabel lblNewLabel = new JLabel("Vanshaj Chowdhary");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("French Script MT", Font.PLAIN, 25));
 		
 		JLabel label = new JLabel("Trung-Nghia Ngo Huynh");
@@ -59,58 +65,42 @@ public class CreditScreenView extends JPanel implements IView{
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(319)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(319, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(289)
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(288, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(318)
-					.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(318, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(321)
-					.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(320, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(331)
-					.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(330, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(269)
-					.addComponent(lblNewLabel_1)
-					.addContainerGap(268, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(317)
-					.addComponent(label_4)
-					.addContainerGap(317, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(735, Short.MAX_VALUE)
-					.addComponent(btnBack)
-					.addContainerGap())
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(200)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(18)
+							.addComponent(btnBack)))
+					.addContainerGap(300, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(50)
 					.addComponent(lblNewLabel)
-					.addGap(11)
+					.addGap(18)
 					.addComponent(label)
-					.addGap(11)
+					.addGap(18)
 					.addComponent(label_1)
-					.addGap(11)
+					.addGap(18)
 					.addComponent(label_2)
-					.addGap(11)
+					.addGap(18)
 					.addComponent(label_3)
-					.addGap(11)
+					.addGap(18)
 					.addComponent(lblNewLabel_1)
-					.addGap(11)
+					.addGap(18)
 					.addComponent(label_4)
-					.addGap(177)
+					.addGap(183)
 					.addComponent(btnBack)
-					.addContainerGap())
+					.addGap(18))
 		);
 		setLayout(groupLayout);
 	}

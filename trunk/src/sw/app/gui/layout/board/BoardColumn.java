@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Square;
+import sw.common.model.entity.Tile;
 import sw.common.system.manager.IResourceManager;
 
 public class BoardColumn extends JPanel {
@@ -24,48 +25,50 @@ public class BoardColumn extends JPanel {
 	int yPos = 0;
 	
 	Dimension imgSize;
-	IResourceManager resourceManager;
 	
-	Square squares[] = new Square[count];
 	int rows[] = new int[count];
 	
+	Board board;
+	
+	/** The column of Square to display */
 	ArrayList<Square> col;
 	
-	HashMap<Square, Image> imageMap;
+	/** Keep a cached copy of the column so when updatePosition is called, we know what changed */
+	ArrayList<Square> cache;
 	
-	/** Design note:
-	 *  Should treat each column like a queue, add in from tail, take from head, but we can also
-	 *  remove square from somewhere in the middle, the next one will take its place, so it's also like 
-	 *  a doubly-linked list
-	 * 
-	 * @param resManager
-	 * @param imageMap 
-	 * @param column
-	 */
+	BoardPanel panel;
+	
+	// Need to translate Board discreet position into XY explicit position
 
-	
-	public BoardColumn(IResourceManager resManager, HashMap<Square, Image> imageMap, ArrayList<Square> column) {
-		this.resourceManager = resManager;
-		this.imageMap = imageMap;
-		this.col = column;		
-		this.imgSize = resManager.getImageSize();
+	public BoardColumn(BoardPanel boardPanel, int i) {
+		this.panel = boardPanel;
+		this.board = boardPanel.board;
+		this.col = board.getColumn(i);		
+		this.imgSize = boardPanel.resManager.getImageSize();
+		
+		// Create a cache copy of the column
+		this.cache = new ArrayList<Square>(col);
 		
 		Dimension size = new Dimension(imgSize.width, imgSize.height * count);
 		setPreferredSize(size);
 		
 		// Calculate row positions
-		for (int i = 0; i < count; i++) {
-			rows[i] = size.height - ((i+1)*imgSize.height);
+		for (int idx = 0; idx < count; idx++) {
+			rows[idx] = size.height - ((idx+1)*imgSize.height);
 		}
 		
 		// Load the images we need, will add in more as needed
 		for (int y = 0; y < Board.ROW; y++) {
-			Square s = column.get(y);
-			if (!imageMap.containsKey(s)) {
-				Image img = new ImageIcon(BoardColumn.class.getResource(resManager.getImage(s))).getImage();
-				imageMap.put(s, img);
+			Square s = col.get(y);
+			if (!panel.imageMap.containsKey(s)) {
+				Image img = loadImage(s);
+				panel.imageMap.put(s, img);
 			}
-		}		
+			
+		}
+		
+		// Create BoardTile
+		
 		
 	}
 
@@ -84,27 +87,39 @@ public class BoardColumn extends JPanel {
 		paintSquares(g);
 		
 		// paint the tiles
-		//g.copyArea(xPos, yPos, imgSize.width, imgSize.height, 0, 0);
 		//g.drawImage(img, xPos, yPos, null);
 	}
 	
 	void paintSquares(Graphics g) {
-		Image img;
 		for (int y = 0; y < Board.ROW; y++) {
 			Square s = col.get(y);
-			if (!imageMap.containsKey(s)) {
-				img = new ImageIcon(BoardColumn.class.getResource(resourceManager.getImage(s))).getImage();
-				imageMap.put(s, img);
-			} else {
-				img = imageMap.get(s);
-			}
+			Image img = loadImage(s);
 			g.drawImage(img, 0, rows[y], null);
 		}
+	}
+	
+	Image loadImage(Square s) {
+		Image img;
+		if (!panel.imageMap.containsKey(s)) {
+			img = new ImageIcon(BoardColumn.class.getResource(panel.resManager.getImage(s))).getImage();
+			panel.imageMap.put(s, img);
+		} else {
+			img = panel.imageMap.get(s);
+		}
+		return img;
 	}
 
 	public void clear() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	class BoardTile {
+		int prevBoardPos = 0;
+		int currBoardPos = 0;
+		int prevXYPos = 0;
+		int currXYPos = 0;
+		Tile tile;		
 	}
 
 }

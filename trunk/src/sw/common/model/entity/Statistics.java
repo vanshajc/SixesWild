@@ -12,7 +12,7 @@ import java.sql.Time;
  */
 public class Statistics {
 	
-	Time current = new Time(0,0,0);
+	Time current = Time.valueOf("00:00:00");
 	int numMoves = 0;
 	int score = 0;
 	
