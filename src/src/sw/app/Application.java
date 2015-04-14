@@ -6,7 +6,7 @@ import sw.app.gui.view.SixesWildJFrame;
 
 public class Application {
 
-	private SixesWildJFrame app;
+	SixesWildJFrame app;
 
 	/**
 	 * Launch the application.
