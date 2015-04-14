@@ -1,4 +1,4 @@
-package sw.app.gui.layout;
+package sw.app.gui.view;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -14,13 +14,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.PostGameMenuController;
-import sw.app.gui.layout.board.BoardPanel;
-import sw.app.gui.layout.board.GameInfoPanel;
-import sw.app.gui.layout.board.PowerUpPanel;
-import sw.app.gui.layout.board.ScorePanel;
-import sw.app.gui.layout.board.TimeMovePanel;
+import sw.app.gui.view.board.BoardPanel;
+import sw.app.gui.view.board.GameInfoPanel;
+import sw.app.gui.view.board.PowerUpPanel;
+import sw.app.gui.view.board.ScorePanel;
+import sw.app.gui.view.board.TimeMovePanel;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
+
 import java.awt.Color;
 
 public class GameplayView extends JPanel implements IView {
@@ -46,7 +47,7 @@ public class GameplayView extends JPanel implements IView {
 	/**
 	 * Create the panel.
 	 */
-	public GameplayView(sw.app.gui.layout.LayoutManager layoutManager, LevelManager levelManager) {
+	public GameplayView(sw.app.gui.view.LayoutManager layoutManager, LevelManager levelManager) {
 		setBackground(Color.WHITE);
 		this.manager = layoutManager;
 		this.levelManager = levelManager;

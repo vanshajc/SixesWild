@@ -1,4 +1,4 @@
-package sw.app.gui.layout.board;
+package sw.app.gui.view.board;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;

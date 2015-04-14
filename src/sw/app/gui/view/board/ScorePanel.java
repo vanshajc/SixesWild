@@ -1,4 +1,4 @@
-package sw.app.gui.layout.board;
+package sw.app.gui.view.board;
 
 import java.awt.Color;
 import java.awt.Dimension;
