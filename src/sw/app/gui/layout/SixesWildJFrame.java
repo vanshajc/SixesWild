@@ -1,6 +1,7 @@
 package sw.app.gui.layout;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -98,10 +99,25 @@ public class SixesWildJFrame extends JFrame implements IView{
 	
 	void switchToScreen(JPanel screen){
 		System.out.println("Switch to next screen");
+		
+		// call cleanup on all IView components
+		int count = pane.getComponentCount();
+		Component[] c = pane.getComponents();
+		for (int i = 0; i < count; i++) {
+			if (c[i] instanceof IView) {
+				((IView) c[i]).cleanup();
+			}
+		}
+		
 		pane.removeAll();
-		pane.add(screen);
+		pane.add(screen);		
 		pane.revalidate();
 		pane.repaint();
+		
+		// initialize the new view
+		if (screen instanceof IView) {
+			((IView) screen).initialize();
+		}
 	}
 	
 	public LevelManager getLevelManager(){

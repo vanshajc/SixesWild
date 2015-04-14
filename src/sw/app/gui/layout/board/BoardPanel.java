@@ -39,6 +39,8 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	int refreshPeriod = 10; // msec
 	
 	HashMap<Point, Tile> location = new HashMap<Point, Tile>();
+	
+	IResourceManager resManager;
 	HashMap<Square, Image> imageMap = new HashMap<Square, Image>();
 	
 	/**
@@ -56,11 +58,11 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 		setPreferredSize(preferredSize);
 		setDoubleBuffered(true);
 		
-		IResourceManager resManager = level.getMode().getResourceManger();
+		resManager = level.getMode().getResourceManger();
 		
 		int x = 0;
 		for (int i = 0; i < Board.COLUMN; i++) {
-			columns[i] = new BoardColumn(resManager, imageMap, board.getColumn(i));
+			columns[i] = new BoardColumn(this, i);
 			
 			// Use the column's preferred size
 			Rectangle rec = new Rectangle(columns[i].getPreferredSize());

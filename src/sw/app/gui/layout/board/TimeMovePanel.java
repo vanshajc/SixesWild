@@ -75,7 +75,6 @@ public class TimeMovePanel extends JPanel implements IView, ActionListener {
 	
 	public void setTime(Time time) {
 		this.time.setText(time.toString());
-		this.time.repaint();
 	}
 	
 	public Time getTime() {
@@ -84,7 +83,6 @@ public class TimeMovePanel extends JPanel implements IView, ActionListener {
 	
 	public void setMove(int move) {
 		this.move.setText(Integer.toString(move));
-		this.move.repaint();
 	}
 	
 	public int getMove() {

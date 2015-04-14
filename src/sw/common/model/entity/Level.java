@@ -47,6 +47,10 @@ public class Level {
 		return 1;
 	}
 	
+	public int getLevelNum() {
+		return levelNum;
+	}
+	
 	public void initialize() {
 		
 	}

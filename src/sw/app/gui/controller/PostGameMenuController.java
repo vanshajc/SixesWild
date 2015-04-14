@@ -1,12 +1,14 @@
-package sw.app.gui.layout;
+package sw.app.gui.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import sw.app.gui.layout.LayoutManager;
+
 public class PostGameMenuController implements ActionListener {
 	
 	LayoutManager lm;
-	PostGameMenuController(LayoutManager lm) {
+	public PostGameMenuController(LayoutManager lm) {
 		this.lm = lm;
 	}
 	@Override
