@@ -11,8 +11,8 @@ import sw.app.gui.view.SplashScreenView;
 import sw.common.system.manager.LevelManager;
 
 public class LevelBuilderJFrame extends JFrame implements IView{
-	LayoutManager lm = new LayoutManager(this);
-	SplashScreenView ssv = new SplashScreenView(lm);
+	BuilderLayoutManager blm = new LayoutManager(this);
+	SplashScreenBuilderView ssbv = new SplashScreenBuilderView(blm);
 	
 	Container pane = getContentPane();
 	long startTime;

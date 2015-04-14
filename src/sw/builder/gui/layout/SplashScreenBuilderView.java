@@ -12,14 +12,14 @@ public class SpashScreenBuilderView extends JPanel implements IView{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	LayoutManager lm;
-	public SpashScreenBuilderView(LayoutManager lm) {
+	BuilderLayoutManager blm;
+	public SpashScreenBuilderView(BuilderLayoutManager bblm) {
 //		
 //		JLabel lblNewLabel = new JLabel("");
 //		lblNewLabel.setIcon(new ImageIcon(SpashScreenBuilderView.class.getResource("/sw/resource/image/SplashScreenResizedtest.png")));
 //		add(lblNewLabel);
 		
-		this.lm = lm;
+		this.blm = blm;
 		//initialize();
 	}
 	
