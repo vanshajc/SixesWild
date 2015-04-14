@@ -7,10 +7,10 @@ import sw.app.gui.view.LayoutManager;
 
 public class LoadButtonController implements ActionListener {
 
-	LayoutManager lm;
+	BuilderLayoutManager blm;
 	
-	public LoadButtonController(LayoutManager lm) {
-		this.lm = lm;
+	public LoadButtonController(BuilderLayoutManager blm) {
+		this.blm = blm;
 	}
 	
 	@Override

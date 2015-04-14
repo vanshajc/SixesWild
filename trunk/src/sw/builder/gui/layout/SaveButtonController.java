@@ -7,10 +7,10 @@ import sw.app.gui.view.LayoutManager;
 
 public class SaveButtonController implements ActionListener {
 
-	LayoutManager lm;
+	BuilderLayoutManager blm;
 	
-	public SaveButtonController(LayoutManager lm) {
-		this.lm = lm;
+	public SaveButtonController(BuilderLayoutManager blm) {
+		this.blm = blm;
 	}
 	
 	@Override
