@@ -2,17 +2,25 @@ package sw.app.gui.layout;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MainMenuView extends JPanel implements IView{
+public class MainMenuView extends JPanel implements IView {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1717902879125448300L;
 	LayoutManager lm;
+
 	public MainMenuView(LayoutManager lm) {
 		this.lm = lm;
 		setLayout(null);
@@ -21,20 +29,20 @@ public class MainMenuView extends JPanel implements IView{
 
 	@Override
 	public void initialize() {
-		this.setBackground(Color.WHITE);
+		//this.setBackground(Color.WHITE);
 		JButton btnPlay = new JButton();
 		add(btnPlay);
-		btnPlay.setBounds(300, 150, 190, 50);
+		btnPlay.setBounds(300, 250, 190, 50);
 		btnPlay.setIcon(new ImageIcon("src/sw/resource/image/PlayButton.png"));
 		
 		JButton btnScoreboard = new JButton();
 		add(btnScoreboard);
-		btnScoreboard.setBounds(300, 225, 190, 50);
+		btnScoreboard.setBounds(300, 325, 190, 50);
 		btnScoreboard.setIcon(new ImageIcon("src/sw/resource/image/ScoreboardButton.png"));
 		
 		JButton btnCredits = new JButton();
 		add(btnCredits);
-		btnCredits.setBounds(300, 300, 190, 50);
+		btnCredits.setBounds(300, 400, 190, 50);
 		btnCredits.setIcon(new ImageIcon("src/sw/resource/image/CreditsButton.png"));
 		
 		
@@ -43,15 +51,18 @@ public class MainMenuView extends JPanel implements IView{
 		btnScoreboard.addActionListener(new ScoreboardScreenController(lm));
 		btnCredits.addActionListener(new CreditScreenController(lm));
 		
+		JLabel background = new JLabel();
+		add(background);
+		background.setBounds(0, 0, 800, 600);
+		background.setIcon(new ImageIcon("src/sw/resource/image/SixesWildMainMenuImage.png"));
 	}
-	
-	public Dimension getPrefferredSize(){
-		return new Dimension(800,600);
+
+	public Dimension getPrefferredSize() {
+		return new Dimension(800, 600);
 	}
 
 	@Override
 	public void cleanup() {
-		
-		
+
 	}
 }
