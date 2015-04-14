@@ -1,4 +1,4 @@
-package sw.app.gui.layout;
+package sw.app.gui.view;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;

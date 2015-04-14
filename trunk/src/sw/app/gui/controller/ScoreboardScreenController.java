@@ -3,7 +3,7 @@ package sw.app.gui.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import sw.app.gui.layout.LayoutManager;
+import sw.app.gui.view.LayoutManager;
 
 public class ScoreboardScreenController implements ActionListener {
 	

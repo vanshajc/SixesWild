@@ -1,5 +1,6 @@
-package sw.app.gui.layout;
+package sw.app.gui.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,10 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import sw.app.gui.controller.MainMenuController;
-
-import java.awt.Color;
-
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class CreditScreenView extends JPanel implements IView{
 	

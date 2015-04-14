@@ -1,4 +1,7 @@
-package sw.app.gui.layout;
+package sw.app.gui.view;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,13 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.sql.Time;
-
-import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.common.model.entity.Game;
@@ -22,10 +19,13 @@ import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.mode.release.Release;
 
-import javax.swing.SwingConstants;
-
 public class ScoreBoardView extends JPanel implements IView {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	LayoutManager lm;
 	
 	JLabel lblLevel;

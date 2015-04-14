@@ -1,4 +1,4 @@
-package sw.app.gui.layout.board;
+package sw.app.gui.view.board;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
-import sw.app.gui.layout.IView;
+import sw.app.gui.view.IView;
 
 public class TimeMovePanel extends JPanel implements IView, ActionListener {
 	

@@ -1,10 +1,9 @@
-package sw.app.gui.layout.board;
+package sw.app.gui.view.board;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -12,7 +11,6 @@ import javax.swing.JPanel;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
-import sw.common.system.manager.IResourceManager;
 
 public class BoardColumn extends JPanel {
 

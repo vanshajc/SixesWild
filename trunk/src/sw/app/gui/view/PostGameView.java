@@ -1,21 +1,23 @@
-package sw.app.gui.layout;
+package sw.app.gui.view;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.StartGameController;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
-import java.awt.Color;
-
 public class PostGameView extends JPanel implements IView{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	LayoutManager lm;
 	public PostGameView(LayoutManager lm) {
 		setBackground(Color.WHITE);
