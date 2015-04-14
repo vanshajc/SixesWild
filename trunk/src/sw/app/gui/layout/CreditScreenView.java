@@ -2,19 +2,26 @@ package sw.app.gui.layout;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import sw.app.gui.controller.MainMenuController;
+
 import java.awt.Color;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class CreditScreenView extends JPanel implements IView{
+	
+	Image background = new ImageIcon(CreditScreenView.class.getResource("/sw/resource/image/SixesWildMainMenuImage.png")).getImage();
 	
 	/**
 	 * 
@@ -77,14 +84,14 @@ public class CreditScreenView extends JPanel implements IView{
 								.addComponent(label, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(18)
-							.addComponent(btnBack)))
-					.addContainerGap(300, Short.MAX_VALUE))
+							.addGap(325)
+							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(200, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(50)
+					.addGap(150)
 					.addComponent(lblNewLabel)
 					.addGap(18)
 					.addComponent(label)
@@ -98,16 +105,23 @@ public class CreditScreenView extends JPanel implements IView{
 					.addComponent(lblNewLabel_1)
 					.addGap(18)
 					.addComponent(label_4)
-					.addGap(183)
+					.addGap(55)
 					.addComponent(btnBack)
-					.addGap(18))
+					.addGap(128))
 		);
 		setLayout(groupLayout);
+		
 	}
 	
 	@Override
 	public void cleanup() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(background, 0, 0, null);
 	}
 }
