@@ -7,10 +7,10 @@ import sw.app.gui.view.LayoutManager;
 
 public class RandomizeButtonController implements ActionListener {
 
-	LayoutManager lm;
+	BuilderLayoutManager blm;
 	
-	public RandomizeButtonController(LayoutManager lm) {
-		this.lm = lm;
+	public RandomizeButtonController(BuilderLayoutManager blm) {
+		this.blm = blm;
 	}
 	
 	@Override

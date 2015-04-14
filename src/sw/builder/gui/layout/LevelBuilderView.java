@@ -14,9 +14,9 @@ import sw.app.gui.view.LayoutManager;
 
 public class LevelBuilderView extends JPanel{
 	
-	LayoutManager lm;
-	public LevelBuilderView(LayoutManager lm) {
-		this.lm = lm;
+	BuilderLayoutManager blm;
+	public LevelBuilderView(BuilderLayoutManager blm) {
+		this.blm = blm;
 		initialize();
 	}
 	
@@ -919,10 +919,10 @@ public class LevelBuilderView extends JPanel{
 						.addComponent(btnRandomizeBoard)))
 		);
 		setLayout(groupLayout);
-		btnSave.addActionListener(new SaveButtonController(lm));
+		btnSave.addActionListener(new SaveButtonController(blm));
 		
-		btnLoad.addActionListener(new LoadButtonController(lm));
+		btnLoad.addActionListener(new LoadButtonController(blm));
 		
-		btnRandomizeBoard.addActionListener(new RandomizeButtonController(lm));
+		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm));
 	}
 }
