@@ -8,8 +8,15 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import sw.app.gui.view.LayoutManager;
+
+
+
 public class LevelBuilderView extends JPanel{
-	public LevelBuilderView() {
+	
+	LayoutManager lm;
+	public LevelBuilderView(LayoutManager lm) {
+		this.lm = lm;
 		initialize();
 	}
 	
@@ -109,6 +116,7 @@ public class LevelBuilderView extends JPanel{
 	private JTextField textField_78;
 	private JTextField textField_79;
 	private JTextField textField_80;
+	
 	public void initialize() {
 		
 		JLabel lblLevel = new JLabel("Level");
@@ -911,5 +919,10 @@ public class LevelBuilderView extends JPanel{
 						.addComponent(btnRandomizeBoard)))
 		);
 		setLayout(groupLayout);
+		btnSave.addActionListener(new SaveButtonController(lm));
+		
+		btnLoad.addActionListener(new LoadButtonController(lm));
+		
+		btnRandomizeBoard.addActionListener(new RandomizeButtonController(lm));
 	}
 }
