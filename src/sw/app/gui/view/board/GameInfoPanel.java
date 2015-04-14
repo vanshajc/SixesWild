@@ -5,13 +5,14 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Dimension;
+import java.awt.Color;
 
 public class GameInfoPanel extends JPanel {
 	JLabel info = new JLabel();
 	
-	public GameInfoPanel(String levelName) {
+	public GameInfoPanel() {
+		setBackground(Color.LIGHT_GRAY);
 		setSize(new Dimension(150, 15));
-		info.setText(levelName);
 		info.setHorizontalAlignment(JLabel.CENTER);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -28,6 +29,10 @@ public class GameInfoPanel extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
+	}
+	
+	public void setLevelName(String name) {
+		info.setText(name);
 	}
 
 	/**

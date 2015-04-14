@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
+import sw.common.system.manager.IResourceManager;
 
 public class BoardColumn extends JPanel {
 
@@ -29,6 +31,7 @@ public class BoardColumn extends JPanel {
 	Board board;
 	
 	/** The column of Square to display */
+	int colIdx;
 	ArrayList<Square> col;
 	
 	/** Keep a cached copy of the column so when updatePosition is called, we know what changed */
@@ -39,10 +42,16 @@ public class BoardColumn extends JPanel {
 	// Need to translate Board discreet position into XY explicit position
 
 	public BoardColumn(BoardPanel boardPanel, int i) {
-		this.panel = boardPanel;
-		this.board = boardPanel.board;
-		this.col = board.getColumn(i);		
-		this.imgSize = boardPanel.resManager.getImageSize();
+		this.panel  = boardPanel;
+		this.colIdx = i;
+		
+		initialize();
+	}
+	
+	void initialize() {
+		this.board = panel.board;
+		this.col = board.getColumn(colIdx);
+		this.imgSize = panel.resManager.getImageSize();
 		
 		// Create a cache copy of the column
 		this.cache = new ArrayList<Square>(col);
@@ -61,13 +70,8 @@ public class BoardColumn extends JPanel {
 			if (!panel.imageMap.containsKey(s)) {
 				Image img = loadImage(s);
 				panel.imageMap.put(s, img);
-			}
-			
+			}			
 		}
-		
-		// Create BoardTile
-		
-		
 	}
 
 	public void updatePosition() {

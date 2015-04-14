@@ -1,28 +1,31 @@
 package sw.app.gui.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-
+import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import sw.app.gui.controller.MainMenuController;
+import sw.app.gui.controller.PostGameController;
 import sw.app.gui.controller.StartGameController;
+import sw.common.system.manager.LevelManager;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Dimension;
+import java.awt.Color;
 
 public class PostGameView extends JPanel implements IView{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	LayoutManager lm;
-	public PostGameView(LayoutManager lm) {
+	LevelManager lvlm;
+	
+	public PostGameView(LayoutManager lm, LevelManager lvlm) {
 		setBackground(Color.WHITE);
 		setSize(new Dimension(800, 600));
 		this.lm = lm;
+		this.lvlm = lvlm;
 		initialize();
 	}
 
@@ -34,10 +37,10 @@ public class PostGameView extends JPanel implements IView{
 		btnMainmenu.addActionListener(new MainMenuController(lm));
 		
 		JButton btnNextlevel = new JButton("NextLevel");
-		btnNextlevel.addActionListener(new StartGameController(lm));
+		btnNextlevel.addActionListener(new PostGameController(lm, lvlm));
 		
 		JButton btnReplay = new JButton("Replay");
-		btnReplay.addActionListener(new StartGameController(lm));
+		btnReplay.addActionListener(new StartGameController(lm, lvlm));
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

@@ -10,8 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import sw.common.system.manager.IResourceManager;
-
 public class ScorePanel extends JPanel {
 	
 	JLabel star0;
@@ -21,10 +19,13 @@ public class ScorePanel extends JPanel {
 	ImageIcon starImg;
 	JProgressBar score;
 	
-	public ScorePanel(IResourceManager resManager) {
-		String path = resManager.getStarImage();
-		starImg = new ImageIcon(ScorePanel.class.getResource(path));
+	/** default star image */
+	String defaultStar = "/sw/resource/image/star.png";
+	
+	public ScorePanel() {
+		setStarImage(defaultStar);
 		
+		setOpaque(false);		
 		setSize(new Dimension(100, 450));
 		setMinimumSize(new Dimension(90, 450));
 		
@@ -76,6 +77,10 @@ public class ScorePanel extends JPanel {
 	public void setScore(int score) {
 		this.score.setValue(score);
 		this.score.setString(Integer.toString(score));
+	}
+	
+	public void setStarImage(String location) {
+		starImg = new ImageIcon(ScorePanel.class.getResource(location));
 	}
 
 	public void setStar(int numStar) {

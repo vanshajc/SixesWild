@@ -4,17 +4,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import sw.app.gui.view.LayoutManager;
+import sw.common.model.entity.Level;
+import sw.common.system.manager.LevelManager;
 
 public class PostGameController implements ActionListener {
 
 	LayoutManager lm;
-	PostGameController(LayoutManager lm) {
+	LevelManager lvlm;
+	
+	public PostGameController(LayoutManager lm, LevelManager lvlm) {
 		this.lm = lm;
+		this.lvlm = lvlm;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		Level n = lvlm.getNext();
+		Level c = lvlm.getCurrent();
+		lvlm.setCurrent(n);
+		c = lvlm.getCurrent();
+		lm.switchToGameplayView();
 	}
 
 }
