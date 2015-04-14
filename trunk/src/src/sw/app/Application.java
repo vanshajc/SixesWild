@@ -2,8 +2,6 @@ package src.sw.app;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-
 import sw.app.gui.view.SixesWildJFrame;
 
 public class Application {

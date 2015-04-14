@@ -32,7 +32,7 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	
 	Dimension preferredSize = new Dimension(800, 600);
 	
-	BoardColumn columns[] = new BoardColumn[Board.COLUMN];
+	BoardColumn columns[];
 	
 	// Timer to update columns
 	Timer timer;
@@ -43,14 +43,17 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 	IResourceManager resManager;
 	HashMap<Square, Image> imageMap = new HashMap<Square, Image>();
 	
-	/**
-	 * Create the panel.
-	 */
-	public BoardPanel(Level level) {
-		this.level = level;
-		this.board = level.getGame().getBoard();		
+	public void setLevel(Level level) {
+		if (level == null) {
+			throw new IllegalArgumentException("Current level is null!");
+		}
 		
-		initializeLayout();		
+		this.level = level;
+		this.board = level.getGame().getBoard();
+		this.resManager = level.getMode().getResourceManger();
+		columns = new BoardColumn[Board.COLUMN];
+		
+		initializeLayout();
 	}
 	
 	void initializeLayout() {
@@ -58,7 +61,8 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 		setPreferredSize(preferredSize);
 		setDoubleBuffered(true);
 		
-		resManager = level.getMode().getResourceManger();
+		// Remove all out-of-date components
+		//removeAll();
 		
 		int x = 0;
 		for (int i = 0; i < Board.COLUMN; i++) {
@@ -72,6 +76,9 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 			add(columns[i]);
 			x += rec.width;
 		}
+		
+		invalidate();
+		repaint();
 		
 		// Start timer 
 		timer = new Timer(refreshPeriod, this);
@@ -95,19 +102,39 @@ public class BoardPanel extends JPanel implements IView, ActionListener {
 
 	@Override
 	public void initialize() {
+		if (level == null || board == null || resManager == null) {
+			throw new IllegalStateException("Must set BoardPanel::setLevel first!");
+		}
+		initializeColumns();
 		timer.start();		
 	}
 
 	@Override
 	public void cleanup() {
 		timer.stop();		
+		
+		// Reset the state of the panel
+		level = null;
+		board = null;
+		resManager = null;
+		columns = null;
+		
+		// remove all components
+		removeAll();
 	}
 
 	/** Remove every Tile from the board */
 	public void clear() {
 		for (int i = 0; i < Board.COLUMN; i++) {
-			columns[i].clear();
+			columns[i] = null;
+			System.gc();			
 		}		
+	}
+	
+	private void initializeColumns() {
+		for (int i = 0; i < Board.COLUMN; i++) {
+			columns[i].initialize();
+		}
 	}
 
 }

@@ -15,6 +15,8 @@ import javax.swing.Timer;
 
 import sw.app.gui.view.IView;
 
+import java.awt.Color;
+
 public class TimeMovePanel extends JPanel implements IView, ActionListener {
 	
 	JLabel timeLabel;
@@ -31,8 +33,8 @@ public class TimeMovePanel extends JPanel implements IView, ActionListener {
 	
 	int ONE_SEC = 1000;  // msec per second
 	
-	public TimeMovePanel(boolean countDown) {
-		this.countDown = countDown;
+	public TimeMovePanel() {		
+		setBackground(Color.LIGHT_GRAY);		
 		
 		setPreferredSize(new Dimension(450, 15));
 		
@@ -71,6 +73,10 @@ public class TimeMovePanel extends JPanel implements IView, ActionListener {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);		
+	}
+	
+	public void setCountDown(boolean countDown) {
+		this.countDown = countDown;
 	}
 	
 	public void setTime(Time time) {

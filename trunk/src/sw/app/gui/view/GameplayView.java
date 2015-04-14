@@ -1,6 +1,8 @@
 package sw.app.gui.view;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
@@ -36,48 +38,64 @@ public class GameplayView extends JPanel implements IView {
 	GameInfoPanel gameInfoPanel;
 	TimeMovePanel timeMovePanel;
 	PowerUpPanel powerUpPanel;
-	JButton quitButton;
 	
 	LayoutManager manager;
 	LevelManager levelManager;
 	
-	String quitBtnPath = "/sw/resource/image/button_quit.png";
+	Image background = new ImageIcon(SplashScreenView.class.getResource("/sw/resource/image/SplashScreenResizedtest.png")).getImage();
+	
 	private JButton btnPostgamemenutest;
+	
+	JButton quitButton;	
+	MainMenuController mmc;
+	String quitBtnPath = "/sw/resource/image/button_quit.png";
+	ImageIcon quitBtnImg;
 	
 	/**
 	 * Create the panel.
 	 */
-	public GameplayView(sw.app.gui.view.LayoutManager layoutManager, LevelManager levelManager) {
+	public GameplayView(LayoutManager layoutManager, LevelManager levelManager) {
 		setBackground(Color.WHITE);
 		this.manager = layoutManager;
 		this.levelManager = levelManager;
 		
-		Level level = levelManager.getCurrent();
-		this.boardPanel    = new BoardPanel(level);
-		boardPanel.setBackground(Color.WHITE);
-		this.timeMovePanel = new TimeMovePanel(false);
-		timeMovePanel.setBackground(Color.WHITE);
-		this.scorePanel    = new ScorePanel(level.getMode().getResourceManger());
-		scorePanel.setBackground(Color.WHITE);
-		this.gameInfoPanel = new GameInfoPanel(level.toString());		
-		gameInfoPanel.setBackground(Color.WHITE);
+		this.boardPanel    = new BoardPanel();
+		this.timeMovePanel = new TimeMovePanel();
+		this.scorePanel    = new ScorePanel();
+		this.gameInfoPanel = new GameInfoPanel();
 		this.powerUpPanel  = new PowerUpPanel();
-		powerUpPanel.setBackground(Color.WHITE);
 		
-		this.quitButton    = new JButton("");		
-		quitButton.setIcon(new ImageIcon(GameplayView.class.getResource(quitBtnPath)));
+		this.quitButton    = new JButton();
+		this.mmc           = new MainMenuController(manager);
+		this.quitBtnImg    = new ImageIcon(GameplayView.class.getResource(quitBtnPath));
 		
-		initializeLayout();
-		//initialize();
 	}
 	
-
+	private void initializeLevel() {
+		Level level = levelManager.getCurrent();
+		if (level == null) {
+			throw new IllegalStateException("Current level is null!");
+		}
+		
+		boardPanel.setLevel(level);
+		gameInfoPanel.setLevelName(level.toString());		
+	}
+	
 	private void initializeLayout() {
 		setPreferredSize(new Dimension(685, 564));
 		setMinimumSize(getPreferredSize());
 		
+		boardPanel.setBackground(Color.WHITE);		
+		timeMovePanel.setBackground(Color.WHITE);		
+		scorePanel.setBackground(Color.WHITE);				
+		gameInfoPanel.setBackground(Color.WHITE);		
+		powerUpPanel.setBackground(Color.WHITE);
+		
+		quitButton.setIcon(quitBtnImg);
+		quitButton.addActionListener(mmc);
+		
 		btnPostgamemenutest = new JButton("PostGameMenuTest");
-		btnPostgamemenutest.addActionListener(new PostGameMenuController(manager));
+		btnPostgamemenutest.addActionListener(new PostGameMenuController(manager));		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -87,8 +105,8 @@ public class GameplayView extends JPanel implements IView {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(20)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
 							.addGap(20)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(timeMovePanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
@@ -115,8 +133,8 @@ public class GameplayView extends JPanel implements IView {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(scorePanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
 							.addComponent(boardPanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)))
@@ -129,19 +147,25 @@ public class GameplayView extends JPanel implements IView {
 
 	@Override
 	public void initialize() {
-		timeMovePanel.initialize();
-		timeMovePanel.setTimerAlarm(new dummyAlarm(), Time.valueOf("00:00:05"));
-		
-		boardPanel.initialize();
-		
-		scorePanel.setMinimum(0);
-		scorePanel.setMaximum(1000);
-		scorePanel.setScore(300);
-		scorePanel.setStar(2);		
-		
-		quitButton.addActionListener(new MainMenuController(manager));
-		
-		timeMovePanel.startTimer();
+		try {
+			initializeLevel();
+			initializeLayout();
+
+			timeMovePanel.initialize();
+			timeMovePanel.setTimerAlarm(new dummyAlarm(), Time.valueOf("00:00:05"));
+
+			boardPanel.initialize();
+
+			scorePanel.setMinimum(0);
+			scorePanel.setMaximum(1000);
+			scorePanel.setScore(300);
+			scorePanel.setStar(2);		
+
+			timeMovePanel.startTimer();
+		} catch (Exception e) {
+			System.err.println("Cannot initialize the Gameplay View!");
+			manager.switchToMainMenu();
+		}
 	}
 	
 	class dummyAlarm implements ActionListener {
@@ -163,5 +187,11 @@ public class GameplayView extends JPanel implements IView {
 		for (int i = 0; i < listeners.length; i++) {
 			quitButton.removeActionListener(listeners[i]);
 		}
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(background, 0, 0, null);
 	}
 }

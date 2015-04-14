@@ -10,33 +10,53 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.StartGameController;
+import sw.common.model.entity.Level;
+import sw.common.system.manager.LevelManager;
+
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PlayGameScreenView extends JPanel implements IView{
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	LayoutManager lm;
-	public PlayGameScreenView(LayoutManager lm) {
-		setBackground(Color.WHITE);
+	LevelManager lvlm;
+	ArrayList<Level> lvlList;
+	
+	JComboBox<String> levelList;
+	
+	JButton btnBack;
+	JButton btnStartGame;
+	
+	public PlayGameScreenView(LayoutManager lm, LevelManager lvlm) {
 		this.lm = lm;
-		initialize();
+		this.lvlm = lvlm;	
+		this.lvlList = lvlm.getLevels();	
 	}
 	
 	public void initialize() {
-		
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new MainMenuController(lm));
-		
-		JButton btnStartGame = new JButton("Start Game");
-		btnStartGame.addActionListener(new StartGameController(lm));
+		setBackground(Color.WHITE);		
 		
 		JLabel lblLevel = new JLabel("Level");
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBackground(Color.WHITE);
+		levelList = new JComboBox<String>();
+		levelList.setBackground(Color.WHITE);
+		
+		for (int i = 0; i < lvlList.size(); i++) {
+			String name = lvlList.get(i).toString();
+			levelList.addItem(name);
+		}
+		
+		btnBack = new JButton("Back");
+		btnBack.addActionListener(new MainMenuController(lm));
+		
+		btnStartGame = new JButton("Start Game");
+		btnStartGame.addActionListener(new StartGameController(lm, lvlm));
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -50,7 +70,7 @@ public class PlayGameScreenView extends JPanel implements IView{
 					.addGap(112)
 					.addComponent(lblLevel)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(comboBox, 0, 143, Short.MAX_VALUE)
+					.addComponent(levelList, 0, 143, Short.MAX_VALUE)
 					.addGap(146))
 		);
 		groupLayout.setVerticalGroup(
@@ -59,7 +79,7 @@ public class PlayGameScreenView extends JPanel implements IView{
 					.addGap(124)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblLevel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(levelList, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnBack)
@@ -71,7 +91,17 @@ public class PlayGameScreenView extends JPanel implements IView{
 
 	@Override
 	public void cleanup() {
-		// TODO Auto-generated method stub
-		
+		levelList.setSelectedIndex(0);		
 	}
+	
+	void addLevel(Level level) {
+		if (level != null) {
+			levelList.addItem(level.toString());
+		}
+	}
+	
+	public Level getSelectedLevel() {
+		return lvlm.getLevels().get(levelList.getSelectedIndex());
+	}
+
 }

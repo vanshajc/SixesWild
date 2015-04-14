@@ -13,6 +13,8 @@ import sw.common.model.controller.PwrUpSwapActionListener;
 
 public class PowerUpPanel extends JPanel {
 	public PowerUpPanel() {
+		setOpaque(false);
+		setBorder(null);
 		
 		JButton btnSwap = new JButton("Swap");
 		btnSwap.addActionListener(new PwrUpSwapActionListener());
@@ -31,7 +33,7 @@ public class PowerUpPanel extends JPanel {
 						.addComponent(btnShuffle, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnRemove, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnSwap, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(400, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
