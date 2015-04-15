@@ -40,6 +40,7 @@ public class SixesWildJFrame extends JFrame implements IView{
 	long startTime;
 
 	public SixesWildJFrame() {
+		setTitle("Sixes Wild");
 		/*
 		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -59,7 +60,7 @@ public class SixesWildJFrame extends JFrame implements IView{
 		
 		
 		this.setSize(800,600);
-		this.setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		setResizable(false);
 		this.setVisible(true);
 		
@@ -71,7 +72,7 @@ public class SixesWildJFrame extends JFrame implements IView{
 	@Override
 	public void initialize() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.add(ssv);
+		getContentPane().add(ssv);
 		ssv.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
