@@ -3,7 +3,7 @@
  *  @author Tony Vu
  *  @since  Apr 11, 2015
  */
-package sw.mode.release;
+package sw.mode;
 
 import java.awt.Dimension;
 

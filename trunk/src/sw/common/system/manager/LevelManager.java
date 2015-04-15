@@ -11,7 +11,10 @@ import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
-import sw.mode.release.Release;
+import sw.mode.Elimination;
+import sw.mode.Lightning;
+import sw.mode.Puzzle;
+import sw.mode.Release;
 
 /**
  *
@@ -27,9 +30,17 @@ public class LevelManager {
 	
 	public LevelManager() {
 		// Test create levels
-		for (int i = 0; i < maxLvl; i++) {
-			list.add(LevelFactory.getLevel(++lvlCount, new Release() , new Statistics()));
-		}
+//		for (int i = 0; i < maxLvl; i++) {
+//			list.add(LevelFactory.getLevel(++lvlCount, new Release() , new Statistics()));
+//		}
+		list.add(LevelFactory.getLevel(++lvlCount, new Puzzle() , new Statistics()));
+		list.add(LevelFactory.getLevel(++lvlCount, new Release() , new Statistics()));
+		list.add(LevelFactory.getLevel(++lvlCount, new Lightning() , new Statistics()));
+		list.add(LevelFactory.getLevel(++lvlCount, new Elimination() , new Statistics()));
+		list.add(LevelFactory.getLevel(++lvlCount, new Puzzle() , new Statistics()));
+		list.add(LevelFactory.getLevel(++lvlCount, new Release() , new Statistics()));
+		list.add(LevelFactory.getLevel(++lvlCount, new Lightning() , new Statistics()));
+		
 		// first level is the current level by default
 		current = list.get(0);
 	}

@@ -20,7 +20,7 @@ import sw.app.gui.controller.MainMenuController;
 import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
-import sw.mode.release.Release;
+import sw.mode.Release;
 
 import javax.swing.SwingConstants;
 
