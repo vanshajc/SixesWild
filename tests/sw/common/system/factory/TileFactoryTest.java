@@ -50,28 +50,5 @@ public class TileFactoryTest {
 			assertTrue((tile1.getMultiplier() >= 1) && (tile1.getMultiplier() <= 3));
 		}
 	}
-	
-	/** Get same position for 2 Square instances with same value */
-	@Test
-	public void hashMapSquarePositionTest() {
-		Tile t = TileFactory.getTile();
-		Square s1 = new Square(t);
-		Square s2 = new Square(t);
-		Point test = new Point(0,9);
-		
-		HashMap<Square, Point> map = new HashMap<Square, Point>();
-		map.put(s1, test);
-		
-		Point test1 = map.get(s2);
-		assertEquals(0, test1.x);
-		assertEquals(9, test1.y);
-	}
-	
-	/** 2 different Tile instances with same value get different location */
-	@Test
-	public void hashMapTwoTilePositionTest() {
-		Tile t1 = new Tile(1,1);
-		Tile t2 = new Tile(1,1);
-	}
 
 }

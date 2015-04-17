@@ -19,10 +19,8 @@ public class PostGameController implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Level n = lvlm.getNext();
-		Level c = lvlm.getCurrent();
-		lvlm.setCurrent(n);
-		c = lvlm.getCurrent();
+		Level n = lvlm.getNext();		
+		lvlm.setCurrent(n);		
 		lm.switchToGameplayView();
 	}
 

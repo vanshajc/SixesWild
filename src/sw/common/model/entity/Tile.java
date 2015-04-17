@@ -14,23 +14,20 @@ public class Tile {
 	int value = 0;
 	int multiplier = 0;
 
-	public Tile() {
-	}
-
-	public Tile(int value, int multiplier) {
-		if(value >= 1 && value <= 6){
+	static final int minValue = 1;
+	static final int maxValue = 6;
+	
+	static final int minMultiplier = 1;
+	static final int maxMultiplier = 3;	
+	
+	public Tile(int value, int multiplier) {		
+		if ((value >= minValue && value <= maxValue) &&
+				(multiplier >= minMultiplier && multiplier <= maxMultiplier)) {
 			this.value = value;
-		}
-		else{
-			System.err.println("Value out of bounds");
-		}
-		if(multiplier >= 1 && multiplier  <= 3){
 			this.multiplier = multiplier;
+		} else {
+			throw new IllegalArgumentException("Value and/or Multiplier invalid!");
 		}
-		else{
-			System.err.println("Multiplier out of bounds");
-		}
-		
 	}
 
 	/**
@@ -47,24 +44,6 @@ public class Tile {
 		return multiplier;
 	}
 
-	// Can't override this, Hashmap will use this to find a match
-	// we want to find the exact instance of this object, not another
-	// instance with the same value
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	// @Override
-	// public boolean equals(Object obj) {
-	// if (obj instanceof Tile) {
-	// Tile t = (Tile) obj;
-	// return (value == t.value) &&
-	// (multiplier == t.multiplier);
-	// }
-	// return false;
-	// }
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -76,13 +55,14 @@ public class Tile {
 				.format("Value : %d, Multiplier : %d\n", value, multiplier);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Tile) {
-			if ((this.value == ((Tile) o).value)
-					&& this.multiplier == ((Tile) o).multiplier) {
-				return true;
-			}
+			Tile t = (Tile) o;
+			return (this.value == t.value) && (this.multiplier == t.multiplier);
 		}
 		return false;
 	}

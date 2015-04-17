@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.util.HashMap;
 
 import sw.common.model.entity.Square;
+import sw.common.model.entity.Tile;
 
 
 /** Every game mode will need to get its own resource manager */
@@ -21,6 +22,9 @@ public interface IResourceManager {
 	
 	/** Get image file path for a particular Square */
 	String getImage(Square square);
+	
+	/** Get image file path for a particular Tile */
+	String getImage(Tile tile);
 	
 	/**
 	 * @return size of the common icon square image

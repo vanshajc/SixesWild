@@ -1,17 +1,21 @@
 package sw.app.gui.view.board;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import sw.common.model.entity.Board;
+import sw.common.model.entity.Column;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
+import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
 public class BoardColumn extends JPanel {
@@ -19,109 +23,325 @@ public class BoardColumn extends JPanel {
 	/** GENERATED DO NOT CHANGE */
 	private static final long serialVersionUID = -7989466787176501882L;
 
-	int count = 9;
-	
-	int xPos = 0;
-	int yPos = 0;
-	
-	Dimension imgSize;
-	
-	int rows[] = new int[count];
-	
-	Board board;
-	
-	/** The column of Square to display */
+	/** The index of this column */
 	int colIdx;
-	ArrayList<Square> col;
-	
-	/** Keep a cached copy of the column so when updatePosition is called, we know what changed */
-	ArrayList<Square> cache;
-	
-	BoardPanel panel;
-	
-	// Need to translate Board discreet position into XY explicit position
 
+	/** The column of Square to display */
+	Column column;
+
+	/** The dimension of the Tile icon */
+	Dimension imgSize;
+
+	/** Common icon image map */
+	HashMap<String, Image> im;
+
+	/** Resource manager */
+	IResourceManager rm;
+
+	/** Keep track of the XY coordinate of each Tile */
+	ArrayList<BoardTile> tiles = new ArrayList<BoardTile>();
+
+	/** Whether the column is in animation */
+	boolean isMoving = false;
+
+	/**
+	 * @param boardPanel
+	 * @param i
+	 *            column index
+	 */
 	public BoardColumn(BoardPanel boardPanel, int i) {
-		this.panel  = boardPanel;
-		this.colIdx = i;
-		
-		initialize();
+		this.im = boardPanel.imageMap;
+
+		// Any initialization that cannot handle repeat call can go here,
+		// otherwise it will go to initialize
+		initialize(boardPanel, i);
 	}
-	
-	void initialize() {
-		this.board = panel.board;
-		this.col = board.getColumn(colIdx);
-		this.imgSize = panel.resManager.getImageSize();
-		
-		// Create a cache copy of the column
-		this.cache = new ArrayList<Square>(col);
-		
-		Dimension size = new Dimension(imgSize.width, imgSize.height * count);
+
+	void initialize(BoardPanel boardPanel, int i) {
+		this.colIdx = i;
+		this.column = boardPanel.board.getColumn(i);
+
+		this.rm = boardPanel.resManager;
+		this.imgSize = rm.getImageSize();
+
+		// Clear current display
+		clear();
+
+		// Calculate size of this column
+		Dimension size = new Dimension(imgSize.width, imgSize.height
+				* column.size());
 		setPreferredSize(size);
-		
-		// Calculate row positions
-		for (int idx = 0; idx < count; idx++) {
-			rows[idx] = size.height - ((idx+1)*imgSize.height);
-		}
-		
+
 		// Load the images we need, will add in more as needed
-		for (int y = 0; y < Board.ROW; y++) {
-			Square s = col.get(y);
-			if (!panel.imageMap.containsKey(s)) {
-				Image img = loadImage(s);
-				panel.imageMap.put(s, img);
-			}			
+		for (int y = 0; y < column.size(); y++) {
+			Square s = column.getSquare(y); // better not be null here...
+			if (s != null && !s.isEmpty()) {
+				Tile t = s.getTile();
+				String str = rm.getImage(t);
+				if (!im.containsKey(str)) {
+					im.put(str, loadTileImg(t)); // Guarantee to get an Image
+													// here
+				}
+				BoardTile bt = new BoardTile(t);
+				if (bt != null) { // There was a bug here before, so just to be
+									// safe
+					tiles.add(bt);
+				}
+			}
 		}
 	}
 
-	public void updatePosition() {
-		if (yPos == 0) {
-			yPos = 1;
-		} else if (yPos < rows[0]) {
-			yPos += 2;		
+	/** Synch the tiles to be displayed with the underlying Column */
+	public void updateTilePosition() {
+		boolean updatePosition = false; // need a temp to prevent racing
+										// condition
+
+		// Update the current Tile positions
+		for (int y = 0; y < tiles.size(); y++) {
+			try {
+				BoardTile bt = tiles.get(y);
+				int idx = column.indexOf(bt.tile); // can handle null case
+				bt.updateDestY(idxToY(idx)); // Update destination y-coordinate
+				if (bt.updateCurrentY()) { // Update current y-coordinate
+					updatePosition = true; // If any Tile position is updated,
+											// we're in animation
+				}
+			} catch (IllegalAccessError | Exception e) {
+				// Tile doesn't exist, it was removed from the column or index
+				// out of bound, just remove it
+				tiles.remove(y);
+			}
+		}
+		// Add new Tiles, if any
+		for (int y = 0; y < column.count(); y++) {
+			Tile t = column.getTile(y); // Should not be null here...
+			if (t != null && !tilesContains(t)) {
+				BoardTile bt = new BoardTile(t);
+				if (bt != null) {
+					tiles.add(bt); // Add new tile, which doesn't need to be
+									// moved
+				}
+			}
+		}
+
+		// Update BoardColumn animating state
+		isMoving = updatePosition;
+	}
+
+	/** Synch the BoardColumn with the underlying Column */
+	public void update() {
+		updateTilePosition();
+	}
+
+	/** Clear the column display */
+	public void clear() {
+		// TODO Auto-generated method stub
+		tiles.clear();
+	}
+
+	/**
+	 * Paint the Squares in the column, can be upgraded to use Image
+	 * 
+	 * @throws Exception
+	 */
+	void paintSquares(Graphics g) throws Exception {
+		for (int y = 0; y < column.size(); y++) {
+			Square s = column.getSquare(y);
+			if (s.isSelected()) {
+				g.setColor(Color.YELLOW);
+				g.fillRect(0, idxToY(y), imgSize.width, imgSize.height);
+			} else {
+				g.setColor(Color.BLACK);
+				g.drawRect(0, idxToY(y), imgSize.width, imgSize.height);
+			}
 		}
 	}
-	
+
+	/** Paint the Tiles in the column */
+	void paintTiles(Graphics g) {
+		for (int y = 0; y < tiles.size(); y++) {
+			BoardTile bt = tiles.get(y);
+			if (bt != null && bt.isVisible()) {
+				g.drawImage(loadTileImg(bt.tile), 0, bt.currentY, null);
+			}
+		}
+	}
+
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		// paint the squares
-		paintSquares(g);
-		
-		// paint the tiles
-		//g.drawImage(img, xPos, yPos, null);
-	}
-	
-	void paintSquares(Graphics g) {
-		for (int y = 0; y < Board.ROW; y++) {
-			Square s = col.get(y);
-			Image img = loadImage(s);
-			g.drawImage(img, 0, rows[y], null);
+		try {
+			paintSquares(g);
+		} catch (Exception e) {
+			// Should never throw an exception here
+			System.err.println("False exception occured!");
 		}
+		paintTiles(g);
 	}
-	
-	Image loadImage(Square s) {
+
+	/**
+	 * @param t
+	 *            tile to load the Image for
+	 * @return the Image to be drawn for the Tile
+	 */
+	Image loadTileImg(Tile t) {
 		Image img;
-		if (!panel.imageMap.containsKey(s)) {
-			img = new ImageIcon(BoardColumn.class.getResource(panel.resManager.getImage(s))).getImage();
-			panel.imageMap.put(s, img);
+		CommonResourceManager crm = new CommonResourceManager();
+
+		// Tries to load the image from IResourceManager, if that doesn't work
+		// then use common image
+		if (!im.containsKey(t)) {
+			String path = rm.getImage(t);
+			if (path == null) {
+				path = crm.getImage(t); // Guarantee to work
+			}
+			img = new ImageIcon(BoardColumn.class.getResource(path)).getImage();
+			if (img == null) {
+				img = new ImageIcon(BoardColumn.class.getResource(crm
+						.getImage(t))).getImage();
+			}
+			im.put(crm.getImage(t), img); // Store the image
 		} else {
-			img = panel.imageMap.get(s);
+			img = im.get(t);
 		}
 		return img;
 	}
 
-	public void clear() {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * @return the index of this BoardColumn
+	 */
+	public int getColIdx() {
+		return colIdx;
 	}
-	
+
+	/**
+	 * Convert index to y-coordinate, top-aligned
+	 * 
+	 * @throws Exception
+	 */
+	public int idxToY(int idx) throws Exception {
+		if (idx >= 0 && idx < column.size()) {
+			return idx * imgSize.height;
+		}
+		throw new Exception("Index out of bound!");
+	}
+
+	/**
+	 * Convert y-coordinate to index
+	 * 
+	 * @throws Exception
+	 */
+	public int yToIdx(int y) throws Exception {
+		for (int i = 0; i < column.size(); i++) {
+			int yPos = idxToY(i);
+			if (y >= yPos && y < yPos + imgSize.height) {
+				return i;
+			}
+		}
+		throw new Exception("Selection out of bound!");
+	}
+
+	/**
+	 * @return true if Tiles are still moving to final destination, false if
+	 *         they're already there
+	 */
+	synchronized public boolean isAnimating() {
+		return isMoving;
+	}
+
+	/**
+	 * @param idx
+	 * @return an iterator of all occupant in this index
+	 */
+	Iterator<BoardTile> getOccupant(int idx) {
+		ArrayList<BoardTile> abt = new ArrayList<BoardTile>();
+		try {
+			Iterator<BoardTile> bti = tiles.iterator();
+			while (bti.hasNext()) {
+				BoardTile bt = bti.next();
+				if (yToIdx(bt.currentY) == idx) {
+					abt.add(bt);
+				}
+			}
+		} catch (Exception e) {
+
+		}
+		return abt.iterator();
+	}
+
+	/**
+	 * @param idx
+	 * @return true if idx is occupied, false if not
+	 */
+	boolean isIdxOccupied(int idx) {
+		Iterator<BoardTile> bti = getOccupant(idx);
+		return bti.hasNext();
+	}
+
+	/**
+	 * @param t
+	 *            the Tile
+	 * @return whether the Tile is in the display list
+	 */
+	boolean tilesContains(Tile t) {
+		Iterator<BoardTile> bti = tiles.iterator();
+		while (bti.hasNext()) {
+			if (bti.next().tile == t) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Internal class to keep track of the current and destination y-coordinate
+	 * of the Tile
+	 */
 	class BoardTile {
-		int prevBoardPos = 0;
-		int currBoardPos = 0;
-		int prevXYPos = 0;
-		int currXYPos = 0;
-		Tile tile;		
+		int currentY; // Current y position
+		int destY; // Destination y position
+		Tile tile; // The tile to keep track of
+
+		BoardTile(Tile t) {
+			this.tile = t;
+			try {
+				this.currentY = idxToY(column.indexOf(t));
+			} catch (Exception e) { // Should not throw exception here
+				System.err.println("False exception occured!");
+			}
+			this.destY = this.currentY;
+		}
+
+		void updateDestY(int newY) {
+			this.destY = newY;
+		}
+
+		boolean updateCurrentY() {
+			if (currentY < destY) {
+				currentY++;
+				return true;
+			} else if (currentY > destY) { // for swap move
+				currentY = destY;
+			}
+			return false;
+		}
+
+		boolean isVisible() {
+			try {
+				int idx = yToIdx(currentY);
+				Iterator<BoardTile> bti = getOccupant(idx);
+				while (bti.hasNext()) {
+					BoardTile o = bti.next();
+					if (o != this && (tiles.indexOf(o) < tiles.indexOf(this))) {
+						// Older tile has priority
+						return false;
+					}
+				}
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
 	}
 
 }
