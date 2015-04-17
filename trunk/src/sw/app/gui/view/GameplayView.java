@@ -162,7 +162,7 @@ public class GameplayView extends JPanel implements IView {
 			scorePanel.setStar(2);		
 
 			timeMovePanel.startTimer();
-		} catch (Exception e) {
+		} catch (IllegalStateException e) {
 			System.err.println("Cannot initialize the Gameplay View!");
 			manager.switchToMainMenu();
 		}

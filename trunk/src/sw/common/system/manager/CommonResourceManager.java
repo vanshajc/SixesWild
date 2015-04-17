@@ -9,11 +9,12 @@ import java.awt.Dimension;
 import java.util.HashMap;
 
 import sw.common.model.entity.Square;
+import sw.common.model.entity.Tile;
 
 /**
  *
  */
-public abstract class CommonResourceManager implements IResourceManager {
+public class CommonResourceManager implements IResourceManager {
 	
 	Dimension imgSize = new Dimension(50,50);
 	
@@ -33,8 +34,16 @@ public abstract class CommonResourceManager implements IResourceManager {
 		return getUnusedImage(square.getTile().getValue());		
 	}
 	
+	public String getImage(Tile tile) {
+		return getTileImage(tile.getValue());
+	}
+	
 	String getUnusedImage(int i) {
 		return imagePath.concat(String.format("%d_unused.png", i));
+	}
+	
+	String getTileImage(int i) {
+		return imagePath.concat(String.format("tile_%d.png", i));
 	}
 
 	/* (non-Javadoc)
