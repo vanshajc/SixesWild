@@ -34,7 +34,7 @@ public class BoardColumnController extends MouseAdapter {
 		if (!col.isAnimating()) {  // If column is still moving, don't allow click
 			try {
 				int y = col.yToIdx(e.getY());
-				board.removeTile(new Point(col.getColIdx(), y), true);
+				board.remove(new Point(col.getColIdx(), y));
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				System.err

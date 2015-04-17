@@ -5,8 +5,12 @@
  */
 package sw.common.model.controller;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import sw.common.model.entity.Square;
+import sw.common.model.entity.Tile;
 
 /**
  * 

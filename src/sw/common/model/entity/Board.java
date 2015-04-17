@@ -8,10 +8,13 @@ package sw.common.model.entity;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import sw.common.system.factory.SquareFactory;
+import sw.common.system.manager.IBoardLocationManager;
+import sw.common.system.manager.IBoardSelectionManager;
 
 /** The model for the game board 
  * 
@@ -23,7 +26,7 @@ import sw.common.system.factory.SquareFactory;
  *     80  81  82  83  84  85  86  87  88 
  * 
  * */
-public class Board {
+public class Board implements IBoardSelectionManager, IBoardLocationManager, IBoard {
 	
 	/** Default dimension for the board */
 	public static int COLUMN = 9;
@@ -46,30 +49,6 @@ public class Board {
 		createBoard(fill);
 	}
 	
-	/**
-	 * @param x the x-position to check
-	 * @return true if valid, false if not
-	 */
-	boolean isValidX(int x) {
-		return (x >= 0 && x < Board.COLUMN);
-	}
-	
-	/**
-	 * @param y the y-position to check
-	 * @return true if valid, false if not
-	 */
-	boolean isValidY(int y) {
-		return (y >= 0 && y < Board.ROW);
-	}
-	
-	/**
-	 * @param p the Point to check
-	 * @return true if valid, false if not
-	 */
-	boolean isValidPoint(Point p) {
-		return (isValidX(p.x) && isValidY(p.y));
-	}
-	
 	/** Create new Board
 	 * @param fill whether to fill board with Tile
 	 */
@@ -84,46 +63,7 @@ public class Board {
 			// Add the new row to the grid			
 			grid.add(new Column(row));
 		}		
-	}	
-	
-	/**
-	 * @param pos the position
-	 * @return the Square at the position
-	 */
-	public Square getSquare(Point pos) {
-		if (isValidPoint(pos)) {
-			return grid.get(pos.x).getSquare(pos.y);
-		}
-		return null;
 	}
-	
-	/**
-	 * @param tile the Tile to search for
-	 * @return the position of the Tile in the Board
-	 */
-	public Point getLocation(Tile tile) {
-		for (int x = 0; x < Board.COLUMN; x++) {
-			int y;
-			try {
-				y = grid.get(x).indexOf(tile);
-			} catch (IllegalAccessError e) {
-				continue;
-			}
-			return new Point(x, y);
-		}
-		return null;
-	}
-	
-	/**
-	 * @param loc the location
-	 * @return the Tile at the location
-	 */
-	public Tile getTile(Point loc) {
-		if (isValidPoint(loc)) {
-			return grid.get(loc.x).getTile(loc.y);
-		}
-		return null;
-	}	
 	
 	/**
 	 * @param col to get
@@ -137,77 +77,209 @@ public class Board {
 		}		
 	}
 	
-	/** Remove all Tile in the board */
+	/* (non-Javadoc)
+	 * @see sw.common.model.entity.IBoard#clear()
+	 */
+	@Override
 	public void clear() {
 		for (int x = 0; x < Board.COLUMN; x++) {
 			grid.get(x).clear();
 		}		
 	}
 	
-	/** If there is unused space in each column, create new Tile to fill it */
+	/* (non-Javadoc)
+	 * @see sw.common.model.entity.IBoard#fill()
+	 */
+	@Override
 	public void fill() {
 		for (int x = 0; x < Board.COLUMN; x++) {
-			Column c = grid.get(x);
-			c.pack();
-			c.fill();
+			grid.get(x).fill();
 		}		
-	}	
+	}
 	
-	/**
-	 * @return the dimension of the Board
+	/* (non-Javadoc)
+	 * @see sw.common.model.entity.IBoard#pack()
 	 */
+	@Override
+	public void pack() {
+		for (int x = 0; x < Board.COLUMN; x++) {
+			grid.get(x).pack();
+		}	
+	}
+	
+	/* (non-Javadoc)
+	 * @see sw.common.model.entity.IBoard#size()
+	 */
+	@Override
 	public Dimension size() {
 		return new Dimension(Board.COLUMN, Board.ROW);
-	}
-	
-	/**
-	 * @param p the position to select
-	 */
-	public void select(Point p) {
-		Square s = getSquare(p);
-		s.setSelected(true);
-		try {
-			selection.put(s);
-		} catch (InterruptedException e) {
-			// Queue is full, discard this selection
-			System.err.println("Selection queue is full!");
-		}		
-	}
-	
-	/**
-	 * @return the selection queue
-	 */
-	public Queue<Square> getSelected() {
-		return selection;
-	}
+	}	
 	
 	/**
 	 * @param p position to remove
 	 * @param fill whether to fill empty spaces with new Tiles
 	 */
-	public void removeTile(Point p, boolean fill) {
+	public boolean remove(Point p) {
 		if (isValidPoint(p)) {
 			Column c = grid.get(p.x);
-			c.removeTile(p.y);  // Remove Tile
-			c.pack();           // Pack the Column
-			if (fill) {
-				c.fill();           // Fill empty spaces
-			}
+			return c.removeTile(p.y);  // Remove Tile			
 		}
+		return false;
 	}
 	
-	/** Exchange the Tile of 2 positions
-	 * @param s1
-	 * @param s2
+	/**
+	 * @return the number of Tile currently in the Board
 	 */
-	public void swapTile(Point p1, Point p2) {
-		Square s1 = getSquare(p1);
-		Tile   t1 = s1.getTile();
-		
-		Square s2 = getSquare(p2);
-		
-		s1.setTile(s2.getTile());
-		s2.setTile(t1);
+	@Override
+	public int count() {
+		int total = 0;
+		for (int x = 0; x < Board.COLUMN; x++) {
+			total += grid.get(x).count();
+		}
+		return total;
+	}
+
+	/**
+	 * @param p the position
+	 * @param t the new Tile to place at the position
+	 * @return true if the new Tile was placed at the position, false if not
+	 */
+	@Override
+	public boolean replace(Point p, Tile t) {
+		if (remove(p)) {
+			return grid.get(p.x).setTile(t, p.y);
+		}
+		return false;
+	}
+	
+	/**
+	 * @param p the positon
+	 * @return true if the position is empty, false if not
+	 */
+	@Override
+	public boolean isEmpty(Point p) {
+		return grid.get(p.x).getTile(p.y) == null;		
+	}
+	
+	//////////////////////////////////////////////////////////
+	// IBoardLocationnManager methods
+	//
+	
+	/* (non-Javadoc)
+	 * @see sw.common.model.entity.IBoard#isValidX(int)
+	 */
+	@Override
+	public boolean isValidX(int x) {
+		return (x >= 0 && x < Board.COLUMN);
+	}
+	
+	/* (non-Javadoc)
+	 * @see sw.common.model.entity.IBoard#isValidY(int)
+	 */
+	@Override
+	public boolean isValidY(int y) {
+		return (y >= 0 && y < Board.ROW);
+	}
+	
+	/* (non-Javadoc)
+	 * @see sw.common.model.entity.IBoard#isValidPoint(java.awt.Point)
+	 */
+	@Override
+	public boolean isValidPoint(Point p) {
+		return (isValidX(p.x) && isValidY(p.y));
+	}
+	
+	/**
+	 * @param tile the Tile to search for
+	 * @return the position of the Tile in the Board
+	 */
+	public Point getPoint(Tile tile) {
+		for (int x = 0; x < Board.COLUMN; x++) {
+			try {
+				int y = grid.get(x).indexOf(tile);
+				return new Point(x, y);
+			} catch (IllegalAccessError e) {
+				continue;
+			}			
+		}
+		return null;
+	}
+	
+	/**
+	 * @param p the position
+	 * @return the Tile at the position
+	 */
+	public Tile getTile(Point p) {
+		if (isValidPoint(p)) {
+			return grid.get(p.x).getTile(p.y);
+		}
+		return null;
+	}
+	
+	/**
+	 * @param p the position
+	 * @return the Square at the position
+	 */
+	public Square getSquare(Point p) {
+		if (isValidPoint(p)) {
+			return grid.get(p.x).getSquare(p.y);
+		}
+		return null;
+	}
+	
+	//////////////////////////////////////////////////////////
+	// IBoardSelectionManager methods
+	//
+	
+	/**
+	 * @param p the position to select
+	 */
+	public boolean select(Point p) {
+		Square s = getSquare(p);
+		if (!s.isSelected()) {
+			s.setSelected(true);
+			try {
+				selection.put(s);
+				return true;
+			} catch (InterruptedException e) {
+				// Queue is full, discard this selection
+				System.err.println("Selection queue is full!");
+				return false;
+			}
+		}
+		return true;  // if Square already selected, return true
+	}
+	
+	/**
+	 * @return the selected Squares
+	 */
+	public Queue<Square> getSelectedSquare() {
+		return selection;
+	}
+	
+	/**
+	 * @return the selected Tiles
+	 */
+	public Queue<Tile> getSelectedTile() {
+		Queue<Tile> tq = new ArrayBlockingQueue<Tile>(Board.COLUMN * Board.ROW, true);
+		Iterator<Square> si = selection.iterator();
+		while (si.hasNext()) {
+			tq.add(si.next().getTile());
+		}
+		return tq;
+	}
+	
+	public boolean clearSelection() {
+		Iterator<Square> si = selection.iterator();
+		while (si.hasNext()) {
+			si.next().setSelected(false);
+			si.remove();
+		}
+//		// Just in case...
+//		if (!selection.isEmpty()) {
+//			selection.clear();
+//		}
+		return true;
 	}
 
 }

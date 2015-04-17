@@ -26,5 +26,26 @@ public class TileFactory {
 	static public Tile getTile() {		
 		return new Tile(frequencies.nextVal(), frequencies.nextMul());
 	}
+	
+	/**
+	 * @param t the Tile
+	 * @return a new Tile with the same value and multiplier as t
+	 */
+	static public Tile getTile(Tile t) {
+		return new Tile(t.getValue(), t.getMultiplier());
+	}
+	
+	/**
+	 * @param val value
+	 * @param mul multiplier
+	 * @return new Tile with specified value and multiplier, or null if input is invalid
+	 */
+	static public Tile getTile(int val, int mul) {
+		try {
+			return new Tile(val, mul);
+		} catch (IllegalArgumentException e) {
+			return null;
+		}
+	}
 
 }
