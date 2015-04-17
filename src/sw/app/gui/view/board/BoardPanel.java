@@ -11,7 +11,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -21,6 +23,8 @@ import sw.common.model.entity.Board;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
+import sw.common.model.entity.Tile;
+import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
 import sw.common.system.manager.IResourceManager;
@@ -78,7 +82,19 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 		this.level = level;
 		this.board = level.getGame().getBoard();
 		this.boardSize  = board.size();
-		this.resManager = level.getMode().getResourceManger();		
+		this.resManager = level.getMode().getResourceManger();
+		
+		// Load all images we need now
+		Iterator<String> si = resManager.getTileImage().values().iterator();
+		while (si.hasNext()) {
+			String path = si.next();
+			if (!imageMap.containsKey(path)) {
+				 Image img = new ImageIcon(BoardPanel.class.getResource(path)).getImage();
+				 if (img != null) {
+					 imageMap.put(path, img); // Store the image
+				 }
+			}			
+		}
 		
 		BoardController bc = new MoveSelection(this);
 		setBoardController(bc);

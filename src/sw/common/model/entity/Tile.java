@@ -14,11 +14,11 @@ public class Tile {
 	int value = 0;
 	int multiplier = 0;
 
-	static final int minValue = 1;
-	static final int maxValue = 6;
+	public static final int minValue = 1;
+	public static final int maxValue = 6;
 	
-	static final int minMultiplier = 1;
-	static final int maxMultiplier = 3;	
+	public static final int minMultiplier = 1;
+	public static final int maxMultiplier = 3;	
 	
 	public Tile(int value, int multiplier) {		
 		if ((value >= minValue && value <= maxValue) &&

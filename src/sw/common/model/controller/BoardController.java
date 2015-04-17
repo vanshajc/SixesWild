@@ -17,9 +17,7 @@ import sw.common.model.entity.Tile;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
 
-/**
- * 
- */
+/** Model for an abstract BoardController */
 public abstract class BoardController extends MouseAdapter {
 	
 	IBoardPanel            panel;
@@ -102,7 +100,7 @@ public abstract class BoardController extends MouseAdapter {
 		board.pack();
 	}
 
-	int count() {
+	int boardCount() {
 		return board.count();
 	}	
 	

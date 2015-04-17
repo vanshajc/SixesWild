@@ -275,10 +275,10 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 			si.next().setSelected(false);
 			si.remove();
 		}
-//		// Just in case...
-//		if (!selection.isEmpty()) {
-//			selection.clear();
-//		}
+		// Just in case...
+		if (!selection.isEmpty()) {
+			selection.clear();
+		}
 		return true;
 	}
 

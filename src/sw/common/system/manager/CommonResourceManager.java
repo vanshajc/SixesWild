@@ -10,11 +10,14 @@ import java.util.HashMap;
 
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
+import sw.common.system.factory.TileFactory;
 
 /**
  *
  */
 public class CommonResourceManager implements IResourceManager {
+	
+	HashMap<Tile, String> tileMap = new HashMap<Tile, String>();
 	
 	Dimension imgSize = new Dimension(50,50);
 	
@@ -24,9 +27,16 @@ public class CommonResourceManager implements IResourceManager {
 	 * @see sw.common.system.manager.IResourceManager#getImage()
 	 */
 	@Override
-	public HashMap<Square, String> getImage() {
-		// TODO Auto-generated method stub
-		return null;
+	public HashMap<Tile, String> getTileImage() {
+		for (int i = Tile.minValue; i <= Tile.maxValue; i++) {
+			for (int m = Tile.minMultiplier; m <= Tile.maxMultiplier; m++) {
+				Tile t = TileFactory.getTile(i, m);
+				if (!tileMap.containsKey(t)) {
+					tileMap.put(t, getImage(t));
+				}
+			}
+		}
+		return tileMap;
 	}
 
 	@Override
@@ -56,6 +66,12 @@ public class CommonResourceManager implements IResourceManager {
 	
 	public String getStarImage() {
 		return imagePath.concat("star.png");
+	}
+
+	@Override
+	public HashMap<Square, String> getSquareImage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

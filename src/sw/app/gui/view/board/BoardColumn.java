@@ -197,11 +197,8 @@ public class BoardColumn extends JPanel {
 
 		// Tries to load the image from IResourceManager, if that doesn't work
 		// then use common image
-		if (!im.containsKey(t)) {
-			String path = rm.getImage(t);
-			if (path == null) {
-				path = crm.getImage(t); // Guarantee to work
-			}
+		String path = crm.getImage(t);
+		if (!im.containsKey(path)) {
 			img = new ImageIcon(BoardColumn.class.getResource(path)).getImage();
 			if (img == null) {
 				img = new ImageIcon(BoardColumn.class.getResource(crm
@@ -209,9 +206,9 @@ public class BoardColumn extends JPanel {
 			}
 			im.put(crm.getImage(t), img); // Store the image
 		} else {
-			img = im.get(t);
+			img = im.get(path);
 		}
-		return img;
+		return img;		
 	}
 
 	/**

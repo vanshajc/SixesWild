@@ -15,10 +15,15 @@ import sw.common.model.entity.Tile;
 /** Every game mode will need to get its own resource manager */
 public interface IResourceManager {
 	
+	/** Get the image file path for every possible Tile
+	 * @return the hashmap with Tile as key
+	 */
+	HashMap<Tile, String> getTileImage();
+	
 	/** Get the image file path for every possible Square
 	 * @return the hashmap with Square as key
 	 */
-	HashMap<Square, String> getImage();
+	HashMap<Square, String> getSquareImage();
 	
 	/** Get image file path for a particular Square */
 	String getImage(Square square);
