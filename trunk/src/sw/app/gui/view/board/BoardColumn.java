@@ -91,8 +91,10 @@ public class BoardColumn extends JPanel {
 		}
 	}
 
-	/** Synch the tiles to be displayed with the underlying Column */
-	public void updateTilePosition() {
+	/** Synch the tiles to be displayed with the underlying Column
+	 * @return whether Tile position was updated
+	 */
+	public boolean updateTilePosition() {
 		boolean updatePosition = false; // need a temp to prevent racing
 										// condition
 
@@ -126,11 +128,15 @@ public class BoardColumn extends JPanel {
 
 		// Update BoardColumn animating state
 		isMoving = updatePosition;
+		
+		return isMoving;
 	}
 
-	/** Synch the BoardColumn with the underlying Column */
-	public void update() {
-		updateTilePosition();
+	/** Synch the BoardColumn with the underlying Column
+	 * @return true if Tile position was updated, false if not
+	 */
+	public boolean update() {
+		return updateTilePosition();
 	}
 
 	/** Clear the column display */
@@ -318,7 +324,7 @@ public class BoardColumn extends JPanel {
 
 		boolean updateCurrentY() {
 			if (currentY < destY) {
-				currentY++;
+				currentY += 3;
 				return true;
 			} else if (currentY > destY) { // for swap move
 				currentY = destY;

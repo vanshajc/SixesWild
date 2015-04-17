@@ -72,7 +72,7 @@ public class Column {
 
 	/**
 	 * @param idx the index
-	 * @return the Tile at idx, may be null
+	 * @return the Tile at idx, null if index is empty
 	 */
 	public Tile getTile(int idx) {
 		Square s = getSquare(idx);

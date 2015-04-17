@@ -8,13 +8,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import sw.common.system.manager.IBoardLocationManager;
+
 public class BoardTest {
 
 	Board board;
+	IBoardLocationManager lm;
 	
 	@Before
 	public void setUp() throws Exception {
 		board = new Board();  // Create new board and fill it
+		lm    = (IBoardLocationManager) board;
 		
 		testBoardSize();
 	}
@@ -56,14 +60,14 @@ public class BoardTest {
 				Tile t = board.grid.get(x).getTile(y);
 				
 				// it has to exist
-				Point p = board.getLocation(t);
+				Point p = lm.getPoint(t);
 				assertNotNull(String.format("Location %d,%d is null", x,y), p);
 				assertEquals(String.format("Location %d,%d failed", x,y), x, p.x);
 				assertEquals(String.format("Location %d,%d failed", x,y), y, p.y);
 				
 				// Create a "fake" tile with the same value and multiplier
 				Tile fake = new Tile(t.value, t.multiplier);
-				Point fp = board.getLocation(fake);
+				Point fp = lm.getPoint(fake);
 				assertNull(fp); // This Tile should not exist in the Board
 			}
 		}
@@ -79,12 +83,12 @@ public class BoardTest {
 				board.grid.get(x).getSquare(y).setTile(null);
 				
 				// Square is now empty, Board must return null
-				Point p = board.getLocation(t);
+				Point p = board.getPoint(t);
 				assertNull(String.format("Location %d,%d is not null", x,y), p);				
 				
 				// Create a "fake" tile with the same value and multiplier
 				Tile fake = new Tile(t.value, t.multiplier);
-				Point fp = board.getLocation(fake);
+				Point fp = board.getPoint(fake);
 				assertNull(fp); // This Tile should not exist in the Board
 			}
 		}
