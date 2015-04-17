@@ -20,6 +20,9 @@ import sw.common.model.entity.Tile;
  */
 public class MoveSelection extends BoardController implements IMove {
 	
+	// This makes sure the selection is contiguous tiles
+	boolean moveStarted = false;
+	
 	public MoveSelection(IBoardPanel bp) {
 		super(bp);
 	}
@@ -30,6 +33,7 @@ public class MoveSelection extends BoardController implements IMove {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		try {
+			moveStarted = true;
 			selectionHandler(e);
 		} catch (IndexOutOfBoundsException e1) {
 			System.err
@@ -56,24 +60,35 @@ public class MoveSelection extends BoardController implements IMove {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		selectionHandler(e);
-		Iterator<Tile> selected = getSelectedTile().iterator();
-		while (selected.hasNext()) {
-			Point p = getPoint(selected.next());
-			boardRemove(p);
-		}		
-		clearSelection();
-		boardPack();
-		boardFill();
+		
+		if (moveStarted) {
+			moveStarted = false;
+			
+			Iterator<Tile> selected = getSelectedTile().iterator();
+			while (selected.hasNext()) {
+				Point p = getPoint(selected.next());
+				boardRemove(p);
+			}			
+			
+			clearSelection();
+			boardPack();
+			//boardFill();
+		}
 	}
 
 	protected void selectionHandler(MouseEvent e) {
 		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
 				Point p = panel.xyToPoint(e.getPoint());
-				select(p);
+				if (!isEmpty(p)) {
+					select(p);
+				} else {
+					moveStarted = false;
+					clearSelection();
+				}
 			} catch (Exception e1) {
+				moveStarted = false;
 				clearSelection();
-				throw new IndexOutOfBoundsException("Selection out of bound!");
 			}
 		}
 	}

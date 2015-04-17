@@ -165,7 +165,8 @@ public class BoardColumn extends JPanel {
 
 	/** Paint the Tiles in the column */
 	void paintTiles(Graphics g) {
-		for (int y = 0; y < tiles.size(); y++) {
+		//for (int y = 0; y < tiles.size(); y++) {
+		for (int y = tiles.size() - 1; y >= 0; y--) {
 			BoardTile bt = tiles.get(y);
 			if (bt != null && bt.isVisible()) {
 				g.drawImage(loadTileImg(bt.tile), 0, bt.currentY, null);
@@ -311,11 +312,11 @@ public class BoardColumn extends JPanel {
 		BoardTile(Tile t) {
 			this.tile = t;
 			try {
-				this.currentY = idxToY(column.indexOf(t));
+				this.destY = idxToY(column.indexOf(t));
 			} catch (Exception e) { // Should not throw exception here
 				System.err.println("False exception occured!");
 			}
-			this.destY = this.currentY;
+			this.currentY = 0;
 		}
 
 		void updateDestY(int newY) {
@@ -334,19 +335,18 @@ public class BoardColumn extends JPanel {
 
 		boolean isVisible() {
 			try {
+				int hiIdx = 0;
 				int idx = yToIdx(currentY);
 				Iterator<BoardTile> bti = getOccupant(idx);
-				while (bti.hasNext()) {
+				while (bti.hasNext()) {					
 					BoardTile o = bti.next();
-					if (o != this && (tiles.indexOf(o) < tiles.indexOf(this))) {
-						// Older tile has priority
-						return false;
-					}
+					hiIdx = Math.max(tiles.indexOf(o), hiIdx);
 				}
-				return true;
+				return tiles.indexOf(this) == hiIdx;
 			} catch (Exception e) {
 				return false;
 			}
+			//return true;
 		}
 	}
 
