@@ -12,6 +12,7 @@ import java.util.Queue;
 
 import sw.app.gui.view.board.IBoardPanel;
 import sw.common.model.entity.IBoard;
+import sw.common.model.entity.Level;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 import sw.common.system.manager.IBoardLocationManager;
@@ -24,9 +25,11 @@ public abstract class BoardController extends MouseAdapter {
 	IBoard                 board;
 	IBoardLocationManager  locator;
 	IBoardSelectionManager selector;
+	Level level;
 	
-	public BoardController(IBoardPanel bp) {
+	public BoardController(IBoardPanel bp, Level level) {
 		this.panel    = bp;
+		this.level = level;
 		this.board    = bp.getBoard();
 		this.locator  = bp.getLocator();
 		this.selector = bp.getSelector();

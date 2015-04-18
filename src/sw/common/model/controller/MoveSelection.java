@@ -6,25 +6,19 @@
 package sw.common.model.controller;
 
 import java.awt.Point;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
-import sw.app.gui.view.board.BoardColumn;
 import sw.app.gui.view.board.IBoardPanel;
-import sw.common.model.entity.Board;
+import sw.common.model.entity.Level;
 import sw.common.model.entity.Tile;
 
 /**
  *
  */
 public class MoveSelection extends BoardController implements IMove {
-	
-	// This makes sure the selection is contiguous tiles
-	boolean moveStarted = false;
-	
-	public MoveSelection(IBoardPanel bp) {
-		super(bp);
+	public MoveSelection(IBoardPanel bp, Level level) {
+		super(bp, level);
 	}
 
 	/* (non-Javadoc)
@@ -33,7 +27,6 @@ public class MoveSelection extends BoardController implements IMove {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		try {
-			moveStarted = true;
 			selectionHandler(e);
 		} catch (IndexOutOfBoundsException e1) {
 			System.err
@@ -60,43 +53,57 @@ public class MoveSelection extends BoardController implements IMove {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		selectionHandler(e);
-		
-		if (moveStarted) {
-			moveStarted = false;
-			
-			Iterator<Tile> selected = getSelectedTile().iterator();
-			while (selected.hasNext()) {
-				Point p = getPoint(selected.next());
-				boardRemove(p);
-			}			
-			
-			clearSelection();
-			boardPack();
-			//boardFill();
-		}
+		doMove();
+		clearSelection();
 	}
 
 	protected void selectionHandler(MouseEvent e) {
-		if (moveStarted && !panel.isAnimating()) {  // If column is still moving, don't do anything
+		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
 				Point p = panel.xyToPoint(e.getPoint());
-				if (isEmpty(p) || !select(p)) {
-					moveStarted = false;
-					clearSelection();
-				}
+				select(p);
 			} catch (Exception e1) {
-				moveStarted = false;
 				clearSelection();
+				throw new IndexOutOfBoundsException("Selection out of bound!");
 			}
 		}
 	}
 
 	@Override
 	public boolean doMove() {
-		// TODO Auto-generated method stub
-		return false;
+		if (!isValid()) return false;
+		Iterator<Tile> selected = getSelectedTile().iterator();
+		while (selected.hasNext()) {
+			Point p = getPoint(selected.next());
+			boardRemove(p);
+		}		
+		boardPack();
+		boardFill();
+		return true;
 	}
 
+
+	
+	private boolean isValid(){
+		Iterator<Tile> selected = getSelectedTile().iterator();
+		if (!selected.hasNext()) return false; // none selected somehow
+		Tile prev = selected.next();
+		if (prev.getValue()==6) return false;
+		int sum = prev.getValue();
+		while (selected.hasNext()){
+			Tile curr = selected.next();
+			sum += curr.getValue();
+			if (!adjacent(prev, curr))
+				return false;
+		}
+		
+		return sum == 6;
+		
+	}
+	private boolean adjacent(Tile t1, Tile t2){
+		return true;
+	}
+	
 	@Override
 	public boolean undoMove() {
 		// TODO Auto-generated method stub

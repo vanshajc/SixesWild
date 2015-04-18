@@ -11,7 +11,6 @@ import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import sw.common.model.entity.Board;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;

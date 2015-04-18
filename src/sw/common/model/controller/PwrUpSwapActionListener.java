@@ -5,25 +5,31 @@
  */
 package sw.common.model.controller;
 
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import sw.common.model.entity.Square;
-import sw.common.model.entity.Tile;
+import sw.app.gui.view.board.BoardPanel;
+import sw.common.model.entity.Level;
 
 /**
  * 
  */
 public class PwrUpSwapActionListener implements ActionListener {
 
+	BoardPanel bp;
+	Level level;
+	public PwrUpSwapActionListener(BoardPanel bp, Level level){
+		this.bp = bp;
+		this.level = level;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		BoardController bc = new MoveSwap(bp, level);
+		bp.setBoardController(bc);
 	}
 
 }

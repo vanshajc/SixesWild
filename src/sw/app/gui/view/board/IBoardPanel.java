@@ -4,7 +4,6 @@ import java.awt.Point;
 
 import sw.app.gui.view.IView;
 import sw.common.model.controller.BoardController;
-import sw.common.model.entity.Board;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.IBoardLocationManager;
