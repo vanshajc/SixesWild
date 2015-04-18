@@ -1,5 +1,6 @@
 package sw.builder.gui.layout;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -25,6 +26,7 @@ public class LevelBuilderView extends JPanel{
 	}
 	
 	private JTextField LvlField;
+	private JComboBox<String> modeList;
 	private JTextField MoveField;
 	private JTextField TimeField;
 	private JTextField SwapField;
@@ -127,7 +129,6 @@ public class LevelBuilderView extends JPanel{
 		
 		JLabel lblMode = new JLabel("Mode");
 		
-		JComboBox<String> modeList;
 		
 		modeList = new JComboBox<String>();
 		modeList.setBackground(Color.WHITE);
@@ -931,10 +932,281 @@ public class LevelBuilderView extends JPanel{
 						.addComponent(btnRandomizeBoard)))
 		);
 		setLayout(groupLayout);
-		btnSave.addActionListener(new SaveButtonController(blm));
+		btnSave.addActionListener(new SaveButtonController(blm, this));
 		
 		btnLoad.addActionListener(new LoadButtonController(blm));
 		
 		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm));
+	}
+	
+	public int getLvlField(){
+		int level;
+		try{
+		level = Integer.parseInt(this.LvlField.getText());
+		} catch (NumberFormatException e) {
+			this.LvlField.setText("");
+			return -1;
+		}
+		return level;
+	}
+	public void setLvlField(Integer s){
+		this.LvlField.setText(s.toString());
+	}
+	
+	public String getModeList(){
+		return (String) this.modeList.getSelectedItem();
+	}
+	
+	public int getMoveField(){
+		int moves;
+		try{
+		moves = Integer.parseInt(this.MoveField.getText());
+		} catch (NumberFormatException e) {
+			this.MoveField.setText("");
+			return -1;
+		}
+		return moves;
+	}
+	
+	public int getTimeField(){
+		int time;
+		try{
+		time = Integer.parseInt(this.TimeField.getText());
+		} catch (NumberFormatException e) {
+			this.TimeField.setText("");
+			return -1;
+		}
+		return time;
+	}
+	
+	public int getSwapField(){
+		int swaps;
+		try{
+		swaps = Integer.parseInt(this.SwapField.getText());
+		} catch (NumberFormatException e) {
+			this.SwapField.setText("");
+			return -1;
+		}
+		return swaps;
+	}
+	
+	public int getShuffleField(){
+		int shuffle;
+		try{
+		shuffle = Integer.parseInt(this.Shufflefield.getText());
+		} catch (NumberFormatException e) {
+			this.Shufflefield.setText("");
+			return -1;
+		}
+		return shuffle;
+	}
+	
+	public int getRemoveField(){
+		int remove;
+		try{
+		remove = Integer.parseInt(this.RemoveField.getText());
+		} catch (NumberFormatException e) {
+			this.RemoveField.setText("");
+			return -1;
+		}
+		return remove;
+	}
+	
+	public int getOnePercent(){
+		int one;
+		try{
+		one = Integer.parseInt(this.onePercent.getText());
+		} catch (NumberFormatException e) {
+			this.onePercent.setText("");
+			return -1;
+		}
+		return one;
+	}
+	
+	public int getTwoPercent(){
+		int one;
+		try{
+		one = Integer.parseInt(this.twoPercent.getText());
+		} catch (NumberFormatException e) {
+			this.twoPercent.setText("");
+			return -1;
+		}
+		return one;
+	}
+	
+	public int getThreePercent(){
+		int one;
+		try{
+		one = Integer.parseInt(this.threePercent.getText());
+		} catch (NumberFormatException e) {
+			this.threePercent.setText("");
+			return -1;
+		}
+		return one;
+	}
+	
+	public int getFourPercent(){
+		int one;
+		try{
+		one = Integer.parseInt(this.fourPercent.getText());
+		} catch (NumberFormatException e) {
+			this.fourPercent.setText("");
+			return -1;
+		}
+		return one;
+	}
+	
+	public int getFivePercent(){
+		int one;
+		try{
+		one = Integer.parseInt(this.fivePercent.getText());
+		} catch (NumberFormatException e) {
+			this.fivePercent.setText("");
+			return -1;
+		}
+		return one;
+	}
+	
+	public int getSixPercent(){
+		int one;
+		try{
+		one = Integer.parseInt(this.sixPercent.getText());
+		} catch (NumberFormatException e) {
+			this.sixPercent.setText("");
+			return -1;
+		}
+		return one;
+	}
+	
+	public int getOneMultPercent(){
+		int one;
+		try{
+		one = Integer.parseInt(this.oneMultPercent.getText());
+		} catch (NumberFormatException e) {
+			this.oneMultPercent.setText("");
+			return -1;
+		}
+		return one;
+	}
+	
+	public int getTwoMultPercent(){
+		int one;
+		try{
+		one = Integer.parseInt(this.twoMultPercent.getText());
+		} catch (NumberFormatException e) {
+			this.twoMultPercent.setText("");
+			return -1;
+		}
+		return one;
+	}
+	
+	public int getThreeMultPercent(){
+		int one;
+		try{
+		one = Integer.parseInt(this.threeMultPercent.getText());
+		} catch (NumberFormatException e) {
+			this.threeMultPercent.setText("");
+			return -1;
+		}
+		return one;
+	}
+	
+	public String[][] getBoard(){
+		ArrayList<String> source = this.getBoardList();
+		int iterator = 0;
+		String[][] board = new String[9][9];
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				board[i][j] = source.get(iterator);
+				if(iterator < 79)
+					iterator++;
+			}
+		}
+		return board;
+	}
+	
+	public ArrayList<String> getBoardList(){
+		ArrayList<String> squares = new ArrayList<String>();
+		squares.add(textField_1.getText());
+		squares.add(textField_2.getText());
+		squares.add(textField_3.getText());
+		squares.add(textField_4.getText());
+		squares.add(textField_5.getText());
+		squares.add(textField_6.getText());
+		squares.add(textField_7.getText());
+		squares.add(textField_8.getText());
+		squares.add(textField_9.getText());
+		squares.add(textField_10.getText());
+		squares.add(textField_11.getText());
+		squares.add(textField_12.getText());
+		squares.add(textField_13.getText());
+		squares.add(textField_14.getText());
+		squares.add(textField_15.getText());
+		squares.add(textField_16.getText());
+		squares.add(textField_17.getText());
+		squares.add(textField_18.getText());
+		squares.add(textField_19.getText());
+		squares.add(textField_20.getText());
+		squares.add(textField_21.getText());
+		squares.add(textField_22.getText());
+		squares.add(textField_23.getText());
+		squares.add(textField_24.getText());
+		squares.add(textField_25.getText());
+		squares.add(textField_26.getText());
+		squares.add(textField_27.getText());
+		squares.add(textField_28.getText());
+		squares.add(textField_29.getText());
+		squares.add(textField_30.getText());
+		squares.add(textField_31.getText());
+		squares.add(textField_32.getText());
+		squares.add(textField_33.getText());
+		squares.add(textField_34.getText());
+		squares.add(textField_35.getText());
+		squares.add(textField_36.getText());
+		squares.add(textField_37.getText());
+		squares.add( textField_38.getText());
+		squares.add( textField_39.getText());
+		squares.add( textField_40.getText());
+		squares.add(textField_41.getText());
+		squares.add(textField_42.getText());
+		squares.add(textField_43.getText());
+		squares.add(textField_44.getText());
+		squares.add(textField_45.getText());
+		squares.add(textField_46.getText());
+		squares.add( textField_47.getText());
+		squares.add(textField_48.getText());
+		squares.add(textField_49.getText());
+		squares.add(textField_50.getText());
+		squares.add(textField_51.getText());
+		squares.add(textField_52.getText());
+		squares.add(textField_53.getText());
+		squares.add(textField_54.getText());
+		squares.add(textField_55.getText());
+		squares.add(textField_56.getText());
+		squares.add(textField_57.getText());
+		squares.add(textField_58.getText());
+		squares.add(textField_59.getText());
+		squares.add(textField_60.getText());
+		squares.add(textField_61.getText());
+		squares.add(textField_62.getText());
+		squares.add(textField_63.getText());
+		squares.add(textField_64.getText());
+		squares.add(textField_65.getText());
+		squares.add(textField_66.getText());
+		squares.add(textField_67.getText());
+		squares.add(textField_68.getText());
+		squares.add(textField_69.getText());
+		squares.add(textField_70.getText());
+		squares.add(textField_71.getText());
+		squares.add(textField_72.getText());
+		squares.add(textField_73.getText());
+		squares.add(textField_74.getText());
+		squares.add(textField_75.getText());
+		squares.add(textField_76.getText());
+		squares.add(textField_77.getText());
+		squares.add(textField_78.getText());
+		squares.add(textField_79.getText());
+		squares.add(textField_80.getText());
+		return squares;
 	}
 }
