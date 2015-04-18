@@ -5,10 +5,8 @@
  */
 package sw.mode;
 
-import java.awt.Dimension;
-
-import sw.common.model.controller.MoveSelection;
 import sw.common.model.controller.IMode;
+import sw.common.model.controller.MoveSelection;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
