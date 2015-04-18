@@ -1,5 +1,8 @@
 package sw.app.gui.view;
 
+import java.awt.Color;
+import java.util.ArrayList;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -12,10 +15,6 @@ import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.StartGameController;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class PlayGameScreenView extends JPanel implements IView{
 	/**

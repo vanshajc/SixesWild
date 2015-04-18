@@ -9,6 +9,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 
 import sw.app.gui.view.board.BoardPanel;
+import sw.common.model.entity.Level;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 import sw.common.system.factory.TileFactory;
@@ -24,8 +25,8 @@ public class MoveSwap extends BoardController implements IMove {
 	Point p2;
 	boolean moveStarted = false;
 	
-	public MoveSwap(BoardPanel bp) {
-		super(bp);
+	public MoveSwap(BoardPanel bp, Level level) {
+		super(bp, level);
 	}
 
 	/* (non-Javadoc)
@@ -56,6 +57,8 @@ public class MoveSwap extends BoardController implements IMove {
 
 	@Override
 	public boolean doMove() {
+		BoardController bc = new MoveSelection(panel, level);
+		panel.setBoardController(bc);
 		return swap(p1, p2);
 	}
 

@@ -3,7 +3,6 @@ package sw.app.gui.view;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SplashScreenView extends JPanel implements IView{

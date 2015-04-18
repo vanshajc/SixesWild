@@ -1,23 +1,24 @@
 package sw.app.gui.view.board;
 
-import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-
+import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import sw.common.model.controller.PwrUpRemoveActionListener;
 import sw.common.model.controller.PwrUpShuffleActionListener;
 import sw.common.model.controller.PwrUpSwapActionListener;
+import sw.common.model.entity.Level;
 
 public class PowerUpPanel extends JPanel {
-	public PowerUpPanel() {
+	Level level;
+	public PowerUpPanel(BoardPanel bp, Level level) {
 		setOpaque(false);
 		setBorder(null);
 		
 		JButton btnSwap = new JButton("Swap");
-		btnSwap.addActionListener(new PwrUpSwapActionListener());
+		btnSwap.addActionListener(new PwrUpSwapActionListener(bp, level));
 		
 		JButton btnShuffle = new JButton("Shuffle");
 		btnShuffle.addActionListener(new PwrUpShuffleActionListener());
