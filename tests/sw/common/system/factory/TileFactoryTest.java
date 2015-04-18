@@ -38,17 +38,28 @@ public class TileFactoryTest {
 
 	@Test
 	public void getTileTest() {
-		int run = 10;
+		double valPercentage[] = {0, 0, 0, 0, 0, 0, 0};  // use value as index, so add 1 extra space 
+		double mulPercentage[] = {0, 0, 0, 0};
+		
+		int run = 100000;
 		for (int i = 0; i < run; i++) {
 			Tile tile1 = TileFactory.getTile();
 			assertNotNull(tile1);
 			
-			assertNotEquals(0, tile1.getValue());
-			assertTrue((tile1.getValue() >= 1) && (tile1.getValue() <= 6));
-			
-			assertNotEquals(0, tile1.getMultiplier());
+			assertTrue((tile1.getValue() >= 1) && (tile1.getValue() <= 6));			
 			assertTrue((tile1.getMultiplier() >= 1) && (tile1.getMultiplier() <= 3));
+			
+			valPercentage[tile1.getValue()]++;
+			mulPercentage[tile1.getMultiplier()]++;
 		}
+		
+		for (int i = 1; i <= 6; i++) {
+			assertEquals(16.67, valPercentage[i] / (double) run * 100, 1.00);
+		}
+		for (int i = 1; i <= 3; i++) {
+			assertEquals(33.33, mulPercentage[i] / (double) run * 100, 1.00);
+		}
+		
 	}
 
 }

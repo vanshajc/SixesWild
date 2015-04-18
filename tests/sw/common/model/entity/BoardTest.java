@@ -2,6 +2,7 @@ package sw.common.model.entity;
 
 import static org.junit.Assert.*;
 
+import java.awt.Dimension;
 import java.awt.Point;
 
 import org.junit.After;
@@ -9,89 +10,64 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sw.common.system.manager.IBoardLocationManager;
+import sw.common.system.manager.IBoardSelectionManager;
 
 public class BoardTest {
 
 	Board board;
-	IBoardLocationManager lm;
 	
 	@Before
 	public void setUp() throws Exception {
 		board = new Board();  // Create new board and fill it
-		lm    = (IBoardLocationManager) board;
-		
-		testBoardSize();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
 	
-	@Test
-	public void testBoardSize() {
-		// Make sure there are 81 Tiles in the grid
-		assertEquals(9, board.grid.size());
-		for (int i = 0; i < board.grid.size(); i++) {			
-			assertEquals(9, board.grid.get(i).size());
-		}		
-	}
-
-	@Test
-	public void testGetTile() {
-		// Get location of every Tile in the board, must not be null
-		for (int x = 0; x < 9; x++) {
-			for (int y = 0; y < 9; y++) {
-				Tile t = board.getTile(new Point(x,y));
-				assertNotNull(t);
-				
-				// Is this location correct?
-				Tile t1 = board.grid.get(x).getTile(y);
-				assertTrue(t.equals(t1));
-				assertEquals(t, t1);
-			}
-		}		
-	}
-
-	@Test
-	public void testGetTileLocation() {		
-		// Pick a Tile from the grid, the return location has to be correct
-		for (int x = 0; x < 9; x++) {
-			for (int y = 0; y < 9; y++) {
-				Tile t = board.grid.get(x).getTile(y);
-				
-				// it has to exist
-				Point p = lm.getPoint(t);
-				assertNotNull(String.format("Location %d,%d is null", x,y), p);
-				assertEquals(String.format("Location %d,%d failed", x,y), x, p.x);
-				assertEquals(String.format("Location %d,%d failed", x,y), y, p.y);
-				
-				// Create a "fake" tile with the same value and multiplier
-				Tile fake = new Tile(t.value, t.multiplier);
-				Point fp = lm.getPoint(fake);
-				assertNull(fp); // This Tile should not exist in the Board
-			}
-		}
-	}
+	/** Test IBoard interface */
 	
-	/** Remove a Tile from the Board, update location, Board returns null for getTileLocation */
 	@Test
-	public void testRemoveTile() {
+	public void testIBoard() {
+		assertEquals(new Dimension(9,9), board.size());		
+		assertEquals(81, board.count());
+		
+		board.clear();
+		assertEquals(0, board.count());
+		
+		board.fill();
+		assertEquals(81, board.count());
+	}
+
+	@Test
+	public void testIBoardLocationManage() {
+		int count = board.count();
+		
+		Point fake1 = new Point(11,9);
+		Point fake2 = new Point(8,11);
+		assertFalse(board.isValidPoint(fake1));
+		assertFalse(board.isValidPoint(fake2));
+		
+		assertFalse(board.remove(fake1));
+		assertFalse(board.remove(fake2));
+		
 		for (int x = 0; x < 9; x++) {
 			for (int y = 0; y < 9; y++) {
-				Tile t = board.grid.get(x).getTile(y);
+				Point p = new Point(x,y);
+				assertTrue(board.isValidPoint(p));
 				
-				board.grid.get(x).getSquare(y).setTile(null);
+				Tile t = board.getTile(p);
 				
-				// Square is now empty, Board must return null
-				Point p = board.getPoint(t);
-				assertNull(String.format("Location %d,%d is not null", x,y), p);				
+				board.remove(p);
+				assertTrue(board.isEmpty(p));
 				
-				// Create a "fake" tile with the same value and multiplier
-				Tile fake = new Tile(t.value, t.multiplier);
-				Point fp = board.getPoint(fake);
-				assertNull(fp); // This Tile should not exist in the Board
+				assertNull(board.getTile(p));
+				assertNull(board.getPoint(t));
+				
+				assertEquals(--count, board.count());
 			}
 		}
+		
 	}
 
 }
