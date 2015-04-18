@@ -1,4 +1,6 @@
 package sw.builder.gui.layout;
+import java.awt.Color;
+
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -123,7 +125,15 @@ public class LevelBuilderView extends JPanel{
 		
 		JLabel lblMode = new JLabel("Mode");
 		
-		JComboBox ModeField = new JComboBox();
+		JComboBox<String> modeList;
+		
+		modeList = new JComboBox<String>();
+		modeList.setBackground(Color.WHITE);
+		modeList.addItem("Puzzle");
+		modeList.addItem("Lightening");
+		modeList.addItem("Release");
+		modeList.addItem("Elimination");
+		
 		
 		LvlField = new JTextField();
 		LvlField.setColumns(10);
@@ -469,7 +479,7 @@ public class LevelBuilderView extends JPanel{
 							.addGap(12)
 							.addComponent(lblMode)
 							.addGap(12)
-							.addComponent(ModeField, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+							.addComponent(modeList, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(lblMoves)
 							.addGap(12)
@@ -738,7 +748,7 @@ public class LevelBuilderView extends JPanel{
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(5)
 							.addComponent(lblMode))
-						.addComponent(ModeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(modeList, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(5)
 							.addComponent(lblMoves))
