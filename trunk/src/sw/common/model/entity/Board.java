@@ -158,7 +158,10 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 	 */
 	@Override
 	public boolean isEmpty(Point p) {
-		return grid.get(p.x).getTile(p.y) == null;		
+		if (isValidPoint(p)) {
+			return grid.get(p.x).getTile(p.y) == null;
+		}
+		return true;
 	}
 	
 	//////////////////////////////////////////////////////////
