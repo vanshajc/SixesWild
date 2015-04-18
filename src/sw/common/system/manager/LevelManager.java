@@ -7,7 +7,6 @@ package sw.common.system.manager;
 
 import java.util.ArrayList;
 
-import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;

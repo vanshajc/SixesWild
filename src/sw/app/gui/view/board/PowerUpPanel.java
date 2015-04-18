@@ -21,7 +21,7 @@ public class PowerUpPanel extends JPanel {
 		btnSwap.addActionListener(new PwrUpSwapActionListener(bp, level));
 		
 		JButton btnShuffle = new JButton("Shuffle");
-		btnShuffle.addActionListener(new PwrUpShuffleActionListener());
+		btnShuffle.addActionListener(new PwrUpShuffleActionListener(level));
 		
 		JButton btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new PwrUpRemoveActionListener());

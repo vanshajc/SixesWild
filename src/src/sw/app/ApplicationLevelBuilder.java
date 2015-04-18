@@ -2,7 +2,6 @@ package src.sw.app;
 
 import java.awt.EventQueue;
 
-import sw.app.gui.view.SixesWildJFrame;
 import sw.builder.gui.layout.LevelBuilderJFrame;
 
 

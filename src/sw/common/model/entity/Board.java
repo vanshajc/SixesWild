@@ -282,4 +282,9 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 		return true;
 	}
 
+	public void shuffle(){
+		for (int i = 0; i<grid.size(); i++){
+			grid.get(i).shuffle();
+		}
+	}
 }

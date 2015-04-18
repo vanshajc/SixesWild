@@ -3,7 +3,6 @@ package sw.builder.gui.layout;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import sw.app.gui.view.IView;
@@ -21,7 +20,7 @@ public class SplashScreenBuilderView extends JPanel implements IView{
 //		lblNewLabel.setIcon(new ImageIcon(SpashScreenBuilderView.class.getResource("/sw/resource/image/SplashScreenResizedtest.png")));
 //		add(lblNewLabel);
 		
-		this.blm = blm;
+		this.blm = bblm;
 		//initialize();
 	}
 	

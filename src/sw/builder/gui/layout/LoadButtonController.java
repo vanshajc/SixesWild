@@ -3,8 +3,6 @@ package sw.builder.gui.layout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import sw.app.gui.view.LayoutManager;
-
 public class LoadButtonController implements ActionListener {
 
 	BuilderLayoutManager blm;

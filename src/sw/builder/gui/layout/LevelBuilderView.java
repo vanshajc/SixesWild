@@ -1,21 +1,23 @@
 package sw.builder.gui.layout;
 import java.awt.Color;
 
-import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextField;
 import javax.swing.JButton;
-
-import sw.app.gui.view.LayoutManager;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 
 
 public class LevelBuilderView extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3838710634376227000L;
 	BuilderLayoutManager blm;
 	public LevelBuilderView(BuilderLayoutManager blm) {
 		this.blm = blm;

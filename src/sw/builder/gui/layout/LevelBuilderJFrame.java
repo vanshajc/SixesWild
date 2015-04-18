@@ -6,14 +6,16 @@ import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.GroupLayout.Alignment;
 
 import sw.app.gui.view.IView;
 
 public class LevelBuilderJFrame extends JFrame implements IView{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	BuilderLayoutManager blm = new BuilderLayoutManager(this);
 	SplashScreenBuilderView ssbv = new SplashScreenBuilderView(blm);
 	
