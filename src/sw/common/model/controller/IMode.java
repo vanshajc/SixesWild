@@ -14,10 +14,6 @@ public interface IMode {
 
 	IResourceManager getResourceManger();
 	
-	IBoardLocationManager getBoardLocationManager();
-	
-	IBoardSelectionManager getBoardSelectionManager();
-	
-	MoveSelection getBoardColumnController();
+	BoardController getBoardController();
 	
 }

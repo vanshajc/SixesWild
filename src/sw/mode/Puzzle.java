@@ -5,6 +5,7 @@
  */
 package sw.mode;
 
+import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IMode;
 import sw.common.model.controller.MoveSelection;
 import sw.common.system.manager.CommonResourceManager;
@@ -31,21 +32,8 @@ public class Puzzle extends CommonResourceManager implements IMode {
 	}
 
 	@Override
-	public IBoardLocationManager getBoardLocationManager() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IBoardSelectionManager getBoardSelectionManager() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MoveSelection getBoardColumnController() {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardController getBoardController() {
+		return new MoveSelection();
 	}
 
 }

@@ -8,11 +8,11 @@ package sw.common.model.controller;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
+import java.util.Iterator;
 import java.util.Queue;
 
 import sw.app.gui.view.board.IBoardPanel;
 import sw.common.model.entity.IBoard;
-import sw.common.model.entity.Level;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 import sw.common.system.manager.IBoardLocationManager;
@@ -21,15 +21,19 @@ import sw.common.system.manager.IBoardSelectionManager;
 /** Model for an abstract BoardController */
 public abstract class BoardController extends MouseAdapter {
 	
-	IBoardPanel            panel;
-	IBoard                 board;
-	IBoardLocationManager  locator;
-	IBoardSelectionManager selector;
-	Level level;
+	IBoardPanel            panel    = null;
+	IBoard                 board    = null;
+	IBoardLocationManager  locator  = null;
+	IBoardSelectionManager selector = null;
 	
-	public BoardController(IBoardPanel bp, Level level) {
+	public BoardController(){}
+	
+	public BoardController(IBoardPanel bp) {
+		initialize(bp);
+	}
+	
+	public void initialize(IBoardPanel bp) {
 		this.panel    = bp;
-		this.level = level;
 		this.board    = bp.getBoard();
 		this.locator  = bp.getLocator();
 		this.selector = bp.getSelector();
@@ -49,6 +53,13 @@ public abstract class BoardController extends MouseAdapter {
 
 	boolean clearSelection() {
 		return selector.clearSelection();
+	}
+	
+	void removeSelection() {
+		Iterator<Tile> ti = getSelectedTile().iterator();
+		while (ti.hasNext()) {
+			boardRemove(getPoint(ti.next()));
+		}
 	}
 
 	public boolean isValidX(int x) {

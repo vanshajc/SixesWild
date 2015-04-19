@@ -17,8 +17,11 @@ import sw.common.model.entity.Tile;
  *
  */
 public class MoveSelection extends BoardController implements IMove {
-	public MoveSelection(IBoardPanel bp, Level level) {
-		super(bp, level);
+	
+	public MoveSelection(){}
+	
+	public MoveSelection(IBoardPanel bp) {
+		super(bp);
 	}
 
 	/* (non-Javadoc)

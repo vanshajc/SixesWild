@@ -11,15 +11,20 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import sw.common.model.controller.BoardController;
+import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
+import sw.common.model.entity.Tile;
+import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
 import sw.common.system.manager.IResourceManager;
@@ -51,7 +56,7 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	boolean isAnimating = false;
 	
 	/** The preferred size */
-	Dimension preferredSize = new Dimension(800, 600);
+	Dimension preferredSize;
 	
 	public BoardPanel() {
 		// Initialize the timer only once
@@ -77,10 +82,25 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 		this.level = level;
 		this.board = level.getGame().getBoard();
 		this.boardSize  = board.size();
-		this.resManager = level.getMode().getResourceManger();		
+		this.resManager = level.getMode().getResourceManger();
 		
-		//BoardController bc = new MoveSelection(this);
-		//setBoardController(bc);
+		// Load all images we need now
+		Iterator<String> si = resManager.getTileImage().values().iterator();
+		while (si.hasNext()) {
+			String path = si.next();
+			if (!imageMap.containsKey(path)) {
+				 Image img = new ImageIcon(BoardPanel.class.getResource(path)).getImage();
+				 if (img != null) {
+					 imageMap.put(path, img); // Store the image
+				 }
+			}			
+		}
+		
+		BoardController bc = level.getMode().getBoardController();
+		if (bc != null) {
+			setBoardController(bc);
+			bc.initialize(this);
+		}
 		
 		initializeLayout();
 	}
@@ -96,14 +116,17 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 			this.removeMouseMotionListener(mml[i]);
 		}
 		
-		this.addMouseListener(bc);
-		this.addMouseMotionListener(bc);
+		if (bc != null) {
+			this.addMouseListener(bc);
+			this.addMouseMotionListener(bc);
+		}
 	}
 	
 	void initializeLayout() {
-		setLayout(null);
-		setPreferredSize(preferredSize);
+		setLayout(null);		
 		setDoubleBuffered(true);
+		
+		preferredSize = new Dimension();
 		
 		int x = 0;
 		for (int i = 0; i < boardSize.width; i++) {
@@ -120,7 +143,12 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 			// Add new component
 			add(bc);
 			x += rec.width;
+			
+			preferredSize.width = Math.max(preferredSize.width, x);
+			preferredSize.height = Math.max(preferredSize.height, rec.height);
 		}
+		
+		setPreferredSize(preferredSize);
 		
 		// Repaint panel
 		invalidate();
@@ -194,6 +222,7 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.drawRect(0, 0, preferredSize.width, preferredSize.height);
 		for (int i = 0; i < boardSize.width; i++) {
 			columns.get(i).repaint();
 		}
@@ -260,6 +289,20 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	@Override
 	public IBoardSelectionManager getSelector() {
 		return (IBoardSelectionManager) board;
+	}
+
+	@Override
+	public void disableAnimation() {
+		for (int x = 0; x < boardSize.width; x++) {
+			columns.get(x).disableAnimation();
+		}		
+	}
+
+	@Override
+	public void enableAnimation() {
+		for (int x = 0; x < boardSize.width; x++) {
+			columns.get(x).enableAnimation();
+		}
 	}
 
 }

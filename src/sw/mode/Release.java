@@ -5,8 +5,11 @@
  */
 package sw.mode;
 
-import sw.common.model.controller.IMode;
+import java.awt.Dimension;
+
+import sw.common.model.controller.BoardController;
 import sw.common.model.controller.MoveSelection;
+import sw.common.model.controller.IMode;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
@@ -31,21 +34,8 @@ public class Release extends CommonResourceManager implements IMode {
 	}
 
 	@Override
-	public IBoardLocationManager getBoardLocationManager() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IBoardSelectionManager getBoardSelectionManager() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MoveSelection getBoardColumnController() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public BoardController getBoardController() {
+		return new MoveSelection();
+	}	
 
 }
