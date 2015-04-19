@@ -11,6 +11,7 @@ import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import sw.common.model.entity.Board;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
@@ -42,6 +43,9 @@ public class BoardColumn extends JPanel {
 
 	/** Whether the column is in animation */
 	boolean isMoving = false;
+	
+	/** Whether to animate Tile falling down */
+	boolean enableAnimation = true;
 
 	/**
 	 * @param boardPanel
@@ -249,7 +253,11 @@ public class BoardColumn extends JPanel {
 	 *         they're already there
 	 */
 	synchronized public boolean isAnimating() {
-		return isMoving;
+		if (enableAnimation) {
+			return isMoving;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -295,6 +303,14 @@ public class BoardColumn extends JPanel {
 		}
 		return false;
 	}
+	
+	void enableAnimation() {
+		this.enableAnimation = true;
+	}
+	
+	void disableAnimation() {
+		this.enableAnimation = false;
+	}
 
 	/**
 	 * Internal class to keep track of the current and destination y-coordinate
@@ -312,7 +328,11 @@ public class BoardColumn extends JPanel {
 			} catch (Exception e) { // Should not throw exception here
 				System.err.println("False exception occured!");
 			}
-			this.currentY = 0;
+			if (enableAnimation) {
+				this.currentY = 0;
+			} else {
+				this.currentY = this.destY;
+			}
 		}
 
 		void updateDestY(int newY) {
@@ -320,29 +340,39 @@ public class BoardColumn extends JPanel {
 		}
 
 		boolean updateCurrentY() {
-			if (currentY < destY) {
-				currentY += 3;
-				return true;
-			} else if (currentY > destY) { // for swap move
-				currentY = destY;
+			if (enableAnimation) {
+				if (currentY < destY) {
+					currentY += 3;
+					return true;
+				} else if (currentY > destY) { // for swap move
+					currentY = destY;
+				}
+				return false;
+			} else {
+				if (currentY != destY) {
+					currentY = destY;
+					return true;
+				}
+				return false;
 			}
-			return false;
 		}
 
 		boolean isVisible() {
-			try {
-				int hiIdx = 0;
-				int idx = yToIdx(currentY);
-				Iterator<BoardTile> bti = getOccupant(idx);
-				while (bti.hasNext()) {					
-					BoardTile o = bti.next();
-					hiIdx = Math.max(tiles.indexOf(o), hiIdx);
+			if (enableAnimation) {
+				try {
+					int hiIdx = 0;
+					int idx = yToIdx(currentY);
+					Iterator<BoardTile> bti = getOccupant(idx);
+					while (bti.hasNext()) {					
+						BoardTile o = bti.next();
+						hiIdx = Math.max(tiles.indexOf(o), hiIdx);
+					}
+					return tiles.indexOf(this) == hiIdx;
+				} catch (Exception e) {
+					return false;
 				}
-				return tiles.indexOf(this) == hiIdx;
-			} catch (Exception e) {
-				return false;
 			}
-			//return true;
+			return true;
 		}
 	}
 

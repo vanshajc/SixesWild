@@ -1,6 +1,5 @@
 package sw.app.gui.view;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -22,10 +21,10 @@ import sw.app.gui.view.board.GameInfoPanel;
 import sw.app.gui.view.board.PowerUpPanel;
 import sw.app.gui.view.board.ScorePanel;
 import sw.app.gui.view.board.TimeMovePanel;
-import sw.common.model.controller.BoardController;
-import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
+
+import java.awt.Color;
 
 public class GameplayView extends JPanel implements IView {
 
@@ -156,8 +155,6 @@ public class GameplayView extends JPanel implements IView {
 			timeMovePanel.setTimerAlarm(new dummyAlarm(), Time.valueOf("00:00:05"));
 
 			boardPanel.initialize();
-			BoardController bc = new MoveSelection(boardPanel, this.levelManager.getCurrent());
-			boardPanel.setBoardController(bc);
 
 			scorePanel.setMinimum(0);
 			scorePanel.setMaximum(1000);

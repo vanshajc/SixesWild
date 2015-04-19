@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import sw.app.gui.view.IView;
 import sw.common.model.controller.BoardController;
+import sw.common.model.entity.Board;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.IBoardLocationManager;
@@ -16,6 +17,12 @@ public interface IBoardPanel extends IView {
 	 * @param level to display
 	 */
 	void setLevel(Level level);
+	
+	/** Disable animation */
+	void disableAnimation();
+	
+	/** Enable animation */
+	void enableAnimation();
 
 	/**
 	 * @param bc the new board controller
