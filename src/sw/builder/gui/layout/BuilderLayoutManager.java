@@ -13,7 +13,7 @@ public class BuilderLayoutManager {
 	LevelBuilderJFrame lbjf;
 	SplashScreenBuilderView ssbv;
 	LevelBuilderView lbv;
-JPanel current = null;
+	JPanel current = null;
 	
 	public BuilderLayoutManager(LevelBuilderJFrame lbjf){
 		this.lbjf = lbjf;
@@ -24,6 +24,5 @@ JPanel current = null;
 		System.out.println("Going to Level Builder");
 		current = lbv;
 		lbjf.switchToScreen(lbv);
-	}
-		
+	}		
 }

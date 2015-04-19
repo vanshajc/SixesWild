@@ -17,6 +17,7 @@ public class SaveButtonController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+
 		int level = lbv.getLvlField();
 		String mode = lbv.getModeList();
 		int moves = lbv.getMoveField();
@@ -34,6 +35,8 @@ public class SaveButtonController implements ActionListener {
 		int mtwoPer = lbv.getTwoMultPercent();
 		int mthreePer = lbv.getThreeMultPercent();
 		String[][] board = lbv.getBoard();
+		System.out.println("asdf");
+
 		if (level == -1 || moves == -1 || time == -1 || swap == -1
 				|| shuffle == -1 || remove == -1 || onePer == -1
 				|| twoPer == -1 || threePer == -1 || fourPer == -1
@@ -42,6 +45,7 @@ public class SaveButtonController implements ActionListener {
 			return;
 		}
 		try {
+
 			PrintWriter save = new PrintWriter(
 					"./src/sw/resource/levelData/level" + level + ".txt");
 			save.println(level);
@@ -61,8 +65,9 @@ public class SaveButtonController implements ActionListener {
 			save.println(mtwoPer);
 			save.println(mthreePer);
 			for (int i = 0; i < 9; i++) {
+				System.out.println("asd");
 				for (int j = 0; j < 9; j++) {
-					save.print(board[i][j] + "\t");
+					save.print(board[i][j]);
 				}
 				save.println("");
 			}
@@ -70,7 +75,6 @@ public class SaveButtonController implements ActionListener {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
