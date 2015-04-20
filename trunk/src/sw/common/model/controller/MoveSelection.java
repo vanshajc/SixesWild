@@ -7,10 +7,10 @@ package sw.common.model.controller;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import sw.app.gui.view.board.IBoardPanel;
-import sw.common.model.entity.Level;
 import sw.common.model.entity.Tile;
 
 /**
@@ -18,8 +18,9 @@ import sw.common.model.entity.Tile;
  */
 public class MoveSelection extends BoardController implements IMove {
 	
+	ArrayList<Tile> tiles = new ArrayList<Tile>();
 	public MoveSelection(){}
-	
+
 	public MoveSelection(IBoardPanel bp) {
 		super(bp);
 	}
@@ -33,7 +34,7 @@ public class MoveSelection extends BoardController implements IMove {
 			selectionHandler(e);
 		} catch (IndexOutOfBoundsException e1) {
 			System.err
-					.println("Out of bound error in BoardColumnController::mouseClicked!");
+			.println("Out of bound error in BoardColumnController::mouseClicked!");
 		}
 	}
 
@@ -46,7 +47,7 @@ public class MoveSelection extends BoardController implements IMove {
 			selectionHandler(e);
 		} catch (IndexOutOfBoundsException e1) {
 			System.err
-					.println("Out of bound error in BoardColumnController::mouseDragged!");
+			.println("Out of bound error in BoardColumnController::mouseDragged!");
 		}
 	}
 
@@ -86,27 +87,27 @@ public class MoveSelection extends BoardController implements IMove {
 	}
 
 
-	
-	private boolean isValid(){
+
+	boolean isValid(){
 		Iterator<Tile> selected = getSelectedTile().iterator();
 		if (!selected.hasNext()) return false; // none selected somehow
 		Tile prev = selected.next();
-		if (prev.getValue()==6) return false;
+		tiles.add(prev);
+		if (prev.getValue()==6) return false; // if only a six is selected
 		int sum = prev.getValue();
 		while (selected.hasNext()){
 			Tile curr = selected.next();
+			tiles.add(curr);
 			sum += curr.getValue();
-			if (!adjacent(prev, curr))
+			if (!this.board.adjacent(prev, curr))
 				return false;
+			prev = curr;
 		}
-		
+
 		return sum == 6;
-		
+
 	}
-	private boolean adjacent(Tile t1, Tile t2){
-		return true;
-	}
-	
+
 	@Override
 	public boolean undoMove() {
 		// TODO Auto-generated method stub
