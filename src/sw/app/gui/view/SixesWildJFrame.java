@@ -95,8 +95,6 @@ public class SixesWildJFrame extends JFrame implements IView{
 	}
 	
 	void switchToScreen(JPanel screen){
-		System.out.println("Switch to next screen");
-		
 		// call cleanup on all IView components
 		int count = pane.getComponentCount();
 		Component[] c = pane.getComponents();

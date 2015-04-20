@@ -7,7 +7,6 @@ package sw.common.model.controller;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import sw.app.gui.view.board.IBoardPanel;
@@ -18,7 +17,6 @@ import sw.common.model.entity.Tile;
  */
 public class MoveSelection extends BoardController implements IMove {
 	
-	ArrayList<Tile> tiles = new ArrayList<Tile>();
 	public MoveSelection(){}
 
 	public MoveSelection(IBoardPanel bp) {
@@ -92,12 +90,10 @@ public class MoveSelection extends BoardController implements IMove {
 		Iterator<Tile> selected = getSelectedTile().iterator();
 		if (!selected.hasNext()) return false; // none selected somehow
 		Tile prev = selected.next();
-		tiles.add(prev);
 		if (prev.getValue()==6) return false; // if only a six is selected
 		int sum = prev.getValue();
 		while (selected.hasNext()){
 			Tile curr = selected.next();
-			tiles.add(curr);
 			sum += curr.getValue();
 			if (!this.board.adjacent(prev, curr))
 				return false;

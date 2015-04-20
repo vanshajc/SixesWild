@@ -44,7 +44,7 @@ public class Column {
 			for (int y = 0; y < col.size(); y++) {
 				Square s = col.get(y);
 				if (s != null) {
-					if (s.getTile().equals(t)) {
+					if (s.getTile() == (t)) {
 						return y;
 					}
 				}

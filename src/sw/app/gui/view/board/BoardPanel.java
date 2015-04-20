@@ -18,13 +18,10 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import sw.common.model.controller.BoardController;
-import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
-import sw.common.model.entity.Tile;
-import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
 import sw.common.system.manager.IResourceManager;
