@@ -290,4 +290,37 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 			grid.get(i).shuffle();
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see sw.common.model.entity.IBoard#adjacent(sw.common.model.entity.Square, sw.common.model.entity.Square)
+	 */
+	@Override
+	public boolean adjacent(Tile s1, Tile s2) {
+		int col1 = findCol(s1);
+		int col2 = findCol(s2);
+		if (col1 == -1 || col2 == -1)
+			return false;
+		if (Math.abs(col1 - col2) == 1){
+			return (grid.get(col1).indexOf(s1) == grid.get(col2).indexOf(s2));
+		}
+		else if (col1 == col2){
+			return (Math.abs(grid.get(col1).indexOf(s1) - grid.get(col2).indexOf(s2)) == 1);
+		}
+		return false;
+	}
+	
+	/**
+	 * @param t the tile to be located
+	 * @return the index of the column
+	 */
+	int findCol(Tile t){
+		for (int i = 0; i<this.grid.size(); i++){
+			try{
+				grid.get(i).indexOf(t);
+				return i;
+			}catch(IllegalAccessError e){
+			}
+		}
+		return -1;
+	}
 }

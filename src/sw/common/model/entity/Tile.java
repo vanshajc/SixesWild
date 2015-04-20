@@ -58,13 +58,13 @@ public class Tile {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
-	public boolean equals(Object o) {
-		if (o instanceof Tile) {
-			Tile t = (Tile) o;
-			return (this.value == t.value) && (this.multiplier == t.multiplier);
-		}
-		return false;
-	}
+//	@Override
+//	public boolean equals(Object o) {
+//		if (o instanceof Tile) {
+//			Tile t = (Tile) o;
+//			return (this.value == t.value) && (this.multiplier == t.multiplier);
+//		}
+//		return false;
+//	}
 
 }

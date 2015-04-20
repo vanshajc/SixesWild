@@ -45,6 +45,14 @@ public interface IBoard {
 	int count();
 	
 	/**
+	 * @param s1 the first square
+	 * @param s2 the second square
+	 * @return if the two tiles are adjacent either horizontally or vertically
+	 */
+	boolean adjacent(Tile s1, Tile s2);
+	
+	
+	/**
 	 * @return the dimension of the Board
 	 */
 	Dimension size();
