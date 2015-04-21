@@ -256,7 +256,7 @@ public class LevelBuilderView extends JPanel {
 		btnRandomizeBoard.setBorder(null);
 		btnRandomizeBoard.setBounds(340, 510, 150, 40);
 		add(btnRandomizeBoard);
-		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm));
+		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm, this));
 		
 		JLabel background = new JLabel();
 		add(background);
@@ -375,12 +375,12 @@ public class LevelBuilderView extends JPanel {
 	public int getOnePercent() {
 		int one;
 		try {
-			one = Integer.parseInt(this.onePercent.getText());
+			one = Integer.parseInt(this.onePercent.getText());			
 		} catch (NumberFormatException e) {
 			this.onePercent.setText("");
 			return -1;
 		}
-		return one;
+		return one;	
 	}
 
 	public void setOnePercent(String s) {
@@ -520,7 +520,7 @@ public class LevelBuilderView extends JPanel {
 	public void setBoard(ArrayList<String> s) {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				textFields[i][j].setText(s.get(i).substring(j*3, j*3 + 3));
+				textFields[i][j].setText(s.get(i).substring(j * 3, j * 3 + 3));
 			}
 		}
 	}
