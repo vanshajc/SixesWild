@@ -24,9 +24,11 @@ public class MoveSwap extends BoardController implements IMove {
 	Point p1;
 	Point p2;
 	boolean moveStarted = false;
+	Level level;
 	
 	public MoveSwap(BoardPanel bp, Level level) {
 		super(bp);
+		this.level = level;
 	}
 
 	/* (non-Javadoc)
@@ -57,6 +59,8 @@ public class MoveSwap extends BoardController implements IMove {
 
 	@Override
 	public boolean doMove() {
+		if (!this.level.getMode().isValid(this))
+			return false;
 		BoardController bc = new MoveSelection(panel);
 		panel.setBoardController(bc);
 		return swap(p1, p2);

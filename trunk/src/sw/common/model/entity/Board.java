@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import sw.common.model.controller.IMove;
 import sw.common.system.factory.SquareFactory;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
@@ -30,8 +29,8 @@ import sw.common.system.manager.IBoardSelectionManager;
 public class Board implements IBoardSelectionManager, IBoardLocationManager, IBoard {
 	
 	/** Default dimension for the board */
-	public static int COLUMN = 9;
-	public static int ROW    = 9;
+	public static final int COLUMN = 9;
+	public static final int ROW    = 9;
 	
 	/** The grid of Square */
 	ArrayList<Column> grid = new ArrayList<Column>();
@@ -280,14 +279,16 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 	
 	public boolean clearSelection() {
 		Iterator<Square> si = selection.iterator();
-		while (si.hasNext()) {
+		while (si.hasNext()) { 
 			si.next().setSelected(false);
 			si.remove();
 		}
+		
 		// Just in case...
 		if (!selection.isEmpty()) {
 			selection.clear();
 		}
+		
 		return true;
 	}
 

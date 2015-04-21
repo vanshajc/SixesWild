@@ -7,7 +7,6 @@ package sw.common.model.controller;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
 import java.util.Queue;
 
 import javax.swing.SwingUtilities;
