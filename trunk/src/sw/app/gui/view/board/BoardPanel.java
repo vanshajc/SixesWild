@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import sw.common.model.controller.BoardController;
+import sw.common.model.controller.IMoveManager;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.IBoard;
@@ -262,8 +263,16 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	@Override
 	public boolean isAnimating(int colIdx) {
 		return false;
-	}
+	}	
 	
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.board.IBoardPanel#getLevel()
+	 */
+	@Override
+	public IMoveManager getMoveManager() {
+		return (IMoveManager) level;
+	}
+
 	/* (non-Javadoc)
 	 * @see sw.app.gui.view.board.IBoardPanel#getBoard()
 	 */

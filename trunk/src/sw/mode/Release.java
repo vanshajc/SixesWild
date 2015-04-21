@@ -19,6 +19,8 @@ import sw.common.system.manager.IResourceManager;
  * 
  */
 public class Release extends CommonResourceManager implements IMode {
+	
+	
 
 	@Override
 	public IResourceManager getResourceManger() {

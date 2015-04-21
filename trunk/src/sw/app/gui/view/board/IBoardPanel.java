@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import sw.app.gui.view.IView;
 import sw.common.model.controller.BoardController;
+import sw.common.model.controller.IMoveManager;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.IBoardLocationManager;
@@ -31,6 +32,11 @@ public interface IBoardPanel extends IView {
 	/** Clear display */
 	void clear();
 
+	/**
+	 * @return the Move manager interface
+	 */
+	IMoveManager getMoveManager();
+	
 	/**
 	 * @return the Board interface
 	 */

@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import sw.common.model.controller.IMove;
 import sw.common.system.factory.SquareFactory;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
@@ -36,7 +37,7 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 	ArrayList<Column> grid = new ArrayList<Column>();
 	
 	/** The selection queue */
-	ArrayBlockingQueue<Square> selection = new ArrayBlockingQueue<Square>(Board.COLUMN * Board.ROW, true);
+	SelectionQueue selection = new SelectionQueue(Board.COLUMN * Board.ROW);
 			
 	/** Create a new Board
 	 * @param fill the board with randomly generated value or not
@@ -242,14 +243,11 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 		
 		if (!s.isSelectable()) {
 			return false;
-		}
-		
-		if (!s.isSelected()) {
-			s.setSelected(true);
 		}		
 		
 		if (!selection.contains(s)) {			
 			try {
+				s.setSelected(true);
 				selection.put(s);
 				return true;
 			} catch (InterruptedException e) {
@@ -330,5 +328,22 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 			}
 		}
 		return -1;
+	}
+	
+	private class SelectionQueue extends ArrayBlockingQueue<Square> {
+
+		public SelectionQueue(int capacity) {
+			super(capacity, true);			
+		}
+
+		/* (non-Javadoc)
+		 * @see java.util.concurrent.ArrayBlockingQueue#iterator()
+		 */
+		@Override
+		public Iterator<Square> iterator() {
+			// return a copy only
+			return new ArrayList<Square>(this).iterator();
+		}
+		
 	}
 }

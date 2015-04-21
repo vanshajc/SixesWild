@@ -26,6 +26,8 @@ public abstract class BoardController extends MouseAdapter {
 	IBoardLocationManager  locator  = null;
 	IBoardSelectionManager selector = null;
 	
+	IMoveManager           manager  = null;
+	
 	public BoardController(){}
 	
 	public BoardController(IBoardPanel bp) {
@@ -37,7 +39,16 @@ public abstract class BoardController extends MouseAdapter {
 		this.board    = bp.getBoard();
 		this.locator  = bp.getLocator();
 		this.selector = bp.getSelector();
+		this.manager  = bp.getMoveManager();
 	}
+	
+	void requestPushMove(IMove m) {
+		manager.pushMove(m);
+	}
+	
+	void requestUndoMove() {
+		manager.undoMove();
+	}	
 	
 	boolean select(Point p) {
 		return selector.select(p);
