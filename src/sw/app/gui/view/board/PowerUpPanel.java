@@ -24,7 +24,7 @@ public class PowerUpPanel extends JPanel {
 		btnShuffle.addActionListener(new PwrUpShuffleActionListener(level));
 		
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.addActionListener(new PwrUpRemoveActionListener());
+		btnRemove.addActionListener(new PwrUpRemoveActionListener(level, bp));
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

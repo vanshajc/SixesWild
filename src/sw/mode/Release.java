@@ -5,14 +5,12 @@
  */
 package sw.mode;
 
-import java.awt.Dimension;
-
 import sw.common.model.controller.BoardController;
-import sw.common.model.controller.MoveSelection;
 import sw.common.model.controller.IMode;
+import sw.common.model.controller.IMove;
+import sw.common.model.controller.MoveRemove;
+import sw.common.model.controller.MoveSelection;
 import sw.common.system.manager.CommonResourceManager;
-import sw.common.system.manager.IBoardLocationManager;
-import sw.common.system.manager.IBoardSelectionManager;
 import sw.common.system.manager.IResourceManager;
 
 /**
@@ -38,6 +36,21 @@ public class Release extends CommonResourceManager implements IMode {
 	@Override
 	public BoardController getBoardController() {
 		return new MoveSelection();
+	}
+
+	@Override
+	public boolean isValid(IMove m) {
+		System.out.println("Calling on release valid");
+		if (m instanceof MoveRemove){
+			return ((MoveRemove) m).getRemoveTile().getValue() != 6;
+		}
+		return true;
 	}	
+	
+	@Override
+	public boolean hasWon() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

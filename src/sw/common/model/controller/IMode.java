@@ -14,4 +14,8 @@ public interface IMode {
 	
 	BoardController getBoardController();
 	
+	public boolean isValid(IMove m);
+	
+	public boolean hasWon();
+	
 }
