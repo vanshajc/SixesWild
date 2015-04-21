@@ -110,7 +110,7 @@ public class Column {
 	 */
 	public boolean removeTile(int idx) {
 		Square s = getSquare(idx);
-		if (s != null && !s.isEmpty()) {
+		if (s != null) {
 			s.setTile(null);
 			return true;
 		}
@@ -206,14 +206,16 @@ public class Column {
 		}
 	}
 	
-	void shuffle(){
+	/** Shuffle the Column */
+	void shuffle() {
 		ArrayList<Square> newCol = new ArrayList<Square>();
-		while (col.size()>0){
-			int i = (int) (Math.random()*col.size());
+		while (col.size() > 0){
+			int i = (int) (Math.random() * col.size());
 			newCol.add(col.get(i));
 			col.remove(i);
 		}
-		col = newCol;
+		col.clear();
+		col.addAll(newCol);
 	}
 
 }

@@ -239,8 +239,16 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 	 */
 	public boolean select(Point p) {
 		Square s = getSquare(p);
+		
+		if (!s.isSelectable()) {
+			return false;
+		}
+		
 		if (!s.isSelected()) {
 			s.setSelected(true);
+		}		
+		
+		if (!selection.contains(s)) {			
 			try {
 				selection.put(s);
 				return true;
@@ -250,7 +258,7 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 				return false;
 			}
 		}
-		return true;  // if Square already selected, return true
+		return true;
 	}
 	
 	/**
