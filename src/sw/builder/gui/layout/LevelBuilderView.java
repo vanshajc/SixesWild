@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -256,6 +257,11 @@ public class LevelBuilderView extends JPanel {
 		btnRandomizeBoard.setBounds(340, 510, 150, 40);
 		add(btnRandomizeBoard);
 		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm));
+		
+		JLabel background = new JLabel();
+		add(background);
+		background.setBounds(0, 0, 800, 600);
+		background.setIcon(new ImageIcon("src/sw/resource/image/levelbuilderbackground.png"));
 
 	}
 
