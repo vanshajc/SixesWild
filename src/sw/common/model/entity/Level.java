@@ -14,15 +14,14 @@ import sw.common.model.controller.IMoveManager;
 /** The model for an arbitrary game level */
 public class Level implements IMoveManager {
 	
-	Game game;
+	Game game = null;
 	Statistics winStats;
 	IMode mode;
 	int levelNum;
 	
 	Stack<IMove> moves = new Stack<IMove>();
 	
-	public Level(int levelNum, Game game, Statistics winStats, IMode mode) {
-		this.game = game;
+	public Level(int levelNum, Statistics winStats, IMode mode) {		
 		this.winStats = winStats;
 		this.mode = mode;
 		this.levelNum = levelNum;
@@ -32,6 +31,9 @@ public class Level implements IMoveManager {
 	 * @return the game
 	 */
 	public Game getGame() {
+		if (game == null) {
+			initialize();
+		}
 		return game;
 	}
 
@@ -58,7 +60,7 @@ public class Level implements IMoveManager {
 	}
 	
 	public void initialize() {
-		
+		game = new Game();
 	}
 	
 	public boolean hasWon() {
@@ -89,6 +91,10 @@ public class Level implements IMoveManager {
 	@Override
 	public int countMove() {
 		return moves.size();
+	}
+	
+	public void updateScore(int delta) {
+		game.stats.score += delta;
 	}
 	
 }

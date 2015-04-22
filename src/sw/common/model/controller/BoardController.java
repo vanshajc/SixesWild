@@ -48,7 +48,11 @@ public abstract class BoardController extends MouseAdapter {
 	
 	void requestUndoMove() {
 		manager.undoMove();
-	}	
+	}
+	
+	void updateScore(int delta) {
+		manager.updateScore(delta);
+	}
 	
 	boolean select(Point p) {
 		return selector.select(p);
