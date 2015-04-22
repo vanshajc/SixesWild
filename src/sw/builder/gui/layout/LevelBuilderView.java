@@ -256,12 +256,14 @@ public class LevelBuilderView extends JPanel {
 		btnRandomizeBoard.setBorder(null);
 		btnRandomizeBoard.setBounds(340, 510, 150, 40);
 		add(btnRandomizeBoard);
-		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm, this));
-		
+		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm,
+				this));
+
 		JLabel background = new JLabel();
 		add(background);
 		background.setBounds(0, 0, 800, 600);
-		background.setIcon(new ImageIcon("src/sw/resource/image/levelbuilderbackground.png"));
+		background.setIcon(new ImageIcon(
+				"src/sw/resource/image/levelbuilderbackground.png"));
 
 	}
 
@@ -375,12 +377,12 @@ public class LevelBuilderView extends JPanel {
 	public int getOnePercent() {
 		int one;
 		try {
-			one = Integer.parseInt(this.onePercent.getText());			
+			one = Integer.parseInt(this.onePercent.getText());
 		} catch (NumberFormatException e) {
 			this.onePercent.setText("");
 			return -1;
 		}
-		return one;	
+		return one;
 	}
 
 	public void setOnePercent(String s) {
@@ -511,7 +513,12 @@ public class LevelBuilderView extends JPanel {
 		String[][] board = new String[9][9];
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				board[i][j] = textFields[i][j].getText();
+				String input = textFields[i][j].getText();
+				if (isValid(input))
+					board[i][j] = input;
+				else{
+				textFields[i][j].setText("");	
+				}
 			}
 		}
 		return board;
@@ -526,7 +533,22 @@ public class LevelBuilderView extends JPanel {
 	}
 
 	public boolean isValid(String s) {
-		return true;
+		if (s.length() == 3) {
+
+			if (s.charAt(0) == '0' || s.charAt(0) == '1' || s.charAt(0) == '2'
+					|| s.charAt(0) == '3' || s.charAt(0) == '4'
+					|| s.charAt(0) == '5' || s.charAt(0) == '6'
+					|| s.charAt(0) == '*') {
+				if (s.charAt(1) == ',') {
+					if (s.charAt(2) == '0' || s.charAt(2) == '1'
+							|| s.charAt(2) == '2' || s.charAt(2) == '3'
+							|| s.charAt(2) == '*') {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 }
