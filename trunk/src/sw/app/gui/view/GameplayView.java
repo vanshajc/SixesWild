@@ -63,7 +63,7 @@ public class GameplayView extends JPanel implements IView {
 		this.timeMovePanel = new TimeMovePanel();
 		this.scorePanel    = new ScorePanel();
 		this.gameInfoPanel = new GameInfoPanel();
-		this.powerUpPanel  = new PowerUpPanel(boardPanel, levelManager.getCurrent());
+		this.powerUpPanel  = new PowerUpPanel(boardPanel, levelManager);
 		
 		this.quitButton    = new JButton();
 		this.mmc           = new MainMenuController(manager);

@@ -6,18 +6,19 @@ import java.awt.event.MouseEvent;
 import sw.app.gui.view.board.IBoardPanel;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Tile;
+import sw.common.system.manager.LevelManager;
 
 public class MoveRemove extends BoardController implements IMove{
-	Level level;
+	LevelManager lm;
 	
 	public MoveRemove(){
 		super();
 	}
 	
-	public MoveRemove(Level level, IBoardPanel bp){
+	public MoveRemove(LevelManager lm, IBoardPanel bp){
 		super(bp);
 		this.panel = bp;
-		this.level = level;
+		this.lm = lm;
 	}
 	
 	@Override
@@ -34,7 +35,9 @@ public class MoveRemove extends BoardController implements IMove{
 	
 	@Override
 	public boolean doMove() {
+		Level level = lm.getCurrent();
 		if (this.getSelectedTile().isEmpty()) return false;
+		System.out.println(level.getMode());
 		if (!level.getMode().isValid(this))
 			return false;
 		

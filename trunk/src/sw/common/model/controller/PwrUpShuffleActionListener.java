@@ -8,16 +8,16 @@ package sw.common.model.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import sw.common.model.entity.Level;
+import sw.common.system.manager.LevelManager;
 
 /**
  * 
  */
 public class PwrUpShuffleActionListener implements ActionListener {
 
-	Level level;
-	public PwrUpShuffleActionListener(Level level){
-		this.level = level;
+	LevelManager lm;
+	public PwrUpShuffleActionListener(LevelManager lm){
+		this.lm = lm;
 	}
 	
 	/* (non-Javadoc)
@@ -25,7 +25,7 @@ public class PwrUpShuffleActionListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		level.getGame().getBoard().shuffle();
+		lm.getCurrent().getGame().getBoard().shuffle();
 
 	}
 

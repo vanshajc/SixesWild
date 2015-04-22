@@ -10,6 +10,7 @@ import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveRemove;
 import sw.common.model.controller.MoveSelection;
+import sw.common.model.entity.Level;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
@@ -17,9 +18,19 @@ import sw.common.system.manager.IResourceManager;
  * 
  */
 public class Release extends CommonResourceManager implements IMode {
-	
-	
+	boolean[][] sixLocation;
+	Level level;
 
+	public Release(){
+		
+	}
+	
+	public Release(Level level, boolean[][] sixLocation){
+		this.sixLocation = sixLocation;
+		this.level = level;
+	}
+	
+	
 	@Override
 	public IResourceManager getResourceManger() {
 		return this;
@@ -50,7 +61,13 @@ public class Release extends CommonResourceManager implements IMode {
 	@Override
 	public boolean hasWon() {
 		// TODO Auto-generated method stub
-		return false;
+		for (int i = 0; i<sixLocation.length; i++){
+			for (int j = 0; j<sixLocation[i].length; i++){
+				if (level.getGame().getBoard().getColumn(i).getTile(j).getValue() != 6 && sixLocation[i][j])
+					return false;
+			}
+		}
+		return true;
 	}
 
 }
