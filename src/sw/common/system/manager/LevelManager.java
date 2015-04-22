@@ -19,42 +19,43 @@ import sw.mode.Release;
  *
  */
 public class LevelManager {
-	
-	int lvlCount = 0;
-	int maxLvl   = 5;
-	
+
 	ArrayList<Level> list = new ArrayList<Level>();
 	
-	Level current;
+	int current;
+	int highest = 4;
 	
 	public LevelManager() {
-		// Test create levels
-//		for (int i = 0; i < maxLvl; i++) {
-//			list.add(LevelFactory.getLevel(++lvlCount, new Release() , new Statistics()));
-//		}
-		list.add(LevelFactory.getLevel(++lvlCount, new Puzzle() , new Statistics()));
-		list.add(LevelFactory.getLevel(++lvlCount, new Release() , new Statistics()));
-		list.add(LevelFactory.getLevel(++lvlCount, new Lightning() , new Statistics()));
-		list.add(LevelFactory.getLevel(++lvlCount, new Elimination() , new Statistics()));
-		list.add(LevelFactory.getLevel(++lvlCount, new Puzzle() , new Statistics()));
-		list.add(LevelFactory.getLevel(++lvlCount, new Release() , new Statistics()));
-		list.add(LevelFactory.getLevel(++lvlCount, new Lightning() , new Statistics()));
+		// Load available levels from resource classpath
+		
+		// For now, just manually creates new Levels
+		int lvlCount = 0;
+		list.add(LevelFactory.getPuzzleLevel(++lvlCount, new Statistics()));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, new Statistics()));
+		list.add(LevelFactory.getLightningLevel(++lvlCount, new Statistics()));
+		list.add(LevelFactory.getEliminationLevel(++lvlCount, new Statistics()));
+		list.add(LevelFactory.getPuzzleLevel(++lvlCount, new Statistics()));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, new Statistics()));
+		list.add(LevelFactory.getLightningLevel(++lvlCount, new Statistics()));
 		
 		// first level is the current level by default
-		current = list.get(0);
+		current = 0;
 	}
 	
 	public Level getCurrent() {
-		return current;
+		return list.get(current);
 	}
 	
-	public Level getNext() {
-		int i = list.indexOf(current);
-		if (i < list.size() - 1) {
-			return list.get(i+1);			
+	public Level getNext() {		
+		if (current < list.size() - 1) {
+			return list.get(current + 1);			
 		} else {
 			return null;
 		}
+	}
+	
+	public Level getHighestLevel() {
+		return list.get(highest);
 	}
 	
 	public ArrayList<Level> getLevels() {
@@ -62,7 +63,15 @@ public class LevelManager {
 	}
 	
 	public void setCurrent(Level level) {
-		current = level;
+		if (list.contains(level)) {
+			current = list.indexOf(level);
+		}
+	}
+	
+	public void setHighest(Level level) {
+		if (list.contains(level)) {
+			highest = list.indexOf(level);			
+		}
 	}
 
 }

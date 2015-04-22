@@ -18,21 +18,19 @@ import sw.app.gui.controller.MainMenuController;
 
 public class CreditScreenView extends JPanel implements IView{
 	
-	Image background = new ImageIcon(CreditScreenView.class.getResource("/sw/resource/image/SixesWildMainMenuImage.png")).getImage();
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	LayoutManager lm;
-	public CreditScreenView(LayoutManager lm) {
-		setBackground(Color.WHITE);
+	Image background = new ImageIcon(
+			CreditScreenView.class
+					.getResource("/sw/resource/image/SixesWildMainMenuImage.png"))
+			.getImage();
+	
+	public CreditScreenView(LayoutManager lm) {		
 		this.lm = lm;
 		initialize();
 	}
 	
 	public void initialize() {
-		
+		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(800, 600));
 		
 		JButton btnBack = new JButton("Back");
@@ -106,14 +104,12 @@ public class CreditScreenView extends JPanel implements IView{
 					.addComponent(btnBack)
 					.addGap(128))
 		);
-		setLayout(groupLayout);
-		
+		setLayout(groupLayout);		
 	}
 	
 	@Override
 	public void cleanup() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	
 	@Override

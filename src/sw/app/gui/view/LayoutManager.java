@@ -1,13 +1,14 @@
 package sw.app.gui.view;
 
+import java.awt.Component;
+import java.awt.Container;
+
 import javax.swing.JPanel;
-
-import sw.common.system.manager.LevelManager;
-
 
 public class LayoutManager {
 
 	SixesWildJFrame f;
+	
 	MainMenuView mmv;
 	SplashScreenView ssv;
 	GameplayView gv;
@@ -15,10 +16,10 @@ public class LayoutManager {
 	ScoreBoardView sbv;
 	PlayGameScreenView pgs;
 	PostGameView pgv;
-	
+
 	JPanel current = null;
-	
-	public LayoutManager(SixesWildJFrame f){
+
+	public LayoutManager(SixesWildJFrame f) {
 		this.f = f;
 		mmv = new MainMenuView(this);
 		gv = new GameplayView(this, f.getLevelManager());
@@ -27,47 +28,58 @@ public class LayoutManager {
 		pgs = new PlayGameScreenView(this, f.levelManager);
 		pgv = new PostGameView(this, f.levelManager);
 	}
-	
-	public LayoutManager(SixesWildJFrame_BoardPanel f){
-		///this.f = f;
-		mmv = new MainMenuView(this);
-		//gv = new GameplayView(this, f.getLevelManager());
-		csv = new CreditScreenView(this);
-		sbv = new ScoreBoardView(this);
-		pgs = new PlayGameScreenView(this, new LevelManager());
+
+	public void switchToMainMenu() {
+		switchToScreen(mmv);
 	}
-	
-	public void switchToMainMenu(){
-		current = mmv;
-		f.switchToScreen(mmv);
+
+	public void switchToGameplayView() {
+		switchToScreen(gv);
 	}
-	
-	public void switchToGameplayView(){
-		current = gv;
-		f.switchToScreen(gv);
+
+	public void switchToScoreBoardView() {
+		switchToScreen(sbv);
 	}
-	
-	public void switchToScoreBoardView(){
-		current = sbv;
-		f.switchToScreen(sbv);
+
+	public void switchToCreditScreenView() {
+		switchToScreen(csv);
 	}
-	
-	public void switchToCreditScreenView(){
-		f.switchToScreen(csv);
+
+	public void switchToPlayView() {
+		switchToScreen(pgs);
 	}
-	
-	public void switchToPlayView(){
-		current = pgs;
-		f.switchToScreen(pgs);
-	}
-	
+
 	public void switchToPostGameView() {
-		current = pgv;
-		f.switchToScreen(pgv);
+		switchToScreen(pgv);
 	}
-	
+
+	void switchToScreen(JPanel screen) {
+		Container pane = f.getContentPane();
+
+		// call cleanup on all IView components
+		int count = pane.getComponentCount();
+		Component[] c = pane.getComponents();
+		for (int i = 0; i < count; i++) {
+			if (c[i] instanceof IView) {
+				((IView) c[i]).cleanup();
+			}
+		}
+
+		pane.removeAll();
+		pane.add(screen);
+		pane.revalidate();
+		pane.repaint();
+
+		current = screen;
+
+		// initialize the new view
+		if (screen instanceof IView) {
+			((IView) screen).initialize();
+		}
+	}
+
 	public JPanel getCurrentView() {
 		return current;
 	}
-	
+
 }

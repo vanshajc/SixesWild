@@ -9,7 +9,7 @@ import sw.app.gui.view.LayoutManager;
 import sw.app.gui.view.PlayGameScreenView;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
-public class StartGameController implements ActionListener{
+public class StartGameController implements ActionListener {
 	
 	LayoutManager lm;
 	LevelManager lvlm;
