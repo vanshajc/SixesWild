@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import sw.app.gui.view.board.BoardPanel;
-import sw.common.model.entity.Level;
+import sw.common.system.manager.LevelManager;
 
 /**
  * 
@@ -17,10 +17,10 @@ import sw.common.model.entity.Level;
 public class PwrUpSwapActionListener implements ActionListener {
 
 	BoardPanel bp;
-	Level level;
-	public PwrUpSwapActionListener(BoardPanel bp, Level level){
+	LevelManager lm;
+	public PwrUpSwapActionListener(BoardPanel bp, LevelManager lm){
 		this.bp = bp;
-		this.level = level;
+		this.lm = lm;;
 	}
 	
 	/* (non-Javadoc)
@@ -28,7 +28,7 @@ public class PwrUpSwapActionListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		BoardController bc = new MoveSwap(bp, level);
+		BoardController bc = new MoveSwap(bp, lm.getCurrent());
 		bp.setBoardController(bc);
 	}
 

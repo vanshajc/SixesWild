@@ -9,18 +9,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import sw.app.gui.view.board.IBoardPanel;
-import sw.common.model.entity.Level;
+import sw.common.system.manager.LevelManager;
 
 /**
  * 
  */
 public class PwrUpRemoveActionListener implements ActionListener {
 
-	Level level;
+	LevelManager lm;
 	IBoardPanel bp;
 	
-	public PwrUpRemoveActionListener(Level level, IBoardPanel bp){
-		this.level = level;
+	public PwrUpRemoveActionListener(LevelManager lm, IBoardPanel bp){
+		this.lm = lm;
 		this.bp = bp;
 	}
 	
@@ -29,7 +29,7 @@ public class PwrUpRemoveActionListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		BoardController bc = new MoveRemove(level, bp);
+		BoardController bc = new MoveRemove(lm, bp);
 		bp.setBoardController(bc);
 	}
 

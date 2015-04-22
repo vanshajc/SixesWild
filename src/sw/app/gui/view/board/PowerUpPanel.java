@@ -10,21 +10,22 @@ import sw.common.model.controller.PwrUpRemoveActionListener;
 import sw.common.model.controller.PwrUpShuffleActionListener;
 import sw.common.model.controller.PwrUpSwapActionListener;
 import sw.common.model.entity.Level;
+import sw.common.system.manager.LevelManager;
 
 public class PowerUpPanel extends JPanel {
-	Level level;
-	public PowerUpPanel(BoardPanel bp, Level level) {
+	LevelManager lm;
+	public PowerUpPanel(BoardPanel bp, LevelManager lm) {
 		setOpaque(false);
 		setBorder(null);
 		
 		JButton btnSwap = new JButton("Swap");
-		btnSwap.addActionListener(new PwrUpSwapActionListener(bp, level));
+		btnSwap.addActionListener(new PwrUpSwapActionListener(bp, lm));
 		
 		JButton btnShuffle = new JButton("Shuffle");
-		btnShuffle.addActionListener(new PwrUpShuffleActionListener(level));
+		btnShuffle.addActionListener(new PwrUpShuffleActionListener(lm));
 		
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.addActionListener(new PwrUpRemoveActionListener(level, bp));
+		btnRemove.addActionListener(new PwrUpRemoveActionListener(lm, bp));
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
