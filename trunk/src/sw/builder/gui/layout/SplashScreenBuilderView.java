@@ -15,23 +15,13 @@ public class SplashScreenBuilderView extends JPanel implements IView{
 
 	BuilderLayoutManager blm;
 	public SplashScreenBuilderView(BuilderLayoutManager bblm) {
-//		
-//		JLabel lblNewLabel = new JLabel("");
-//		lblNewLabel.setIcon(new ImageIcon(SpashScreenBuilderView.class.getResource("/sw/resource/image/SplashScreenResizedtest.png")));
-//		add(lblNewLabel);
 		
 		this.blm = bblm;
-		//initialize();
+	
 	}
 	
 	public void initialize() {
-/*		
-		try {
-			Thread.sleep(5000);
-		} catch (Exception e) {
-		}
-		//new MainMenuController(this);
-		*/
+
 	}
 
 	@Override
