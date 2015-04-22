@@ -21,4 +21,8 @@ public interface IMoveManager {
 	 */
 	int countMove();
 
+	/**
+	 * @param delta the difference to update score
+	 */
+	void updateScore(int delta);
 }

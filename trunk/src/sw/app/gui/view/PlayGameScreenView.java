@@ -1,6 +1,7 @@
 package sw.app.gui.view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -8,8 +9,11 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.StartGameController;
@@ -45,10 +49,12 @@ public class PlayGameScreenView extends JPanel implements IView{
 		levelList = new JComboBox<String>();
 		levelList.setBackground(Color.WHITE);
 		
+		// Load all available levels to the combobox
 		for (int i = 0; i < lvlList.size(); i++) {
 			String name = lvlList.get(i).toString();
 			levelList.addItem(name);
-		}
+		}		
+//		levelList.setRenderer(new DisabledItemsRenderer<String>());
 		
 		btnBack = new JButton("Back");
 		btnBack.addActionListener(new MainMenuController(lm));
@@ -102,5 +108,16 @@ public class PlayGameScreenView extends JPanel implements IView{
 	public Level getSelectedLevel() {
 		return lvlm.getLevels().get(levelList.getSelectedIndex());
 	}
+
+//	private class DisabledItemsRenderer<String> extends BasicComboBoxRenderer {
+//		public Component getListCellRendererComponent(JList list, Object value,
+//				int index, boolean isSelected, boolean cellHasFocus) {
+//			setText(value.toString());
+//			if (index > lvlm.getHighestLevel().getLevelNum()) {
+//				setEnabled(false);
+//			}
+//			return this;
+//		}
+//	}
 
 }

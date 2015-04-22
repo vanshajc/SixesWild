@@ -5,14 +5,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Time;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.Timer;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.PostGameMenuController;
@@ -21,12 +20,14 @@ import sw.app.gui.view.board.GameInfoPanel;
 import sw.app.gui.view.board.PowerUpPanel;
 import sw.app.gui.view.board.ScorePanel;
 import sw.app.gui.view.board.TimeMovePanel;
+import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
+import sw.common.model.entity.Statistics;
 import sw.common.system.manager.LevelManager;
 
 import java.awt.Color;
 
-public class GameplayView extends JPanel implements IView {
+public class GameplayView extends JPanel implements IView, ActionListener {
 
 	/** GENERATED DO NOT CHANGE */
 	private static final long serialVersionUID = -7540685505032159107L;
@@ -39,6 +40,7 @@ public class GameplayView extends JPanel implements IView {
 	TimeMovePanel timeMovePanel;
 	PowerUpPanel powerUpPanel;
 	
+	Level level;
 	LayoutManager manager;
 	LevelManager levelManager;
 	
@@ -50,6 +52,8 @@ public class GameplayView extends JPanel implements IView {
 	MainMenuController mmc;
 	String quitBtnPath = "/sw/resource/image/button_quit.png";
 	ImageIcon quitBtnImg;
+	
+	Timer refreshTimer;
 	
 	/**
 	 * Create the panel.
@@ -68,15 +72,17 @@ public class GameplayView extends JPanel implements IView {
 		this.quitButton    = new JButton();
 		this.mmc           = new MainMenuController(manager);
 		this.quitBtnImg    = new ImageIcon(GameplayView.class.getResource(quitBtnPath));
-		
+	
+		this.refreshTimer  = new Timer(250, this);  // 250 msec
 	}
 	
 	private void initializeLevel() {
-		Level level = levelManager.getCurrent();
+		level = levelManager.getCurrent();
 		if (level == null) {
 			throw new IllegalStateException("Current level is null!");
 		}
 		
+		level.initialize(); // Reset the state of the Board
 		boardPanel.setLevel(level);
 		gameInfoPanel.setLevelName(level.toString());		
 	}
@@ -152,15 +158,11 @@ public class GameplayView extends JPanel implements IView {
 			initializeLayout();
 
 			timeMovePanel.initialize();
-			timeMovePanel.setTimerAlarm(new dummyAlarm(), Time.valueOf("00:00:05"));
-
 			boardPanel.initialize();
-
-			scorePanel.setMinimum(0);
-			scorePanel.setMaximum(1000);
-			scorePanel.setScore(300);
-			scorePanel.setStar(2);		
-
+			
+			update();			
+			
+			refreshTimer.start();
 			timeMovePanel.startTimer();
 		} catch (IllegalStateException e) {
 			System.err.println("Cannot initialize the Gameplay View!");
@@ -168,18 +170,23 @@ public class GameplayView extends JPanel implements IView {
 		}
 	}
 	
-	class dummyAlarm implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			timeMovePanel.setMove(25);
+	public void update() {
+		if (this.level != null) {
+			Game game = level.getGame();
+			
+			Statistics stats = game.getStats();
+			
+			scorePanel.setScore(stats.getScore());
+			scorePanel.setStar(level.getStars());
+			
+			timeMovePanel.setMove(level.countMove());
 		}		
-	}
+	}	
 
 	@Override
 	public void cleanup() {
-		// TODO Auto-generated method stub
+		refreshTimer.stop();
+		
 		boardPanel.cleanup();
 		
 		// Remove all action listeners for this button
@@ -193,5 +200,11 @@ public class GameplayView extends JPanel implements IView {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(background, 0, 0, null);
+	}
+
+	/** Update stats on a timer tick */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		update();		
 	}
 }
