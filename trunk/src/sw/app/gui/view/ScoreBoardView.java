@@ -14,17 +14,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 
 import sw.app.gui.controller.MainMenuController;
-import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
-import sw.mode.Release;
+import sw.common.system.factory.LevelFactory;
 
 public class ScoreBoardView extends JPanel implements IView {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	LayoutManager lm;
 	
@@ -73,9 +67,8 @@ public class ScoreBoardView extends JPanel implements IView {
 		
 		btnNewButton_1 = new JButton("Add score test");
 		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Level newLevel = new Level(count, new Game(), new Statistics(), new Release());
-				addLevelStats(newLevel);
+			public void actionPerformed(ActionEvent arg0) {				
+				addLevelStats(LevelFactory.getLightningLevel(0, new Statistics()));
 			}
 		});
 		
@@ -122,8 +115,7 @@ public class ScoreBoardView extends JPanel implements IView {
 		);
 		setLayout(groupLayout);
 		
-		btnBack.addActionListener(new MainMenuController(lm));
-		
+		btnBack.addActionListener(new MainMenuController(lm));		
 	}
 
 	@Override
@@ -143,34 +135,34 @@ public class ScoreBoardView extends JPanel implements IView {
 		count++;
 		
 		JLabel levelNum = new JLabel();
-		levelNum.setText(Integer.toString(level.getLevelNum()));		
+		levelNum.setText(level.toString());		
 		levelNum.setHorizontalAlignment(SwingConstants.CENTER);
 		levelNum.setSize(fieldSize);
 		levelNum.setLocation(new Point(levelX, yPos + (fieldSize.height * count) + gap));
-		this.add(levelNum);
+		add(levelNum);
 		
 		JLabel score = new JLabel();
 		score.setText(Integer.toString(level.getGame().getStats().getScore()));		
 		score.setHorizontalAlignment(SwingConstants.CENTER);
 		score.setSize(fieldSize);
 		score.setLocation(new Point(scoreX, yPos + (fieldSize.height * count) + gap));
-		this.add(score);
+		add(score);
 		
 		JLabel move = new JLabel();
 		move.setText(Integer.toString(level.getGame().getStats().getNumMoves()));		
 		move.setHorizontalAlignment(SwingConstants.CENTER);
 		move.setSize(fieldSize);
 		move.setLocation(new Point(moveX, yPos + (fieldSize.height * count) + gap));
-		this.add(move);
+		add(move);
 		
 		JLabel time = new JLabel();
 		time.setText(level.getGame().getStats().getCurrent().toString());		
 		time.setHorizontalAlignment(SwingConstants.CENTER);
 		time.setSize(fieldSize);
 		time.setLocation(new Point(timeX, yPos + (fieldSize.height * count) + gap));
-		this.add(time);
+		add(time);
 		
-		this.invalidate();
-		this.repaint();		
+		invalidate();
+		repaint();
 	}
 }

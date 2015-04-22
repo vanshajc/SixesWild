@@ -16,16 +16,7 @@ public class PlayGameScreenController implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		lm.switchToPlayView();
-		
-		// create screen
-		/*
-		SecondScreen secondScreen = new SecondScreen();
-		secondScreen.setVisible(true);
-		 */
-		// set controller for previous button
-		//secondScreen.getPreviousButton().addActionListener(new PrevScreenController(main, secondScreen));
-		
+		lm.switchToPlayView();		
 	}
 
 }
