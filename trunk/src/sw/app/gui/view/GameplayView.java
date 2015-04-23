@@ -83,6 +83,10 @@ public class GameplayView extends JPanel implements IView, ActionListener {
 		
 		level.initialize(); // Reset the state of the Board
 		boardPanel.setLevel(level);
+		
+		scorePanel.setScore(level.getGame().getStats().getScore());
+		timeMovePanel.setMove(level.getGame().getStats().getNumMoves());
+		
 		gameInfoPanel.setLevelName(level.toString());		
 	}
 	
@@ -188,6 +192,8 @@ public class GameplayView extends JPanel implements IView, ActionListener {
 		refreshTimer.stop();
 		
 		boardPanel.cleanup();
+		timeMovePanel.cleanup();
+		scorePanel.cleanup();
 		
 		// Remove all action listeners for this button
 		ActionListener[] listeners = quitButton.getActionListeners();

@@ -44,6 +44,14 @@ public abstract class BoardController extends MouseAdapter {
 	
 	void requestPushMove(IMove m) {
 		manager.pushMove(m);
+		
+		// if Game is finished, wait for board panel to be done animating
+		if (manager.hasFinished()) {
+			// wait for panel to be done with animation
+			while (panel.isAnimating()){}
+			
+			manager.finishGame();
+		}
 	}
 	
 	void requestUndoMove() {

@@ -7,11 +7,11 @@ import javax.swing.JFrame;
 import sw.common.system.manager.LevelManager;
 
 public class SixesWildJFrame extends JFrame {	
-
-	LevelManager levelManager = new LevelManager();
-	LayoutManager lm = new LayoutManager(this);	
 	
-	SplashScreenView ssv = new SplashScreenView();
+	LayoutManager lm;	
+	LevelManager lvlm;
+	
+	SplashScreenView ssv;
 	
 	public SixesWildJFrame() {
 		setTitle("Sixes Wild");		
@@ -20,10 +20,17 @@ public class SixesWildJFrame extends JFrame {
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		lm = new LayoutManager(this);		
+		lvlm = new LevelManager(lm);
+		
 		initialize();
 	}
 
-	void initialize() {		
+	void initialize() {
+		lm.initialize();
+		
+		ssv = new SplashScreenView();
 		getContentPane().add(ssv);
 		ssv.addMouseListener(new MouseAdapter() {			
 			@Override
@@ -34,7 +41,7 @@ public class SixesWildJFrame extends JFrame {
 	}	
 	
 	public LevelManager getLevelManager(){
-		return levelManager;
+		return lvlm;
 	}	
 	
 }

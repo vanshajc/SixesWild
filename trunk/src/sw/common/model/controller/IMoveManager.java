@@ -25,4 +25,12 @@ public interface IMoveManager {
 	 * @param delta the difference to update score
 	 */
 	void updateScore(int delta);
+	
+	/**
+	 * @return whether the game is finished
+	 */
+	boolean hasFinished();
+	
+	/** Finish the game */
+	void finishGame();
 }

@@ -5,8 +5,11 @@
  */
 package sw.common.system.manager;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import sw.app.gui.view.LayoutManager;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
@@ -19,7 +22,7 @@ import sw.mode.Release;
 /**
  *
  */
-public class LevelManager {
+public class LevelManager implements ActionListener {
 
 	ArrayList<Level> list = new ArrayList<Level>();
 	
@@ -29,7 +32,11 @@ public class LevelManager {
 	// Load initial board layouts
 	Board initBoard = new Board();
 	
-	public LevelManager() {
+	LayoutManager lm;
+	
+	public LevelManager(LayoutManager lm) {
+		this.lm = lm;
+		
 		// Load available levels from resource classpath
 		
 		// For now, just manually creates new Levels
@@ -44,6 +51,11 @@ public class LevelManager {
 		
 		// first level is the current level by default
 		current = 0;
+		
+		// set game finished listener
+		for (Level l : list) {
+			l.setListener(this);
+		}
 	}
 	
 	public Level getCurrent() {
@@ -76,6 +88,19 @@ public class LevelManager {
 		if (list.contains(level)) {
 			highest = list.indexOf(level);			
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() instanceof Level) {
+			String str = e.getActionCommand();
+			if (str.equals(Level.strFinished)) {
+				lm.switchToPostGameView();
+			} else if (str.equals(Level.strWon)) {
+				
+				lm.switchToPostGameView();
+			}
+		}		
 	}
 
 }

@@ -122,4 +122,9 @@ public class ScorePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -8082985446420559832L;
+
+	public void cleanup() {
+		setScore(0);
+		setStar(0);
+	}
 }
