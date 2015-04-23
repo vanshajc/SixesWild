@@ -3,6 +3,7 @@ package sw.builder.gui.layout;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import sw.app.gui.view.IView;
+import sw.app.gui.view.SplashScreenView;
 
 public class LevelBuilderJFrame extends JFrame implements IView{
 	/**
@@ -28,56 +30,23 @@ public class LevelBuilderJFrame extends JFrame implements IView{
 		this.setLayout(new BorderLayout());
 		setResizable(false);
 		this.setVisible(true);
+		blm = new BuilderLayoutManager(this);
 		
 		this.initialize();
 
 
 	}
-
-	void switchToScreen(JPanel screen){
-		System.out.println("Switch to next screen");
-		
-		// call cleanup on all IView components
-		int count = pane.getComponentCount();
-		Component[] c = pane.getComponents();
-		for (int i = 0; i < count; i++) {
-			if (c[i] instanceof IView) {
-				((IView) c[i]).cleanup();
-			}
-		}
-		
-		pane.removeAll();
-		pane.add(screen);		
-		pane.revalidate();
-		pane.repaint();
-		
-		// initialize the new view
-		if (screen instanceof IView) {
-			((IView) screen).initialize();
-		}
-	}
 	
 	
 	public void initialize() {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.add(ssbv);
-		ssbv.addMouseListener(new MouseListener(){
+		blm.initailize();
+		ssbv = new SplashScreenBuilderView(blm);
+		getContentPane().add(ssbv);
+		ssbv.addMouseListener(new MouseAdapter() {			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				blm.switchToLevelBuilder();
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {	
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {	
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
+			}			
 		});
 	}
 
