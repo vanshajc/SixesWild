@@ -45,7 +45,7 @@ public class LevelBuilderJFrame extends JFrame implements IView{
 		ssbv.addMouseListener(new MouseAdapter() {			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				blm.switchToLevelBuilder();
+				blm.switchToLevelBuilderMenu();
 			}			
 		});
 	}
