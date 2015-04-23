@@ -16,6 +16,7 @@ public class BuilderLayoutManager {
 	LevelBuilderJFrame lbjf;
 	SplashScreenBuilderView ssbv;
 	LevelBuilderView lbv;
+	LevelBuilderMenuView lbmv;
 	JPanel current = null;
 	
 	public BuilderLayoutManager(LevelBuilderJFrame lbjf){
@@ -25,11 +26,16 @@ public class BuilderLayoutManager {
 	public void initailize() {
 		lbv = new LevelBuilderView(this);
 		ssbv = new SplashScreenBuilderView(this);
+		lbmv = new LevelBuilderMenuView(this);
 		
 	}
 	
 	public void switchToLevelBuilder(){
 		switchToScreen(lbv);
+	}
+	
+	public void switchToLevelBuilderMenu(){
+		switchToScreen(lbmv);
 	}
 	
 	void switchToScreen(JPanel screen){
