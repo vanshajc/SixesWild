@@ -43,6 +43,14 @@ public class Tile {
 	public int getMultiplier() {
 		return multiplier;
 	}
+	
+	/**
+	 * @param t the Tile to copy
+	 */
+	public void copy(Tile t) {
+		value = t.value;
+		multiplier = t.multiplier;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -58,13 +66,13 @@ public class Tile {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-//	@Override
-//	public boolean equals(Object o) {
-//		if (o instanceof Tile) {
-//			Tile t = (Tile) o;
-//			return (this.value == t.value) && (this.multiplier == t.multiplier);
-//		}
-//		return false;
-//	}
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Tile) {
+			Tile t = (Tile) o;
+			return (this.value == t.value) && (this.multiplier == t.multiplier);
+		}
+		return false;
+	}
 
 }

@@ -14,6 +14,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 
 import sw.app.gui.controller.MainMenuController;
+import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
@@ -68,7 +69,7 @@ public class ScoreBoardView extends JPanel implements IView {
 		btnNewButton_1 = new JButton("Add score test");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
-				addLevelStats(LevelFactory.getLightningLevel(0, new Statistics()));
+				addLevelStats(LevelFactory.getLightningLevel(0, new Board(), new Statistics()));
 			}
 		});
 		

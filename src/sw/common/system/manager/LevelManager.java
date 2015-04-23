@@ -7,6 +7,7 @@ package sw.common.system.manager;
 
 import java.util.ArrayList;
 
+import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
@@ -25,18 +26,21 @@ public class LevelManager {
 	int current;
 	int highest = 4;
 	
+	// Load initial board layouts
+	Board initBoard = new Board();
+	
 	public LevelManager() {
 		// Load available levels from resource classpath
 		
 		// For now, just manually creates new Levels
 		int lvlCount = 0;
-		list.add(LevelFactory.getPuzzleLevel(++lvlCount, new Statistics()));
-		list.add(LevelFactory.getReleaseLevel(++lvlCount, new Statistics()));
-		list.add(LevelFactory.getLightningLevel(++lvlCount, new Statistics()));
-		list.add(LevelFactory.getEliminationLevel(++lvlCount, new Statistics()));
-		list.add(LevelFactory.getPuzzleLevel(++lvlCount, new Statistics()));
-		list.add(LevelFactory.getReleaseLevel(++lvlCount, new Statistics()));
-		list.add(LevelFactory.getLightningLevel(++lvlCount, new Statistics()));
+		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getEliminationLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, new Statistics()));
 		
 		// first level is the current level by default
 		current = 0;
