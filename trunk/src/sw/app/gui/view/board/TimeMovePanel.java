@@ -145,7 +145,7 @@ public class TimeMovePanel extends JPanel implements IView, ActionListener {
 		Time currentTime = getTime();
 		long time = currentTime.getTime();  // msec
 		
-		if (currentTime.compareTo(alarm) == 0) {
+		if (listener != null && currentTime.compareTo(alarm) == 0) {
 			// Fire action event
 			listener.actionPerformed(new ActionEvent(this, 0, null));
 		}

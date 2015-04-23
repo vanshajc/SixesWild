@@ -51,9 +51,7 @@ public class Column {
 			}
 		}
 		throw new IllegalAccessError("Tile not found!");
-	}
-	
-	
+	}	
 
 	/**
 	 * @param t

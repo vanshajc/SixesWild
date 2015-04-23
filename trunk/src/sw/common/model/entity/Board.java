@@ -66,6 +66,18 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 	}
 	
 	/**
+	 * @param b the Board to copy
+	 */
+	public void copy(Board b) {
+		for (int x = 0; x < Board.COLUMN; x++) {
+			for (int y = 0; y < Board.ROW; y++) {
+				Point p = new Point(x,y);
+				getSquare(p).copy(b.getSquare(p));				
+			}
+		}
+	}
+	
+	/**
 	 * @param col to get
 	 * @return the column of Square
 	 */
@@ -281,14 +293,8 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 		Iterator<Square> si = selection.iterator();
 		while (si.hasNext()) { 
 			si.next().setSelected(false);
-			si.remove();
-		}
-		
-		// Just in case...
-		if (!selection.isEmpty()) {
-			selection.clear();
-		}
-		
+		}		
+		selection.clear();		
 		return true;
 	}
 
@@ -347,4 +353,5 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 		}
 		
 	}
+
 }

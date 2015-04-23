@@ -5,6 +5,8 @@ import java.awt.Dimension;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.plaf.ProgressBarUI;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,6 +34,25 @@ public class ScorePanel extends JPanel {
 		score = new JProgressBar(JProgressBar.VERTICAL);
 		score.setStringPainted(true);
 		score.setForeground(Color.GREEN);
+		score.setUI(new BasicProgressBarUI() {
+
+			/* (non-Javadoc)
+			 * @see javax.swing.plaf.basic.BasicProgressBarUI#getSelectionBackground()
+			 */
+			@Override
+			protected Color getSelectionBackground() {
+				return Color.BLACK;
+			}
+
+			/* (non-Javadoc)
+			 * @see javax.swing.plaf.basic.BasicProgressBarUI#getSelectionForeground()
+			 */
+			@Override
+			protected Color getSelectionForeground() {
+				return Color.BLACK;
+			}
+			
+		});
 		
 		star0 = new JLabel("");		
 		star1 = new JLabel("");		

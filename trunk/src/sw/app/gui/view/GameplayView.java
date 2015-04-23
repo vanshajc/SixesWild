@@ -58,8 +58,7 @@ public class GameplayView extends JPanel implements IView, ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public GameplayView(LayoutManager layoutManager, LevelManager levelManager) {
-		setBackground(Color.WHITE);
+	public GameplayView(LayoutManager layoutManager, LevelManager levelManager) {		
 		this.manager = layoutManager;
 		this.levelManager = levelManager;
 		
@@ -88,6 +87,7 @@ public class GameplayView extends JPanel implements IView, ActionListener {
 	}
 	
 	private void initializeLayout() {
+		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(685, 564));
 		setMinimumSize(getPreferredSize());
 		
@@ -109,7 +109,7 @@ public class GameplayView extends JPanel implements IView, ActionListener {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(20)
+							.addGap(50)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
@@ -119,9 +119,9 @@ public class GameplayView extends JPanel implements IView, ActionListener {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(boardPanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
 									.addGap(30)
-									.addComponent(scorePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(scorePanel, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(220)
+							.addGap(250)
 							.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(239)

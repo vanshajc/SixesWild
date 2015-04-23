@@ -42,6 +42,18 @@ public class Square {
 	public void setTile(Tile tile) {
 		this.tile = tile;
 	}
+	
+	public void copy(Square s) {
+		if (s.tile != null) {
+			tile.copy(s.tile);
+		} else {
+			tile = null;
+		}
+		
+		useCount   = s.useCount;
+		selected   = s.selected;
+		selectable = s.selectable;
+	}
 
 	/**
 	 * @return the useCount

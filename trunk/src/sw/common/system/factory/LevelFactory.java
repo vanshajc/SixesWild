@@ -6,6 +6,7 @@
 package sw.common.system.factory;
 
 import sw.common.model.controller.IMode;
+import sw.common.model.entity.Board;
 import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
@@ -17,24 +18,24 @@ import sw.mode.Release;
 /** Factory model for Level objects */
 public class LevelFactory {
 
-	public static Level getLevel(int lvl, IMode mode, Statistics winStats) {
-		return new Level(lvl, winStats, mode);
+	public static Level getLevel(int lvl, IMode mode, Board initBoard, Statistics winStats) {
+		return new Level(lvl, initBoard, winStats, mode);
 	}
 	
-	public static Level getPuzzleLevel(int lvl, Statistics winStats) {
-		return new Level(lvl, winStats, new Puzzle());
+	public static Level getPuzzleLevel(int lvl, Board initBoard, Statistics winStats) {
+		return new Level(lvl, initBoard, winStats, new Puzzle());
 	}
 	
-	public static Level getReleaseLevel(int lvl, Statistics winStats) {
-		return new Level(lvl, winStats, new Release());
+	public static Level getReleaseLevel(int lvl, Board initBoard, Statistics winStats) {
+		return new Level(lvl, initBoard, winStats, new Release());
 	}
 	
-	public static Level getLightningLevel(int lvl, Statistics winStats) {
-		return new Level(lvl, winStats, new Lightning());
+	public static Level getLightningLevel(int lvl, Board initBoard, Statistics winStats) {
+		return new Level(lvl, initBoard, winStats, new Lightning());
 	}
 	
-	public static Level getEliminationLevel(int lvl, Statistics winStats) {
-		return new Level(lvl, winStats, new Elimination());
+	public static Level getEliminationLevel(int lvl, Board initBoard, Statistics winStats) {
+		return new Level(lvl, initBoard, winStats, new Elimination());
 	}
 	
 }
