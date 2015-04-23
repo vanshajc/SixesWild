@@ -9,6 +9,7 @@ import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveSelection;
+import sw.common.model.entity.Game;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
@@ -43,11 +44,9 @@ public class Elimination extends CommonResourceManager implements IMode {
 	}
 
 	@Override
-	public boolean hasWon() {
+	public boolean hasFinished(Game g) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	
+	}	
 
 }

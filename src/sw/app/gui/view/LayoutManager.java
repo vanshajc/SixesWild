@@ -20,13 +20,16 @@ public class LayoutManager {
 	JPanel current = null;
 
 	public LayoutManager(SixesWildJFrame f) {
-		this.f = f;
+		this.f = f;		
+	}
+	
+	void initialize() {
 		mmv = new MainMenuView(this);
 		gv = new GameplayView(this, f.getLevelManager());
 		csv = new CreditScreenView(this);
 		sbv = new ScoreBoardView(this);
-		pgs = new PlayGameScreenView(this, f.levelManager);
-		pgv = new PostGameView(this, f.levelManager);
+		pgs = new PlayGameScreenView(this, f.getLevelManager());
+		pgv = new PostGameView(this, f.getLevelManager());
 	}
 
 	public void switchToMainMenu() {

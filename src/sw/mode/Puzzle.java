@@ -9,6 +9,7 @@ import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveSelection;
+import sw.common.model.entity.Game;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
@@ -40,10 +41,10 @@ public class Puzzle extends CommonResourceManager implements IMode {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
 	@Override
-	public boolean hasWon() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean hasFinished(Game g) {
+		return g.getStats().getScore() >= 100;  // test
 	}
 
 }

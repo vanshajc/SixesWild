@@ -50,6 +50,9 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	/** The columns to paint */
 	ArrayList<BoardColumn> columns = new ArrayList<BoardColumn>();
 	
+	/** Keep track of whether animation is enabled */
+	boolean enableAnimation = true;
+	
 	/** Keep track of whether the board is in animation */
 	boolean isAnimating = false;
 	
@@ -231,7 +234,10 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	 */
 	@Override
 	public synchronized boolean isAnimating() {
-		return isAnimating;
+		if (enableAnimation) {
+			return isAnimating;
+		}
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -299,6 +305,7 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 
 	@Override
 	public void disableAnimation() {
+		enableAnimation = false;
 		for (int x = 0; x < boardSize.width; x++) {
 			columns.get(x).disableAnimation();
 		}		
@@ -306,6 +313,7 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 
 	@Override
 	public void enableAnimation() {
+		enableAnimation = true;
 		for (int x = 0; x < boardSize.width; x++) {
 			columns.get(x).enableAnimation();
 		}

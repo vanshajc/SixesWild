@@ -136,8 +136,9 @@ public class TimeMovePanel extends JPanel implements IView, ActionListener {
 	}
 
 	@Override
-	public void cleanup() {
-		stopTimer();		
+	public void cleanup() {		
+		stopTimer();
+		reset();
 	}
 	
 	@Override

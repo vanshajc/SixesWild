@@ -5,6 +5,8 @@
  */
 package sw.common.model.entity;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Stack;
 
 import sw.common.model.controller.IMode;
@@ -13,14 +15,21 @@ import sw.common.model.controller.IMoveManager;
 
 /** The model for an arbitrary game level */
 public class Level implements IMoveManager {
+	
+	public final static String strFinished = "finished";
+	public final static String strWon      = "won";
 
 	Game game = null;
 	Statistics winStats;
 	IMode mode;
 	int levelNum;
-	
+
 	// The initial layout of the Board
 	Board initBoard;
+
+	ActionListener al = null;
+	
+	Boolean hasFinished = false;
 
 	Stack<IMove> moves = new Stack<IMove>();
 
@@ -29,6 +38,13 @@ public class Level implements IMoveManager {
 		this.mode = mode;
 		this.levelNum = levelNum;
 		this.initBoard = initBoard;
+		this.game = new Game();
+	}
+
+	public void setListener(ActionListener al) {
+		if (al != null) {
+			this.al = al;
+		}
 	}
 
 	/**
@@ -64,7 +80,9 @@ public class Level implements IMoveManager {
 	}
 
 	public void initialize() {
-		game = new Game();
+		hasFinished = false;
+		
+		game.stats = new Statistics();
 		game.board.copy(initBoard);
 	}
 
@@ -84,13 +102,18 @@ public class Level implements IMoveManager {
 
 	public void pushMove(IMove move) {
 		if (move.doMove()) {
+			game.stats.numMoves++;
 			moves.push(move);
+			if (mode.hasFinished(game)) {
+				hasFinished = true;
+			}
 		}
 	}
 
 	public void undoMove() {
 		if (!moves.isEmpty()) {
 			if (moves.peek().undoMove()) {
+				game.stats.numMoves--;
 				moves.pop();
 			}
 		}
@@ -98,11 +121,24 @@ public class Level implements IMoveManager {
 
 	@Override
 	public int countMove() {
-		return moves.size();
+		return game.stats.numMoves;
 	}
 
 	public void updateScore(int delta) {
 		game.stats.score += delta;
+	}
+
+	@Override
+	public boolean hasFinished() {
+		return hasFinished;
+	}
+
+	@Override
+	public void finishGame() {
+		if (hasFinished && al != null) {
+			String msg = hasWon() ? strWon : strFinished;
+			al.actionPerformed(new ActionEvent(this, 0, msg));
+		}		
 	}
 
 }
