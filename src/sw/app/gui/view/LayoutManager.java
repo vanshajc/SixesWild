@@ -1,3 +1,7 @@
+/**
+ * @file LayoutManager.java
+ * @author Vanshaj Chowdhary
+ */
 package sw.app.gui.view;
 
 import java.awt.Component;

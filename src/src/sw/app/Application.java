@@ -1,3 +1,7 @@
+/**
+ * @file Application.java
+ * @author Vanshaj Chowdhary, Tony Vu
+ */
 package src.sw.app;
 
 import java.awt.EventQueue;

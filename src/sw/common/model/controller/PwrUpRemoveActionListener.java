@@ -1,6 +1,6 @@
 /**
  *  @file   PwrUpRemoveActionListener.java
- *  @author Tony Vu
+ *  @author Tony Vu, Vanshaj Chowdhary
  *  @since  Apr 12, 2015
  */
 package sw.common.model.controller;
@@ -12,7 +12,7 @@ import sw.app.gui.view.board.IBoardPanel;
 import sw.common.system.manager.LevelManager;
 
 /**
- * 
+ * Controller class for the remove powerup button.
  */
 public class PwrUpRemoveActionListener implements ActionListener {
 

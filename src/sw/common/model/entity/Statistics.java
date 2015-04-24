@@ -1,6 +1,6 @@
 /**
  *  @file   Statistics.java
- *  @author Tony Vu
+ *  @author Tony Vu, Vanshaj Chowdhary
  *  @since  Apr 11, 2015
  */
 package sw.common.model.entity;
@@ -15,6 +15,15 @@ public class Statistics {
 	Time current = Time.valueOf("00:00:00");
 	int numMoves = 0;
 	int score = 0;
+	
+	public Statistics(){}
+	
+	public Statistics(Time current, int numMoves, int score){
+		this.current = current;
+		this.numMoves = numMoves;
+		this.score = score;
+	}
+	
 	
 	/**
 	 * @return the current
