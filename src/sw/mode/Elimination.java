@@ -16,11 +16,11 @@ import sw.common.system.manager.IResourceManager;
 /**
  *
  */
-public class Elimination extends CommonResourceManager implements IMode {
+public class Elimination implements IMode {
 
 	@Override
 	public IResourceManager getResourceManger() {
-		return this;
+		return new CommonResourceManager();
 	}
 
 	/* (non-Javadoc)

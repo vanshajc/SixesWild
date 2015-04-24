@@ -11,14 +11,13 @@ import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveRemove;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Game;
-import sw.common.model.entity.Level;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
 /**
  * 
  */
-public class Release extends CommonResourceManager implements IMode {
+public class Release implements IMode {
 	boolean[][] sixLocation;	
 
 	public Release(){
@@ -31,7 +30,7 @@ public class Release extends CommonResourceManager implements IMode {
 	
 	@Override
 	public IResourceManager getResourceManger() {
-		return this;
+		return new CommonResourceManager();
 	}
 
 	/* (non-Javadoc)

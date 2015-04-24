@@ -5,6 +5,8 @@
  */
 package sw.mode;
 
+import javax.swing.JButton;
+
 import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
@@ -16,11 +18,11 @@ import sw.common.system.manager.IResourceManager;
 /**
  *
  */
-public class Puzzle extends CommonResourceManager implements IMode {
+public class Puzzle implements IMode {
 
 	@Override
 	public IResourceManager getResourceManger() {
-		return this;
+		return new CommonResourceManager();
 	}
 
 	/* (non-Javadoc)
@@ -44,7 +46,7 @@ public class Puzzle extends CommonResourceManager implements IMode {
 	
 	@Override
 	public boolean hasFinished(Game g) {
-		return g.getStats().getScore() >= 100;  // test
+		return g.getStats().getStar() >= 1;  // test
 	}
 
 }
