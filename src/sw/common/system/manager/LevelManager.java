@@ -33,12 +33,16 @@ public class LevelManager implements ActionListener {
 	public LevelManager(LayoutManager lm) {
 		this.lm = lm;
 		
+		boolean[][] bottomSix = new boolean[9][9];
+		for (int i = 8; i<9; i++)
+			bottomSix[i][8] = true;
+		
 		// Load available levels from resource classpath
 		
 		// For now, just manually creates new Levels
 		int lvlCount = 0;
 		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
-		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics(), bottomSix));
 		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, new Statistics()));
 		list.add(LevelFactory.getEliminationLevel(++lvlCount, initBoard, new Statistics()));
 		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
