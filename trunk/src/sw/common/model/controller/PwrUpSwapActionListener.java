@@ -1,6 +1,6 @@
 /**
  *  @file   PwrUpSwapActionListener.java
- *  @author Tony Vu
+ *  @author Tony Vu, Vanshaj Chowdhary
  *  @since  Apr 12, 2015
  */
 package sw.common.model.controller;
@@ -12,7 +12,7 @@ import sw.app.gui.view.board.BoardPanel;
 import sw.common.system.manager.LevelManager;
 
 /**
- * 
+ * Controller class for the Swap powerup button.
  */
 public class PwrUpSwapActionListener implements ActionListener {
 

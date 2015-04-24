@@ -1,3 +1,7 @@
+/**
+ * @file MoveRemove.java
+ * @author Vanshaj Chowdhary
+ */
 package sw.common.model.controller;
 
 import java.awt.Point;

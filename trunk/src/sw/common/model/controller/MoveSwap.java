@@ -1,7 +1,7 @@
 /**
  * @file MoveSwap.java
  * @date Apr 16, 2015 2:49:37 PM
- * @author Tony Vu (quangvu@wpi.edu)
+ * @author Tony Vu (quangvu@wpi.edu), Vanshaj Chowdhary
  */
 package sw.common.model.controller;
 

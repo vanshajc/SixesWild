@@ -1,7 +1,7 @@
 /**
  * @file LevelManager.java
  * @date Apr 12, 2015 12:51:53 PM
- * @author Tony Vu (quangvu@wpi.edu)
+ * @author Tony Vu (quangvu@wpi.edu), Vanshaj Chowdhary
  */
 package sw.common.system.manager;
 
@@ -14,10 +14,6 @@ import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
-import sw.mode.Elimination;
-import sw.mode.Lightning;
-import sw.mode.Puzzle;
-import sw.mode.Release;
 
 /**
  *
