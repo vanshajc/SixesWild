@@ -8,11 +8,11 @@ import sw.common.model.entity.Game;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
-public class Lightning extends CommonResourceManager implements IMode {
+public class Lightning implements IMode {
 
 	@Override
 	public IResourceManager getResourceManger() {
-		return this;
+		return new CommonResourceManager();
 	}
 
 	/* (non-Javadoc)
