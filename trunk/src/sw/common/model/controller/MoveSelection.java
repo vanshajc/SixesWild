@@ -1,7 +1,5 @@
 /**
  * @file BoardColumnController.java
- * @date Apr 15, 2015 9:17:12 AM
- * @author Tony Vu (quangvu@wpi.edu)
  */
 package sw.common.model.controller;
 
@@ -13,7 +11,7 @@ import sw.app.gui.view.board.IBoardPanel;
 import sw.common.model.entity.Tile;
 
 /**
- *
+ * Class for handling moves that involve selecting squares on the board
  */
 public class MoveSelection extends BoardController implements IMove {
 	
@@ -59,6 +57,7 @@ public class MoveSelection extends BoardController implements IMove {
 		clearSelection();
 	}
 
+	
 	protected void selectionHandler(MouseEvent e) {
 		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {

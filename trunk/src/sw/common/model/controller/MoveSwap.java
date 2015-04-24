@@ -46,7 +46,7 @@ public class MoveSwap extends BoardController implements IMove {
 					moveStarted = false;
 					p2 = panel.xyToPoint(e.getPoint());
 					select(p2);
-					doMove();
+					requestPushMove(this);
 					clearSelection();
 				}
 			} catch (Exception e1) {

@@ -16,8 +16,15 @@ public interface IMode {
 	
 	BoardController getBoardController();
 	
+	/**
+	 * Returns if the move m is valid.
+	 * @param m the move to be validated.
+	 */
 	public boolean isValid(IMove m);
 	
+	/**
+	 * Returns if the current game is finished.
+	 */
 	public boolean hasFinished(Game g, Statistics winStats);
 	
 }
