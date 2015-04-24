@@ -1,3 +1,8 @@
+/**
+ * @file Lightning.java
+ * @author Tony Vu, Vanshaj Chowdhary
+ */
+
 package sw.mode;
 
 import sw.common.model.controller.BoardController;

@@ -1,5 +1,6 @@
 /**
  * @file BoardColumnController.java
+ * @author Tony Vu, Vanshaj Chowdhary
  */
 package sw.common.model.controller;
 

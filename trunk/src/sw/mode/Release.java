@@ -1,6 +1,6 @@
 /**
  *  @file   Release.java
- *  @author Tony Vu
+ *  @author Tony Vu, Vanshaj Chowdhary
  *  @since  Apr 11, 2015
  */
 package sw.mode;
