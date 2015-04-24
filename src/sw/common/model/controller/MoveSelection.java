@@ -6,6 +6,7 @@ package sw.common.model.controller;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import sw.app.gui.view.board.IBoardPanel;
@@ -97,18 +98,38 @@ public class MoveSelection extends BoardController implements IMove {
 	
 	boolean isValid(){
 		Iterator<Tile> selected = getSelectedTile().iterator();
-		if (!selected.hasNext()) return false; // none selected somehow
-		Tile prev = selected.next();
-		if (prev.getValue()==6) return false; // if only a six is selected
-		int sum = prev.getValue();
-		while (selected.hasNext()){
-			Tile curr = selected.next();
-			sum += curr.getValue();
-			if (!this.board.adjacent(prev, curr))
+		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		while(selected.hasNext())
+			tiles.add(selected.next());
+		
+		if (tiles.isEmpty()|| (tiles.size() == 1 && tiles.get(0).getValue() == 6)) return false;
+		int sum = 0;
+		for (int i = 0; i<tiles.size(); i++){
+			Tile t = tiles.get(i);
+			sum += t.getValue();
+			boolean ad = false;
+			for (int j = 0; j<tiles.size(); j++){
+				if (i == j) continue;
+				if (this.board.adjacent(t, tiles.get(j))) ad = true;
+			}
+			if (!ad)
 				return false;
-			prev = curr;
 		}
+		
 		return sum == 6;
+//		
+//		if (!selected.hasNext()) return false; // none selected somehow
+//		Tile prev = selected.next();
+//		if (prev.getValue()==6) return false; // if only a six is selected
+//		int sum = prev.getValue();
+//		while (selected.hasNext()){
+//			Tile curr = selected.next();
+//			sum += curr.getValue();
+//			if (!this.board.adjacent(prev, curr))
+//				return false;
+//			prev = curr;
+//		}
+//		return sum == 6;
 	}
 	
 		
