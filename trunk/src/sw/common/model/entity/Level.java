@@ -104,7 +104,7 @@ public class Level implements IMoveManager {
 		if (move.doMove()) {
 			game.stats.numMoves++;
 			moves.push(move);
-			if (mode.hasFinished(game)) {
+			if (mode.hasFinished(game, winStats)) {
 				hasFinished = true;
 			}
 		}

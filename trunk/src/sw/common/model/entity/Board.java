@@ -339,6 +339,11 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 	
 	private class SelectionQueue extends ArrayBlockingQueue<Square> {
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public SelectionQueue(int capacity) {
 			super(capacity, true);			
 		}

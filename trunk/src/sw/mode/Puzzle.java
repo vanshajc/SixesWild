@@ -5,13 +5,12 @@
  */
 package sw.mode;
 
-import javax.swing.JButton;
-
 import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Game;
+import sw.common.model.entity.Statistics;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
@@ -45,8 +44,9 @@ public class Puzzle implements IMode {
 	}
 	
 	@Override
-	public boolean hasFinished(Game g) {
-		return g.getStats().getStar() >= 1;  // test
+	public boolean hasFinished(Game g, Statistics winStat) {
+		return (g.getStats().getNumMoves() < winStat.getNumMoves());
+		//return g.getStats().getScore() >= 1;  // test
 	}
 
 }

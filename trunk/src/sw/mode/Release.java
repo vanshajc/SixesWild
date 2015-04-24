@@ -11,6 +11,7 @@ import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveRemove;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Game;
+import sw.common.model.entity.Statistics;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
@@ -56,8 +57,11 @@ public class Release implements IMode {
 	}	
 	
 	@Override
-	public boolean hasFinished(Game g) {
+	public boolean hasFinished(Game g, Statistics winStats) {
 		// TODO Auto-generated method stub
+		if (sixLocation == null)
+			return false;
+		
 		for (int i = 0; i<sixLocation.length; i++){
 			for (int j = 0; j<sixLocation[i].length; i++){
 				if (g.getBoard().getColumn(i).getTile(j).getValue() != 6 && sixLocation[i][j])
@@ -66,5 +70,6 @@ public class Release implements IMode {
 		}
 		return true;
 	}
+	
 
 }

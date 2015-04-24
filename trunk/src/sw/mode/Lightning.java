@@ -5,6 +5,7 @@ import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Game;
+import sw.common.model.entity.Statistics;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
@@ -34,8 +35,8 @@ public class Lightning implements IMode {
 	}
 
 	@Override
-	public boolean hasFinished(Game g) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean hasFinished(Game g, Statistics winStats) {
+		return g.getStats().getCurrent().getTime() <
+				winStats.getCurrent().getTime(); 
 	}
 }
