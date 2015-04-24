@@ -16,9 +16,10 @@ import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
 /**
- * 
+ * Class for handling operations dependent on the Release mode.
  */
 public class Release implements IMode {
+	/** Holds the location on the board which must be filled with 6s. */
 	boolean[][] sixLocation;	
 
 	public Release(){

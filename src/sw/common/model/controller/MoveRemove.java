@@ -25,7 +25,7 @@ public class MoveRemove extends BoardController implements IMove{
 	public void mouseClicked(MouseEvent e){
 		try {
 			selectionHandler(e);
-			doMove();
+			requestPushMove(this);
 			clearSelection();
 		} catch (IndexOutOfBoundsException e1) {
 			System.err
