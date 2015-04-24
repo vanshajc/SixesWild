@@ -45,8 +45,8 @@ public class Puzzle implements IMode {
 	
 	@Override
 	public boolean hasFinished(Game g, Statistics winStat) {
-		return (g.getStats().getNumMoves() < winStat.getNumMoves());
-		//return g.getStats().getScore() >= 1;  // test
+		//return (g.getStats().getNumMoves() >= winStat.getNumMoves()); <- actual code, dont uncomment until stats class is done
+		return g.getStats().getScore() >= 1;  // test
 	}
 
 }
