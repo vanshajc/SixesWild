@@ -1,4 +1,4 @@
-package src.sw.app;
+package sw.app;
 
 import java.awt.EventQueue;
 
