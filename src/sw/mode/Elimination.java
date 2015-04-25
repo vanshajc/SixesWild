@@ -15,7 +15,7 @@ import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
 /**
- *
+ * Class for the Elimination mode.
  */
 public class Elimination implements IMode {
 //	boolean[][] marked;
