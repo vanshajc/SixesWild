@@ -1,6 +1,6 @@
 /**
  *  @file   BoardPanelController.java
- *  @author Tony Vu
+ *  @author Tony Vu, Vanshaj Chowdhary
  *  @since  Apr 16, 2015
  */
 package sw.common.model.controller;

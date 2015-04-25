@@ -1,6 +1,6 @@
 /**
  *  @file   Release.java
- *  @author Tony Vu
+ *  @author Tony Vu, Vanshaj Chowdhary
  *  @since  Apr 11, 2015
  */
 package sw.mode;
@@ -17,15 +17,22 @@ import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
 /**
- * 
+ * Class for Release Mode.
  */
 public class Release extends AbstractMode {
-	boolean[][] sixLocation;	
+	boolean[][] sixLocation = new boolean[9][9];	
 
+	/**
+	 * TODO Remove this later.
+	 */
 	public Release(){
 		
 	}
 	
+	/**
+	 * Constructor for creating a release mode.
+	 * @param sixLocation a 2d boolean array which holds true for all the locations that must have 6.
+	 */
 	public Release(boolean[][] sixLocation){
 		this.sixLocation = sixLocation;		
 	}	
@@ -45,7 +52,6 @@ public class Release extends AbstractMode {
 
 	@Override
 	public boolean isValid(IMove m) {
-		System.out.println("Calling on release valid");
 		if (m instanceof MoveRemove){
 			return ((MoveRemove) m).getRemoveTile().getValue() != 6;
 		}
@@ -55,8 +61,12 @@ public class Release extends AbstractMode {
 	@Override
 	public boolean hasFinished(Game g, Statistics winStats) {
 		// TODO Auto-generated method stub
-		if (sixLocation == null)
-			return false;
+		boolean found = false;
+		for (int i = 0; i<sixLocation.length; i++)
+			for (int j = 0; j<9; j++)
+				if (!sixLocation[i][j])
+					found = true;
+		if (!found) return false;
 		
 		for (int i = 0; i<sixLocation.length; i++){
 			for (int j = 0; j<sixLocation[i].length; i++){
@@ -73,6 +83,7 @@ public class Release extends AbstractMode {
 	@Override
 	public void initializeGame(IGameController g) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 
