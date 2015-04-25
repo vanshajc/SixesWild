@@ -74,7 +74,8 @@ public class MoveSelection extends BoardController implements IMove {
 				select(p);
 			} catch (Exception e1) {
 				clearSelection();
-				throw new IndexOutOfBoundsException("Selection out of bound!");
+				//throw new IndexOutOfBoundsException("Selection out of bound!");
+				System.err.println("Selection out of bound!");
 			}
 		}
 	}
@@ -88,8 +89,8 @@ public class MoveSelection extends BoardController implements IMove {
 		while (selected.hasNext()) {
 			Tile t = selected.next();
 			Point p = getPoint(t);
-			boardRemove(p);
 			score += t.getValue() * t.getMultiplier();
+			boardRemove(p);
 		}		
 		boardPack();
 		boardFill();
