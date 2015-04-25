@@ -15,7 +15,13 @@ import sw.common.system.manager.LevelManager;
  */
 public class PwrUpShuffleActionListener implements ActionListener {
 
+	/** Holds the Level Manager. */
 	LevelManager lm;
+	
+	/**
+	 * Constructor for the listener of Shuffle powerup button.
+	 * @param lm the level manager
+	 */
 	public PwrUpShuffleActionListener(LevelManager lm){
 		this.lm = lm;
 	}
@@ -27,7 +33,6 @@ public class PwrUpShuffleActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		lm.getCurrent().getGame().getBoard().shuffle();
 		lm.getCurrent().addToMoves();
-
 	}
 
 }

@@ -14,6 +14,9 @@ import sw.common.model.entity.Statistics;
 import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
+/**
+ * Class for the Lightning mode.
+ */
 public class Lightning implements IMode {
 
 	@Override

@@ -16,7 +16,7 @@ import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
 
 /**
- *
+ * Class for handling, constructing, and changing levels.
  */
 public class LevelManager implements ActionListener {
 

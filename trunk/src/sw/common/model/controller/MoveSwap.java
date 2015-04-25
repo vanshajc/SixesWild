@@ -26,6 +26,11 @@ public class MoveSwap extends BoardController implements IMove {
 	boolean moveStarted = false;
 	Level level;
 	
+	/**
+	 * Constructor for a swap powerup move.
+	 * @param bp the board panel
+	 * @param level the current level being played
+	 */
 	public MoveSwap(BoardPanel bp, Level level) {
 		super(bp);
 		this.level = level;

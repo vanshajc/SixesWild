@@ -17,8 +17,15 @@ import sw.common.model.entity.Tile;
  */
 public class MoveSelection extends BoardController implements IMove {
 	
+	/**
+	 * TODO Remove later on.
+	 */
 	public MoveSelection(){}
 
+	/**
+	 * Constructor for a selection move.
+	 * @param bp the board panel being acted upon.
+	 */
 	public MoveSelection(IBoardPanel bp) {
 		super(bp);
 	}
