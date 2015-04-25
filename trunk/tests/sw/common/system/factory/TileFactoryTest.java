@@ -7,14 +7,12 @@ package sw.common.system.factory;
 
 import static org.junit.Assert.*;
 
-import java.awt.Point;
 import java.util.HashMap;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 
 /**

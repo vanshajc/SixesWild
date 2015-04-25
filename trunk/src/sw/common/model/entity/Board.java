@@ -304,9 +304,7 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 		}		
 		selection.clear();		
 		return true;
-	}
-
-	
+	}	
 
 	/* (non-Javadoc)
 	 * @see sw.common.model.entity.IBoard#adjacent(sw.common.model.entity.Square, sw.common.model.entity.Square)

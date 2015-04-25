@@ -10,7 +10,7 @@ import sw.common.model.entity.Level;
 /** Interface for displaying the Board */
 public interface IBoardPanel extends IView {
 
-	/**
+	/** Set the Level to display
 	 * @param level to display
 	 */
 	void setLevel(Level level);
