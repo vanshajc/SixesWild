@@ -7,85 +7,84 @@ package sw.app.gui.view;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.Timer;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.PostGameMenuController;
 import sw.app.gui.view.board.BoardPanel;
 import sw.app.gui.view.board.GameInfoPanel;
+import sw.app.gui.view.board.IBoardPanel;
+import sw.app.gui.view.board.IMovePanel;
+import sw.app.gui.view.board.IScorePanel;
+import sw.app.gui.view.board.ITimePanel;
 import sw.app.gui.view.board.PowerUpPanel;
 import sw.app.gui.view.board.ScorePanel;
 import sw.app.gui.view.board.TimeMovePanel;
-import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
-import sw.common.model.entity.Statistics;
 import sw.common.system.manager.LevelManager;
 
 import java.awt.Color;
 
-public class GameplayView extends JPanel implements IView, ActionListener {
-
-	/** GENERATED DO NOT CHANGE */
-	private static final long serialVersionUID = -7540685505032159107L;
+@SuppressWarnings("serial")
+public class GameplayView extends JPanel implements IGameplayView, IView {
 	
-	Dimension size = new Dimension(630, 540);
-	
-	BoardPanel boardPanel;
+	// Panels for displaying the Level
+	BoardPanel boardPanel;	
 	ScorePanel scorePanel;
 	GameInfoPanel gameInfoPanel;
 	TimeMovePanel timeMovePanel;
 	PowerUpPanel powerUpPanel;
 	
-	Level level;
-	LayoutManager manager;
-	LevelManager levelManager;
+	// The Level to display
+	Level level = null;	
+	LevelManager lvlm;
 	
+	// Quit button
+	JButton quitButton;	
+	MainMenuController mmc;
+	String quitBtnPath = "/sw/resource/image/button_quit.png";
+	ImageIcon quitBtnImg;	
+	
+	// Background image
 	Image background = new ImageIcon(SplashScreenView.class.getResource("/sw/resource/image/SplashScreenResizedtest.png")).getImage();
 	
 	private JButton btnPostgamemenutest;
 	
-	JButton quitButton;	
-	MainMenuController mmc;
-	String quitBtnPath = "/sw/resource/image/button_quit.png";
-	ImageIcon quitBtnImg;
-	
-	Timer refreshTimer;
-	
-	/**
-	 * Create the panel.
-	 */
-	public GameplayView(LayoutManager layoutManager, LevelManager levelManager) {		
-		this.manager = layoutManager;
-		this.levelManager = levelManager;
+	public GameplayView() {		
+		this.lvlm          = SixesWildJFrame.getLevelManager();
 		
 		this.boardPanel    = new BoardPanel();
+		
 		this.timeMovePanel = new TimeMovePanel();
 		this.scorePanel    = new ScorePanel();
 		this.gameInfoPanel = new GameInfoPanel();
-		this.powerUpPanel  = new PowerUpPanel(boardPanel, levelManager);
+		this.powerUpPanel  = new PowerUpPanel();
 		
 		this.quitButton    = new JButton();
-		this.mmc           = new MainMenuController(manager);
+		this.mmc           = new MainMenuController();
 		this.quitBtnImg    = new ImageIcon(GameplayView.class.getResource(quitBtnPath));
-	
-		this.refreshTimer  = new Timer(250, this);  // 250 msec
 	}
 	
-	private void initializeLevel() {
-		level = levelManager.getCurrent();
+	//////////////////////////////////////////////////////////
+	// Initialization methods
+	//
+	public void setLevel(Level lvl) {
+		this.level = lvl;
+		initializeLevel();
+	}
+	
+	private void initializeLevel() {		
 		if (level == null) {
 			throw new IllegalStateException("Current level is null!");
-		}
+		}		
 		
-		level.initialize(); // Reset the state of the Board
 		boardPanel.setLevel(level);
 		
 		scorePanel.setScore(level.getGame().getStats().getScore());
@@ -109,7 +108,7 @@ public class GameplayView extends JPanel implements IView, ActionListener {
 		quitButton.addActionListener(mmc);
 		
 		btnPostgamemenutest = new JButton("PostGameMenuTest");
-		btnPostgamemenutest.addActionListener(new PostGameMenuController(manager));		
+		btnPostgamemenutest.addActionListener(new PostGameMenuController());		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -158,42 +157,27 @@ public class GameplayView extends JPanel implements IView, ActionListener {
 		);
 		setLayout(groupLayout);
 	}
-
+	
+	//////////////////////////////////////////////////////////
+	// IView methods
+	//
+	
 	@Override
 	public void initialize() {
 		try {
-			initializeLevel();
+			//initializeLevel();
 			initializeLayout();
 
-			timeMovePanel.initialize();
-			boardPanel.initialize();
-			
-			update();			
-			
-			refreshTimer.start();
-			timeMovePanel.startTimer();
+			//timeMovePanel.initialize(level.getGame().getStats());
+			boardPanel.initialize();			
 		} catch (IllegalStateException e) {
 			System.err.println("Cannot initialize the Gameplay View!");
-			manager.switchToMainMenu();
+			LayoutManager.switchToMainMenu(true);
 		}
-	}
-	
-	public void update() {
-		if (this.level != null) {
-			Game game = level.getGame();
-			
-			Statistics stats = game.getStats();
-			
-			scorePanel.setScore(stats.getScore());
-			scorePanel.setStar(level.getStars());
-			
-			timeMovePanel.setMove(level.countMove());
-		}		
 	}	
 
 	@Override
-	public void cleanup() {
-		refreshTimer.stop();
+	public void cleanup() {		
 		
 		boardPanel.cleanup();
 		timeMovePanel.cleanup();
@@ -204,17 +188,55 @@ public class GameplayView extends JPanel implements IView, ActionListener {
 		for (int i = 0; i < listeners.length; i++) {
 			quitButton.removeActionListener(listeners[i]);
 		}
+		
+		// Reset state
+		level = null;
 	}
+	
+	//////////////////////////////////////////////////////////
+	// IGameplayView methods
+	//
+	
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.IGameplayView#getBoardPanel()
+	 */
+	@Override
+	public IBoardPanel getBoardPanel() {
+		return boardPanel;
+	}
+
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.IGameplayView#getScorePanel()
+	 */
+	@Override
+	public IScorePanel getScorePanel() {
+		return scorePanel;
+	}
+
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.IGameplayView#getTimePanel()
+	 */
+	@Override
+	public ITimePanel getTimePanel() {
+		return timeMovePanel;
+	}
+
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.IGameplayView#getMovePanel()
+	 */
+	@Override
+	public IMovePanel getMovePanel() {
+		return timeMovePanel;
+	}	
+	
+	//////////////////////////////////////////////////////////
+	// Paint the background
+	//
 	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(background, 0, 0, null);
-	}
-
-	/** Update stats on a timer tick */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		update();		
-	}
+	}	
+	
 }

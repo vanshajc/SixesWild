@@ -5,11 +5,11 @@
 package sw.common.model.controller;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import sw.app.gui.view.board.IBoardPanel;
 import sw.common.model.entity.Tile;
 
 /**
@@ -26,8 +26,8 @@ public class MoveSelection extends BoardController implements IMove {
 	 * Constructor for a selection move.
 	 * @param bp the board panel being acted upon.
 	 */
-	public MoveSelection(IBoardPanel bp) {
-		super(bp);
+	public MoveSelection(ILevelController lc) {
+		super(lc);
 	}
 
 	/* (non-Javadoc)
@@ -62,19 +62,26 @@ public class MoveSelection extends BoardController implements IMove {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		selectionHandler(e);
-		requestPushMove(this);
-		clearSelection();
+		
+		if (!manager.hasFinished()) {
+			requestPushMove(this);
+			clearSelection();
+		}
 	}
 
 	
 	protected void selectionHandler(MouseEvent e) {
+//		if (manager.hasFinished()) {
+//			if (!panel.isAnimating()) {
+//				manager.finishGame();
+//			}
+//		} else 
 		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
 				Point p = panel.xyToPoint(e.getPoint());
 				select(p);
 			} catch (Exception e1) {
 				clearSelection();
-				//throw new IndexOutOfBoundsException("Selection out of bound!");
 				System.err.println("Selection out of bound!");
 			}
 		}
@@ -95,6 +102,7 @@ public class MoveSelection extends BoardController implements IMove {
 		boardPack();
 		boardFill();
 		updateScore(score);
+		clearSelection();
 		return true;
 	}	
 
@@ -138,6 +146,12 @@ public class MoveSelection extends BoardController implements IMove {
 //			prev = curr;
 //		}
 //		return sum == 6;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 		

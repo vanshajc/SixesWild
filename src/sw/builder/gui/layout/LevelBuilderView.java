@@ -1,18 +1,13 @@
 package sw.builder.gui.layout;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 public class LevelBuilderView extends JPanel {
 

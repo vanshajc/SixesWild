@@ -11,7 +11,12 @@ import sw.common.system.manager.IResourceManager;
 
 /** Interface for every game mode */
 public interface IMode {
-
+	
+	static enum TIMER_POLICY {
+		COUNT_UP,
+		COUNT_DOWN
+	}
+	
 	IResourceManager getResourceManger();
 	
 	BoardController getBoardController();
@@ -20,11 +25,14 @@ public interface IMode {
 	 * Returns if the move m is valid.
 	 * @param m the move to be validated.
 	 */
-	public boolean isValid(IMove m);
-	
+	boolean isValid(IMove m);
+
 	/**
 	 * Returns if the current game is finished.
 	 */
-	public boolean hasFinished(Game g, Statistics winStats);
+	boolean hasFinished(Game g, Statistics winStats);
 	
+	void initializeGame(IGameController g);
+	
+	TIMER_POLICY getTimerPolicy();
 }

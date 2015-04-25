@@ -1,61 +1,58 @@
 /**
  * @file LevelManager.java
  * @date Apr 12, 2015 12:51:53 PM
- * @author Tony Vu (quangvu@wpi.edu), Vanshaj Chowdhary
+ * @author Tony Vu (quangvu@wpi.edu)
  */
 package sw.common.system.manager;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.ArrayList;
 
+import sw.app.gui.view.GameplayView;
 import sw.app.gui.view.LayoutManager;
+import sw.common.model.controller.ILevelController;
+import sw.common.model.controller.LevelController;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
 
-/**
- * Class for handling, constructing, and changing levels.
- */
-public class LevelManager implements ActionListener {
+/** Class to manages the player's progress */
+public class LevelManager {
 
-	ArrayList<Level> list = new ArrayList<Level>();
+	/** List of available levels */
+	protected ArrayList<Level> list = new ArrayList<Level>();
 	
-	int current;
-	int highest = 4;
+	/** Current and highest level reached */
+	protected int current;
+	protected int highest = 4;
 	
-	// Load initial board layouts
-	Board initBoard = new Board();
+	/** Load initial board layouts */
+	protected Board initBoard = new Board();
 	
-	LayoutManager lm;
+	/** The current level controller */
+	protected LevelController lCtrl;
 	
-	public LevelManager(LayoutManager lm) {
-		this.lm = lm;
-		
-		boolean[][] bottomSix = new boolean[9][9];
-		for (int i = 8; i<9; i++)
-			bottomSix[i][8] = true;
+	public LevelManager() {
 		
 		// Load available levels from resource classpath
 		
 		// For now, just manually creates new Levels
 		int lvlCount = 0;
+		
+		Statistics lightningStats = new Statistics();
+		lightningStats.setTime(Time.valueOf("00:00:10"));
+		
 		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
-		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics(), bottomSix));
-		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, lightningStats));
 		list.add(LevelFactory.getEliminationLevel(++lvlCount, initBoard, new Statistics()));
 		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
 		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics()));
-		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, lightningStats));
 		
 		// first level is the current level by default
 		current = 0;
-		
-		// set game finished listener
-		for (Level l : list) {
-			l.setListener(this);
-		}
 	}
 	
 	public Level getCurrent() {
@@ -78,29 +75,33 @@ public class LevelManager implements ActionListener {
 		return list;
 	}
 	
-	public void setCurrent(Level level) {
-		if (list.contains(level)) {
-			current = list.indexOf(level);
-		}
-	}
-	
 	public void setHighest(Level level) {
 		if (list.contains(level)) {
 			highest = list.indexOf(level);			
 		}
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() instanceof Level) {
-			String str = e.getActionCommand();
-			if (str.equals(Level.strFinished)) {
-				lm.switchToPostGameView();
-			} else if (str.equals(Level.strWon)) {
-				
-				lm.switchToPostGameView();
+	
+	public ILevelController getLevelController() {
+		return lCtrl;
+	}
+	
+	public void setCurrent(Level lvl) {
+		if (list.contains(lvl)) {
+			current = list.indexOf(lvl);
+			if (LayoutManager.getCurrentView() instanceof GameplayView) {
+				GameplayView gpv = (GameplayView) LayoutManager.getCurrentView();
+				lCtrl = new LevelController(getCurrent(), gpv);
+			} else {
+				lCtrl = null;
+				throw new IllegalStateException("Hasn't switched to gameplay view!");
 			}
-		}		
+		}
+	}
+	
+	public void startLevel() {
+		if (lCtrl != null) {
+			lCtrl.startGame();
+		}
 	}
 
 }

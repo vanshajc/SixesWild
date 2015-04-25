@@ -11,57 +11,43 @@ import javax.swing.JPanel;
 
 public class LayoutManager {
 
-	SixesWildJFrame f;
-	
-	MainMenuView mmv;
-	SplashScreenView ssv;
-	GameplayView gv;
-	CreditScreenView csv;
-	ScoreBoardView sbv;
-	PlayGameScreenView pgs;
-	PostGameView pgv;
+	static SixesWildJFrame swf = null;
+	static JPanel current = null;
 
-	JPanel current = null;
-
-	public LayoutManager(SixesWildJFrame f) {
-		this.f = f;		
-	}
-	
-	void initialize() {
-		mmv = new MainMenuView(this);
-		gv = new GameplayView(this, f.getLevelManager());
-		csv = new CreditScreenView(this);
-		sbv = new ScoreBoardView(this);
-		pgs = new PlayGameScreenView(this, f.getLevelManager());
-		pgv = new PostGameView(this, f.getLevelManager());
+	public LayoutManager(SixesWildJFrame swf) {
+		this.swf = swf;
 	}
 
-	public void switchToMainMenu() {
-		switchToScreen(mmv);
+	public static void switchToMainMenu(boolean init) {
+		switchToScreen(new MainMenuView(), init);
 	}
 
-	public void switchToGameplayView() {
-		switchToScreen(gv);
+	public static void switchToGameplayView(boolean init) {
+		switchToScreen(new GameplayView(), init);
 	}
 
-	public void switchToScoreBoardView() {
-		switchToScreen(sbv);
+	public static void switchToScoreBoardView(boolean init) {
+		switchToScreen(new ScoreBoardView(), init);
 	}
 
-	public void switchToCreditScreenView() {
-		switchToScreen(csv);
+	public static void switchToCreditScreenView(boolean init) {
+		switchToScreen(new CreditScreenView(), init);
 	}
 
-	public void switchToPlayView() {
-		switchToScreen(pgs);
+	public static void switchToPlayView(boolean init) {
+		switchToScreen(new PlayGameScreenView(), init);
 	}
 
-	public void switchToPostGameView() {
-		switchToScreen(pgv);
+	public static void switchToPostGameView(boolean init) {		
+		switchToScreen(new PostGameView(), init);
 	}
 
-	void switchToScreen(JPanel screen) {
-		Container pane = f.getContentPane();
+	static void switchToScreen(JPanel screen, boolean init) {
+		if (swf == null) {
+			throw new IllegalStateException("LayoutManager is not initialized!");
+		}
+
+		Container pane = swf.getContentPane();
 
 		// call cleanup on all IView components
 		int count = pane.getComponentCount();
@@ -76,16 +62,22 @@ public class LayoutManager {
 		pane.add(screen);
 		pane.revalidate();
 		pane.repaint();
-
+		
 		current = screen;
+		
+		if (init) {
+			initCurrentView();
+		}
+		
+	}
 
-		// initialize the new view
-		if (screen instanceof IView) {
-			((IView) screen).initialize();
+	public static void initCurrentView() {		
+		if (current instanceof IView) {
+			((IView) current).initialize();
 		}
 	}
 
-	public JPanel getCurrentView() {
+	public static JPanel getCurrentView() {
 		return current;
 	}
 

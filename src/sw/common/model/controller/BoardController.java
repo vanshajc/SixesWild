@@ -7,6 +7,7 @@ package sw.common.model.controller;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.Iterator;
 import java.util.Queue;
@@ -19,7 +20,9 @@ import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
 
 /** Model for an abstract BoardController */
-public abstract class BoardController extends MouseAdapter {
+public abstract class BoardController extends MouseAdapter implements ActionListener {
+	
+	ILevelController       lvlCtrl  = null;
 	
 	IBoardPanel            panel    = null;
 	IBoard                 board    = null;
@@ -30,55 +33,62 @@ public abstract class BoardController extends MouseAdapter {
 	
 	public BoardController(){}
 	
-	public BoardController(IBoardPanel bp) {
-		initialize(bp);
+	public BoardController(ILevelController lc) {
+		initialize(lc);
 	}
 	
-	public void initialize(IBoardPanel bp) {
-		this.panel    = bp;
-		this.board    = bp.getBoard();
-		this.locator  = bp.getLocator();
-		this.selector = bp.getSelector();
-		this.manager  = bp.getMoveManager();
-	}
-	
-	void requestPushMove(IMove m) {
-		manager.pushMove(m);
+	public void initialize(ILevelController lc) {
+		this.lvlCtrl  = lc;
 		
-		// if Game is finished, wait for board panel to be done animating
-		if (manager.hasFinished()) {
-			// wait for panel to be done with animation
+		this.panel    = lc.getBoardPanel();
+		this.board    = lc.getBoardPanel().getBoard();		
+		
+		this.locator  = lc.getBoardLocator();
+		this.selector = lc.getBoardSelector();
+		this.manager  = lc.getMoveManager();
+	}
+	
+	protected void setBoardController(BoardController bc) {
+		lvlCtrl.setBoardController(bc);
+	}
+	
+	protected void finishGameHandler() {
+		manager.finishGame();
+	}
+	
+	protected void requestPushMove(IMove m) {
+		if (manager.pushMove(m) && manager.hasFinished()) {
 			while (panel.isAnimating()){}
 			
 			manager.finishGame();
 		}
 	}
 	
-	void requestUndoMove() {
+	protected void requestUndoMove() {
 		manager.undoMove();
 	}
 	
-	void updateScore(int delta) {
+	protected void updateScore(int delta) {
 		manager.updateScore(delta);
 	}
 	
-	boolean select(Point p) {
+	protected boolean select(Point p) {
 		return selector.select(p);
 	}
 
-	Queue<Square> getSelectedSquare() {
+	protected Queue<Square> getSelectedSquare() {
 		return selector.getSelectedSquare();
 	}
 	
-	Queue<Tile> getSelectedTile() {
+	protected Queue<Tile> getSelectedTile() {
 		return selector.getSelectedTile();
 	}
 
-	boolean clearSelection() {
+	protected boolean clearSelection() {
 		return selector.clearSelection();
 	}
 	
-	void removeSelection() {
+	protected void removeSelected() {
 		Iterator<Tile> ti = getSelectedTile().iterator();
 		while (ti.hasNext()) {
 			boardRemove(getPoint(ti.next()));
@@ -121,23 +131,23 @@ public abstract class BoardController extends MouseAdapter {
 		return board.remove(p);
 	}
 
-	boolean boardReplace(Point p, Tile t) {
+	protected boolean boardReplace(Point p, Tile t) {
 		return board.replace(p, t);
 	}
 
-	void boardClear() {
+	protected void boardClear() {
 		board.clear();
 	}
 
-	void boardFill() {
+	protected void boardFill() {
 		board.fill();		
 	}
 
-	void boardPack() {
+	protected void boardPack() {
 		board.pack();
 	}
 
-	int boardCount() {
+	protected int boardCount() {
 		return board.count();
 	}	
 	

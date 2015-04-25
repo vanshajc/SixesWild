@@ -6,17 +6,11 @@ import java.awt.event.ActionListener;
 import sw.app.gui.view.LayoutManager;
 
 
-public class PlayGameScreenController implements ActionListener {
-
-	LayoutManager lm;
-	
-	public PlayGameScreenController(LayoutManager lm){
-		this.lm = lm;
-	}
+public class PlayGameScreenController implements ActionListener {	
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		lm.switchToPlayView();		
+		LayoutManager.switchToPlayView(true);
 	}
 
 }

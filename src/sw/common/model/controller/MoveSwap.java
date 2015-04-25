@@ -6,10 +6,9 @@
 package sw.common.model.controller;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
-import sw.app.gui.view.board.BoardPanel;
-import sw.common.model.entity.Level;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 import sw.common.system.factory.TileFactory;
@@ -24,16 +23,14 @@ public class MoveSwap extends BoardController implements IMove {
 	Point p1;
 	Point p2;
 	boolean moveStarted = false;
-	Level level;
 	
 	/**
 	 * Constructor for a swap powerup move.
 	 * @param bp the board panel
 	 * @param level the current level being played
 	 */
-	public MoveSwap(BoardPanel bp, Level level) {
-		super(bp);
-		this.level = level;
+	public MoveSwap(ILevelController lc) {
+		super(lc);		
 	}
 
 	/* (non-Javadoc)
@@ -54,8 +51,7 @@ public class MoveSwap extends BoardController implements IMove {
 					requestPushMove(this);
 					clearSelection();
 				}
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
+			} catch (Exception e1) {				
 				System.err
 				.println("Out of bound error in MoveSwap::mouseClicked!");
 			}
@@ -64,10 +60,10 @@ public class MoveSwap extends BoardController implements IMove {
 
 	@Override
 	public boolean doMove() {
-		if (!this.level.getMode().isValid(this))
-			return false;
-		BoardController bc = new MoveSelection(panel);
-		panel.setBoardController(bc);
+		//if (!this.level.getMode().isValid(this))
+		//	return false;
+		setBoardController(new MoveSelection());
+		
 		return swap(p1, p2);
 	}
 
@@ -98,5 +94,11 @@ public class MoveSwap extends BoardController implements IMove {
 			return true;
 		}		
 		return false;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

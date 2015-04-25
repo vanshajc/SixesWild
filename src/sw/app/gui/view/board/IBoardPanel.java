@@ -4,13 +4,10 @@ import java.awt.Point;
 
 import sw.app.gui.view.IView;
 import sw.common.model.controller.BoardController;
-import sw.common.model.controller.IMoveManager;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
-import sw.common.system.manager.IBoardLocationManager;
-import sw.common.system.manager.IBoardSelectionManager;
 
-/** Interface for BoardPanel */
+/** Interface for displaying the Board */
 public interface IBoardPanel extends IView {
 
 	/**
@@ -23,34 +20,9 @@ public interface IBoardPanel extends IView {
 	
 	/** Enable animation */
 	void enableAnimation();
-
-	/**
-	 * @param bc the new board controller
-	 */
-	void setBoardController(BoardController bc);
 	
 	/** Clear display */
 	void clear();
-
-	/**
-	 * @return the Move manager interface
-	 */
-	IMoveManager getMoveManager();
-	
-	/**
-	 * @return the Board interface
-	 */
-	IBoard getBoard();
-	
-	/**
-	 * @return the Board location manager interface
-	 */
-	IBoardLocationManager getLocator();
-	
-	/**
-	 * @return the Board selection manager interface
-	 */
-	IBoardSelectionManager getSelector();
 
 	/**
 	 * @param point the XY coordinate of the panel
@@ -68,4 +40,14 @@ public interface IBoardPanel extends IView {
 	 * @return whether the Column is in animation
 	 */
 	boolean isAnimating(int colIdx);
+	
+	/**
+	 * @return the underlying Board interface
+	 */
+	IBoard getBoard();
+	
+	/**
+	 * @param bc the new board controller
+	 */
+	void setBoardController(BoardController bc);
 }

@@ -34,7 +34,7 @@ public class LoadButtonController extends JPanel implements ActionListener,IView
 		int returnVal = fc.showOpenDialog(LoadButtonController.this);
         file = fc.getSelectedFile();
         		
-        ArrayList<String> input  = new ArrayList();
+        ArrayList<String> input  = new ArrayList<String>();
 		
 		BufferedReader reader = null;
 		try {

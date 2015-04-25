@@ -1,11 +1,12 @@
 /**
  * @file Puzzle.java
  * @date Apr 15, 2015 10:46:13 AM
- * @author Tony Vu (quangvu@wpi.edu), Vanshaj Chowdhary
+ * @author Tony Vu (quangvu@wpi.edu)
  */
 package sw.mode;
 
 import sw.common.model.controller.BoardController;
+import sw.common.model.controller.IGameController;
 import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveSelection;
@@ -15,14 +16,9 @@ import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
 /**
- * Class for the Puzzle mode.
+ *
  */
-public class Puzzle implements IMode {
-
-	@Override
-	public IResourceManager getResourceManger() {
-		return new CommonResourceManager();
-	}
+public class Puzzle extends AbstractMode {
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -39,14 +35,30 @@ public class Puzzle implements IMode {
 
 	@Override
 	public boolean isValid(IMove m) {
-		// TODO Auto-generated method stub
-		return true;
+		return m instanceof MoveSelection;
 	}
 	
 	@Override
 	public boolean hasFinished(Game g, Statistics winStat) {
 		//return (g.getStats().getNumMoves() >= winStat.getNumMoves()); <- actual code, dont uncomment until stats class is done
-		return g.getStats().getScore() >= 200;  // test
+		return g.getStats().getScore() >= 100;  // test
+	}
+
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.IMode#initializeGame(sw.common.model.controller.IGameController)
+	 */
+	@Override
+	public void initializeGame(IGameController g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.IMode#getTimePolicy()
+	 */
+	@Override
+	public TIMER_POLICY getTimerPolicy() {
+		return TIMER_POLICY.COUNT_UP;
 	}
 
 }

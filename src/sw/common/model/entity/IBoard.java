@@ -30,6 +30,8 @@ public interface IBoard {
 	 */
 	boolean replace(Point p, Tile t);
 
+	public void shuffle();
+	
 	/** Remove all Tile in the board */
 	void clear();
 

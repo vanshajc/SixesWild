@@ -8,31 +8,46 @@ package sw.common.model.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import sw.common.system.manager.LevelManager;
+import sw.app.gui.view.SixesWildJFrame;
 
 /**
  * Controller class for the shuffle powerup button.
  */
 public class PwrUpShuffleActionListener implements ActionListener {
-
-	/** Holds the Level Manager. */
-	LevelManager lm;
-	
-	/**
-	 * Constructor for the listener of Shuffle powerup button.
-	 * @param lm the level manager
-	 */
-	public PwrUpShuffleActionListener(LevelManager lm){
-		this.lm = lm;
-	}
 	
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		lm.getCurrent().getGame().getBoard().shuffle();
-		lm.getCurrent().addToMoves();
+	public void actionPerformed(ActionEvent e) {		
+		ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
+		
+		IMoveManager mm = lc.getMoveManager();
+		mm.pushMove(new MoveShuffle());
+	}
+	
+	private class MoveShuffle implements IMove {
+
+		/* (non-Javadoc)
+		 * @see sw.common.model.controller.IMove#doMove()
+		 */
+		@Override
+		public boolean doMove() {
+			ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
+			
+			lc.getBoardPanel().getBoard().shuffle();
+			return true;
+		}
+
+		/* (non-Javadoc)
+		 * @see sw.common.model.controller.IMove#undoMove()
+		 */
+		@Override
+		public boolean undoMove() {
+			// Cannot undo shuffle
+			return false;
+		}
+		
 	}
 
 }

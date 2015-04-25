@@ -11,10 +11,10 @@ public interface IMoveManager {
 	/**
 	 * @param move the Move to attempt
 	 */
-	void pushMove(IMove move);
+	boolean pushMove(IMove move);
 	
 	/** Attempt to undo the last Move made */
-	void undoMove();	
+	boolean undoMove();	
 	
 	/**
 	 * @return the number of successful Moves performed
@@ -24,7 +24,7 @@ public interface IMoveManager {
 	/**
 	 * @param delta the difference to update score
 	 */
-	void updateScore(int delta);
+	boolean updateScore(int delta);
 	
 	/**
 	 * @return whether the game is finished

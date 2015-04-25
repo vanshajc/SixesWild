@@ -5,12 +5,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import sw.app.gui.controller.CreditScreenController;
-import sw.app.gui.controller.PlayGameScreenController;
-import sw.app.gui.controller.ScoreboardScreenController;
 import sw.app.gui.view.IView;
-import sw.app.gui.view.LayoutManager;
 
+@SuppressWarnings("serial")
 public class LevelBuilderMenuView extends JPanel implements IView {
 
 	BuilderLayoutManager blm;

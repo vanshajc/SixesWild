@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 public class SplashScreenView extends JPanel implements IView {
 	
-	private static final long serialVersionUID = 1L;
 	final String res = "/sw/resource/image/SplashScreenImage.png";
 	
 	public void initialize() {}

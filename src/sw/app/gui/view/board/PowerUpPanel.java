@@ -9,23 +9,22 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import sw.common.model.controller.PwrUpRemoveActionListener;
 import sw.common.model.controller.PwrUpShuffleActionListener;
 import sw.common.model.controller.PwrUpSwapActionListener;
-import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
 
 public class PowerUpPanel extends JPanel {
-	LevelManager lm;
-	public PowerUpPanel(BoardPanel bp, LevelManager lm) {
+	
+	public PowerUpPanel() {
 		setOpaque(false);
 		setBorder(null);
 		
 		JButton btnSwap = new JButton("Swap");
-		btnSwap.addActionListener(new PwrUpSwapActionListener(bp, lm));
+		btnSwap.addActionListener(new PwrUpSwapActionListener());
 		
 		JButton btnShuffle = new JButton("Shuffle");
-		btnShuffle.addActionListener(new PwrUpShuffleActionListener(lm));
+		btnShuffle.addActionListener(new PwrUpShuffleActionListener());
 		
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.addActionListener(new PwrUpRemoveActionListener(lm, bp));
+		btnRemove.addActionListener(new PwrUpRemoveActionListener());
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -49,9 +48,5 @@ public class PowerUpPanel extends JPanel {
 		);
 		setLayout(groupLayout);
 	}
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 9018711320856474573L;
+	
 }

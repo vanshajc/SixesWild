@@ -5,14 +5,13 @@ import java.awt.Dimension;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.plaf.ProgressBarUI;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-public class ScorePanel extends JPanel {
+public class ScorePanel extends JPanel implements IScorePanel {
 	
 	JLabel star0;
 	JLabel star1;
@@ -87,23 +86,43 @@ public class ScorePanel extends JPanel {
 		setLayout(groupLayout);
 	}
 	
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.board.IScorePanel#setMaximum(int)
+	 */
+	@Override
 	public void setMaximum(int max) {
 		this.score.setMaximum(max);
 	}
 	
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.board.IScorePanel#setMinimum(int)
+	 */
+	@Override
 	public void setMinimum(int min) {
 		this.score.setMinimum(min);
 	}
 	
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.board.IScorePanel#setScore(int)
+	 */
+	@Override
 	public void setScore(int score) {
 		this.score.setValue(score);
 		this.score.setString(Integer.toString(score));
 	}
 	
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.board.IScorePanel#setStarImage(java.lang.String)
+	 */
+	@Override
 	public void setStarImage(String location) {
 		starImg = new ImageIcon(ScorePanel.class.getResource(location));
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.board.IScorePanel#setStar(int)
+	 */
+	@Override
 	public void setStar(int numStar) {
 		if (numStar > 0 && numStar <= 3) {			
 			if (numStar >= 1) {

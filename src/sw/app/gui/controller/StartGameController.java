@@ -7,26 +7,26 @@ import javax.swing.JPanel;
 
 import sw.app.gui.view.LayoutManager;
 import sw.app.gui.view.PlayGameScreenView;
+import sw.app.gui.view.SixesWildJFrame;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
 public class StartGameController implements ActionListener {
 	
-	LayoutManager lm;
-	LevelManager lvlm;
-	
-	public StartGameController(LayoutManager lm, LevelManager lvlm){
-		this.lm = lm;
-		this.lvlm = lvlm;
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JPanel current = lm.getCurrentView();
+		JPanel current = LayoutManager.getCurrentView();
+		
+		LevelManager lvlm = SixesWildJFrame.getLevelManager();
+		
+		Level l = lvlm.getCurrent();
 		if (current instanceof PlayGameScreenView) {
-			Level l = ((PlayGameScreenView) current).getSelectedLevel();
-			lvlm.setCurrent(l);
-		} 
-		lm.switchToGameplayView();		
+			l = ((PlayGameScreenView) current).getSelectedLevel();
+		}		
+		LayoutManager.switchToGameplayView(false);		
+		lvlm.setCurrent(l);
+		LayoutManager.initCurrentView();
+		
+		lvlm.startLevel();
 	}
 	
 	

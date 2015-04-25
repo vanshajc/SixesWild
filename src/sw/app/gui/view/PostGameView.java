@@ -12,37 +12,28 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.PostGameController;
 import sw.app.gui.controller.StartGameController;
-import sw.common.system.manager.LevelManager;
 
-public class PostGameView extends JPanel implements IView{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	LayoutManager lm;
-	LevelManager lvlm;
-	
-	public PostGameView(LayoutManager lm, LevelManager lvlm) {
+@SuppressWarnings("serial")
+public class PostGameView extends JPanel implements IView {
+		
+	public PostGameView() {
 		setBackground(Color.WHITE);
 		setSize(new Dimension(800, 600));
-		this.lm = lm;
-		this.lvlm = lvlm;
+		
 		initialize();
 	}
 
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
-
+		
 		JButton btnMainmenu = new JButton("MainMenu");
-		btnMainmenu.addActionListener(new MainMenuController(lm));
+		btnMainmenu.addActionListener(new MainMenuController());
 		
 		JButton btnNextlevel = new JButton("NextLevel");
-		btnNextlevel.addActionListener(new PostGameController(lm, lvlm));
+		btnNextlevel.addActionListener(new PostGameController());
 		
 		JButton btnReplay = new JButton("Replay");
-		btnReplay.addActionListener(new StartGameController(lm, lvlm));
+		btnReplay.addActionListener(new StartGameController());
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -71,7 +62,6 @@ public class PostGameView extends JPanel implements IView{
 
 	@Override
 	public void cleanup() {
-		// TODO Auto-generated method stub
-		
+		// Nothing to do
 	}
 }

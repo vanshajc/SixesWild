@@ -1,17 +1,11 @@
 package sw.builder.gui.layout;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import sw.app.gui.view.IView;
-import sw.app.gui.view.SplashScreenView;
 
 public class LevelBuilderJFrame extends JFrame implements IView{
 	/**
