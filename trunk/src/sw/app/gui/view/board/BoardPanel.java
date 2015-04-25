@@ -5,29 +5,25 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import sw.common.model.controller.BoardController;
-import sw.common.model.controller.IMoveManager;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
-import sw.common.system.manager.IBoardLocationManager;
-import sw.common.system.manager.IBoardSelectionManager;
 import sw.common.system.manager.IResourceManager;
+import sw.common.system.manager.TimerTaskManager;
 
-public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
+public class BoardPanel extends JPanel implements IBoardPanel {
 
 	/** GENERATED DO NOT CHANGE */
 	private static final long serialVersionUID = 5914218859027914106L;
@@ -40,8 +36,8 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	Dimension boardSize;
 	
 	/** Timer to update columns */
-	Timer timer;
-	int refreshPeriod = 10; // msec
+	final String refreshTask = "BoardPanelRefresh";
+	long  refreshPeriod = 10; // msec
 	
 	/** Map of icon images to use */
 	IResourceManager resManager;
@@ -58,18 +54,6 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	
 	/** The preferred size */
 	Dimension preferredSize;
-	
-	public BoardPanel() {
-		// Initialize the timer only once
-		timer = new Timer(refreshPeriod, this);
-	}
-	
-	public BoardPanel(Level level) {
-		// Initialize the timer only once
-		timer = new Timer(refreshPeriod, this);
-		
-		setLevel(level);
-	}
 	
 	/* (non-Javadoc)
 	 * @see sw.app.gui.view.board.IBoardPanel#setLevel(sw.common.model.entity.Level)
@@ -97,11 +81,11 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 			}			
 		}
 		
-		BoardController bc = level.getMode().getBoardController();
-		if (bc != null) {
-			setBoardController(bc);
-			bc.initialize(this);
-		}
+		//BoardController bc = level.getMode().getBoardController();
+		//if (bc != null) {
+		//	setBoardController(bc);
+		//	bc.initialize(this);
+		//}
 		
 		initializeLayout();
 	}
@@ -109,17 +93,18 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	public void setBoardController(BoardController bc) {
 		MouseListener[] ml = this.getMouseListeners();
 		for (int i = 0; i < ml.length; i++) {
-			this.removeMouseListener(ml[i]);
+			removeMouseListener(ml[i]);
 		}
 		
 		MouseMotionListener[] mml = this.getMouseMotionListeners();
 		for (int i = 0; i < mml.length; i++) {
-			this.removeMouseMotionListener(mml[i]);
+			removeMouseMotionListener(mml[i]);
 		}
 		
 		if (bc != null) {
-			this.addMouseListener(bc);
-			this.addMouseMotionListener(bc);
+			addMouseListener(bc);
+			addMouseMotionListener(bc);
+			//bc.initialize(this);
 		}
 	}
 	
@@ -173,7 +158,7 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 		}
 		
 		initializeColumns();
-		timer.start();		
+		TimerTaskManager.scheduleTask(refreshTask, new refreshTask(), refreshPeriod);
 	}
 	
 	/* (non-Javadoc)
@@ -181,13 +166,15 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	 */
 	@Override
 	public void cleanup() {
-		timer.stop();
+		TimerTaskManager.cancelTask(refreshTask);
 		
 		// Reset the state of the panel
 		level = null;
 		board = null;
 		resManager = null;
 		columns.clear();
+		
+		setBoardController(null);
 		
 		// remove all components
 		removeAll();
@@ -202,19 +189,15 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 			columns.get(i).clear();		
 		}		
 	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		isAnimating = false;
+	
+	boolean refresh() {
+		boolean updated = false;
 		for (int i = 0; i < boardSize.width; i++) {
 			if (columns.get(i).update()) {
-				isAnimating = true;
+				updated = true;
 			}
-		}		
-		repaint();
+		}
+		return updated;
 	}
 	
 	/* (non-Javadoc)
@@ -269,14 +252,6 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	@Override
 	public boolean isAnimating(int colIdx) {
 		return false;
-	}	
-	
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IBoardPanel#getLevel()
-	 */
-	@Override
-	public IMoveManager getMoveManager() {
-		return (IMoveManager) level;
 	}
 
 	/* (non-Javadoc)
@@ -285,22 +260,6 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 	@Override
 	public IBoard getBoard() {
 		return (IBoard) board;
-	}
-
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IBoardPanel#getLocator()
-	 */
-	@Override
-	public IBoardLocationManager getLocator() {
-		return (IBoardLocationManager) board;
-	}
-
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IBoardPanel#getSelector()
-	 */
-	@Override
-	public IBoardSelectionManager getSelector() {
-		return (IBoardSelectionManager) board;
 	}
 
 	@Override
@@ -317,6 +276,16 @@ public class BoardPanel extends JPanel implements IBoardPanel, ActionListener {
 		for (int x = 0; x < boardSize.width; x++) {
 			columns.get(x).enableAnimation();
 		}
+	}
+	
+	private class refreshTask extends TimerTask {
+
+		@Override
+		public void run() {
+			isAnimating = refresh();
+			repaint();
+		}
+		
 	}
 
 }

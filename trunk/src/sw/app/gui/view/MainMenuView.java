@@ -15,18 +15,16 @@ public class MainMenuView extends JPanel implements IView {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1717902879125448300L;
-	
-	LayoutManager lm;
+	private static final long serialVersionUID = -1717902879125448300L;	
 
-	public MainMenuView(LayoutManager lm) {
-		this.lm = lm;
-		setLayout(null);
+	public MainMenuView() {		
 		initialize();
 	}
 
 	@Override
-	public void initialize() {		
+	public void initialize() {
+		setLayout(null);
+		
 		JButton btnPlay = new JButton();
 		btnPlay.setBorder(null);
 		add(btnPlay);
@@ -47,9 +45,9 @@ public class MainMenuView extends JPanel implements IView {
 		btnCredits.setIcon(new ImageIcon(
 				"src/sw/resource/image/CreditsButton.png"));
 
-		btnPlay.addActionListener(new PlayGameScreenController(lm));
-		btnScoreboard.addActionListener(new ScoreboardScreenController(lm));
-		btnCredits.addActionListener(new CreditScreenController(lm));
+		btnPlay.addActionListener(new PlayGameScreenController());
+		btnScoreboard.addActionListener(new ScoreboardScreenController());
+		btnCredits.addActionListener(new CreditScreenController());
 
 		JLabel background = new JLabel();
 		add(background);

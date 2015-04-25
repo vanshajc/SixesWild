@@ -6,16 +6,9 @@ import java.awt.event.ActionListener;
 import sw.app.gui.view.LayoutManager;
 
 public class CreditScreenController implements ActionListener {
-	
-	LayoutManager lm;
-	
-	public CreditScreenController(LayoutManager lm) {
-		this.lm = lm;
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		lm.switchToCreditScreenView();
+		LayoutManager.switchToCreditScreenView(true);
 	}
 
 }

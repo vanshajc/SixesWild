@@ -16,17 +16,17 @@ import sw.common.system.factory.SquareFactory;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
 
-/** The model for the game board 
- * 
- *  Layout:
- * 
- *     00  01  02  03  04  05  06  07  08
- *     10  11  12  13  14  15  16  17  18
- *     ...
- *     80  81  82  83  84  85  86  87  88 
+/** The model for the game board<br>
+ * <br>
+ *  Layout:<br>
+ * <br>
+ *     00  01  02  03  04  05  06  07  08<br>
+ *     10  11  12  13  14  15  16  17  18<br>
+ *     ...<br>
+ *     80  81  82  83  84  85  86  87  88<br> 
  * 
  * */
-public class Board implements IBoardSelectionManager, IBoardLocationManager, IBoard {
+public class Board implements IBoard, IBoardSelectionManager, IBoardLocationManager {
 	
 	/** Default dimension for the board */
 	public static final int COLUMN = 9;
@@ -36,7 +36,7 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 	ArrayList<Column> grid = new ArrayList<Column>();
 	
 	/** The selection queue */
-	SelectionQueue selection = new SelectionQueue(Board.COLUMN * Board.ROW);
+	SelectionQueue<Square> selection = new SelectionQueue<Square>(Board.COLUMN * Board.ROW);
 			
 	/** Create a new Board
 	 * @param fill the board with randomly generated value or not
@@ -176,6 +176,12 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 		return true;
 	}
 	
+	public void shuffle() {
+		for (int i = 0; i<grid.size(); i++){
+			grid.get(i).shuffle();
+		}
+	}
+	
 	//////////////////////////////////////////////////////////
 	// IBoardLocationnManager methods
 	//
@@ -274,14 +280,16 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 	 * @return the selected Squares
 	 */
 	public Queue<Square> getSelectedSquare() {
-		return selection;
+		Queue<Square> sq = new SelectionQueue<Square>(Board.COLUMN * Board.ROW);
+		sq.addAll(selection);
+		return sq;
 	}
 	
 	/**
 	 * @return the selected Tiles
 	 */
 	public Queue<Tile> getSelectedTile() {
-		Queue<Tile> tq = new ArrayBlockingQueue<Tile>(Board.COLUMN * Board.ROW, true);
+		Queue<Tile> tq = new SelectionQueue<Tile>(Board.COLUMN * Board.ROW);
 		Iterator<Square> si = selection.iterator();
 		while (si.hasNext()) {
 			tq.add(si.next().getTile());
@@ -298,11 +306,7 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 		return true;
 	}
 
-	public void shuffle(){
-		for (int i = 0; i<grid.size(); i++){
-			grid.get(i).shuffle();
-		}
-	}
+	
 
 	/* (non-Javadoc)
 	 * @see sw.common.model.entity.IBoard#adjacent(sw.common.model.entity.Square, sw.common.model.entity.Square)
@@ -327,7 +331,7 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 	 * @return the index of the column
 	 */
 	int findCol(Tile t){
-		for (int i = 0; i<this.grid.size(); i++){
+		for (int i = 0; i < this.grid.size(); i++){
 			try{
 				grid.get(i).indexOf(t);
 				return i;
@@ -337,24 +341,10 @@ public class Board implements IBoardSelectionManager, IBoardLocationManager, IBo
 		return -1;
 	}
 	
-	private class SelectionQueue extends ArrayBlockingQueue<Square> {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
+	private class SelectionQueue<T> extends ArrayBlockingQueue<T> {
 
 		public SelectionQueue(int capacity) {
 			super(capacity, true);			
-		}
-
-		/* (non-Javadoc)
-		 * @see java.util.concurrent.ArrayBlockingQueue#iterator()
-		 */
-		@Override
-		public Iterator<Square> iterator() {
-			// return a copy only
-			return new ArrayList<Square>(this).iterator();
 		}
 		
 	}

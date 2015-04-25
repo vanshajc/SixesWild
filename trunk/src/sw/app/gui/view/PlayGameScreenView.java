@@ -5,7 +5,6 @@
 package sw.app.gui.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -13,12 +12,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
-
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.StartGameController;
 import sw.common.model.entity.Level;
@@ -30,7 +25,6 @@ public class PlayGameScreenView extends JPanel implements IView{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	LayoutManager lm;
 	LevelManager lvlm;
 	ArrayList<Level> lvlList;
 	
@@ -39,9 +33,8 @@ public class PlayGameScreenView extends JPanel implements IView{
 	JButton btnBack;
 	JButton btnStartGame;
 	
-	public PlayGameScreenView(LayoutManager lm, LevelManager lvlm) {
-		this.lm = lm;
-		this.lvlm = lvlm;	
+	public PlayGameScreenView() {
+		this.lvlm = SixesWildJFrame.getLevelManager();	
 		this.lvlList = lvlm.getLevels();	
 	}
 	
@@ -61,10 +54,10 @@ public class PlayGameScreenView extends JPanel implements IView{
 //		levelList.setRenderer(new DisabledItemsRenderer<String>());
 		
 		btnBack = new JButton("Back");
-		btnBack.addActionListener(new MainMenuController(lm));
+		btnBack.addActionListener(new MainMenuController());
 		
 		btnStartGame = new JButton("Start Game");
-		btnStartGame.addActionListener(new StartGameController(lm, lvlm));
+		btnStartGame.addActionListener(new StartGameController());
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

@@ -15,23 +15,39 @@ public class Statistics {
 	Time current = Time.valueOf("00:00:00");
 	int numMoves = 0;
 	int score = 0;
-	
-	public Statistics(){}
-	
-	public Statistics(Time current, int numMoves, int score){
-		this.current = current;
-		this.numMoves = numMoves;
-		this.score = score;
-	}
-	
+	int stars = 0;
 	
 	/**
 	 * @return the current
 	 */
-	public Time getCurrent() {
+	public Time getTime() {
 		return current;
 	}
 	
+	public void setTime(Time t) {
+		current = t;
+	}
+	
+	public int getStars() {
+		return stars;
+	}
+
+	public void setStars(int stars) {
+		this.stars = stars;
+	}
+
+	public void setCurrent(Time current) {
+		this.current = current;
+	}
+
+	public void setNumMoves(int delta) {
+		this.numMoves += delta;
+	}
+
+	public void setScore(int delta) {
+		this.score += delta;
+	}
+
 	/**
 	 * @return the numMoves
 	 */
@@ -45,5 +61,9 @@ public class Statistics {
 	public int getScore() {
 		return score;
 	}	
+	
+	public int getStar() {
+		return stars;
+	}
 	
 }

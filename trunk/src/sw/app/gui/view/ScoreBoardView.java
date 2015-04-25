@@ -20,8 +20,6 @@ import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
 
 public class ScoreBoardView extends JPanel implements IView {
-
-	LayoutManager lm;
 	
 	JLabel lblLevel;
 	JLabel lblScore;
@@ -40,10 +38,9 @@ public class ScoreBoardView extends JPanel implements IView {
 	Dimension fieldSize = new Dimension(150,15);
 	private JButton btnNewButton_1;
 	
-	public ScoreBoardView(LayoutManager lm) {
+	public ScoreBoardView() {
 		setSize(new Dimension(800, 600));
-		setBackground(Color.WHITE);
-		this.lm = lm;
+		setBackground(Color.WHITE);		
 		initialize();
 	}
 	
@@ -116,7 +113,7 @@ public class ScoreBoardView extends JPanel implements IView {
 		);
 		setLayout(groupLayout);
 		
-		btnBack.addActionListener(new MainMenuController(lm));		
+		btnBack.addActionListener(new MainMenuController());		
 	}
 
 	@Override
@@ -157,7 +154,7 @@ public class ScoreBoardView extends JPanel implements IView {
 		add(move);
 		
 		JLabel time = new JLabel();
-		time.setText(level.getGame().getStats().getCurrent().toString());		
+		time.setText(level.getGame().getStats().getTime().toString());		
 		time.setHorizontalAlignment(SwingConstants.CENTER);
 		time.setSize(fieldSize);
 		time.setLocation(new Point(timeX, yPos + (fieldSize.height * count) + gap));

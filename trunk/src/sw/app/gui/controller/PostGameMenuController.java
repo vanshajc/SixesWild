@@ -7,14 +7,10 @@ import sw.app.gui.view.LayoutManager;
 
 public class PostGameMenuController implements ActionListener {
 	
-	LayoutManager lm;
-	public PostGameMenuController(LayoutManager lm) {
-		this.lm = lm;
-	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		lm.switchToPostGameView();
+		LayoutManager.switchToPostGameView(true);
 	}
 
 }

@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.util.TimerTask;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -11,27 +12,31 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
 
-import sw.app.gui.view.IView;
+import sw.common.model.entity.Statistics;
+import sw.common.system.manager.TimerTaskManager;
 
 import java.awt.Color;
 
-public class TimeMovePanel extends JPanel implements IView, ActionListener {
+@SuppressWarnings("serial")
+public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 	
 	JLabel timeLabel;
 	JLabel time;
 	JLabel moveLabel;
 	JLabel move;
 	
-	Timer timer;
-	int timerPeriod;
-	boolean countDown;
+	Statistics stats;
 	
+	// Timer task fields
+	final String timerTask = "TimeMovePanelTask";
+	final long timerPeriod = 1000;
+	
+	boolean countDown = false;
+	
+	// Alarm timer
 	Time alarm;
-	ActionListener listener;
-	
-	int ONE_SEC = 1000;  // msec per second
+	ActionListener listener;	
 	
 	public TimeMovePanel() {		
 		setBackground(Color.LIGHT_GRAY);		
@@ -75,17 +80,39 @@ public class TimeMovePanel extends JPanel implements IView, ActionListener {
 		setLayout(groupLayout);		
 	}
 	
+	//////////////////////////////////////////////////////////
+	// IMovePanel methods
+	//
+	
+	public Time getTime() {
+		return Time.valueOf(this.time.getText());
+		//return stats.getTime();
+	}
+	
 	public void setCountDown(boolean countDown) {
 		this.countDown = countDown;
 	}
 	
 	public void setTime(Time time) {
 		this.time.setText(time.toString());
+	}	
+	
+	public void startTimer() {
+		TimerTaskManager.scheduleTask(timerTask, new timerTask(), timerPeriod);
 	}
 	
-	public Time getTime() {
-		return Time.valueOf(this.time.getText());
+	public void stopTimer() {
+		TimerTaskManager.cancelTask(timerTask);
 	}
+	
+	public void setAlarm(Time time, ActionListener al) {
+		listener = al;
+		alarm = time;
+	}
+	
+	//////////////////////////////////////////////////////////
+	// IMovePanel methods
+	//
 	
 	public void setMove(int move) {
 		this.move.setText(Integer.toString(move));
@@ -93,76 +120,73 @@ public class TimeMovePanel extends JPanel implements IView, ActionListener {
 	
 	public int getMove() {
 		return Integer.parseInt(this.move.getText());
+	}	
+	
+	//////////////////////////////////////////////////////////
+	// pseudo-IView methods
+	//	
+	
+	public void initialize(Statistics stats) {
+		this.stats = stats;
+		
+		setTime(stats.getTime());
+		setMove(stats.getNumMoves());
 	}
 	
-	/**
-	 * @param period in seconds
-	 */
-	public void setTimerPeriod(int period) {
-		this.timerPeriod = period * ONE_SEC; // timer takes period in msec
-		
-		stopTimer();
-		timer = new Timer(timerPeriod, this);
+	public void cleanup() {
+		stopTimer();		
 	}
+	
+	//////////////////////////////////////////////////////////
+	// Miscellaneous methods
+	//
+	
+	//public void reset() {		
+	//	setTime(Time.valueOf("00:00:00"));
+	//	setMove(0);
+	//}	
+	
+	//////////////////////////////////////////////////////////
+	// Timer refresh task
+	//
+	
+	private class timerTask extends TimerTask {
 
-	public void startTimer() {
-		if (timer != null && !timer.isRunning()) {
-			timer.start();
+		@Override
+		public void run() {
+			Time currentTime = getTime();
+			long time = currentTime.getTime();  // msec
+			
+			if (listener != null && currentTime.compareTo(alarm) == 0) {
+				// Fire action event
+				try {
+					listener.actionPerformed(new ActionEvent(this, 0, null));
+				} catch (Exception e) {
+					System.err.println("Not supposed to reach here!");
+				}				
+			}
+			
+			if (countDown && time >= timerPeriod) {
+				time -= timerPeriod;			
+			} else {
+				time += timerPeriod;
+			}			
+			
+			// Update
+			Time current = new Time(time);
+			setTime(current);	
 		}
-	}
-	
-	public void stopTimer() {
-		if (timer != null && timer.isRunning()) {
-			timer.stop();
-		}
-	}
-	
-	public void setTimerAlarm(ActionListener al, Time time) {
-		listener = al;
-		alarm = time;
-	}
-	
-	public void reset() {		
-		setTime(Time.valueOf("00:00:00"));
-		setMove(0);
-		
-		stopTimer();
-		setTimerPeriod(1);
-	}
-	
-	@Override
-	public void initialize() {
-		reset();		
-	}
 
-	@Override
-	public void cleanup() {		
-		stopTimer();
-		reset();
+		/* (non-Javadoc)
+		 * @see java.util.TimerTask#cancel()
+		 */
+		@Override
+		public boolean cancel() {
+			listener = null;
+			
+			return super.cancel();
+		}		
+		
 	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Time currentTime = getTime();
-		long time = currentTime.getTime();  // msec
-		
-		if (listener != null && currentTime.compareTo(alarm) == 0) {
-			// Fire action event
-			listener.actionPerformed(new ActionEvent(this, 0, null));
-		}
-		
-		if (countDown && time >= timerPeriod) {
-			time -= timerPeriod;			
-		} else {
-			time += timerPeriod;
-		}
-		
-		setTime(new Time(time));
-	}
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8208502195019158726L;
 
 }

@@ -25,7 +25,7 @@ public class ButtonQuitActionListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		manager.switchToMainMenu();
+		manager.switchToMainMenu(true);
 	}
 
 }

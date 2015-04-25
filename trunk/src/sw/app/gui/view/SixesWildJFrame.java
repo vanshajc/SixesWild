@@ -4,12 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+
 import sw.common.system.manager.LevelManager;
 
-public class SixesWildJFrame extends JFrame {	
+public class SixesWildJFrame extends JFrame {
 	
-	LayoutManager lm;	
-	LevelManager lvlm;
+	static LevelManager lvlm = new LevelManager();
+	static LayoutManager lm  = null;
 	
 	SplashScreenView ssv;
 	
@@ -19,30 +20,30 @@ public class SixesWildJFrame extends JFrame {
 		getContentPane().setLayout(new BorderLayout());
 		setResizable(false);
 		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);		
 		
-		lm = new LayoutManager(this);		
-		lvlm = new LevelManager(lm);
+		lm  = new LayoutManager(this);
 		
 		initialize();
 	}
 
-	void initialize() {
-		lm.initialize();
-		
+	void initialize() {		
 		ssv = new SplashScreenView();
 		getContentPane().add(ssv);
 		ssv.addMouseListener(new MouseAdapter() {			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lm.switchToMainMenu();
+				LayoutManager.switchToMainMenu(true);
 			}			
-		});
-	}	
+		});		
+	}
 	
-	public LevelManager getLevelManager(){
+	public static LevelManager getLevelManager() {
 		return lvlm;
-	}	
+	}
 	
+	public static LayoutManager getLayoutManager() {
+		return lm;
+	}
 }
 

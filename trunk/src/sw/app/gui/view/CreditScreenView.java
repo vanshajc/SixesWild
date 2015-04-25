@@ -16,16 +16,15 @@ import javax.swing.SwingConstants;
 
 import sw.app.gui.controller.MainMenuController;
 
+@SuppressWarnings("serial")
 public class CreditScreenView extends JPanel implements IView{
 	
-	LayoutManager lm;
 	Image background = new ImageIcon(
 			CreditScreenView.class
 					.getResource("/sw/resource/image/SixesWildMainMenuImage.png"))
 			.getImage();
 	
-	public CreditScreenView(LayoutManager lm) {		
-		this.lm = lm;
+	public CreditScreenView() {
 		initialize();
 	}
 	
@@ -34,7 +33,7 @@ public class CreditScreenView extends JPanel implements IView{
 		setPreferredSize(new Dimension(800, 600));
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new MainMenuController(lm));
+		btnBack.addActionListener(new MainMenuController());
 		
 		JLabel lblNewLabel = new JLabel("Vanshaj Chowdhary");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);

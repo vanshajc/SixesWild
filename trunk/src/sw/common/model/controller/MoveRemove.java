@@ -5,24 +5,22 @@
 package sw.common.model.controller;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
-import sw.app.gui.view.board.IBoardPanel;
-import sw.common.model.entity.Level;
 import sw.common.model.entity.Tile;
-import sw.common.system.manager.LevelManager;
 
-public class MoveRemove extends BoardController implements IMove{
-	LevelManager lm;
+public class MoveRemove extends BoardController implements IMove {	
 	
-	public MoveRemove(){
+	ILevelController lc;
+	
+	public MoveRemove() {
 		super();
 	}
 	
-	public MoveRemove(LevelManager lm, IBoardPanel bp){
-		super(bp);
-		this.panel = bp;
-		this.lm = lm;
+	public MoveRemove(ILevelController lc) {
+		super(lc);
+		this.lc = lc;
 	}
 	
 	@Override
@@ -39,19 +37,18 @@ public class MoveRemove extends BoardController implements IMove{
 	
 	@Override
 	public boolean doMove() {
-		Level level = lm.getCurrent();
+		//Level level = lm.getCurrent();
 		if (this.getSelectedTile().isEmpty()) return false;
-		System.out.println(level.getMode());
-		if (!level.getMode().isValid(this))
-			return false;
+		//System.out.println(level.getMode());
+		//if (!level.getMode().isValid(this))
+		//	return false;
 		
 		Point p = this.getPoint(this.getSelectedTile().peek());
 		this.board.remove(p);
 		this.board.pack();
 		this.board.fill();
 		
-		BoardController bc = new MoveSelection(panel);
-		panel.setBoardController(bc);
+		setBoardController(new MoveSelection());
 		
 		return true;
 	}
@@ -61,6 +58,7 @@ public class MoveRemove extends BoardController implements IMove{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 	protected void selectionHandler(MouseEvent e) {
 		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
@@ -78,5 +76,11 @@ public class MoveRemove extends BoardController implements IMove{
 	 */
 	public Tile getRemoveTile(){
 		return this.selector.getSelectedTile().peek();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
