@@ -62,6 +62,10 @@ public class Release extends AbstractMode {
 	public boolean hasFinished(Game g, Statistics winStats) {
 		// TODO Auto-generated method stub
 		boolean found = false;
+		
+		if (sixLocation == null)
+			return false;
+		
 		for (int i = 0; i<sixLocation.length; i++)
 			for (int j = 0; j<9; j++)
 				if (!sixLocation[i][j])
@@ -69,7 +73,7 @@ public class Release extends AbstractMode {
 		if (!found) return false;
 		
 		for (int i = 0; i<sixLocation.length; i++){
-			for (int j = 0; j<sixLocation[i].length; i++){
+			for (int j = 0; j<sixLocation[i].length; j++){
 				if (g.getBoard().getColumn(i).getTile(j).getValue() != 6 && sixLocation[i][j])
 					return false;
 			}
