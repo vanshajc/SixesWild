@@ -55,6 +55,14 @@ public class LevelManager {
 		current = 0;
 	}
 	
+	void addLevel(Level lvl) {
+		list.add(lvl);
+	}
+	
+	void clear() {
+		list.clear();
+	}
+	
 	public Level getCurrent() {
 		return list.get(current);
 	}

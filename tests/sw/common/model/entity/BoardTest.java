@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.util.Iterator;
 import java.util.Queue;
 
 import org.junit.After;
@@ -12,8 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sw.common.system.factory.TileFactory;
-import sw.common.system.manager.IBoardLocationManager;
-import sw.common.system.manager.IBoardSelectionManager;
 
 public class BoardTest {
 
@@ -113,17 +110,22 @@ public class BoardTest {
 		Queue<Square> sq = board.getSelectedSquare();
 		assertEquals(2, sq.size());
 		
+		Queue<Tile> tq = board.getSelectedTile();
+		assertEquals(2, tq.size());
+		
 		Square s = sq.remove();
-		Tile t = s.getTile();
+		Tile t = tq.remove();
 		assertTrue(s.isSelected());
 		assertEquals(s, board.getSquare(new Point(0,0)));
 		assertEquals(t, board.getTile(new Point(0,0)));
+		assertTrue(s.getTile() == t);
 		
 		s = sq.remove();
-		t = s.getTile();
+		t = tq.remove();
 		assertTrue(s.isSelected());
 		assertEquals(s, board.getSquare(new Point(0,1)));
 		assertEquals(t, board.getTile(new Point(0,1)));
+		assertTrue(s.getTile() == t);
 		
 		board.clearSelection();
 		assertEquals(0, board.getSelectedSquare().size());
@@ -132,8 +134,9 @@ public class BoardTest {
 		board.select(new Point(0,1));
 		
 		sq = board.getSelectedSquare();
-		assertEquals(2, sq.size());
-		
+		assertEquals(2, sq.size());		
+		tq = board.getSelectedTile();
+		assertEquals(2, tq.size());
 	}
 
 }
