@@ -140,5 +140,9 @@ public class Level implements IMoveManager {
 			al.actionPerformed(new ActionEvent(this, 0, msg));
 		}		
 	}
+	
+	public void addToMoves(){
+		game.stats.numMoves++;
+	}
 
 }
