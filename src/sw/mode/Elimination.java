@@ -56,7 +56,7 @@ public class Elimination implements IMode {
 //					return false;
 //			}
 //		}
-		return true;
+		return false;
 	}	
 
 //	void initialize(Board board){

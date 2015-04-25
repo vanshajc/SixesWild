@@ -79,8 +79,15 @@ public class Release implements IMode {
 	@Override
 	public boolean hasFinished(Game g, Statistics winStats) {
 		// TODO Auto-generated method stub
-		if (sixLocation == null)
-			return false;
+		boolean found = false;
+		// check for any 6 locations...
+		for (int i = 0; i<9; i++)
+			for (int j = 0; j<9; j++)
+				if (!sixLocation[i][j])
+					found = true;
+		
+		if (!found) return false;
+		
 		
 		for (int i = 0; i<sixLocation.length; i++){
 			for (int j = 0; j<sixLocation[i].length; j++){

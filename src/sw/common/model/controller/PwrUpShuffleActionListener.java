@@ -26,6 +26,7 @@ public class PwrUpShuffleActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		lm.getCurrent().getGame().getBoard().shuffle();
+		lm.getCurrent().addToMoves();
 
 	}
 
