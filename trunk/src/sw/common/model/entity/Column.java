@@ -163,7 +163,7 @@ public class Column {
 	}
 
 	/** Fill any empty Square with a new Tile */
-	void fill() {
+	public void fill() {
 		Iterator<Square> si = col.iterator();
 		while (si.hasNext()) {
 			Square s = si.next();
@@ -181,29 +181,52 @@ public class Column {
 	 * 
 	 * @param col
 	 */
-	void pack() {
+	public void pack() {
 		/*
 		 * Find all selectable block, put them on a stack, clear the column,
 		 * then put them back from the bottom
 		 */
-		int bottom = col.size() - 1;
+		//		int bottom = col.size() - 1;
+		//		Stack<Tile> stack = new Stack<Tile>();
+		//		for (int y = 0; y < col.size(); y++) {
+		//			Square s = getSquare(y);
+		//			if (!s.isSelectable()) {
+		//				bottom = y - 1;
+		//				break;
+		//			} else if (!s.isEmpty()) {
+		//				stack.push(s.getTile()); // If non-empty, push it on the stack
+		//				s.setTile(null); // Clear the Tile
+		//			}
+		//		}
+		//		// Fill the column from the bottom
+		//		while (!stack.isEmpty()) {
+		//			setTile(stack.pop(), bottom--);
+		//		}
+
 		Stack<Tile> stack = new Stack<Tile>();
-		for (int y = 0; y < col.size(); y++) {
+		for (int y = 0; y<col.size(); y++){
 			Square s = getSquare(y);
-			if (!s.isSelectable()) {
-				bottom = y - 1;
-				break;
-			} else if (!s.isEmpty()) {
-				stack.push(s.getTile()); // If non-empty, push it on the stack
-				s.setTile(null); // Clear the Tile
+			if (s.isSelectable() && !s.isEmpty()){
+				stack.push(s.getTile());
+				s.setTile(null);
 			}
 		}
-		// Fill the column from the bottom
-		while (!stack.isEmpty()) {
-			setTile(stack.pop(), bottom--);
+
+		int i = col.size()-1;
+		while (!stack.isEmpty()){
+			if (!getSquare(i).isSelectable()){
+			}
+			else{
+				System.out.println("Adding to board: "+stack.peek()+" at index "+i);
+				setTile(stack.pop(), i);
+			}
+			i--;
 		}
+
+
+
 	}
-	
+
 	void releasePack(){
 		int bottom = col.size() - 1;
 		Stack<Tile> stack = new Stack<Tile>();
@@ -226,7 +249,7 @@ public class Column {
 			setTile(s, bottom);
 		}
 	}
-	
+
 	/** Shuffle the Column */
 	void shuffle() {
 		ArrayList<Square> newCol = new ArrayList<Square>();

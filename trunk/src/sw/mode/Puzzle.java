@@ -44,7 +44,8 @@ public class Puzzle extends AbstractMode {
 	@Override
 	public boolean hasFinished(Game g, Statistics winStat) {
 		//return (g.getStats().getNumMoves() >= winStat.getNumMoves()); <- actual code, dont uncomment until stats class is done
-		return g.getStats().getScore() >= 100;  // test
+		//return g.getStats().getScore() >= 100;  // test
+		return false;
 	}
 
 	/* (non-Javadoc)

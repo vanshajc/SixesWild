@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import sw.common.model.entity.Column;
+import sw.common.model.entity.Level;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 import sw.mode.Elimination;
@@ -96,16 +98,25 @@ public class MoveSelection extends BoardController implements IMove {
 		int score = 0;
 		Iterator<Tile> selected = getSelectedTile().iterator();
 		Iterator<Square> squares = getSelectedSquare().iterator();
+		ArrayList<Column> cols = new ArrayList<Column>();
 		while (selected.hasNext()) {
 			Tile t = selected.next();
-			if (this.lvlCtrl.getLevel().getMode() instanceof Elimination)
+			Level lvl = lvlCtrl.getLevel();
+			cols.add(lvl.getGame().getBoard().getColumn(lvl.getGame().getBoard().findCol(t)));
+			
+			if (lvl.getMode() instanceof Elimination)
 				squares.next().setMarked(true);
 			Point p = getPoint(t);
 			score += t.getValue() * t.getMultiplier();
 			boardRemove(p);
 		}		
-		boardPack();
-		boardFill();
+		//boardPack();
+		//boardFill();
+		for (Column c: cols){
+			c.pack();
+			c.fill();
+		}
+		
 		updateScore(score);
 		clearSelection();
 		return true;
