@@ -106,9 +106,9 @@ public class LevelController implements ILevelController, IGameController, IMove
 			TimerTaskManager.cancelAll();
 			
 			if (lvl.hasWon()) {
-				LayoutManager.switchToPostGameView(true);
+				LayoutManager.switchToPostGameView(true, lvl);
 			} else {
-				LayoutManager.switchToPostGameView(true);
+				LayoutManager.switchToPostGameView(true, lvl);
 			}
 		}
 	}

@@ -7,7 +7,6 @@ package sw.mode;
 
 import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IGameController;
-import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveRemove;
 import sw.common.model.controller.MoveSelection;
@@ -57,6 +56,7 @@ public class Release extends AbstractMode {
 		}
 		return true;
 	}	
+	
 	
 	@Override
 	public boolean hasFinished(Game g, Statistics winStats) {

@@ -21,6 +21,9 @@ public class Square {
 	
 	/** Whether this Square can be selected in a move */
 	boolean selectable = true;
+	
+	/** Whether this Square has previously been selected. */
+	boolean marked = false;
 
 	/** Constructors */
 	public Square() {}
@@ -62,6 +65,20 @@ public class Square {
 		return useCount;
 	}
 
+	/**
+	 * @return if the square has been marked
+	 */
+	public boolean getMarked(){
+		return marked;
+	}
+	
+	/**
+	 * @param f the value marked set to
+	 */
+	public void setMarked(boolean f){
+		marked = f;
+	}
+	
 	/**
 	 * @param useCount the useCount to set
 	 */

@@ -76,11 +76,11 @@ public abstract class BoardController extends MouseAdapter implements ActionList
 		return selector.select(p);
 	}
 
-	protected Queue<Square> getSelectedSquare() {
+	public Queue<Square> getSelectedSquare() {
 		return selector.getSelectedSquare();
 	}
 	
-	protected Queue<Tile> getSelectedTile() {
+	public Queue<Tile> getSelectedTile() {
 		return selector.getSelectedTile();
 	}
 

@@ -34,5 +34,6 @@ public interface IMode {
 	
 	void initializeGame(IGameController g);
 	
+	
 	TIMER_POLICY getTimerPolicy();
 }

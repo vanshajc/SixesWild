@@ -10,15 +10,12 @@ import sw.common.model.controller.IGameController;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Game;
-import sw.common.model.entity.Square;
 import sw.common.model.entity.Statistics;
 
 /**
- *
+ * Class for respresenting the Elimination Mode
  */
 public class Elimination extends AbstractMode {
-	boolean[][] marked;	
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -27,36 +24,29 @@ public class Elimination extends AbstractMode {
 		return "Elimination";
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.mode.AbstractMode#getBoardController()
+	 */
 	@Override
 	public BoardController getBoardController() {
 		return new MoveSelection();
 	}	
 
+	/* (non-Javadoc)
+	 * @see sw.mode.AbstractMode#hasFinished(sw.common.model.entity.Game, sw.common.model.entity.Statistics)
+	 */
 	@Override
 	public boolean hasFinished(Game g, Statistics winStats) {
-		if (marked == null){
-			this.initialize(g.getBoard());
-		}
+		Board board = g.getBoard();
 		for (int i = 0; i<9; i++){
 			for (int j = 0; j<9; j++){
-				if (!marked[i][j])
+				if (!board.getColumn(j).getSquare(i).getMarked())
 					return false;
 			}
 		}
 		return true;
 	}	
-
-	void initialize(Board board){
-		marked = new boolean[9][9];
-		for (int i = 0; i<9; i++){
-			for (int j = 0; j<9; j++){
-				Square s = board.getColumn(j).getSquare(i);
-				if (!s.isSelectable() && s.getTile() == null) // empty squares
-					marked[i][j] = true;
-			}
-		}
-	}
-
+	
 	/* (non-Javadoc)
 	 * @see sw.common.model.controller.IMode#initializeGame(sw.common.model.controller.IGameController)
 	 */
@@ -65,5 +55,6 @@ public class Elimination extends AbstractMode {
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 }
