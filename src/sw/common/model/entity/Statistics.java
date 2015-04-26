@@ -36,10 +36,6 @@ public class Statistics {
 		this.stars = stars;
 	}
 
-	public void setCurrent(Time current) {
-		this.current = current;
-	}
-
 	public void setNumMoves(int delta) {
 		this.numMoves += delta;
 	}
@@ -62,8 +58,5 @@ public class Statistics {
 		return score;
 	}	
 	
-	public int getStar() {
-		return stars;
-	}
 	
 }
