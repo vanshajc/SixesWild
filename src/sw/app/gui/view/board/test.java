@@ -39,14 +39,13 @@ public class test extends JFrame {
 	public test() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		boardPanel = new BoardPanel();
-		boardPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		boardPanel.setLayout(new BorderLayout(0, 0));
-		setContentPane(boardPanel);
 		
 		board = new Board();
-		Level l = LevelFactory.getPuzzleLevel(0, board, new Statistics());
-		boardPanel.setLevel(l);
+		boardPanel = new BoardPanel(board);
+		boardPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		boardPanel.setLayout(new BorderLayout(0, 0));
+		setContentPane(boardPanel);		
+		
 		boardPanel.disableAnimation();
 		boardPanel.setBoardController(null);
 		
