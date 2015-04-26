@@ -20,6 +20,7 @@ import sw.common.model.entity.Board;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
+import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 import sw.common.system.manager.TimerTaskManager;
 
@@ -55,21 +56,46 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 	/** The preferred size */
 	Dimension preferredSize;
 	
+	public BoardPanel() {}
+	
+	public BoardPanel(Level level) {
+		setLevel(level);
+	}
+	
+	public BoardPanel(Board board) {
+		setBoard(board);
+		setResouceManager(new CommonResourceManager());
+		initializeLayout();
+	}
+	
 	/* (non-Javadoc)
 	 * @see sw.app.gui.view.board.IBoardPanel#setLevel(sw.common.model.entity.Level)
 	 */
 	@Override
 	public void setLevel(Level level) {
 		if (level == null) {
-			throw new IllegalArgumentException("Current level is null!");
+			throw new IllegalArgumentException("Level is null!");
 		}
 		
 		this.level = level;
-		this.board = level.getGame().getBoard();
-		this.boardSize  = board.size();
-		this.resManager = level.getMode().getResourceManger();
+		setBoard(level.getGame().getBoard());	
+		setResouceManager(level.getMode().getResourceManger());
 		
-		// Load all images we need now
+		initializeLayout();
+	}
+	
+	void setBoard(Board board) {
+		if (board == null) {
+			throw new IllegalArgumentException("Board is null!");
+		}
+		
+		this.board = board;
+		this.boardSize  = board.size();
+	}
+	
+	void setResouceManager(IResourceManager resManager) {
+		this.resManager = resManager;
+		
 		Iterator<String> si = resManager.getTileImage().values().iterator();
 		while (si.hasNext()) {
 			String path = si.next();
@@ -80,14 +106,6 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 				 }
 			}			
 		}
-		
-		//BoardController bc = level.getMode().getBoardController();
-		//if (bc != null) {
-		//	setBoardController(bc);
-		//	bc.initialize(this);
-		//}
-		
-		initializeLayout();
 	}
 	
 	public void setBoardController(BoardController bc) {
@@ -104,7 +122,6 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		if (bc != null) {
 			addMouseListener(bc);
 			addMouseMotionListener(bc);
-			//bc.initialize(this);
 		}
 	}
 	
@@ -153,8 +170,8 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 	 */
 	@Override
 	public void initialize() {
-		if (level == null || board == null || resManager == null) {
-			throw new IllegalStateException("Must call BoardPanel::setLevel first!");
+		if (resManager == null || (level == null && board == null)) {
+			throw new IllegalStateException("Missing ResourceManger, Level or Board!");
 		}
 		
 		initializeColumns();
