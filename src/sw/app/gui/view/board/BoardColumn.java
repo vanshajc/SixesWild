@@ -159,8 +159,16 @@ public class BoardColumn extends JPanel {
 				g.setColor(Color.YELLOW);
 				g.fillRect(0, idxToY(y), imgSize.width, imgSize.height);
 			} else {
-				g.setColor(Color.BLACK);
-				g.drawRect(0, idxToY(y), imgSize.width, imgSize.height);
+				if(s.getMarked()){
+					g.setColor(Color.CYAN);
+					g.fillRect(0, idxToY(y), imgSize.width, imgSize.height);
+					g.setColor(Color.BLACK);
+					g.drawRect(0, idxToY(y), imgSize.width, imgSize.height);
+				}
+				else{
+					g.setColor(Color.BLACK);
+					g.drawRect(0, idxToY(y), imgSize.width, imgSize.height);
+				}
 			}
 		}
 	}
