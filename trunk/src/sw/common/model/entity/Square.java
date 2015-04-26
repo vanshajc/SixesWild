@@ -28,6 +28,12 @@ public class Square {
 	/** Constructors */
 	public Square() {}
 	
+	
+	public void Reset(){
+		this.selected=false;
+		this.marked=false;	
+	}
+	
 	public Square(Tile tile) {
 		this.tile = tile;
 	}
