@@ -204,6 +204,29 @@ public class Column {
 		}
 	}
 	
+	void releasePack(){
+		int bottom = col.size() - 1;
+		Stack<Tile> stack = new Stack<Tile>();
+		for (int y = 0; y < col.size(); y++) {
+			Square s = getSquare(y);
+			if (!s.isSelectable()) {
+				bottom = y - 1;
+				// EXPERIMENTAL CODE WATCH OUT FOR THIS
+				if (stack.peek().getValue() == 6 && s.onlySix)
+					bottom = y;
+				break;
+			} else if (!s.isEmpty()) {
+				stack.push(s.getTile()); // If non-empty, push it on the stack
+				s.setTile(null); // Clear the Tile
+			}
+		}
+		// Fill the column from the bottom
+		while (!stack.isEmpty()) {
+			Tile s = stack.pop();
+			setTile(s, bottom);
+		}
+	}
+	
 	/** Shuffle the Column */
 	void shuffle() {
 		ArrayList<Square> newCol = new ArrayList<Square>();

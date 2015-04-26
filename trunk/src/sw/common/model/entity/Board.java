@@ -119,6 +119,13 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 		}	
 	}
 	
+	public void releasePack(){
+		for (int i = 0; i<Board.COLUMN; i++){
+			grid.get(i).releasePack();
+		}
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see sw.common.model.entity.IBoard#size()
 	 */

@@ -12,6 +12,7 @@ import java.util.Iterator;
 
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
+import sw.mode.Elimination;
 
 /**
  * Class for handling moves that involve selecting squares on the board
@@ -92,13 +93,13 @@ public class MoveSelection extends BoardController implements IMove {
 	public boolean doMove() {
 		// this is commented for testing purposes... uncomment to see the add to six condition in effect
 		//if (!isValid()) return false; 
-		
 		int score = 0;
 		Iterator<Tile> selected = getSelectedTile().iterator();
 		Iterator<Square> squares = getSelectedSquare().iterator();
 		while (selected.hasNext()) {
 			Tile t = selected.next();
-			squares.next().setMarked(true);
+			if (this.lvlCtrl.getLevel().getMode() instanceof Elimination)
+				squares.next().setMarked(true);
 			Point p = getPoint(t);
 			score += t.getValue() * t.getMultiplier();
 			boardRemove(p);

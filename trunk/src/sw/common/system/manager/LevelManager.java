@@ -47,6 +47,11 @@ public class LevelManager {
 		releaseBottomCorner[8][8] = true;
 		
 		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
+		initBoard.getColumn(8).getSquare(4).setTile(null);
+		initBoard.getColumn(8).getSquare(4).setSelectable(false);
+		initBoard.getColumn(8).getSquare(8).setTile(null);
+		initBoard.getColumn(8).getSquare(8).setOnlySix(true);
+		System.out.println("PLEASE WORK: "+initBoard.getColumn(8).getSquare(8).isOnlySix());
 		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics(), releaseBottomCorner));
 		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, lightningStats));
 		list.add(LevelFactory.getEliminationLevel(++lvlCount, initBoard, new Statistics()));
