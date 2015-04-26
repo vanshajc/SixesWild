@@ -24,6 +24,9 @@ public class Square {
 	
 	/** Whether this Square has previously been selected. */
 	boolean marked = false;
+	
+	/** Whether this Square can hold only a six. */
+	boolean onlySix = false;
 
 	/** Constructors */
 	public Square() {}
@@ -54,6 +57,7 @@ public class Square {
 	
 	public void copy(Square s) {
 		if (s.tile != null) {
+			tile = new Tile();
 			tile.copy(s.tile);
 		} else {
 			tile = null;
@@ -62,6 +66,8 @@ public class Square {
 		useCount   = s.useCount;
 		selected   = s.selected;
 		selectable = s.selectable;
+		marked = s.marked;
+		onlySix = s.onlySix;
 	}
 
 	/**
@@ -156,6 +162,24 @@ public class Square {
 	 */
 	public boolean isEmpty() {
 		return tile == null;
+	}
+	
+	/**
+	 * @return if the square can only hold a tile with value 6
+	 */
+	public boolean isOnlySix(){
+		return onlySix;
+	}
+	
+	/**
+	 * @param f the value onlySix should be
+	 */
+	public void setOnlySix(boolean f){
+		onlySix = f;
+		if (onlySix)
+			this.selectable = false;
+		else
+			this.selectable = true;
 	}
 
 }

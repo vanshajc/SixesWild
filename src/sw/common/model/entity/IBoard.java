@@ -58,4 +58,7 @@ public interface IBoard {
 	 * @return the dimension of the Board
 	 */
 	Dimension size();
+
+	/** Compact tiles into one block for release mode. */
+	void releasePack();
 }

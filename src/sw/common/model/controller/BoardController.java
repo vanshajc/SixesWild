@@ -18,6 +18,7 @@ import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
+import sw.mode.Release;
 
 /** Model for an abstract BoardController */
 public abstract class BoardController extends MouseAdapter implements ActionListener {
@@ -144,6 +145,10 @@ public abstract class BoardController extends MouseAdapter implements ActionList
 	}
 
 	protected void boardPack() {
+		if (this.lvlCtrl.getLevel().getMode() instanceof Release){
+			board.releasePack();
+			return;
+		}
 		board.pack();
 	}
 

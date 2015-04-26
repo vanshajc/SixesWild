@@ -30,6 +30,9 @@ public class Tile {
 		}
 	}
 
+	public Tile() {
+	}
+
 	/**
 	 * @return the value
 	 */
