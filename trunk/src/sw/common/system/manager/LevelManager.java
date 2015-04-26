@@ -43,12 +43,15 @@ public class LevelManager {
 		Statistics lightningStats = new Statistics();
 		lightningStats.setTime(Time.valueOf("00:00:10"));
 		
+		boolean[][] releaseBottomCorner = new boolean[9][9];
+		releaseBottomCorner[8][8] = true;
+		
 		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
-		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics(), releaseBottomCorner));
 		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, lightningStats));
 		list.add(LevelFactory.getEliminationLevel(++lvlCount, initBoard, new Statistics()));
 		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
-		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics(), releaseBottomCorner));
 		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, lightningStats));
 		
 		// first level is the current level by default

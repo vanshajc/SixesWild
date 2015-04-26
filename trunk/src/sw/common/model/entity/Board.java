@@ -328,7 +328,7 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 	 * @param t the tile to be located
 	 * @return the index of the column
 	 */
-	int findCol(Tile t){
+	public int findCol(Tile t){
 		for (int i = 0; i < this.grid.size(); i++){
 			try{
 				grid.get(i).indexOf(t);
@@ -340,6 +340,11 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 	}
 	
 	private class SelectionQueue<T> extends ArrayBlockingQueue<T> {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -3158414763532356898L;
 
 		public SelectionQueue(int capacity) {
 			super(capacity, true);			

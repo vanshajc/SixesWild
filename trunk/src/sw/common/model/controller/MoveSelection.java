@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 
 /**
@@ -24,7 +25,7 @@ public class MoveSelection extends BoardController implements IMove {
 
 	/**
 	 * Constructor for a selection move.
-	 * @param bp the board panel being acted upon.
+	 * @param lc the level controller.
 	 */
 	public MoveSelection(ILevelController lc) {
 		super(lc);
@@ -89,12 +90,14 @@ public class MoveSelection extends BoardController implements IMove {
 
 	@Override
 	public boolean doMove() {
-		if (!isValid()) return false;
+		//if (!isValid()) return false;
 		
 		int score = 0;
 		Iterator<Tile> selected = getSelectedTile().iterator();
+		Iterator<Square> squares = getSelectedSquare().iterator();
 		while (selected.hasNext()) {
 			Tile t = selected.next();
+			squares.next().setMarked(true);
 			Point p = getPoint(t);
 			score += t.getValue() * t.getMultiplier();
 			boardRemove(p);

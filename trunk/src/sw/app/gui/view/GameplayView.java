@@ -108,7 +108,7 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		quitButton.addActionListener(mmc);
 		
 		btnPostgamemenutest = new JButton("PostGameMenuTest");
-		btnPostgamemenutest.addActionListener(new PostGameMenuController());		
+		btnPostgamemenutest.addActionListener(new PostGameMenuController(lvlm));		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

@@ -12,11 +12,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.PostGameController;
 import sw.app.gui.controller.StartGameController;
+import sw.common.model.entity.Level;
 
 @SuppressWarnings("serial")
 public class PostGameView extends JPanel implements IView {
-		
-	public PostGameView() {
+	
+	Level level;
+	public PostGameView(Level level) {
+		this.level = level;
 		setBackground(Color.WHITE);
 		setSize(new Dimension(800, 600));
 		

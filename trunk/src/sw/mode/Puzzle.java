@@ -7,7 +7,6 @@ package sw.mode;
 
 import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IGameController;
-import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Game;
@@ -36,6 +35,10 @@ public class Puzzle extends AbstractMode {
 	@Override
 	public boolean isValid(IMove m) {
 		return m instanceof MoveSelection;
+	}
+	
+	public boolean doMove(IMove m){
+		return true;
 	}
 	
 	@Override

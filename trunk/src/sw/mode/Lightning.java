@@ -32,6 +32,7 @@ public class Lightning extends AbstractMode {
 	public boolean isValid(IMove m) {
 		return m instanceof MoveSelection;
 	}
+	
 
 	@Override
 	public boolean hasFinished(Game g, Statistics winStats) {
