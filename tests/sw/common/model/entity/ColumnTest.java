@@ -56,6 +56,7 @@ public class ColumnTest {
 			while (col.col.iterator().hasNext()) {
 				Square s = col.col.iterator().next();
 				assertNotEquals("Tile was not removed!", t, s.getTile());
+				System.out.println(i + "passed");
 			}
 			
 			// count should have decreased by 1
