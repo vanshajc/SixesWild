@@ -205,7 +205,7 @@ public class MementoManager {
 					} else {
 						int val = Integer.valueOf(str.split(",")[0]);
 						int mul = Integer.valueOf(str.split(",")[1]);
-						System.out.println(val + ", "+mul);
+						//System.out.println(val + ", "+mul);
 						// "0,0" is blank, so it works out fine, null t is expected
 						Tile t = TileFactory.getTile(val, mul);
 						b.replace(p, t);
