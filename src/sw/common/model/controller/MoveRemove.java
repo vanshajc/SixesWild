@@ -78,9 +78,4 @@ public class MoveRemove extends BoardController implements IMove {
 		return this.selector.getSelectedTile().peek();
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 }

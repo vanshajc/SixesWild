@@ -96,9 +96,4 @@ public class MoveSwap extends BoardController implements IMove {
 		return false;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

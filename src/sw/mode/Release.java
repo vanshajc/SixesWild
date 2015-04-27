@@ -5,6 +5,9 @@
  */
 package sw.mode;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IGameController;
 import sw.common.model.controller.IMove;
@@ -13,6 +16,7 @@ import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.Game;
 import sw.common.model.entity.Statistics;
+import sw.common.model.entity.Tile;
 
 /**
  * Class for Release Mode.
@@ -45,7 +49,7 @@ public class Release extends AbstractMode {
 
 	@Override
 	public BoardController getBoardController() {
-		return new MoveSelection();
+		return new ReleaseMoveSelection();
 	}
 
 	@Override
@@ -55,7 +59,6 @@ public class Release extends AbstractMode {
 		}
 		return true;
 	}	
-	
 	
 	@Override
 	public boolean hasFinished(Game g, Statistics winStats) {
@@ -102,5 +105,43 @@ public class Release extends AbstractMode {
 		return TIMER_POLICY.COUNT_UP;
 	}
 	
+	private class ReleaseMoveSelection extends MoveSelection {
+
+		/* (non-Javadoc)
+		 * @see sw.common.model.controller.MoveSelection#doMove()
+		 */
+		@Override
+		public boolean doMove() {
+			if (!isValid()) {
+				return false;
+			}
+			
+			return super.doMove();
+		}
+		
+		@Override
+		protected boolean isValid() {
+			Iterator<Tile> selected = getSelectedTile().iterator();
+			ArrayList<Tile> tiles = new ArrayList<Tile>();
+			while(selected.hasNext())
+				tiles.add(selected.next());
+			
+			if (tiles.isEmpty()|| (tiles.size() == 1 && tiles.get(0).getValue() == 6)) return false;
+			int sum = 0;
+			for (int i = 0; i<tiles.size(); i++){
+				Tile t = tiles.get(i);
+				sum += t.getValue();
+				boolean ad = false;
+				for (int j = 0; j<tiles.size(); j++){
+					if (i == j) continue;
+					if (board.adjacent(t, tiles.get(j))) ad = true;
+				}
+				if (!ad)
+					return false;
+			}
+			
+			return sum == 6;
+		}
+	}
 
 }
