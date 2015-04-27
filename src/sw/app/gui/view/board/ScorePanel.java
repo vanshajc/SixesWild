@@ -5,11 +5,11 @@ import java.awt.Dimension;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.plaf.basic.BasicProgressBarUI;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 
 public class ScorePanel extends JPanel implements IScorePanel {
 	
@@ -108,7 +108,13 @@ public class ScorePanel extends JPanel implements IScorePanel {
 	@Override
 	public void setScore(int score) {
 		this.score.setValue(score);
-		this.score.setString(Integer.toString(score));
+		this.score.setString(reverse(Integer.toString(score)));
+	}
+	
+	String reverse(String s){
+		if (s.length() <=1)
+			return s;
+		return s.charAt(s.length()-1)+reverse(s.substring(0, s.length()-1));
 	}
 	
 	/* (non-Javadoc)

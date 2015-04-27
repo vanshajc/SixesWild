@@ -1,5 +1,6 @@
 package sw.common.system.manager;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -16,6 +17,7 @@ import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
+import sw.common.system.factory.TileFrequency;
 
 /**
  *  @file   TestLevelController.java
@@ -43,7 +45,7 @@ public class TestLevelController {
 		testBoard = new Board();
 		testWinStats = new Statistics();
 		
-		testLevel = LevelFactory.getPuzzleLevel(0, testBoard, testWinStats);
+		testLevel = LevelFactory.getPuzzleLevel(0, testBoard, testWinStats, new TileFrequency());
 		lm.addLevel(testLevel);
 		
 		try {

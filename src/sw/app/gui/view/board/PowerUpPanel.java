@@ -9,7 +9,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import sw.common.model.controller.PwrUpRemoveActionListener;
 import sw.common.model.controller.PwrUpShuffleActionListener;
 import sw.common.model.controller.PwrUpSwapActionListener;
-import sw.common.system.manager.LevelManager;
 
 public class PowerUpPanel extends JPanel {
 	
