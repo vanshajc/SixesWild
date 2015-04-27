@@ -68,7 +68,7 @@ public class SaveButtonController implements ActionListener {
 			save.println(mthreePer);
 			for (int i = 0; i < 9; i++) {
 				for (int j = 0; j < 9; j++) {
-					save.print(board[i][j]);
+					save.print(board[j][i]);
 				}
 				save.println("");
 			}

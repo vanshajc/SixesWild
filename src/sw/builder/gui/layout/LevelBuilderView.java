@@ -532,7 +532,7 @@ public class LevelBuilderView extends JPanel {
 			for (int j = 0; j < 9; j++) {
 				String input = textFields[i][j].getText();
 				if (isValid(input))
-					board1[i][j] = input;
+					board1[j][i] = input;
 				else{
 				textFields[i][j].setText("");	
 				}
