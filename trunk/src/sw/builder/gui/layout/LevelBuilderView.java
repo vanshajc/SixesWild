@@ -9,9 +9,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import sw.builder.gui.controller.DisplayBoardController;
+import sw.builder.gui.controller.LoadButtonController;
+import sw.builder.gui.controller.RandomizeButtonController;
+import sw.builder.gui.controller.SaveButtonController;
+
 public class LevelBuilderView extends JPanel {
 
 	BuilderLayoutManager blm;
+	static String[][] board = new String[9][9];
 
 	public LevelBuilderView(BuilderLayoutManager blm) {
 		this.blm = blm;
@@ -50,7 +56,7 @@ public class LevelBuilderView extends JPanel {
 	JTextField twoMultPercent;
 	JLabel threeMult;
 	JTextField threeMultPercent;
-	JTextField textFields[][];
+	static JTextField textFields[][];
 
 	public void initialize() {
 
@@ -253,6 +259,12 @@ public class LevelBuilderView extends JPanel {
 		add(btnRandomizeBoard);
 		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm,
 				this));
+		
+		JButton btnDisplay = new JButton("Display Board");
+		btnDisplay.setBorder(null);
+		btnDisplay.setBounds(500, 510, 150, 40);
+		add(btnDisplay);
+		btnDisplay.addActionListener(new DisplayBoardController(blm,this));
 
 		JLabel background = new JLabel();
 		add(background);
@@ -504,19 +516,19 @@ public class LevelBuilderView extends JPanel {
 		this.threeMultPercent.setText(s);
 	}
 
-	public String[][] getBoard() {
-		String[][] board = new String[9][9];
+	public static String[][] getBoard() {
+		String[][] board1 = new String[9][9];
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				String input = textFields[i][j].getText();
 				if (isValid(input))
-					board[i][j] = input;
+					board1[i][j] = input;
 				else{
 				textFields[i][j].setText("");	
 				}
 			}
 		}
-		return board;
+		return board1;
 	}
 
 	public void setBoard(ArrayList<String> s) {
@@ -527,7 +539,7 @@ public class LevelBuilderView extends JPanel {
 		}
 	}
 
-	public boolean isValid(String s) {
+	public static boolean isValid(String s) {
 		if (s.length() == 3) {
 
 			if (s.charAt(0) == '0' || s.charAt(0) == '1' || s.charAt(0) == '2'

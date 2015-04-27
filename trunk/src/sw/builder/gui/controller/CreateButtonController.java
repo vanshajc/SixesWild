@@ -1,7 +1,9 @@
-package sw.builder.gui.layout;
+package sw.builder.gui.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import sw.builder.gui.layout.BuilderLayoutManager;
 
 public class CreateButtonController implements ActionListener {
 	

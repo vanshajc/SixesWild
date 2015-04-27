@@ -1,9 +1,12 @@
-package sw.builder.gui.layout;
+package sw.builder.gui.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
+
+import sw.builder.gui.layout.BuilderLayoutManager;
+import sw.builder.gui.layout.LevelBuilderView;
 
 public class RandomizeButtonController implements ActionListener {
 
