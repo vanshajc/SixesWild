@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import sw.app.gui.view.board.BoardPanel;
+import sw.builder.gui.controller.CreateButtonController;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
@@ -19,12 +20,13 @@ import javax.swing.GroupLayout.Alignment;
 
 public class BuilderBoardPanel extends JPanel {
 
-	Board board;
 	BuilderLayoutManager blm;
-	BoardPanel boardPanel = new BoardPanel();
+	BoardPanel boardPanel;
+	Level l;
 
 	public BuilderBoardPanel(BuilderLayoutManager blm) {
 		this.blm = blm;
+		boardPanel  = new BoardPanel();
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
@@ -47,16 +49,40 @@ public class BuilderBoardPanel extends JPanel {
 		initialize();
 	}
 
-	public void initialize() {
-
-		board = new Board(false);
-
-		Level l = LevelFactory.getPuzzleLevel(0, board, new Statistics(), null);
+	public void initialize() {		
+		l = LevelFactory.getPuzzleLevel(0, null, new Statistics(), null);
 		boardPanel.setLevel(l);
 		boardPanel.disableAnimation();
 		boardPanel.setBoardController(null);
 		boardPanel.initialize();
+		
 	}
-
-
+	
+	public void setBoardView(String[][] b) {
+		Board b1 = new Board();
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				String val = b[i][j].substring(0, 1);
+				int value = Integer.parseInt(val);
+				String mul = b[i][j].substring(2);
+				int mult = Integer.parseInt(mul);
+				Point p1 = new Point(i, j);
+				Tile t1 = new Tile(value, mult);
+				CreateButtonController.board.getSquare(p1).setTile(t1);
+			}
+		}
+		b1 = CreateButtonController.board;
+		boardPanel.setBoard(b1);
+		boardPanel.initialize();
+		
+		
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				Point p1 = new Point(i, j);
+				System.out.print(b1.getSquare(p1).getTile().getValue() + " ");
+			}
+			System.out.println("");
+		}
+		
+	}
 }

@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import sw.builder.gui.controller.CreateButtonController;
 import sw.builder.gui.controller.DisplayBoardController;
 import sw.builder.gui.controller.LoadButtonController;
 import sw.builder.gui.controller.RandomizeButtonController;
@@ -17,7 +18,7 @@ import sw.builder.gui.controller.SaveButtonController;
 public class LevelBuilderView extends JPanel {
 
 	BuilderLayoutManager blm;
-	static String[][] board = new String[9][9];
+	public static String[][] board = new String[9][9];
 
 	public LevelBuilderView(BuilderLayoutManager blm) {
 		this.blm = blm;
@@ -528,6 +529,7 @@ public class LevelBuilderView extends JPanel {
 				}
 			}
 		}
+		LevelBuilderView.board = board1;
 		return board1;
 	}
 

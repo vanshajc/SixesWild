@@ -28,186 +28,200 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 
 	/** GENERATED DO NOT CHANGE */
 	private static final long serialVersionUID = 5914218859027914106L;
-	
+
 	/** Keep reference to the current level being played */
 	Level level;
-	
+
 	/** The Board to manage */
 	Board board;
 	Dimension boardSize;
-	
+
 	/** Timer to update columns */
 	final String refreshTask = "BoardPanelRefresh";
-	long  refreshPeriod = 10; // msec
-	
+	long refreshPeriod = 10; // msec
+
 	/** Map of icon images to use */
 	IResourceManager resManager;
 	HashMap<String, Image> imageMap = new HashMap<String, Image>();
-	
+
 	/** The columns to paint */
 	ArrayList<BoardColumn> columns = new ArrayList<BoardColumn>();
-	
+
 	/** Keep track of whether animation is enabled */
 	boolean enableAnimation = true;
-	
+
 	/** Keep track of whether the board is in animation */
 	boolean isAnimating = false;
-	
+
 	/** The preferred size */
 	Dimension preferredSize;
-	
-	public BoardPanel() {}
-	
+
+	public BoardPanel() {
+	}
+
 	public BoardPanel(Level level) {
 		setLevel(level);
 	}
-	
+
 	public BoardPanel(Board board) {
 		setBoard(board);
 		setResouceManager(new CommonResourceManager());
 		initializeLayout();
 	}
-	
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IBoardPanel#setLevel(sw.common.model.entity.Level)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * sw.app.gui.view.board.IBoardPanel#setLevel(sw.common.model.entity.Level)
 	 */
 	@Override
 	public void setLevel(Level level) {
 		if (level == null) {
 			throw new IllegalArgumentException("Level is null!");
 		}
-		
+
 		this.level = level;
-		setBoard(level.getGame().getBoard());	
+		setBoard(level.getGame().getBoard());
 		setResouceManager(level.getMode().getResourceManger());
-		
+
 		initializeLayout();
 	}
-	
-	void setBoard(Board board) {
+
+	public void setBoard(Board board) {
 		if (board == null) {
 			throw new IllegalArgumentException("Board is null!");
 		}
-		
+
 		this.board = board;
-		this.boardSize  = board.size();
+		this.boardSize = board.size();
 	}
-	
+
 	void setResouceManager(IResourceManager resManager) {
 		this.resManager = resManager;
-		
+
 		Iterator<String> si = resManager.getTileImage().values().iterator();
 		while (si.hasNext()) {
 			String path = si.next();
 			if (!imageMap.containsKey(path)) {
-				 Image img = new ImageIcon(BoardPanel.class.getResource(path)).getImage();
-				 if (img != null) {
-					 imageMap.put(path, img); // Store the image
-				 }
-			}			
+				Image img = new ImageIcon(BoardPanel.class.getResource(path))
+						.getImage();
+				if (img != null) {
+					imageMap.put(path, img); // Store the image
+				}
+			}
 		}
 	}
-	
+
 	public void setBoardController(BoardController bc) {
 		MouseListener[] ml = this.getMouseListeners();
 		for (int i = 0; i < ml.length; i++) {
 			removeMouseListener(ml[i]);
 		}
-		
+
 		MouseMotionListener[] mml = this.getMouseMotionListeners();
 		for (int i = 0; i < mml.length; i++) {
 			removeMouseMotionListener(mml[i]);
 		}
-		
+
 		if (bc != null) {
 			addMouseListener(bc);
 			addMouseMotionListener(bc);
 		}
 	}
-	
+
 	void initializeLayout() {
-		setLayout(null);		
+		setLayout(null);
 		setDoubleBuffered(true);
-		
+
 		preferredSize = new Dimension();
-		
+
 		int x = 0;
 		for (int i = 0; i < boardSize.width; i++) {
-			BoardColumn bc = new BoardColumn(this, i); // Guarantee to not be null...
-			
+			BoardColumn bc = new BoardColumn(this, i); // Guarantee to not be
+														// null...
+
 			// Add to array
 			columns.add(i, bc);
-			
+
 			// Use the column's preferred size
 			Rectangle rec = new Rectangle(bc.getPreferredSize());
-			rec.setLocation(x, 0);			
-			bc.setBounds(rec);			
-			
+			rec.setLocation(x, 0);
+			bc.setBounds(rec);
+
 			// Add new component
 			add(bc);
 			x += rec.width;
-			
+
 			preferredSize.width = Math.max(preferredSize.width, x);
 			preferredSize.height = Math.max(preferredSize.height, rec.height);
 		}
-		
+
 		setPreferredSize(preferredSize);
-		
+
 		// Repaint panel
 		invalidate();
-		repaint();		
+		repaint();
 	}
-	
+
 	/** Initialize every BoardColumn */
 	void initializeColumns() {
 		for (int i = 0; i < boardSize.width; i++) {
 			columns.get(i).initialize(this, i);
 		}
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sw.app.gui.view.board.IBoardPanel#initialize()
 	 */
 	@Override
 	public void initialize() {
 		if (resManager == null || (level == null && board == null)) {
-			throw new IllegalStateException("Missing ResourceManger, Level or Board!");
+			throw new IllegalStateException(
+					"Missing ResourceManger, Level or Board!");
 		}
-		
+
 		initializeColumns();
-		TimerTaskManager.scheduleTask(refreshTask, new refreshTask(), refreshPeriod);
+		TimerTaskManager.scheduleTask(refreshTask, new refreshTask(),
+				refreshPeriod);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sw.app.gui.view.board.IBoardPanel#cleanup()
 	 */
 	@Override
 	public void cleanup() {
 		TimerTaskManager.cancelTask(refreshTask);
-		
+
 		// Reset the state of the panel
 		level = null;
 		board = null;
 		resManager = null;
 		columns.clear();
-		
+
 		setBoardController(null);
-		
+
 		// remove all components
 		removeAll();
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sw.app.gui.view.board.IBoardPanel#clear()
 	 */
 	@Override
 	public void clear() {
 		for (int i = 0; i < boardSize.width; i++) {
-			columns.get(i).clear();		
-		}		
+			columns.get(i).clear();
+		}
 	}
-	
-	boolean refresh() {
+
+	public boolean refresh() {
 		boolean updated = false;
 		for (int i = 0; i < boardSize.width; i++) {
 			if (columns.get(i).update()) {
@@ -216,8 +230,10 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		}
 		return updated;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
 	 */
 	@Override
@@ -229,7 +245,9 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sw.app.gui.view.board.IBoardPanel#isAnimating()
 	 */
 	@Override
@@ -240,14 +258,16 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sw.app.gui.view.board.IBoardPanel#xyToPoint(java.awt.Point)
 	 */
 	@Override
 	public Point xyToPoint(Point point) {
 		int xStart = 0;
 		for (int x = 0; x < boardSize.width; x++) {
-			BoardColumn bc = columns.get(x);			
+			BoardColumn bc = columns.get(x);
 			int xEnd = xStart + bc.getSize().width;
 			if (point.x >= xStart && point.x < xEnd) {
 				try {
@@ -261,7 +281,7 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		}
 		return null;
 	}
-	
+
 	Column getColumn(int i) {
 		return board.getColumn(i);
 	}
@@ -271,7 +291,9 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sw.app.gui.view.board.IBoardPanel#getBoard()
 	 */
 	@Override
@@ -284,7 +306,7 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		enableAnimation = false;
 		for (int x = 0; x < boardSize.width; x++) {
 			columns.get(x).disableAnimation();
-		}		
+		}
 	}
 
 	@Override
@@ -294,7 +316,7 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 			columns.get(x).enableAnimation();
 		}
 	}
-	
+
 	private class refreshTask extends TimerTask {
 
 		@Override
@@ -302,7 +324,7 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 			isAnimating = refresh();
 			repaint();
 		}
-		
+
 	}
 
 }
