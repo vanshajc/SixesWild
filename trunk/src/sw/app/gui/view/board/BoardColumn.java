@@ -156,6 +156,7 @@ public class BoardColumn extends JPanel {
 	void paintSquares(Graphics g) throws Exception {
 		for (int y = 0; y < column.size(); y++) {
 			Square s = column.getSquare(y);
+			//BoardTile bt = tiles.get(y);
 			if (s.isSelected()) {
 				g.setColor(Color.YELLOW);
 				g.fillRect(0, idxToY(y), imgSize.width, imgSize.height);
@@ -169,9 +170,8 @@ public class BoardColumn extends JPanel {
 				else{
 					g.setColor(Color.BLACK);
 					g.drawRect(0, idxToY(y), imgSize.width, imgSize.height);
-					if (s.isOnlySix()){
-						g.drawImage(loadSquareImg(s), 0, imgSize.height*y, null);
-					}
+					if (s.isOnlySix())
+						g.drawImage(loadSquareImg(s), 0, idxToY(y), null);
 				}
 			}
 		}
@@ -184,7 +184,7 @@ public class BoardColumn extends JPanel {
 			BoardTile bt = tiles.get(y);
 			if (bt != null && bt.isVisible()) {
 				
-				g.drawImage(loadTileImg(bt.tile), 1, bt.currentY+3, null);
+				g.drawImage(loadTileImg(bt.tile), 1, bt.currentY, null);
 			}
 		}
 	}
