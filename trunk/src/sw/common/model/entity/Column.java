@@ -234,10 +234,8 @@ public class Column {
 		}
 
 		int i = col.size()-1;
-		System.out.println("------ col -------");
 		while (!stack.isEmpty()){
 			Tile t = stack.peek();
-			System.out.println(t);
 			if (getSquare(i).isSelectable() || (t.value == 6 && getSquare(i).isOnlySix())){
 				setTile(stack.pop(), i);
 			}
