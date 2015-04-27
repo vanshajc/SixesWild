@@ -84,6 +84,10 @@ public class MoveSelection extends BoardController implements IMove {
 		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
 				Point p = panel.xyToPoint(e.getPoint());
+				if (this.board.getTile(p) == null){
+					clearSelection();
+					return;
+				}
 				select(p);
 			} catch (Exception e1) {
 				clearSelection();
