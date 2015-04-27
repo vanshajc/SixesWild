@@ -207,6 +207,9 @@ public class MementoManager {
 						int mul = Integer.valueOf(str.split(",")[1]);
 						//System.out.println(val + ", "+mul);
 						// "0,0" is blank, so it works out fine, null t is expected
+						if (val == 0 && mul == 0)
+							b.getSquare(p).setSelectable(false);
+						
 						Tile t = TileFactory.getTile(val, mul);
 						b.replace(p, t);
 					}
