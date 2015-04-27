@@ -9,12 +9,10 @@ import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -203,10 +201,11 @@ public class MementoManager {
 					if (strArray[0].equals("*") && strArray[1].equals("*")) {
 						// Release square
 						b.getSquare(p).setSelectable(false);
+						b.getSquare(p).setOnlySix(true);
 					} else {
 						int val = Integer.valueOf(str.split(",")[0]);
 						int mul = Integer.valueOf(str.split(",")[1]);
-						
+						System.out.println(val + ", "+mul);
 						// "0,0" is blank, so it works out fine, null t is expected
 						Tile t = TileFactory.getTile(val, mul);
 						b.replace(p, t);
