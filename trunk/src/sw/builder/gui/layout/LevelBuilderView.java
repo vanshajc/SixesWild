@@ -9,20 +9,29 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import sw.app.gui.view.board.BoardPanel;
 import sw.builder.gui.controller.CreateButtonController;
 import sw.builder.gui.controller.DisplayBoardController;
 import sw.builder.gui.controller.LoadButtonController;
 import sw.builder.gui.controller.RandomizeButtonController;
 import sw.builder.gui.controller.SaveButtonController;
+import sw.common.model.entity.Board;
 
 public class LevelBuilderView extends JPanel {
 
 	BuilderLayoutManager blm;
-	public static String[][] board = new String[9][9];
+	public static Board board;
+	public static String[][] boardStr = new String[9][9];
 
+	public static BoardPanel boardPanel;
+	
 	public LevelBuilderView(BuilderLayoutManager blm) {
 		this.blm = blm;
 		setLayout(null);
+		
+		board = new Board();
+		boardPanel = new BoardPanel(board);
+		
 		initialize();
 	}
 
@@ -529,7 +538,7 @@ public class LevelBuilderView extends JPanel {
 				}
 			}
 		}
-		LevelBuilderView.board = board1;
+		LevelBuilderView.boardStr = board1;
 		return board1;
 	}
 
