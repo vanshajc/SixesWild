@@ -11,6 +11,8 @@ import java.sql.Time;
 import sw.common.model.controller.IGameController;
 import sw.common.model.controller.ILevelController;
 import sw.common.model.controller.IMode;
+import sw.common.system.factory.TileFactory;
+import sw.common.system.factory.TileFrequency;
 
 /** The model for an arbitrary game level */
 public class Level {
@@ -20,14 +22,17 @@ public class Level {
 	IMode mode;
 	int levelNum;
 
+	TileFrequency freq;
+	
 	// The initial layout of the Board
 	Board initBoard;
 
-	public Level(int levelNum, Board initBoard, Statistics winStats, IMode mode) {
+	public Level(int levelNum, Board initBoard, Statistics winStats, IMode mode, TileFrequency freq) {
 		this.winStats = winStats;
 		this.mode = mode;
 		this.levelNum = levelNum;
 		this.initBoard = initBoard;
+		this.freq = freq;
 		
 		this.game = new Game();
 	}
@@ -86,6 +91,8 @@ public class Level {
 		mode.initializeGame(gc);
 		
 		game.board.copy(initBoard);
+		
+		TileFactory.setFreq(freq);
 	}
 
 	public boolean hasWon() {

@@ -45,15 +45,15 @@ public class CommonResourceManager implements IResourceManager {
 	}
 	
 	public String getImage(Tile tile) {
-		return getTileImage(tile.getValue());
+		return getTileImage(tile.getValue(), tile.getMultiplier());
 	}
 	
 	String getUnusedImage(int i) {
 		return imagePath.concat(String.format("%d_unused.png", i));
 	}
 	
-	String getTileImage(int i) {
-		return imagePath.concat(String.format("tile_%d.png", i));
+	String getTileImage(int val, int mul) {
+		return imagePath.concat(String.format("tile_%dx%d.png", val, mul));
 	}
 
 	/* (non-Javadoc)
