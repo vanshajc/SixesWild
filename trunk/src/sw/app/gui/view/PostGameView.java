@@ -2,7 +2,6 @@ package sw.app.gui.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -16,7 +15,6 @@ import sw.app.gui.controller.StartGameController;
 import sw.common.model.entity.Level;
 
 import javax.swing.ImageIcon;
-import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class PostGameView extends JPanel implements IView {
@@ -39,12 +37,15 @@ public class PostGameView extends JPanel implements IView {
 		btnMainmenu.setBorder(null);
 		btnMainmenu.addActionListener(new MainMenuController());
 		
-		JButton btnNextlevel = new JButton("NextLevel");
-		btnNextlevel.setIcon(new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_next.png")));
-		btnNextlevel.addActionListener(new PostGameController());
+		ImageIcon buttonNextLevel = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_next.png"));
+		ImageIcon newBtnNextLevel = new ImageIcon(buttonNextLevel.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
+		JButton btnNextLevel = new JButton(newBtnNextLevel);
+		btnNextLevel.setBorder(null);
+		btnNextLevel.addActionListener(new PostGameController());
 		
-		JButton btnReplay = new JButton("Replay");
-		btnReplay.setIcon(new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_replay.png")));
+		ImageIcon buttonReplay = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_replay.png")); 
+		ImageIcon newBtnReplay = new ImageIcon(buttonReplay.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
+		JButton btnReplay = new JButton(newBtnReplay);
 		btnReplay.addActionListener(new StartGameController());
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -56,7 +57,7 @@ public class PostGameView extends JPanel implements IView {
 					.addGap(86)
 					.addComponent(btnReplay, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-					.addComponent(btnNextlevel, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnNextLevel, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
 					.addGap(86))
 		);
 		groupLayout.setVerticalGroup(
@@ -66,7 +67,7 @@ public class PostGameView extends JPanel implements IView {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(btnMainmenu, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnNextlevel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnNextLevel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnReplay, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
