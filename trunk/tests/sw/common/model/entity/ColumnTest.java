@@ -3,6 +3,7 @@ package sw.common.model.entity;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.junit.After;
 import org.junit.Before;
@@ -53,8 +54,9 @@ public class ColumnTest {
 			col.removeTile(t);
 			
 			// the Tile should be removed
-			while (col.col.iterator().hasNext()) {
-				Square s = col.col.iterator().next();
+			Iterator<Square> it = col.col.iterator();
+			while (it.hasNext()) {
+				Square s = it.next();
 				assertNotEquals("Tile was not removed!", t, s.getTile());
 				System.out.println(i + "passed");
 			}
