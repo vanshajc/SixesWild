@@ -28,8 +28,7 @@ public class BuilderLayoutManager {
 		lbv = new LevelBuilderView(this);
 		ssbv = new SplashScreenBuilderView(this);
 		lbmv = new LevelBuilderMenuView(this);
-		bbp = new BuilderBoardPanel(this);
-		
+		//bbp = new BuilderBoardPanel(this);
 	}
 	
 	public void switchToLevelBuilder(){
@@ -41,11 +40,12 @@ public class BuilderLayoutManager {
 	}
 
 	public void switchToBuilderBoard() {
+		bbp = new BuilderBoardPanel(this);
 		switchToScreen(bbp);
-		
+		bbp.setBoardView(LevelBuilderView.boardStr);
 	}
 	
-	void switchToScreen(JPanel screen){
+	public void switchToScreen(JPanel screen){
 		System.out.println("Switch to next screen");
 		Container pane = lbjf.getContentPane();
 		

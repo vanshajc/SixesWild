@@ -23,10 +23,12 @@ public class BuilderBoardPanel extends JPanel {
 	BuilderLayoutManager blm;
 	BoardPanel boardPanel;
 	Level l;
+	
+	Board b = new Board();
 
 	public BuilderBoardPanel(BuilderLayoutManager blm) {
 		this.blm = blm;
-		boardPanel  = new BoardPanel();
+		boardPanel  = new BoardPanel(b);
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
@@ -50,15 +52,15 @@ public class BuilderBoardPanel extends JPanel {
 	}
 
 	public void initialize() {		
-		l = LevelFactory.getPuzzleLevel(0, null, new Statistics(), null);
-		boardPanel.setLevel(l);
+		//l = LevelFactory.getPuzzleLevel(0, null, new Statistics(), null);
+		//boardPanel.setLevel(l);
 		boardPanel.disableAnimation();
 		boardPanel.setBoardController(null);
 		boardPanel.initialize();
 		
 	}
 	
-	public void setBoardView(String[][] b) {
+	public static Board setBoardView(String[][] b) {
 		Board b1 = new Board();
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -70,19 +72,22 @@ public class BuilderBoardPanel extends JPanel {
 				Tile t1 = new Tile(value, mult);
 				CreateButtonController.board.getSquare(p1).setTile(t1);
 			}
-		}
+		}		
 		b1 = CreateButtonController.board;
-		boardPanel.setBoard(b1);
-		boardPanel.initialize();
+		return b1;
+		//b.copy(b1);
+		
+		//boardPanel.setBoard(b1);
+		//boardPanel.initialize();
 		
 		
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				Point p1 = new Point(i, j);
-				System.out.print(b1.getSquare(p1).getTile().getValue() + " ");
-			}
-			System.out.println("");
-		}
+//		for (int i = 0; i < 9; i++) {
+//			for (int j = 0; j < 9; j++) {
+//				Point p1 = new Point(i, j);
+//				System.out.print(b1.getSquare(p1).getTile().getValue() + " ");
+//			}
+//			System.out.println("");
+//		}
 		
 	}
 }

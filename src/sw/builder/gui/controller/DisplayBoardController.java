@@ -31,11 +31,15 @@ public class DisplayBoardController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		bbp = new BuilderBoardPanel(blm);
-		String[][] b = lbv.getBoard();
+		//bbp = new BuilderBoardPanel(blm);
+//		String[][] b = lbv.getBoard();
 		//setBoardView(b);
-		blm.switchToBuilderBoard();
-		bbp.setBoardView(b);
+		//blm.switchToBuilderBoard();
+		String[][] b = LevelBuilderView.getBoard();
+		Board b1 = BuilderBoardPanel.setBoardView(b);
+		blm.switchToScreen(LevelBuilderView.boardPanel);
+		LevelBuilderView.boardPanel.getBoard().copy(b1);
+		//bbp.setBoardView(b);
 	}
 	/*
 	 * public void setBoardView(String[][] b) { for (int i = 0; i < 9; i++) {
