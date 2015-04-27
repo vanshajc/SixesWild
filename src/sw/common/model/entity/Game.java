@@ -1,5 +1,12 @@
+/**
+ * @file Game.java
+ * @author Tony Vu, Vanshaj Chowdhary
+ */
 package sw.common.model.entity;
 
+/**
+ * Class for representing a game that is being played.
+ */
 public class Game {
 
 	public static final int PWRUP_SWAP = 0;
@@ -8,6 +15,7 @@ public class Game {
 	
 	Statistics stats = new Statistics();
 	Board board = new Board();
+	/** Holds the number left for each powerup */
 	int pwrUps[] = {0, 0, 0};
 	
 	/**

@@ -6,7 +6,6 @@
 package sw.common.model.controller;
 
 import java.awt.Point;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
 import sw.common.model.entity.Square;
@@ -82,6 +81,8 @@ public class MoveSwap extends BoardController implements IMove {
 	 * @param s2
 	 */
 	boolean swap(Point p1, Point p2) {
+		if (!this.lvlCtrl.getLevel().getMode().isValid(this))
+			return false;
 		Square s1 = getSquare(p1);
 		Square s2 = getSquare(p2);
 		if (s1 != null && s2 != null) {
