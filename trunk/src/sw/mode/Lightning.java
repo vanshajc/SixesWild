@@ -1,3 +1,7 @@
+/**
+ * @file Lightning.java
+ * @author Tony Vu, Vanshaj Chowdhary
+ */
 package sw.mode;
 
 import java.awt.event.ActionEvent;

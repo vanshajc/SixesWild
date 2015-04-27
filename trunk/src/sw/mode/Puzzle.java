@@ -1,7 +1,7 @@
 /**
  * @file Puzzle.java
  * @date Apr 15, 2015 10:46:13 AM
- * @author Tony Vu (quangvu@wpi.edu)
+ * @author Tony Vu (quangvu@wpi.edu), Vanshaj Chowdhary
  */
 package sw.mode;
 
