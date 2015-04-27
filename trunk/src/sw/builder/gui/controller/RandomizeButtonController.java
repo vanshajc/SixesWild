@@ -88,7 +88,7 @@ public class RandomizeButtonController implements ActionListener {
 			}
 			board.add(line);
 		}
-		lbv.setBoard(board);
+		lbv.setBoardRandom(board);
 
 	}
 
