@@ -195,7 +195,6 @@ public class MementoManager {
 			for (int j = 0; j < 9; j++) {
 				Point p = new Point(j, i);
 				String str = s.get(i).substring(j * 3, j * 3 + 3);
-				
 				String[] strArray = str.split(",");
 				if (strArray.length == 2) {
 					if (strArray[0].equals("*") && strArray[1].equals("*")) {
@@ -205,7 +204,6 @@ public class MementoManager {
 					} else {
 						int val = Integer.valueOf(str.split(",")[0]);
 						int mul = Integer.valueOf(str.split(",")[1]);
-						//System.out.println(val + ", "+mul);
 						// "0,0" is blank, so it works out fine, null t is expected
 						if (val == 0 && mul == 0)
 							b.getSquare(p).setSelectable(false);
