@@ -180,7 +180,8 @@ public class BoardColumn extends JPanel {
 		for (int y = tiles.size() - 1; y >= 0; y--) {
 			BoardTile bt = tiles.get(y);
 			if (bt != null && bt.isVisible()) {
-				g.drawImage(loadTileImg(bt.tile), 0, bt.currentY, null);
+				
+				g.drawImage(loadTileImg(bt.tile), 1, bt.currentY+3, null);
 			}
 		}
 	}
