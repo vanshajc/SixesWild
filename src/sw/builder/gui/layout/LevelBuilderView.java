@@ -24,14 +24,14 @@ public class LevelBuilderView extends JPanel {
 	public static String[][] boardStr = new String[9][9];
 
 	public static BoardPanel boardPanel;
-	
+
 	public LevelBuilderView(BuilderLayoutManager blm) {
 		this.blm = blm;
 		setLayout(null);
-		
+
 		board = new Board();
 		boardPanel = new BoardPanel(board);
-		
+
 		initialize();
 	}
 
@@ -269,12 +269,12 @@ public class LevelBuilderView extends JPanel {
 		add(btnRandomizeBoard);
 		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm,
 				this));
-		
+
 		JButton btnDisplay = new JButton("Display Board");
 		btnDisplay.setBorder(null);
 		btnDisplay.setBounds(500, 510, 150, 40);
 		add(btnDisplay);
-		btnDisplay.addActionListener(new DisplayBoardController(blm,this));
+		btnDisplay.addActionListener(new DisplayBoardController(blm, this));
 
 		JLabel background = new JLabel();
 		add(background);
@@ -533,8 +533,8 @@ public class LevelBuilderView extends JPanel {
 				String input = textFields[i][j].getText();
 				if (isValid(input))
 					board1[j][i] = input;
-				else{
-				textFields[i][j].setText("");	
+				else {
+					textFields[i][j].setText("");
 				}
 			}
 		}
@@ -545,7 +545,22 @@ public class LevelBuilderView extends JPanel {
 	public void setBoard(ArrayList<String> s) {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				textFields[i][j].setText(s.get(i).substring(j * 3, j * 3 + 3));
+					textFields[i][j].setText(s.get(i).substring(j * 3,
+							j * 3 + 3));
+			}
+		}
+	}
+	
+	public void setBoardRandom(ArrayList<String> s) {
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (textFields[i][j].getText().contains("0,0")
+						|| textFields[i][j].getText().contains("*,*")) {
+
+				} else {
+					textFields[i][j].setText(s.get(i).substring(j * 3,
+							j * 3 + 3));
+				}
 			}
 		}
 	}
