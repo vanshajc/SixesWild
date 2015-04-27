@@ -5,7 +5,9 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import sw.app.ApplicationLevelBuilder;
 import sw.app.gui.view.IView;
+import sw.common.model.entity.Board;
 
 public class SplashScreenBuilderView extends JPanel implements IView{
 	/**

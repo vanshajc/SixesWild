@@ -1,4 +1,4 @@
-package sw.builder.gui.layout;
+package sw.builder.gui.controller;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import sw.app.gui.view.IView;
+import sw.builder.gui.layout.LevelBuilderView;
 
 public class LoadButtonController extends JPanel implements ActionListener,IView {
 

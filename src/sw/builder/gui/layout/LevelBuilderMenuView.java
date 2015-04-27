@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import sw.app.gui.view.IView;
+import sw.builder.gui.controller.CreateButtonController;
 
 @SuppressWarnings("serial")
 public class LevelBuilderMenuView extends JPanel implements IView {

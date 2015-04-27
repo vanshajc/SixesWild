@@ -17,6 +17,7 @@ public class BuilderLayoutManager {
 	SplashScreenBuilderView ssbv;
 	LevelBuilderView lbv;
 	LevelBuilderMenuView lbmv;
+	BuilderBoardPanel bbp;
 	JPanel current = null;
 	
 	public BuilderLayoutManager(LevelBuilderJFrame lbjf){
@@ -27,6 +28,7 @@ public class BuilderLayoutManager {
 		lbv = new LevelBuilderView(this);
 		ssbv = new SplashScreenBuilderView(this);
 		lbmv = new LevelBuilderMenuView(this);
+		bbp = new BuilderBoardPanel(this);
 		
 	}
 	
@@ -36,6 +38,11 @@ public class BuilderLayoutManager {
 	
 	public void switchToLevelBuilderMenu(){
 		switchToScreen(lbmv);
+	}
+
+	public void switchToBuilderBoard() {
+		switchToScreen(bbp);
+		
 	}
 	
 	void switchToScreen(JPanel screen){
@@ -61,4 +68,5 @@ public class BuilderLayoutManager {
 			((IView) screen).initialize();
 		}
 	}
+
 }
