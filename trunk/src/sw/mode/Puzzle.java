@@ -11,8 +11,6 @@ import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Game;
 import sw.common.model.entity.Statistics;
-import sw.common.system.manager.CommonResourceManager;
-import sw.common.system.manager.IResourceManager;
 
 /**
  *
@@ -43,9 +41,9 @@ public class Puzzle extends AbstractMode {
 	
 	@Override
 	public boolean hasFinished(Game g, Statistics winStat) {
-		//return (g.getStats().getNumMoves() >= winStat.getNumMoves()); <- actual code, dont uncomment until stats class is done
-		//return g.getStats().getScore() >= 100;  // test
-		return false;
+		//return (g.getStats().getNumMoves() >= winStat.getNumMoves());
+		return g.getStats().getScore() >= 100;  // test
+		//return false;
 	}
 
 	/* (non-Javadoc)

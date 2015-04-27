@@ -16,6 +16,7 @@ import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
+import sw.common.system.factory.TileFrequency;
 
 /** Class to manages the player's progress */
 public class LevelManager {
@@ -46,18 +47,18 @@ public class LevelManager {
 		boolean[][] releaseBottomCorner = new boolean[9][9];
 		releaseBottomCorner[8][8] = true;
 		
-		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
+		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics(), new TileFrequency()));
 		initBoard.getColumn(8).getSquare(4).setTile(null);
 		initBoard.getColumn(8).getSquare(4).setSelectable(false);
 		initBoard.getColumn(8).getSquare(8).setTile(null);
 		initBoard.getColumn(8).getSquare(8).setOnlySix(true);
 		System.out.println("PLEASE WORK: "+initBoard.getColumn(8).getSquare(8).isOnlySix());
-		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics(), releaseBottomCorner));
-		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, lightningStats));
-		list.add(LevelFactory.getEliminationLevel(++lvlCount, initBoard, new Statistics()));
-		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics()));
-		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics(), releaseBottomCorner));
-		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, lightningStats));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics(), releaseBottomCorner, new TileFrequency()));
+		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, lightningStats, new TileFrequency()));
+		list.add(LevelFactory.getEliminationLevel(++lvlCount, initBoard, new Statistics(), new TileFrequency()));
+		list.add(LevelFactory.getPuzzleLevel(++lvlCount, initBoard, new Statistics(), new TileFrequency()));
+		list.add(LevelFactory.getReleaseLevel(++lvlCount, initBoard, new Statistics(), releaseBottomCorner, new TileFrequency()));
+		list.add(LevelFactory.getLightningLevel(++lvlCount, initBoard, lightningStats, new TileFrequency()));
 		
 		// first level is the current level by default
 		current = 0;

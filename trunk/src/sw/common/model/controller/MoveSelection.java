@@ -93,8 +93,8 @@ public class MoveSelection extends BoardController implements IMove {
 
 	@Override
 	public boolean doMove() {
-		// this is commented for testing purposes... uncomment to see the add to six condition in effect
-		//if (!isValid()) return false; 
+		if (!isValid()) return false; 
+		
 		int score = 0;
 		Iterator<Tile> selected = getSelectedTile().iterator();
 		Iterator<Square> squares = getSelectedSquare().iterator();

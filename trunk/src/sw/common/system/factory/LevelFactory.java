@@ -29,7 +29,7 @@ public class LevelFactory {
 		return new Level(lvl, initBoard, winStats, new Release(), freq);
 	}
 	
-	public static Level getReleaseLevel(int lvl, Board initBoard, Statistics winStats, TileFrequency freq, boolean[][] sixLoc) {
+	public static Level getReleaseLevel(int lvl, Board initBoard, Statistics winStats, boolean[][] sixLoc, TileFrequency freq) {
 		return new Level(lvl, initBoard, winStats, new Release(sixLoc), freq);
 	}
 	

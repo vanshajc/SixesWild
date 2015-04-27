@@ -4,13 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import sw.common.model.entity.Board;
-import sw.common.model.entity.Level;
-import sw.common.model.entity.Statistics;
-import sw.common.system.factory.LevelFactory;
 
 public class test extends JFrame {
 
