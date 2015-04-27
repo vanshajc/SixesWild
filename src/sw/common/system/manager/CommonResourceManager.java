@@ -41,6 +41,8 @@ public class CommonResourceManager implements IResourceManager {
 
 	@Override
 	public String getImage(Square square) {
+		if (square.isOnlySix())
+			return imagePath.concat("tile_release.png");
 		return getUnusedImage(square.getTile().getValue());		
 	}
 	
