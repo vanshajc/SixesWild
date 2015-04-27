@@ -61,4 +61,6 @@ public interface IBoard {
 
 	/** Compact tiles into one block for release mode. */
 	void releasePack();
+	
+	void copy(Board b);
 }
