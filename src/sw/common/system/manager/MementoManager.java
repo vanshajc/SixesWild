@@ -195,7 +195,7 @@ public class MementoManager {
 		
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				Point p = new Point(i, j);
+				Point p = new Point(j, i);
 				String str = s.get(i).substring(j * 3, j * 3 + 3);
 				
 				String[] strArray = str.split(",");
