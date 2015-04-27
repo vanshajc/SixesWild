@@ -1,7 +1,7 @@
 /**
  * @file Elimination.java
  * @date Apr 15, 2015 10:48:11 AM
- * @author Tony Vu (quangvu@wpi.edu)
+ * @author Tony Vu (quangvu@wpi.edu), Vanshaj Chowdhary
  */
 package sw.mode;
 
