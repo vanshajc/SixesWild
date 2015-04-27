@@ -7,6 +7,7 @@ package sw.common.model.controller;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.util.Iterator;
@@ -23,14 +24,14 @@ import sw.mode.Release;
 /** Model for an abstract BoardController */
 public abstract class BoardController extends MouseAdapter implements ActionListener {
 	
-	ILevelController       lvlCtrl  = null;
+	protected ILevelController       lvlCtrl  = null;
 	
-	IBoardPanel            panel    = null;
-	IBoard                 board    = null;
-	IBoardLocationManager  locator  = null;
-	IBoardSelectionManager selector = null;
+	protected IBoardPanel            panel    = null;
+	protected IBoard                 board    = null;
+	protected IBoardLocationManager  locator  = null;
+	protected IBoardSelectionManager selector = null;
 	
-	IMoveManager           manager  = null;
+	protected IMoveManager           manager  = null;
 	
 	public BoardController(){}
 	
@@ -154,6 +155,12 @@ public abstract class BoardController extends MouseAdapter implements ActionList
 
 	protected int boardCount() {
 		return board.count();
-	}	
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

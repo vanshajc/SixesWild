@@ -128,7 +128,7 @@ public class MoveSelection extends BoardController implements IMove {
 		return false;
 	}
 	
-	boolean isValid(){
+	protected boolean isValid(){
 		Iterator<Tile> selected = getSelectedTile().iterator();
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		while(selected.hasNext())
@@ -162,13 +162,6 @@ public class MoveSelection extends BoardController implements IMove {
 //			prev = curr;
 //		}
 //		return sum == 6;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	}	
 		
 }
