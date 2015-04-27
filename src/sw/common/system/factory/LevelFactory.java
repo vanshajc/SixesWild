@@ -29,10 +29,6 @@ public class LevelFactory {
 		return new Level(lvl, initBoard, winStats, new Release(), freq);
 	}
 	
-	public static Level getReleaseLevel(int lvl, Board initBoard, Statistics winStats, boolean[][] sixLoc, TileFrequency freq) {
-		return new Level(lvl, initBoard, winStats, new Release(sixLoc), freq);
-	}
-	
 	public static Level getLightningLevel(int lvl, Board initBoard, Statistics winStats, TileFrequency freq) {
 		return new Level(lvl, initBoard, winStats, new Lightning(), freq);
 	}
