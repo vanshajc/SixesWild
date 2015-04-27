@@ -13,6 +13,7 @@ import sw.common.model.controller.IGameController;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveRemove;
 import sw.common.model.controller.MoveSelection;
+import sw.common.model.entity.Board;
 import sw.common.model.entity.Column;
 import sw.common.model.entity.Game;
 import sw.common.model.entity.Statistics;
@@ -25,19 +26,11 @@ public class Release extends AbstractMode {
 	boolean[][] sixLocation = new boolean[9][9];	
 
 	/**
-	 * TODO Remove this later.
+	 * Default Constructor for Release Mode.
 	 */
 	public Release(){
 		
 	}
-	
-	/**
-	 * Constructor for creating a release mode.
-	 * @param sixLocation a 2d boolean array which holds true for all the locations that must have 6.
-	 */
-	public Release(boolean[][] sixLocation){
-		this.sixLocation = sixLocation;		
-	}	
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -62,26 +55,36 @@ public class Release extends AbstractMode {
 	
 	@Override
 	public boolean hasFinished(Game g, Statistics winStats) {
-		// TODO Auto-generated method stub
-		boolean found = false;
-		if (sixLocation == null)
-			return false;
+//		boolean found = false;
+//		if (sixLocation == null)
+//			return false;
+//		
+//		for (int i = 0; i<sixLocation.length; i++)
+//			for (int j = 0; j<9; j++)
+//				if (!sixLocation[i][j])
+//					found = true;
+//		if (!found) return false;
+//		
+//		for (int i = 0; i<sixLocation.length; i++){
+//			for (int j = 0; j<sixLocation[i].length; j++){
+//				Column c = g.getBoard().getColumn(j);
+//				if (c.getTile(i) == null && c.getSquare(i).isOnlySix())
+//					return false;
+//				if (c.getTile(i) == null)
+//					continue;
+//				if (c.getTile(i).getValue() != 6 && sixLocation[i][j])
+//					return false;
+//			}
+//		}
 		
-		for (int i = 0; i<sixLocation.length; i++)
-			for (int j = 0; j<9; j++)
-				if (!sixLocation[i][j])
-					found = true;
-		if (!found) return false;
-		
-		for (int i = 0; i<sixLocation.length; i++){
-			for (int j = 0; j<sixLocation[i].length; j++){
-				Column c = g.getBoard().getColumn(j);
-				if (c.getTile(i) == null && c.getSquare(i).isOnlySix())
-					return false;
-				if (c.getTile(i) == null)
-					continue;
-				if (c.getTile(i).getValue() != 6 && sixLocation[i][j])
-					return false;
+		Board b = g.getBoard();
+		for (int i = 0; i<9; i++){
+			Column c = b.getColumn(i);
+			for (int j = 0; j<9; j++){
+				if (c.getSquare(j).isOnlySix()){
+					if (c.getTile(j) ==null)
+						return false;
+				}
 			}
 		}
 		return true;
