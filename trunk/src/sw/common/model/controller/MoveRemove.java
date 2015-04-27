@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
+import sw.common.model.entity.Level;
 import sw.common.model.entity.Tile;
 
 public class MoveRemove extends BoardController implements IMove {	
@@ -37,11 +38,13 @@ public class MoveRemove extends BoardController implements IMove {
 	
 	@Override
 	public boolean doMove() {
-		//Level level = lm.getCurrent();
+		Level level = lc.getLevel();
 		if (this.getSelectedTile().isEmpty()) return false;
 		//System.out.println(level.getMode());
-		//if (!level.getMode().isValid(this))
-		//	return false;
+		if (!level.getMode().isValid(this)){
+			setBoardController(new MoveSelection());
+			return false;
+		}
 		
 		Point p = this.getPoint(this.getSelectedTile().peek());
 		this.board.remove(p);

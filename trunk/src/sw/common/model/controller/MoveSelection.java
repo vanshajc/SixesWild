@@ -15,6 +15,7 @@ import sw.common.model.entity.Level;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 import sw.mode.Elimination;
+import sw.mode.Release;
 
 /**
  * Class for handling moves that involve selecting squares on the board
@@ -112,8 +113,12 @@ public class MoveSelection extends BoardController implements IMove {
 		}		
 		//boardPack();
 		//boardFill();
+		
 		for (Column c: cols){
-			c.pack();
+			if (lvlCtrl.getLevel().getMode() instanceof Release)
+				c.releasePack();
+			else
+				c.pack();
 			c.fill();
 		}
 		
