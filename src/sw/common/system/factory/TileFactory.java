@@ -17,7 +17,11 @@ public class TileFactory {
 	 * @param freq the new frequencies
 	 */
 	static public void setFreq(TileFrequency freq) {
-		TileFactory.frequencies = freq;
+		if (freq != null && freq instanceof TileFrequency) {
+			TileFactory.frequencies = freq;
+		} else {
+			TileFactory.frequencies = new TileFrequency();
+		}
 	}
 	
 	/**

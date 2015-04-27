@@ -17,28 +17,28 @@ import sw.mode.Release;
 /** Factory model for Level objects */
 public class LevelFactory {
 
-	public static Level getLevel(int lvl, IMode mode, Board initBoard, Statistics winStats) {
-		return new Level(lvl, initBoard, winStats, mode);
+	public static Level getLevel(int lvl, IMode mode, Board initBoard, Statistics winStats, TileFrequency freq) {
+		return new Level(lvl, initBoard, winStats, mode, freq);
 	}
 	
-	public static Level getPuzzleLevel(int lvl, Board initBoard, Statistics winStats) {
-		return new Level(lvl, initBoard, winStats, new Puzzle());
+	public static Level getPuzzleLevel(int lvl, Board initBoard, Statistics winStats, TileFrequency freq) {
+		return new Level(lvl, initBoard, winStats, new Puzzle(), freq);
 	}
 	
-	public static Level getReleaseLevel(int lvl, Board initBoard, Statistics winStats) {
-		return new Level(lvl, initBoard, winStats, new Release());
+	public static Level getReleaseLevel(int lvl, Board initBoard, Statistics winStats, TileFrequency freq) {
+		return new Level(lvl, initBoard, winStats, new Release(), freq);
 	}
 	
-	public static Level getReleaseLevel(int lvl, Board initBoard, Statistics winStats, boolean[][] sixLoc) {
-		return new Level(lvl, initBoard, winStats, new Release(sixLoc));
+	public static Level getReleaseLevel(int lvl, Board initBoard, Statistics winStats, TileFrequency freq, boolean[][] sixLoc) {
+		return new Level(lvl, initBoard, winStats, new Release(sixLoc), freq);
 	}
 	
-	public static Level getLightningLevel(int lvl, Board initBoard, Statistics winStats) {
-		return new Level(lvl, initBoard, winStats, new Lightning());
+	public static Level getLightningLevel(int lvl, Board initBoard, Statistics winStats, TileFrequency freq) {
+		return new Level(lvl, initBoard, winStats, new Lightning(), freq);
 	}
 	
-	public static Level getEliminationLevel(int lvl, Board initBoard, Statistics winStats) {
-		return new Level(lvl, initBoard, winStats, new Elimination());
+	public static Level getEliminationLevel(int lvl, Board initBoard, Statistics winStats, TileFrequency freq) {
+		return new Level(lvl, initBoard, winStats, new Elimination(), freq);
 	}
 	
 }

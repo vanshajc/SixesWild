@@ -66,7 +66,7 @@ public class ScoreBoardView extends JPanel implements IView {
 		btnNewButton_1 = new JButton("Add score test");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
-				addLevelStats(LevelFactory.getLightningLevel(0, new Board(), new Statistics()));
+				addLevelStats(LevelFactory.getLightningLevel(0, new Board(), new Statistics(), null));
 			}
 		});
 		
