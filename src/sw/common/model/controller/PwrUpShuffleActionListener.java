@@ -47,6 +47,7 @@ public class PwrUpShuffleActionListener implements ActionListener {
 			ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
 			
 			lc.getBoardPanel().getBoard().shuffle();
+			lc.getBoardPanel().initialize();
 			return true;
 		}
 

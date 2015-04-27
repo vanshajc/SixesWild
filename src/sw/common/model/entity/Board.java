@@ -187,6 +187,15 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 		for (int i = 0; i<grid.size(); i++){
 			grid.get(i).shuffle();
 		}
+		ArrayList<Column> nGrid = new ArrayList<Column>();
+		while (nGrid.size() != grid.size()){
+			int i = (int)(Math.random()*9);
+			
+			if (!nGrid.contains(grid.get(i)))
+				nGrid.add(grid.get(i));
+		}
+		this.grid = nGrid;
+		
 	}
 	
 	//////////////////////////////////////////////////////////
