@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
@@ -39,6 +41,14 @@ public class DisplayBoardController implements ActionListener {
 		Board b1 = BuilderBoardPanel.setBoardView(b);
 		blm.switchToScreen(LevelBuilderView.boardPanel);
 		LevelBuilderView.boardPanel.getBoard().copy(b1);
+		System.out.println("here");
+		LevelBuilderView.boardPanel.addMouseListener(new MouseAdapter() {			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println("in click event");
+				blm.switchToLevelBuilder();
+			}			
+		});
 		//bbp.setBoardView(b);
 	}
 	/*

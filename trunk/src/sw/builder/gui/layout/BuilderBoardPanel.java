@@ -3,10 +3,13 @@ package sw.builder.gui.layout;
 import java.awt.BorderLayout;
 import java.awt.Point;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import sw.app.gui.controller.PlayGameScreenController;
 import sw.app.gui.view.board.BoardPanel;
 import sw.builder.gui.controller.CreateButtonController;
 import sw.common.model.entity.Board;
@@ -27,27 +30,14 @@ public class BuilderBoardPanel extends JPanel {
 	Board b = new Board();
 
 	public BuilderBoardPanel(BuilderLayoutManager blm) {
+		setLayout(null);
 		this.blm = blm;
 		boardPanel  = new BoardPanel(b);
 
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				groupLayout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(boardPanel, GroupLayout.PREFERRED_SIZE,
-								800, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(111, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-				Alignment.LEADING).addGroup(
-				groupLayout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(boardPanel, GroupLayout.PREFERRED_SIZE,
-								600, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(68, Short.MAX_VALUE)));
-		setLayout(groupLayout);
+		boardPanel.setBounds(0, 0, 500, 500);
+		boardPanel.setBorder(null);
+		add(boardPanel);
+		
 		initialize();
 	}
 
