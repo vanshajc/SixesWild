@@ -171,7 +171,7 @@ public class BoardColumn extends JPanel {
 					g.setColor(Color.BLACK);
 					g.drawRect(0, idxToY(y), imgSize.width, imgSize.height);
 					if (s.isOnlySix())
-						g.drawImage(loadSquareImg(s), 0, idxToY(y)+3, null);
+						g.drawImage(loadSquareImg(s), 0, idxToY(y), null);
 				}
 			}
 		}
@@ -182,8 +182,9 @@ public class BoardColumn extends JPanel {
 		for (int y = 0; y < tiles.size(); y++) {
 		//for (int y = tiles.size() - 1; y >= 0; y--) {
 			BoardTile bt = tiles.get(y);
-			if (bt != null && bt.isVisible()) {				
-				g.drawImage(loadTileImg(bt.tile), 1, bt.currentY+3, null);
+			if (bt != null && bt.isVisible()) {
+				// hack, need to center the image itself
+				g.drawImage(loadTileImg(bt.tile), 1, bt.currentY + 3, null);
 			}
 		}
 	}
