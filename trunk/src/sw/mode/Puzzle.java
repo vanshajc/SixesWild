@@ -13,7 +13,7 @@ import sw.common.model.entity.Game;
 import sw.common.model.entity.Statistics;
 
 /**
- *
+ * Class for representing Puzzle mode.
  */
 public class Puzzle extends AbstractMode {
 
@@ -32,7 +32,7 @@ public class Puzzle extends AbstractMode {
 
 	@Override
 	public boolean isValid(IMove m) {
-		return m instanceof MoveSelection;
+		return true;
 	}
 	
 	public boolean doMove(IMove m){

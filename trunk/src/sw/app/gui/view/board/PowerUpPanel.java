@@ -1,7 +1,12 @@
+/**
+ * @file PowerUpPanel.java
+ * @author Vanshaj Chowdhary, ANDREW PUT YOUR NAME HERE
+ */
 package sw.app.gui.view.board;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -10,9 +15,17 @@ import sw.common.model.controller.PwrUpRemoveActionListener;
 import sw.common.model.controller.PwrUpShuffleActionListener;
 import sw.common.model.controller.PwrUpSwapActionListener;
 import sw.common.model.entity.Game;
+import sw.common.system.manager.CommonResourceManager;
 
+/**
+ * Class for the Powerup Panel on the game.
+ */
 public class PowerUpPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4058514218265371590L;
 	JButton btnSwap;
 	JButton btnShuffle;
 	JButton btnRemove;
@@ -21,13 +34,15 @@ public class PowerUpPanel extends JPanel {
 		setOpaque(false);
 		setBorder(null);
 		
-		btnSwap = new JButton("Swap");
+		CommonResourceManager crm = new CommonResourceManager();
+		btnSwap = new JButton(new ImageIcon(PowerUpPanel.class.getResource(crm.getPowerUpImage("swap"))));
 		btnSwap.addActionListener(new PwrUpSwapActionListener());
 		
-		btnShuffle = new JButton("Shuffle");
+		
+		btnShuffle = new JButton(new ImageIcon(PowerUpPanel.class.getResource(crm.getPowerUpImage("shuffle"))));
 		btnShuffle.addActionListener(new PwrUpShuffleActionListener());
 		
-		btnRemove = new JButton("Remove");
+		btnRemove = new JButton(new ImageIcon(PowerUpPanel.class.getResource(crm.getPowerUpImage("remove"))));
 		btnRemove.addActionListener(new PwrUpRemoveActionListener());
 		
 		GroupLayout groupLayout = new GroupLayout(this);

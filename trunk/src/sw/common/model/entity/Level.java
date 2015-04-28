@@ -1,7 +1,7 @@
 /**
  * @file Level.java
  * @date Apr 11, 2015 4:38:38 PM
- * @author Tony Vu (quangvu@wpi.edu)
+ * @author Tony Vu (quangvu@wpi.edu), Vanshaj Chowdhary
  */
 package sw.common.model.entity;
 
@@ -104,8 +104,11 @@ public class Level {
 		TileFactory.setFreq(freq);
 	}
 
+	/** 
+	 * @return if the user has won the level
+	 */
 	public boolean hasWon() {
-		return false;
+		return mode.hasFinished(game, winStats) && this.getStars()>0;
 	}
 
 	/*
