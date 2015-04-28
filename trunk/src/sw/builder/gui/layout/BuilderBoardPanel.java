@@ -59,7 +59,10 @@ public class BuilderBoardPanel extends JPanel {
 				String mul = b[i][j].substring(2);
 				int mult = Integer.parseInt(mul);
 				Point p1 = new Point(i, j);
-				Tile t1 = new Tile(value, mult);
+				Tile t1 = null;
+				if (value != 0 && mult != 0) {
+					t1 = new Tile (value, mult);
+				}
 				CreateButtonController.board.getSquare(p1).setTile(t1);
 			}
 		}		

@@ -18,6 +18,7 @@ import sw.builder.gui.controller.LoadButtonController;
 import sw.builder.gui.controller.RandomizeButtonController;
 import sw.builder.gui.controller.SaveButtonController;
 import sw.common.model.entity.Board;
+import sw.common.system.manager.TimerTaskManager;
 
 public class LevelBuilderView extends JPanel {
 
@@ -25,14 +26,14 @@ public class LevelBuilderView extends JPanel {
 	public static Board board;
 	public static String[][] boardStr = new String[9][9];
 
-	public static BoardPanel boardPanel;
+	public static LevelBuilderBoardPanel boardPanel;
 
 	public LevelBuilderView(BuilderLayoutManager blm) {
 		this.blm = blm;
 		setLayout(null);
 
 		board = new Board();
-		boardPanel = new BoardPanel(board);
+		boardPanel = new LevelBuilderBoardPanel(board);
 
 		initialize();
 	}
@@ -584,6 +585,22 @@ public class LevelBuilderView extends JPanel {
 			}
 		}
 		return false;
+	}
+	
+	public class LevelBuilderBoardPanel extends BoardPanel {
+
+		public LevelBuilderBoardPanel(Board board) {
+			super(board);
+		}
+
+		/* (non-Javadoc)
+		 * @see sw.app.gui.view.board.BoardPanel#cleanup()
+		 */
+		@Override
+		public void cleanup() {
+
+		}
+		
 	}
 
 }
