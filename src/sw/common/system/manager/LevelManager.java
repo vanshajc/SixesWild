@@ -118,7 +118,6 @@ public class LevelManager {
 			current = list.indexOf(lvl);
 			if (LayoutManager.getCurrentView() instanceof GameplayView) {
 				GameplayView gpv = (GameplayView) LayoutManager.getCurrentView();
-				
 				Level l = LevelFactory.copyLevel(getCurrent());
 				lCtrl = new LevelController(l, gpv);
 			} else {

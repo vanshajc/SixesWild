@@ -2,6 +2,8 @@ package sw.app;
 
 import java.awt.EventQueue;
 
+import javax.swing.JFrame;
+
 import sw.builder.gui.layout.LevelBuilderJFrame;
 
 
@@ -38,7 +40,7 @@ public class ApplicationLevelBuilder {
 	private void initialize() {
 		app = new LevelBuilderJFrame();
 		//app.setBounds(100, 100, 450, 300);
-		//app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }

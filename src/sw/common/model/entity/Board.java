@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -183,18 +184,40 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 		return true;
 	}
 	
+	/**
+	 * Shuffle the Board.
+	 */
 	public void shuffle() {
-		for (int i = 0; i<grid.size(); i++){
-			grid.get(i).shuffle();
+		Board b = new Board(false);
+		LinkedList<Point> points = new LinkedList<Point>();
+		for (int i = 0; i<Board.COLUMN; i++){
+			for (int j = 0; j<Board.ROW; j++){
+				int newX = (int) (Math.random()*Board.COLUMN);
+				int newY = (int) (Math.random()*Board.ROW);
+				Point newP = new Point(newX, newY);
+				Point curr = new Point(i,j);
+				
+				if (this.getSquare(curr).isOnlySix()){
+					b.getSquare(curr).setOnlySix(true);;
+					continue;
+				}
+				if (!this.getSquare(new Point(i, j)).isSelectable())
+					continue;
+				if (this.getTile(curr).getValue() == 6){
+					b.replace(curr, this.getTile(curr));
+					continue;
+				}
+				while (points.contains(newP) || !this.getSquare(newP).selectable || (this.getTile(newP).getValue() ==6)){
+					newX = (int) (Math.random()*Board.COLUMN);
+					newY = (int) (Math.random()*Board.ROW);
+					newP = new Point(newX, newY);
+				}
+				b.replace(curr, this.getTile(newP));
+				points.add(newP);
+			}
 		}
-		ArrayList<Column> nGrid = new ArrayList<Column>();
-		while (nGrid.size() != grid.size()){
-			int i = (int)(Math.random()*9);
-			
-			if (!nGrid.contains(grid.get(i)))
-				nGrid.add(grid.get(i));
-		}
-		this.grid = nGrid;
+		
+		this.copy(b);
 		
 	}
 	

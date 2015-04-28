@@ -243,16 +243,5 @@ public class Column {
 		}
 	}
 
-	/** Shuffle the Column */
-	void shuffle() {
-		ArrayList<Square> newCol = new ArrayList<Square>();
-		while (col.size() > 0){
-			int i = (int) (Math.random() * col.size());
-			newCol.add(col.get(i));
-			col.remove(i);
-		}
-		col.clear();
-		col.addAll(newCol);
-	}
 
 }
