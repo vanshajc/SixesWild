@@ -225,6 +225,10 @@ public class BoardColumn extends JPanel {
 		return img;		
 	}
 	
+	/**
+	 * @param s the Square to load the Image for
+	 * @return the Image to be drawn for the Square
+	 */
 	Image loadSquareImg(Square s){
 		Image img;
 		CommonResourceManager crm = new CommonResourceManager();

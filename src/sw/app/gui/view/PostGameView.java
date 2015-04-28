@@ -30,6 +30,11 @@ import javax.swing.border.TitledBorder;
 public class PostGameView extends JPanel implements IView {
 	
 	Level level;
+	
+	JLabel lblLevelDisplay;
+	JLabel lblTimeDisplay;
+	JLabel lblScoreDisplay;
+	
 	public PostGameView(Level level) {
 		this.level = level;
 		setBackground(Color.WHITE);
@@ -64,32 +69,29 @@ public class PostGameView extends JPanel implements IView {
 		btnReplay.addActionListener(new StartGameController());
 		
 		JLabel lblTime = new JLabel("Time");
-		lblTime.setBounds(285, 349, 74, 36);
+		lblTime.setBounds(210, 349, 150, 36);
 		lblTime.setForeground(new Color(184, 134, 11));
 		lblTime.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		
 		JLabel lblScore = new JLabel("Score");
-		lblScore.setBounds(272, 396, 87, 36);
+		lblScore.setBounds(210, 396, 150, 36);
 		lblScore.setForeground(new Color(184, 134, 11));
 		lblScore.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		
-		JLabel lblLevelDisplay = new JLabel("LevelDisplay");
-		lblLevelDisplay.setBounds(400, 302, 191, 36);
+		lblLevelDisplay = new JLabel("LevelDisplay");
+		lblLevelDisplay.setBounds(300, 301, 250, 36);
 		lblLevelDisplay.setForeground(new Color(184, 134, 11));
 		lblLevelDisplay.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		
-		JLabel lblModeDisplay = new JLabel("ModeDisplay");
-		lblModeDisplay.setBounds(190, 302, 195, 36);
-		lblModeDisplay.setForeground(new Color(184, 134, 11));
-		lblModeDisplay.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		
-		JLabel lblTimeDisplay = new JLabel("TimeDisplay");
+		lblTimeDisplay = new JLabel("TimeDisplay");
+		lblTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTimeDisplay.setBounds(410, 349, 201, 36);
 		lblTimeDisplay.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		lblTimeDisplay.setForeground(new Color(184, 134, 11));
 		lblTimeDisplay.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		
-		JLabel lblScoreDisplay = new JLabel("ScoreDisplay");
+		lblScoreDisplay = new JLabel("ScoreDisplay");
+		lblScoreDisplay.setHorizontalAlignment(SwingConstants.CENTER);
 		lblScoreDisplay.setBounds(410, 396, 201, 36);
 		lblScoreDisplay.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		lblScoreDisplay.setForeground(new Color(184, 134, 11));
@@ -99,36 +101,71 @@ public class PostGameView extends JPanel implements IView {
 		JLabel lblGoodjob = new JLabel(goodjobImg);
 		lblGoodjob.setBounds(29, 11, 747, 250);
 		
-		ImageIcon starImg1 = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/star.png"));
-		JLabel lblstar1 = new JLabel(starImg1);
-		lblstar1.setBounds(317, 443, 50, 50);
-		lblstar1.setHorizontalAlignment(SwingConstants.LEFT);
+//		ImageIcon starImg1 = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/star.png"));
+//		JLabel lblstar1 = new JLabel(starImg1);
+//		lblstar1.setBounds(317, 443, 50, 50);
+//		lblstar1.setHorizontalAlignment(SwingConstants.LEFT);
+//		
+//		ImageIcon starImg2 = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/star.png"));
+//		JLabel lblstar2 = new JLabel(starImg2);
+//		lblstar2.setBounds(377, 443, 46, 50);
+//		
+//		ImageIcon starImg3 = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/star.png"));
+//		JLabel lblstar3 = new JLabel(starImg3);
+//		lblstar3.setBounds(433, 443, 46, 50);
 		
-		ImageIcon starImg2 = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/star.png"));
-		JLabel lblstar2 = new JLabel(starImg2);
-		lblstar2.setBounds(377, 443, 46, 50);
-		
-		ImageIcon starImg3 = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/star.png"));
-		JLabel lblstar3 = new JLabel(starImg3);
-		lblstar3.setBounds(433, 443, 46, 50);
 		setLayout(null);
 		add(lblGoodjob);
-		add(lblModeDisplay);
 		add(lblLevelDisplay);
 		add(lblTime);
 		add(lblTimeDisplay);
 		add(lblScore);
 		add(lblScoreDisplay);
-		add(lblstar1);
-		add(lblstar2);
-		add(lblstar3);
+//		add(lblstar1);
+//		add(lblstar2);
+//		add(lblstar3);
 		add(btnMainmenu);
 		add(btnReplay);
 		add(btnNextLevel);
+		
+		setLevel(level);
 	}
 
 	@Override
 	public void cleanup() {
 		// Nothing to do
+	}
+	
+	public void setLevel(Level l) {
+		lblLevelDisplay.setText(l.toString());
+		lblScoreDisplay.setText(String.valueOf(l.getGame().getStats().getScore()));
+		lblTimeDisplay.setText(l.getGame().getStats().getTime().toString());
+		
+		// add stars
+		int numStars = l.getStars();
+		if (numStars >= 1) {
+			ImageIcon starImg1 = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/star.png"));
+			JLabel lblstar1 = new JLabel(starImg1);
+			lblstar1.setBounds(317, 443, 50, 50);
+			lblstar1.setHorizontalAlignment(SwingConstants.LEFT);
+			add(lblstar1);
+		}
+		
+		if (numStars >= 2) {
+			ImageIcon starImg2 = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/star.png"));
+			JLabel lblstar2 = new JLabel(starImg2);
+			lblstar2.setBounds(377, 443, 46, 50);
+			add(lblstar2);
+		}
+		
+		if (numStars >= 3) {
+			ImageIcon starImg3 = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/star.png"));
+			JLabel lblstar3 = new JLabel(starImg3);
+			lblstar3.setBounds(433, 443, 46, 50);
+			add(lblstar3);
+		}
+		
+		invalidate();
+		repaint();		
 	}
 }

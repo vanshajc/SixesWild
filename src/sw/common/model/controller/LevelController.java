@@ -105,6 +105,9 @@ public class LevelController implements ILevelController, IGameController, IMove
 		if (hasFinished()) {
 			TimerTaskManager.cancelAll();
 			
+			Time t = getTimePanel().getTime();
+			lvl.getGame().getStats().setTime(t);
+			
 			if (lvl.hasWon()) {
 				LayoutManager.switchToPostGameView(true, lvl);
 			} else {
