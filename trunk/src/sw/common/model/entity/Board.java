@@ -198,16 +198,21 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 				Point curr = new Point(i,j);
 				
 				if (this.getSquare(curr).isOnlySix()){
-					b.getSquare(curr).setOnlySix(true);;
+					b.getSquare(curr).setOnlySix(true);
+					b.getSquare(curr).setSelectable(false);
 					continue;
 				}
-				if (!this.getSquare(new Point(i, j)).isSelectable())
+				if (!this.getSquare(curr).isSelectable()){
+					b.replace(curr, this.getTile(curr));
+					b.getSquare(curr).setSelectable(false);
 					continue;
-				if (this.getTile(curr).getValue() == 6){
+				}
+				if (this.getTile(curr)!=null && this.getTile(curr).getValue() == 6){
 					b.replace(curr, this.getTile(curr));
 					continue;
 				}
-				while (points.contains(newP) || !this.getSquare(newP).selectable || (this.getTile(newP).getValue() ==6)){
+				while (points.contains(newP) || !this.getSquare(newP).selectable || 
+						(this.getTile(newP) != null && (this.getTile(newP).getValue() ==6))){
 					newX = (int) (Math.random()*Board.COLUMN);
 					newY = (int) (Math.random()*Board.ROW);
 					newP = new Point(newX, newY);

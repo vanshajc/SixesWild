@@ -34,7 +34,7 @@ public class Lightning extends AbstractMode {
 
 	@Override
 	public boolean isValid(IMove m) {
-		return m instanceof MoveSelection;
+		return true;
 	}
 	
 

@@ -157,19 +157,6 @@ public class MoveSelection extends BoardController implements IMove {
 		}
 		
 		return sum == 6;
-//		
-//		if (!selected.hasNext()) return false; // none selected somehow
-//		Tile prev = selected.next();
-//		if (prev.getValue()==6) return false; // if only a six is selected
-//		int sum = prev.getValue();
-//		while (selected.hasNext()){
-//			Tile curr = selected.next();
-//			sum += curr.getValue();
-//			if (!this.board.adjacent(prev, curr))
-//				return false;
-//			prev = curr;
-//		}
-//		return sum == 6;
 	}	
 		
 }
