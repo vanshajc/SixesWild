@@ -42,7 +42,7 @@ public class MementoManager {
 		Statistics winStats = new Statistics();
 		winStats.setNumMoves(Integer.parseInt(move));
 		
-		String time1 = String.format("%02d:%02d:%02d", 0, Integer.parseInt(time), 0);
+		String time1 = String.format("%02d:%02d:%02d", 0, 0, Integer.parseInt(time));
 		winStats.setTime(Time.valueOf(time1));
 		
 		// Tile value and multiplier percentage
