@@ -179,8 +179,8 @@ public class BoardColumn extends JPanel {
 
 	/** Paint the Tiles in the column */
 	void paintTiles(Graphics g) {
-		//for (int y = 0; y < tiles.size(); y++) {
-		for (int y = tiles.size() - 1; y >= 0; y--) {
+		for (int y = 0; y < tiles.size(); y++) {
+		//for (int y = tiles.size() - 1; y >= 0; y--) {
 			BoardTile bt = tiles.get(y);
 			if (bt != null && bt.isVisible()) {				
 				g.drawImage(loadTileImg(bt.tile), 1, bt.currentY, null);

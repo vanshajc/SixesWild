@@ -17,6 +17,13 @@ public class Statistics {
 	int score = 0;
 	int stars = 0;
 	
+	public void copy(Statistics s) {
+		this.current = s.current;
+		this.numMoves = s.numMoves;
+		this.score = s.score;
+		this.stars = s.stars;
+	}
+	
 	/**
 	 * @return the current
 	 */

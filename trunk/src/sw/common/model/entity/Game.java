@@ -37,6 +37,15 @@ public class Game {
 	 */
 	public int[] getPwrUps() {
 		return pwrUps;
-	}	
+	}
+	
+	public void copy(Game g) {
+		this.stats.copy(g.stats);
+		this.board.copy(g.board);
+		
+		this.pwrUps[PWRUP_SWAP] = g.pwrUps[PWRUP_SWAP];
+		this.pwrUps[PWRUP_SHUFFLE] = g.pwrUps[PWRUP_SHUFFLE];
+		this.pwrUps[PWRUP_REMOVE] = g.pwrUps[PWRUP_REMOVE];
+	}
 	
 }

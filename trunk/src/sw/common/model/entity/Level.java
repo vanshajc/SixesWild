@@ -68,7 +68,15 @@ public class Level {
 		}			
 		return 0;
 	}
+	
+	public Board getInitBoard() {
+		return initBoard;
+	}
 
+	public TileFrequency getTileFrequency() {
+		return freq;
+	}
+	
 	public int getLevelNum() {
 		return levelNum;
 	}

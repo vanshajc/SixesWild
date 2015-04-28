@@ -27,6 +27,7 @@ import sw.app.gui.view.board.ITimePanel;
 import sw.app.gui.view.board.PowerUpPanel;
 import sw.app.gui.view.board.ScorePanel;
 import sw.app.gui.view.board.TimeMovePanel;
+import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
 
@@ -89,8 +90,9 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		
 		scorePanel.setScore(level.getGame().getStats().getScore());
 		timeMovePanel.setMove(level.getGame().getStats().getNumMoves());
+		powerUpPanel.setPwrUp(level.getGame());
 		
-		gameInfoPanel.setLevelName(level.toString());		
+		gameInfoPanel.setLevelName(level.toString());
 	}
 	
 	private void initializeLayout() {
