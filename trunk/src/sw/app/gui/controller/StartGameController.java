@@ -21,7 +21,8 @@ public class StartGameController implements ActionListener {
 		Level l = lvlm.getCurrent();
 		if (current instanceof PlayGameScreenView) {
 			l = ((PlayGameScreenView) current).getSelectedLevel();
-		}		
+		}
+		System.out.println(l);
 		LayoutManager.switchToGameplayView(false);		
 		lvlm.setCurrent(l);
 		LayoutManager.initCurrentView();

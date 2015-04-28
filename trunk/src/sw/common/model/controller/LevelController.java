@@ -44,17 +44,16 @@ public class LevelController implements ILevelController, IGameController, IMove
 	//Boolean hasFinished = false;
 	Stack<IMove> moves = new Stack<IMove>();
 	
-	public LevelController(Level lvl, IGameplayView gpv) {		
+	public LevelController(Level level, IGameplayView gpv) {		
 		this.gpv = gpv;
-		
-		setLevel(lvl);		
+		System.out.println(level);
+		setLevel(level);		
 	}
 	
 	public void setLevel(Level lvl) {
 		this.lvl = lvl;
-
-		game = lvl.getGame();
-		mode = lvl.getMode();
+		game = this.lvl.getGame();
+		mode = this.lvl.getMode();
 		
 		lvl.initialize(this);
 		
