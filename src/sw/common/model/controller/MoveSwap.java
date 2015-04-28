@@ -81,8 +81,10 @@ public class MoveSwap extends BoardController implements IMove {
 	 * @param s2
 	 */
 	boolean swap(Point p1, Point p2) {
-		if (!this.lvlCtrl.getLevel().getMode().isValid(this))
+		if (!this.lvlCtrl.getLevel().getMode().isValid(this)){
+			System.out.println("Went through?");
 			return false;
+		}
 		Square s1 = getSquare(p1);
 		Square s2 = getSquare(p2);
 		if (s1 != null && s2 != null) {

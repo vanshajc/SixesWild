@@ -1,7 +1,7 @@
 /**
  * @file CommonResourceManager.java
  * @date Apr 11, 2015 5:11:30 PM
- * @author Tony Vu (quangvu@wpi.edu)
+ * @author Tony Vu (quangvu@wpi.edu), Vanshaj Chowdhary
  */
 package sw.common.system.manager;
 
@@ -13,7 +13,7 @@ import sw.common.model.entity.Tile;
 import sw.common.system.factory.TileFactory;
 
 /**
- *
+ * Class for getting locations of different images
  */
 public class CommonResourceManager implements IResourceManager {
 	
@@ -76,6 +76,10 @@ public class CommonResourceManager implements IResourceManager {
 		return null;
 	}
 	
+	
+	public String getPowerUpImage(String name){
+		return imagePath.concat("button_"+name+".png");
+	}
 	
 
 }
