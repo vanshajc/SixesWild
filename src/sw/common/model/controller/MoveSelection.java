@@ -5,7 +5,6 @@
 package sw.common.model.controller;
 
 import java.awt.Point;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -100,10 +99,10 @@ public class MoveSelection extends BoardController implements IMove {
 	public boolean doMove() {
 		if (!isValid()) return false; 
 		
-		int score = 0;
 		Iterator<Tile> selected = getSelectedTile().iterator();
 		Iterator<Square> squares = getSelectedSquare().iterator();
 		ArrayList<Column> cols = new ArrayList<Column>();
+		int score = 10 * this.getSelectedSquare().size();
 		while (selected.hasNext()) {
 			Tile t = selected.next();
 			Level lvl = lvlCtrl.getLevel();
@@ -112,7 +111,7 @@ public class MoveSelection extends BoardController implements IMove {
 			if (lvl.getMode() instanceof Elimination)
 				squares.next().setMarked(true);
 			Point p = getPoint(t);
-			score += t.getValue() * t.getMultiplier();
+			score*= t.getMultiplier();
 			boardRemove(p);
 		}		
 		//boardPack();

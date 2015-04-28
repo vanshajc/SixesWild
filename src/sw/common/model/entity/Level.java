@@ -59,11 +59,12 @@ public class Level {
 	}
 
 	public int getStars() {
-		if (game.stats.score >= 75) {
+		//TODO REPLACE THESE WITH ACTUAL SCORES.... FROM WIN STATS
+		if (game.stats.score >= 75000) {
 			return 3;
-		} else if (game.stats.score >= 50) {
+		} else if (game.stats.score >= 50000) {
 			return 2;
-		} else if (game.stats.score >= 25) {
+		} else if (game.stats.score >= 10000) {
 			return 1;
 		}			
 		return 0;
