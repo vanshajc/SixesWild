@@ -40,6 +40,8 @@ public class Elimination extends AbstractMode {
 		Board board = g.getBoard();
 		for (int i = 0; i<9; i++){
 			for (int j = 0; j<9; j++){
+				if (!board.getColumn(j).getSquare(i).isSelectable())
+					continue;
 				if (!board.getColumn(j).getSquare(i).getMarked())
 					return false;
 			}
