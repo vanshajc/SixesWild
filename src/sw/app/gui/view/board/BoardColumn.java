@@ -182,8 +182,7 @@ public class BoardColumn extends JPanel {
 		//for (int y = 0; y < tiles.size(); y++) {
 		for (int y = tiles.size() - 1; y >= 0; y--) {
 			BoardTile bt = tiles.get(y);
-			if (bt != null && bt.isVisible()) {
-				
+			if (bt != null && bt.isVisible()) {				
 				g.drawImage(loadTileImg(bt.tile), 1, bt.currentY, null);
 			}
 		}
@@ -227,11 +226,23 @@ public class BoardColumn extends JPanel {
 	}
 	
 	Image loadSquareImg(Square s){
-		ImageIcon img;
+		Image img;
 		CommonResourceManager crm = new CommonResourceManager();
 		
-		img = new ImageIcon(crm.getImage(s));
-		return img.getImage();
+		// Tries to load the image from IResourceManager, if that doesn't work
+		// then use common image
+		String path = crm.getImage(s);
+		if (!im.containsKey(path)) {
+			img = new ImageIcon(BoardColumn.class.getResource(path)).getImage();
+			if (img == null) {
+				img = new ImageIcon(BoardColumn.class.getResource(crm
+						.getImage(s))).getImage();
+			}
+			im.put(crm.getImage(s), img); // Store the image
+		} else {
+			img = im.get(path);
+		}
+		return img;
 	}
 
 	/**
