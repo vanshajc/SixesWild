@@ -7,6 +7,7 @@ package sw.common.system.factory;
 
 import sw.common.model.controller.IMode;
 import sw.common.model.entity.Board;
+import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.mode.Elimination;
@@ -19,6 +20,24 @@ public class LevelFactory {
 
 	public static Level getLevel(int lvl, IMode mode, Board initBoard, Statistics winStats, TileFrequency freq) {
 		return new Level(lvl, initBoard, winStats, mode, freq);
+	}
+	
+	public static Level copyLevel(Level lvl) {
+		Level l = null;
+		if (lvl.getMode() instanceof Puzzle) {
+			l = getPuzzleLevel(lvl.getLevelNum(), lvl.getInitBoard(), lvl.getWinStats(), lvl.getTileFrequency());
+			l.getGame().copy(lvl.getGame());
+		} else if (lvl.getMode() instanceof Release) {
+			l = getReleaseLevel(lvl.getLevelNum(), lvl.getInitBoard(), lvl.getWinStats(), lvl.getTileFrequency());
+			l.getGame().copy(lvl.getGame());
+		} else if (lvl.getMode() instanceof Lightning) {
+			l = getLightningLevel(lvl.getLevelNum(), lvl.getInitBoard(), lvl.getWinStats(), lvl.getTileFrequency());
+			l.getGame().copy(lvl.getGame());
+		} else if (lvl.getMode() instanceof Puzzle) {
+			l = getPuzzleLevel(lvl.getLevelNum(), lvl.getInitBoard(), lvl.getWinStats(), lvl.getTileFrequency());
+			l.getGame().copy(lvl.getGame());
+		}
+		return l;
 	}
 	
 	public static Level getPuzzleLevel(int lvl, Board initBoard, Statistics winStats, TileFrequency freq) {

@@ -9,20 +9,25 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import sw.common.model.controller.PwrUpRemoveActionListener;
 import sw.common.model.controller.PwrUpShuffleActionListener;
 import sw.common.model.controller.PwrUpSwapActionListener;
+import sw.common.model.entity.Game;
 
 public class PowerUpPanel extends JPanel {
+	
+	JButton btnSwap;
+	JButton btnShuffle;
+	JButton btnRemove;
 	
 	public PowerUpPanel() {
 		setOpaque(false);
 		setBorder(null);
 		
-		JButton btnSwap = new JButton("Swap");
+		btnSwap = new JButton("Swap");
 		btnSwap.addActionListener(new PwrUpSwapActionListener());
 		
-		JButton btnShuffle = new JButton("Shuffle");
+		btnShuffle = new JButton("Shuffle");
 		btnShuffle.addActionListener(new PwrUpShuffleActionListener());
 		
-		JButton btnRemove = new JButton("Remove");
+		btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new PwrUpRemoveActionListener());
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -46,6 +51,24 @@ public class PowerUpPanel extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
+	}
+	
+	public void setPwrUp(Game game) {
+		if (game.getPwrUps()[Game.PWRUP_REMOVE] == 0) {
+			btnRemove.setEnabled(false);
+		} else {
+			btnRemove.setEnabled(true);
+		}
+		if (game.getPwrUps()[Game.PWRUP_SWAP] == 0) {
+			btnSwap.setEnabled(false);
+		} else {
+			btnSwap.setEnabled(true);
+		}
+		if (game.getPwrUps()[Game.PWRUP_SHUFFLE] == 0) {
+			btnShuffle.setEnabled(false);
+		} else {
+			btnShuffle.setEnabled(true);
+		}
 	}
 	
 }

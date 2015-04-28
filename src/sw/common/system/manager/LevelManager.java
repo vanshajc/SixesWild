@@ -118,7 +118,9 @@ public class LevelManager {
 			current = list.indexOf(lvl);
 			if (LayoutManager.getCurrentView() instanceof GameplayView) {
 				GameplayView gpv = (GameplayView) LayoutManager.getCurrentView();
-				lCtrl = new LevelController(getCurrent(), gpv);
+				
+				Level l = LevelFactory.copyLevel(getCurrent());
+				lCtrl = new LevelController(l, gpv);
 			} else {
 				lCtrl = null;
 				throw new IllegalStateException("Hasn't switched to gameplay view!");
