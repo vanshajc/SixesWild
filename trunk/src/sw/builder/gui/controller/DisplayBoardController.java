@@ -38,7 +38,7 @@ public class DisplayBoardController implements ActionListener {
 		//setBoardView(b);
 		//blm.switchToBuilderBoard();
 		String[][] b = LevelBuilderView.getBoard();
-		Board b1 = BuilderBoardPanel.setBoardView(b);
+		Board b1 = setBoardView(b);
 		blm.switchToScreen(LevelBuilderView.boardPanel);
 		LevelBuilderView.boardPanel.getBoard().copy(b1);
 		System.out.println("here");
@@ -51,17 +51,38 @@ public class DisplayBoardController implements ActionListener {
 		});
 		//bbp.setBoardView(b);
 	}
-	/*
-	 * public void setBoardView(String[][] b) { for (int i = 0; i < 9; i++) {
-	 * for (int j = 0; j < 9; j++) { String val = b[i][j].substring(0, 1); int
-	 * value = Integer.parseInt(val); String mul = b[i][j].substring(2); int
-	 * mult = Integer.parseInt(mul); Point p1 = new Point(i, j); Tile t1 = new
-	 * Tile(value, mult);
-	 * CreateButtonController.board.getSquare(p1).setTile(t1); } } for (int i =
-	 * 0; i < 9; i++) { for (int j = 0; j < 9; j++) { Point p1 = new Point(i,
-	 * j);
-	 * System.out.print(CreateButtonController.board.getSquare(p1).getTile().
-	 * getValue() + " "); } System.out.println(""); } }
-	 */
+	public static Board setBoardView(String[][] b) {
+		Board b1 = new Board();
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				String val = b[i][j].substring(0, 1);
+				int value = Integer.parseInt(val);
+				String mul = b[i][j].substring(2);
+				int mult = Integer.parseInt(mul);
+				Point p1 = new Point(i, j);
+				Tile t1 = null;
+				if (value != 0 && mult != 0) {
+					t1 = new Tile (value, mult);
+				}
+				CreateButtonController.board.getSquare(p1).setTile(t1);
+			}
+		}		
+		b1 = CreateButtonController.board;
+		return b1;
+		//b.copy(b1);
+		
+		//boardPanel.setBoard(b1);
+		//boardPanel.initialize();
+		
+		
+//		for (int i = 0; i < 9; i++) {
+//			for (int j = 0; j < 9; j++) {
+//				Point p1 = new Point(i, j);
+//				System.out.print(b1.getSquare(p1).getTile().getValue() + " ");
+//			}
+//			System.out.println("");
+//		}
+		
+	}
 
 }
