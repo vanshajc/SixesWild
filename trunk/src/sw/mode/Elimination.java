@@ -6,16 +6,13 @@
 package sw.mode;
 
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IGameController;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Board;
-import sw.common.model.entity.Column;
 import sw.common.model.entity.Game;
-import sw.common.model.entity.Level;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Statistics;
 import sw.common.model.entity.Tile;
@@ -67,7 +64,6 @@ public class Elimination extends AbstractMode {
 	}
 
 	private class EliminationMoveSelection extends MoveSelection {
-		
 		@Override
 		public boolean doMove() {
 			if (!isValid()) return false; 
@@ -93,4 +89,5 @@ public class Elimination extends AbstractMode {
 			return true;
 		}
 	}
+
 }

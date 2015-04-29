@@ -17,14 +17,21 @@ import sw.common.system.factory.TileFrequency;
 /** The model for an arbitrary game level */
 public class Level {
 	
+	/** Holds the current game being played. */
 	Game game;
+	
+	/** Holds the winning statistics for the level. */
 	Statistics winStats;
+	
+	/** Holds the mode of the level. */
 	IMode mode;
+	
 	int levelNum;
 
+	/** */
 	TileFrequency freq;
 	
-	// The initial layout of the Board
+	/** */
 	Board initBoard;
 
 	public Level(int levelNum, Board initBoard, Statistics winStats, IMode mode, TileFrequency freq) {

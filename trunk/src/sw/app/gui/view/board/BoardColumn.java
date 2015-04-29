@@ -92,6 +92,7 @@ public class BoardColumn extends JPanel {
 				}
 			}
 		}
+		
 	}
 
 	/** Synch the tiles to be displayed with the underlying Column
@@ -118,7 +119,7 @@ public class BoardColumn extends JPanel {
 			}
 		}
 		// Add new Tiles, if any
-		for (int y = 0; y < column.count(); y++) {
+		for (int y = 0; y <column.size(); y++) {
 			Tile t = column.getTile(y); // Should not be null here...
 			if (t != null && !tilesContains(t)) {
 				BoardTile bt = new BoardTile(t);
