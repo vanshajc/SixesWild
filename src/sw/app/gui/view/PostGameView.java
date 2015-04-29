@@ -52,25 +52,52 @@ public class PostGameView extends JPanel implements IView {
 		
 		ImageIcon buttonMainMenu = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_mainMenu.png"));
 		ImageIcon newBtnMainMenu = new ImageIcon(buttonMainMenu.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
-		JButton btnMainmenu = new JButton(newBtnMainMenu);
-		btnMainmenu.setBounds(86, 504, 152, 64);
-		btnMainmenu.setVerticalAlignment(SwingConstants.BOTTOM);
-		btnMainmenu.setBorder(null);
-		btnMainmenu.addActionListener(new MainMenuController());
-		
-		ImageIcon buttonNextLevel = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_next.png"));
-		ImageIcon newBtnNextLevel = new ImageIcon(buttonNextLevel.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
-		JButton btnNextLevel = new JButton(newBtnNextLevel);
-		btnNextLevel.setBounds(562, 504, 152, 64);
-		btnNextLevel.setBorder(null);
-		btnNextLevel.addActionListener(new PostGameController());
+		ImageIcon btnMainMenuRollover = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_mainMenu_Rollover.png"));
+		ImageIcon newBtnMainMenuRollover = new ImageIcon(btnMainMenuRollover.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnMainMenuPressed = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_mainMenu_Pressed.png"));
+		ImageIcon newBtnMainMenuPressed = new ImageIcon(btnMainMenuPressed.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
+		JButton btnMainMenu = new JButton(newBtnMainMenu);
+		btnMainMenu.setBorderPainted(false);
+		btnMainMenu.setBackground(Color.WHITE);
+		btnMainMenu.setBounds(86, 500, 152, 64);
+		btnMainMenu.setVerticalAlignment(SwingConstants.BOTTOM);
+		btnMainMenu.setBorder(null);
+		btnMainMenu.addActionListener(new MainMenuController());
+		btnMainMenu.setRolloverEnabled(true);
+		btnMainMenu.setRolloverIcon(newBtnMainMenuRollover);
+		btnMainMenu.setPressedIcon(newBtnMainMenuPressed);
+
+		ImageIcon buttonNext = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_next.png"));
+		ImageIcon newBtnNext = new ImageIcon(buttonNext.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon buttonNextRollover = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_next_Rollover.png"));
+		ImageIcon newBtnNextRollover = new ImageIcon(buttonNextRollover.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon buttonNextPressed = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_next_Pressed.png"));
+		ImageIcon newBtnNextPressed = new ImageIcon(buttonNextPressed.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
+		JButton btnNext = new JButton(newBtnNext);
+		btnNext.setBackground(Color.WHITE);
+		btnNext.setBorderPainted(false);
+		btnNext.setBounds(562, 500, 152, 64);
+		btnNext.setBorder(null);
+		btnNext.addActionListener(new PostGameController());
+		btnNext.setRolloverEnabled(true);
+		btnNext.setRolloverIcon(newBtnNextRollover);
+		btnNext.setPressedIcon(newBtnNextPressed);
 		
 		ImageIcon buttonReplay = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_replay.png")); 
 		ImageIcon newBtnReplay = new ImageIcon(buttonReplay.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon buttonReplayRollover = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_replay_Rollover.png"));
+		ImageIcon newBtnReplayRollover = new ImageIcon(buttonReplayRollover.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon buttonReplayPressed = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_replay_Pressed.png"));
+		ImageIcon newBtnReplayPressed = new ImageIcon(buttonReplayPressed.getImage().getScaledInstance(152, 64, java.awt.Image.SCALE_SMOOTH));
 		JButton btnReplay = new JButton(newBtnReplay);
-		btnReplay.setBounds(324, 504, 152, 64);
+		btnReplay.setBackground(Color.WHITE);
+		btnReplay.setBorderPainted(false);
+		btnReplay.setBounds(324, 500, 152, 64);
 		btnReplay.setBorder(null);
 		btnReplay.addActionListener(new StartGameController());
+		btnReplay.setRolloverEnabled(true);
+		btnReplay.setRolloverIcon(newBtnReplayRollover);
+		btnReplay.setPressedIcon(newBtnReplayPressed);
 		
 		JLabel lblTime = new JLabel("Time");
 		lblTime.setBounds(210, 349, 150, 36);
@@ -128,9 +155,9 @@ public class PostGameView extends JPanel implements IView {
 //		add(lblstar1);
 //		add(lblstar2);
 //		add(lblstar3);
-		add(btnMainmenu);
+		add(btnMainMenu);
 		add(btnReplay);
-		add(btnNextLevel);
+		add(btnNext);
 		
 		setLevel(level);
 	}
