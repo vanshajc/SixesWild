@@ -98,7 +98,14 @@ public class PlayGameScreenView extends JPanel implements IView{
 		btnStartGame.setRolloverIcon(newBtnStartRollover);
 		btnStartGame.setPressedIcon(newBtnStartPressed);
 		add(btnStartGame);
-		
+
+		ImageIcon backgroundImg = new ImageIcon(PlayGameScreenView.class.getResource("/sw/resource/image/secondBackground.png"));
+		ImageIcon newBackground = new ImageIcon(backgroundImg.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
+		JLabel background = new JLabel(newBackground);
+		background.setVerticalAlignment(SwingConstants.TOP);
+		background.setBackground(Color.WHITE);
+		background.setBounds(0, 0, 800, 600);
+		add(background);
 		/*
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
