@@ -6,15 +6,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class SplashScreenView extends JPanel implements IView {
+	public SplashScreenView() {
+	}
 	
-	final String res = "/sw/resource/image/SplashScreenImage.png";
+	final String res = "/sw/resource/image/splashScreenImage.png";
 	
 	public void initialize() {}
 
 	public void cleanup() {}
 	
 	public void paintComponent(Graphics g) {
+		ImageIcon splashScreen = new ImageIcon(SplashScreenView.class.getResource(res));
+		ImageIcon newSplashScreen = new ImageIcon(splashScreen.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
 		super.paintComponent(g);
-		g.drawImage(new ImageIcon(SplashScreenView.class.getResource(res)).getImage(), 0, 0, null);
+		g.drawImage(newSplashScreen.getImage(), 0, 0, null);
 	}
 }

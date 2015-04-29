@@ -1,5 +1,6 @@
 package sw.app.gui.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
@@ -10,6 +11,9 @@ import javax.swing.JPanel;
 import sw.app.gui.controller.CreditScreenController;
 import sw.app.gui.controller.PlayGameScreenController;
 import sw.app.gui.controller.ScoreboardScreenController;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.SwingConstants;
 
 public class MainMenuView extends JPanel implements IView {
 	/**
@@ -25,35 +29,67 @@ public class MainMenuView extends JPanel implements IView {
 	public void initialize() {
 		setLayout(null);
 		
-		JButton btnPlay = new JButton();
+		ImageIcon buttonPlay = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/button_play.png"));
+		ImageIcon newBtnPlay = new ImageIcon(buttonPlay.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnPlayRollover = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/button_play_Rollover.png"));
+		ImageIcon newBtnPlayRollover = new ImageIcon(btnPlayRollover.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnPlayPressed = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/button_play_Pressed.png"));
+		ImageIcon newBtnPlayPressed = new ImageIcon(btnPlayPressed.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		JButton btnPlay = new JButton(newBtnPlay);
+		btnPlay.setBorderPainted(false);
+		btnPlay.setBackground(Color.WHITE);
+		btnPlay.setBounds(280, 220, 227, 59);
 		btnPlay.setBorder(null);
-		add(btnPlay);
-		btnPlay.setBounds(300, 250, 190, 50);
-		btnPlay.setIcon(new ImageIcon("src/sw/resource/image/PlayButton.png"));
-
-		JButton btnScoreboard = new JButton();
-		btnScoreboard.setBorder(null);
-		add(btnScoreboard);
-		btnScoreboard.setBounds(300, 325, 190, 50);
-		btnScoreboard.setIcon(new ImageIcon(
-				"src/sw/resource/image/ScoreboardButton.png"));
-
-		JButton btnCredits = new JButton();
-		btnCredits.setBorder(null);
-		add(btnCredits);
-		btnCredits.setBounds(300, 400, 190, 50);
-		btnCredits.setIcon(new ImageIcon(
-				"src/sw/resource/image/CreditsButton.png"));
-
+		btnPlay.setContentAreaFilled(false);
 		btnPlay.addActionListener(new PlayGameScreenController());
+		btnPlay.setRolloverEnabled(true);
+		btnPlay.setRolloverIcon(newBtnPlayRollover);
+		btnPlay.setPressedIcon(newBtnPlayPressed);
+		add(btnPlay);
+		
+		ImageIcon buttonScoreboard = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/button_scoreboard.png"));
+		ImageIcon newBtnScoreboard = new ImageIcon(buttonScoreboard.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnScoreboardRollover = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/button_scoreboard_Rollover.png"));
+		ImageIcon newBtnScoreboardRollover = new ImageIcon(btnScoreboardRollover.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnScoreboardPressed = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/button_scoreboard_Pressed.png"));
+		ImageIcon newBtnScoreboardPressed = new ImageIcon(btnScoreboardPressed.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		JButton btnScoreboard = new JButton(newBtnScoreboard);
+		btnScoreboard.setBorderPainted(false);
+		btnScoreboard.setBackground(Color.WHITE);
+		btnScoreboard.setBounds(280, 310, 227, 69);
+		btnScoreboard.setBorder(null);
+		btnScoreboard.setContentAreaFilled(false);
 		btnScoreboard.addActionListener(new ScoreboardScreenController());
+		btnScoreboard.setRolloverEnabled(true);
+		btnScoreboard.setRolloverIcon(newBtnScoreboardRollover);
+		btnScoreboard.setPressedIcon(newBtnScoreboardPressed);
+		add(btnScoreboard);
+		
+		ImageIcon buttonCredits = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/button_credits.png"));
+		ImageIcon newBtnCredits = new ImageIcon(buttonCredits.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnCreditsRollover = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/button_credits_Rollover.png"));
+		ImageIcon newBtnCreditsRollover = new ImageIcon(btnCreditsRollover.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnCreditsPressed = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/button_credits_Pressed.png"));
+		ImageIcon newBtnCreditsPressed = new ImageIcon(btnCreditsPressed.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));		
+		JButton btnCredits = new JButton(newBtnCredits);
+		btnCredits.setBorderPainted(false);
+		btnCredits.setBackground(Color.WHITE);
+		btnCredits.setBounds(280, 400, 227, 69);
+		btnCredits.setBorder(null);
+		btnCredits.setContentAreaFilled(false);
 		btnCredits.addActionListener(new CreditScreenController());
+		btnCredits.setRolloverEnabled(true);
+		btnCredits.setRolloverIcon(newBtnCreditsRollover);
+		btnCredits.setPressedIcon(newBtnCreditsPressed);
+		add(btnCredits);
 
-		JLabel background = new JLabel();
-		add(background);
+		ImageIcon backgroundImg = new ImageIcon(MainMenuView.class.getResource("/sw/resource/image/splashScreen.png"));
+		ImageIcon newBackground = new ImageIcon(backgroundImg.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
+		JLabel background = new JLabel(newBackground);
+		background.setVerticalAlignment(SwingConstants.TOP);
+		background.setBackground(Color.WHITE);
 		background.setBounds(0, 0, 800, 600);
-		background.setIcon(new ImageIcon(
-				"src/sw/resource/image/SixesWildMainMenuImage.png"));
+		add(background);
 	}
 
 	public Dimension getPrefferredSize() {
