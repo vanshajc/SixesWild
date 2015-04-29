@@ -5,6 +5,7 @@
 package sw.app.gui.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -15,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.StartGameController;
@@ -32,8 +34,6 @@ public class PlayGameScreenView extends JPanel implements IView{
 	
 	JComboBox<String> levelList;
 	
-	JButton btnStartGame;
-	
 	public PlayGameScreenView() {
 		this.lvlm = SixesWildJFrame.getLevelManager();	
 		this.lvlList = lvlm.getLevels();
@@ -41,12 +41,20 @@ public class PlayGameScreenView extends JPanel implements IView{
 	}
 	
 	public void initialize() {
-		setBackground(Color.WHITE);		
 		
 		JLabel lblLevel = new JLabel("Level");
+		lblLevel.setBounds(120, 124, 100, 45);
+		lblLevel.setForeground(new Color(184, 134, 11));
+		lblLevel.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
+		add(lblLevel);
 		
 		levelList = new JComboBox<String>();
+		((JLabel)levelList.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		levelList.setBounds(280, 124, 400, 45);
+		levelList.setForeground(new Color(184, 134, 11));
+		levelList.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		levelList.setBackground(Color.WHITE);
+		add(levelList);
 		
 		// Load all available levels to the combobox
 		for (int i = 0; i < lvlList.size(); i++) {
@@ -62,7 +70,7 @@ public class PlayGameScreenView extends JPanel implements IView{
 		ImageIcon btnBackPressed = new ImageIcon(PlayGameScreenView.class.getResource("/sw/resource/image/button_back_Pressed.png"));
 		ImageIcon newBtnBackPressed = new ImageIcon(btnBackPressed.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
 		JButton btnBack = new JButton(newBtnBack);
-		btnBack.setBounds(10, 500, 227, 69);
+		btnBack.setBounds(20, 500, 227, 69);
 		btnBack.setBorderPainted(false);
 		btnBack.setBackground(Color.WHITE);
 		btnBack.setBorder(null);
@@ -73,9 +81,25 @@ public class PlayGameScreenView extends JPanel implements IView{
 		btnBack.setPressedIcon(newBtnBackPressed);
 		add(btnBack);
 		
-		btnStartGame = new JButton("Start Game");
+		ImageIcon buttonStart = new ImageIcon(PlayGameScreenView.class.getResource("/sw/resource/image/button_startGame.png"));
+		ImageIcon newBtnStart = new ImageIcon(buttonStart.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnStartRollover = new ImageIcon(PlayGameScreenView.class.getResource("/sw/resource/image/button_startGame_Rollover.png"));
+		ImageIcon newBtnStartRollover = new ImageIcon(btnStartRollover.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnStartPressed = new ImageIcon(PlayGameScreenView.class.getResource("/sw/resource/image/button_startGame_Pressed.png"));
+		ImageIcon newBtnStartPressed = new ImageIcon(btnStartPressed.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		JButton btnStartGame = new JButton(newBtnStart);
+		btnStartGame.setBounds(550, 500, 227, 69);
+		btnStartGame.setBorderPainted(false);
+		btnStartGame.setBackground(Color.WHITE);
+		btnStartGame.setBorder(null);
+		btnStartGame.setContentAreaFilled(false);
 		btnStartGame.addActionListener(new StartGameController());
+		btnStartGame.setRolloverEnabled(true);
+		btnStartGame.setRolloverIcon(newBtnStartRollover);
+		btnStartGame.setPressedIcon(newBtnStartPressed);
+		add(btnStartGame);
 		
+		/*
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -104,8 +128,8 @@ public class PlayGameScreenView extends JPanel implements IView{
 						.addComponent(btnBack)
 						.addComponent(btnStartGame))
 					.addContainerGap())
-		);
-		setLayout(groupLayout);
+		);*/
+		setLayout(null);
 	}
 
 	@Override
