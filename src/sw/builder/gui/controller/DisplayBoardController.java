@@ -33,10 +33,6 @@ public class DisplayBoardController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// bbp = new BuilderBoardPanel(blm);
-		// String[][] b = lbv.getBoard();
-		// setBoardView(b);
-		// blm.switchToBuilderBoard();
 		String[][] b = LevelBuilderView.getBoard();
 		Board b1;
 		try {
@@ -53,7 +49,6 @@ public class DisplayBoardController implements ActionListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		// bbp.setBoardView(b);
 	}
 
 	public static Board setBoardView(String[][] b,LevelBuilderView lbv) throws Exception {
@@ -79,6 +74,9 @@ public class DisplayBoardController implements ActionListener {
 				} else if (value == 0 || mult == 0) {
 					CreateButtonController.board.getSquare(p1).setTile(null);
 				} else if(value != -1 || mult != -1) {
+					if(value == 6 && lbv.getModeList().equals("Elimination") && lbv.getModeList().equals("Release")){
+						throw new Exception("Invalid board type for tile selection");
+					}
 					t1 = new Tile(value, mult);
 					CreateButtonController.board.getSquare(p1).setTile(t1);
 					System.out.println(CreateButtonController.board.getSquare(p1).getTile());

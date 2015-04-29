@@ -1,6 +1,6 @@
-1
-Release
-0
+15
+Puzzle
+15
 0
 2
 3
