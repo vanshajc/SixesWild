@@ -23,13 +23,16 @@ public class MoveSwap extends BoardController implements IMove {
 	Point p2;
 	boolean moveStarted = false;
 	
+	BoardController prev;
+	
 	/**
 	 * Constructor for a swap powerup move.
 	 * @param bp the board panel
 	 * @param level the current level being played
 	 */
-	public MoveSwap(ILevelController lc) {
-		super(lc);		
+	public MoveSwap(ILevelController lc, BoardController prev) {
+		super(lc);
+		this.prev = prev;
 	}
 
 	/* (non-Javadoc)
@@ -59,9 +62,7 @@ public class MoveSwap extends BoardController implements IMove {
 
 	@Override
 	public boolean doMove() {
-		//if (!this.level.getMode().isValid(this))
-		//	return false;
-		setBoardController(new MoveSelection());
+		setBoardController(prev);
 		
 		return swap(p1, p2);
 	}

@@ -50,4 +50,9 @@ public interface IBoardPanel extends IView {
 	 * @param bc the new board controller
 	 */
 	void setBoardController(BoardController bc);
+
+	/**
+	 * @return the current board controller
+	 */
+	BoardController getBoardController();
 }

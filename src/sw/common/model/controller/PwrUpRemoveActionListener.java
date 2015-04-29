@@ -26,15 +26,39 @@ public class PwrUpRemoveActionListener implements ActionListener {
 		ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
 		
 		int pwrUps[] = lc.getLevel().getGame().getPwrUps();
-		if (pwrUps[Game.PWRUP_REMOVE] > 0) {
-			pwrUps[Game.PWRUP_REMOVE]--;
-			BoardController bc = new MoveRemove(lc);
+		if (pwrUps[Game.PWRUP_REMOVE] > 0) {			
+			BoardController bc = new PwrUpRemove(lc, lc.getBoardPanel().getBoardController(), (JButton) e.getSource());
 			lc.getBoardPanel().setBoardController(bc);
-			
-			if (pwrUps[Game.PWRUP_REMOVE] == 0) {
-				((JButton) e.getSource()).setEnabled(false);
-			}
 		}			
 	}
 
+	private class PwrUpRemove extends MoveRemove {
+
+		JButton btn;
+		
+		public PwrUpRemove(ILevelController lc, BoardController prev, JButton btn) {
+			super(lc, prev);
+			this.btn = btn;
+		}
+
+		/* (non-Javadoc)
+		 * @see sw.common.model.controller.MoveRemove#doMove()
+		 */
+		@Override
+		public boolean doMove() {
+			lvlCtrl.getBoardPanel().setBoardController(prev);
+			if (super.doMove()) {
+				int pwrUps[] = lvlCtrl.getLevel().getGame().getPwrUps();
+				if (pwrUps[Game.PWRUP_REMOVE] > 0) {
+					pwrUps[Game.PWRUP_REMOVE]--;
+				}
+				if (pwrUps[Game.PWRUP_REMOVE] <= 0) {
+					btn.setEnabled(false);
+				}
+				return true;
+			}
+			return false;
+		}		
+		
+	}
 }

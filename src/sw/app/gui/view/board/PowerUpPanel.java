@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import sw.app.gui.view.SixesWildJFrame;
 import sw.common.model.controller.PwrUpRemoveActionListener;
 import sw.common.model.controller.PwrUpShuffleActionListener;
 import sw.common.model.controller.PwrUpSwapActionListener;
@@ -34,7 +35,7 @@ public class PowerUpPanel extends JPanel {
 		setOpaque(false);
 		setBorder(null);
 		
-		CommonResourceManager crm = new CommonResourceManager();
+		CommonResourceManager crm = SixesWildJFrame.getCommonResourceManager();
 		btnSwap = new JButton(new ImageIcon(PowerUpPanel.class.getResource(crm.getPowerUpImage("swap"))));
 		btnSwap.addActionListener(new PwrUpSwapActionListener());
 		

@@ -7,6 +7,7 @@ package sw.common.system.factory;
 
 import sw.common.model.controller.IMode;
 import sw.common.model.entity.Board;
+import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.mode.Elimination;
@@ -32,8 +33,9 @@ public class LevelFactory {
 		} else if (lvl.getMode() instanceof Lightning) {
 			l = getLightningLevel(lvl.getLevelNum(), lvl.getInitBoard(), lvl.getWinStats(), lvl.getTileFrequency());
 			l.getGame().copy(lvl.getGame());
-		} else if (lvl.getMode() instanceof Elimination){
+		} else if (lvl.getMode() instanceof Elimination) {
 			l = getEliminationLevel(lvl.getLevelNum(), lvl.getInitBoard(), lvl.getWinStats(), lvl.getTileFrequency());
+			l.getGame().copy(lvl.getGame());
 		}
 		return l;
 	}

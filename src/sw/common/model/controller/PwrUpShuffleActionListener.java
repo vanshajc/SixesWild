@@ -28,16 +28,17 @@ public class PwrUpShuffleActionListener implements ActionListener {
 		IMoveManager mm = lc.getMoveManager();
 		int pwrUps[] = lc.getLevel().getGame().getPwrUps();
 		if (pwrUps[Game.PWRUP_SHUFFLE] > 0) {
-			pwrUps[Game.PWRUP_SHUFFLE]--;
-			mm.pushMove(new MoveShuffle());
-			
-			if (pwrUps[Game.PWRUP_SHUFFLE] == 0) {
-				((JButton) e.getSource()).setEnabled(false);
-			}
-		}		
+			mm.pushMove(new PwrUpShuffle((JButton) e.getSource()));	
+		}
 	}
 	
-	private class MoveShuffle implements IMove {
+	private class PwrUpShuffle implements IMove {
+		
+		JButton btn;
+		
+		PwrUpShuffle(JButton btn) {
+			this.btn = btn;
+		}
 
 		/* (non-Javadoc)
 		 * @see sw.common.model.controller.IMove#doMove()
@@ -47,7 +48,14 @@ public class PwrUpShuffleActionListener implements ActionListener {
 			ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
 			
 			lc.getBoardPanel().getBoard().shuffle();
-			lc.getBoardPanel().initialize();
+			
+			int pwrUps[] = lc.getLevel().getGame().getPwrUps();
+			if (pwrUps[Game.PWRUP_SHUFFLE] > 0) {
+				pwrUps[Game.PWRUP_SHUFFLE]--;
+			}
+			if (pwrUps[Game.PWRUP_SHUFFLE] == 0) {
+				btn.setEnabled(false);
+			}
 			return true;
 		}
 

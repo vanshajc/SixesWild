@@ -9,12 +9,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import sw.common.model.entity.Column;
-import sw.common.model.entity.Level;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
-import sw.mode.Elimination;
-import sw.mode.Release;
 
 /**
  * Class for handling moves that involve selecting squares on the board
@@ -83,11 +79,15 @@ public class MoveSelection extends BoardController implements IMove {
 		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
 				Point p = panel.xyToPoint(e.getPoint());
-				if (this.board.getTile(p) == null){
-					clearSelection();
-					return;
+				
+				Square s = getSquare(p);
+				if (s.isSelectable()) {
+					if (this.board.getTile(p) == null) {
+						clearSelection();
+						return;
+					}
+					select(p);
 				}
-				select(p);
 			} catch (Exception e1) {
 				clearSelection();
 				System.err.println("Selection out of bound!");
@@ -100,30 +100,16 @@ public class MoveSelection extends BoardController implements IMove {
 		if (!isValid()) return false; 
 		
 		Iterator<Tile> selected = getSelectedTile().iterator();
-		Iterator<Square> squares = getSelectedSquare().iterator();
-		ArrayList<Column> cols = new ArrayList<Column>();
 		int score = 10 * this.getSelectedSquare().size();
 		while (selected.hasNext()) {
 			Tile t = selected.next();
-			Level lvl = lvlCtrl.getLevel();
-			cols.add(lvl.getGame().getBoard().getColumn(lvl.getGame().getBoard().findCol(t)));
 			
-			if (lvl.getMode() instanceof Elimination)
-				squares.next().setMarked(true);
 			Point p = getPoint(t);
-			score*= t.getMultiplier();
+			score *= t.getMultiplier();
 			boardRemove(p);
 		}		
-		//boardPack();
-		//boardFill();
-		
-		for (Column c: cols){
-			if (lvlCtrl.getLevel().getMode() instanceof Release)
-				c.releasePack();
-			else
-				c.pack();
-			c.fill();
-		}
+		boardPack();
+		boardFill();
 		
 		updateScore(score);
 		clearSelection();

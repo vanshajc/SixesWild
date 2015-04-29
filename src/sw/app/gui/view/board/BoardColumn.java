@@ -32,7 +32,7 @@ public class BoardColumn extends JPanel {
 	Dimension imgSize;
 
 	/** Common icon image map */
-	HashMap<String, Image> im;
+	//HashMap<String, Image> im;
 
 	/** Resource manager */
 	IResourceManager rm;
@@ -52,7 +52,7 @@ public class BoardColumn extends JPanel {
 	 *            column index
 	 */
 	public BoardColumn(BoardPanel boardPanel, int i) {
-		this.im = boardPanel.imageMap;
+		//this.im = boardPanel.imageMap;
 
 		// Any initialization that cannot handle repeat call can go here,
 		// otherwise it will go to initialize
@@ -80,11 +80,11 @@ public class BoardColumn extends JPanel {
 			s.Reset();
 			if (s != null && !s.isEmpty()) {
 				Tile t = s.getTile();
-				String str = rm.getImage(t);
-				if (!im.containsKey(str)) {
-					im.put(str, loadTileImg(t)); // Guarantee to get an Image
-													// here
-				}
+//				String str = rm.getImage(t);
+//				if (!im.containsKey(str)) {
+//					im.put(str, loadTileImg(t)); // Guarantee to get an Image
+//													// here
+//				}
 				BoardTile bt = new BoardTile(t);
 				if (bt != null) { // There was a bug here before, so just to be
 									// safe
@@ -207,23 +207,30 @@ public class BoardColumn extends JPanel {
 	 * @return the Image to be drawn for the Tile
 	 */
 	Image loadTileImg(Tile t) {
-		Image img;
-		CommonResourceManager crm = new CommonResourceManager();
-
-		// Tries to load the image from IResourceManager, if that doesn't work
-		// then use common image
-		String path = crm.getImage(t);
-		if (!im.containsKey(path)) {
-			img = new ImageIcon(BoardColumn.class.getResource(path)).getImage();
-			if (img == null) {
-				img = new ImageIcon(BoardColumn.class.getResource(crm
-						.getImage(t))).getImage();
-			}
-			im.put(crm.getImage(t), img); // Store the image
-		} else {
-			img = im.get(path);
+		Image img = null;
+		String path = rm.getImage(t);
+		if (path != null) {
+			img = rm.getImage(path);
 		}
-		return img;		
+		return img;
+		
+//		Image img;
+//		CommonResourceManager crm = new CommonResourceManager();
+//
+//		// Tries to load the image from IResourceManager, if that doesn't work
+//		// then use common image
+//		String path = crm.getImage(t);
+//		if (!im.containsKey(path)) {
+//			img = new ImageIcon(BoardColumn.class.getResource(path)).getImage();
+//			if (img == null) {
+//				img = new ImageIcon(BoardColumn.class.getResource(crm
+//						.getImage(t))).getImage();
+//			}
+//			im.put(crm.getImage(t), img); // Store the image
+//		} else {
+//			img = im.get(path);
+//		}
+//		return img;		
 	}
 	
 	/**
@@ -231,23 +238,30 @@ public class BoardColumn extends JPanel {
 	 * @return the Image to be drawn for the Square
 	 */
 	Image loadSquareImg(Square s){
-		Image img;
-		CommonResourceManager crm = new CommonResourceManager();
-		
-		// Tries to load the image from IResourceManager, if that doesn't work
-		// then use common image
-		String path = crm.getImage(s);
-		if (!im.containsKey(path)) {
-			img = new ImageIcon(BoardColumn.class.getResource(path)).getImage();
-			if (img == null) {
-				img = new ImageIcon(BoardColumn.class.getResource(crm
-						.getImage(s))).getImage();
-			}
-			im.put(crm.getImage(s), img); // Store the image
-		} else {
-			img = im.get(path);
+		Image img = null;
+		String path = rm.getImage(s);
+		if (path != null) {
+			img = rm.getImage(path);
 		}
 		return img;
+		
+//		Image img;
+//		CommonResourceManager crm = new CommonResourceManager();
+//		
+//		// Tries to load the image from IResourceManager, if that doesn't work
+//		// then use common image
+//		String path = crm.getImage(s);
+//		if (!im.containsKey(path)) {
+//			img = new ImageIcon(BoardColumn.class.getResource(path)).getImage();
+//			if (img == null) {
+//				img = new ImageIcon(BoardColumn.class.getResource(crm
+//						.getImage(s))).getImage();
+//			}
+//			im.put(crm.getImage(s), img); // Store the image
+//		} else {
+//			img = im.get(path);
+//		}
+//		return img;
 	}
 
 	/**

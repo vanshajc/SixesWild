@@ -20,6 +20,7 @@ import sw.common.model.entity.Game;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.model.controller.IMove;
+import sw.common.model.controller.IMode.MOVE_POLICY;
 import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
 import sw.common.system.manager.TimerTaskManager;
@@ -66,10 +67,13 @@ public class LevelController implements ILevelController, IGameController, IMove
 	
 	public boolean pushMove(IMove move) {
 		if (move.doMove()) {
-			game.getStats().setNumMoves(1);
+			if (mode.getMovePolicy() == MOVE_POLICY.COUNT_UP) {
+				game.getStats().setNumMoves(1);
+			} else {
+				game.getStats().setNumMoves(-1);	
+			}
 			
 			moves.push(move);
-			//hasFinished = mode.hasFinished(game, lvl.getWinStats());
 			return true;
 		}
 		return false;
@@ -78,7 +82,11 @@ public class LevelController implements ILevelController, IGameController, IMove
 	public boolean undoMove() {
 		if (!moves.isEmpty()) {
 			if (moves.peek().undoMove()) {
-				game.getStats().setNumMoves(-1);
+				if (mode.getMovePolicy() == MOVE_POLICY.COUNT_UP) {
+					game.getStats().setNumMoves(-1);
+				} else {
+					game.getStats().setNumMoves(1);	
+				}
 				moves.pop();
 				return true;
 			}

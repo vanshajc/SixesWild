@@ -8,13 +8,13 @@ package sw.mode;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import sw.app.gui.view.SixesWildJFrame;
 import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IGameController;
 import sw.common.model.controller.IMode;
 import sw.common.model.controller.IMove;
 import sw.common.model.entity.Game;
 import sw.common.model.entity.Statistics;
-import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
 /** A generic Mode implementation */
@@ -25,7 +25,7 @@ public abstract class AbstractMode implements IMode, ActionListener {
 	 */
 	@Override
 	public IResourceManager getResourceManger() {
-		return new CommonResourceManager();
+		return SixesWildJFrame.getCommonResourceManager();
 	}
 
 	/* (non-Javadoc)
@@ -60,6 +60,14 @@ public abstract class AbstractMode implements IMode, ActionListener {
 	@Override
 	public TIMER_POLICY getTimerPolicy() {
 		return TIMER_POLICY.COUNT_UP;
+	}
+
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.IMode#getMovePolicy()
+	 */
+	@Override
+	public MOVE_POLICY getMovePolicy() {
+		return MOVE_POLICY.COUNT_UP;
 	}
 
 	/* (non-Javadoc)

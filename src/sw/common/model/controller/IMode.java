@@ -17,6 +17,11 @@ public interface IMode {
 		COUNT_DOWN
 	}
 	
+	static enum MOVE_POLICY {
+		COUNT_UP,
+		COUNT_DOWN
+	}
+	
 	IResourceManager getResourceManger();
 	
 	BoardController getBoardController();
@@ -34,6 +39,7 @@ public interface IMode {
 	
 	void initializeGame(IGameController g);
 	
-	
 	TIMER_POLICY getTimerPolicy();
+	
+	MOVE_POLICY getMovePolicy();
 }

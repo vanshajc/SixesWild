@@ -5,25 +5,21 @@
 package sw.common.model.controller;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Tile;
-import sw.mode.Release;
 
-public class MoveRemove extends BoardController implements IMove {	
-
-	ILevelController lc;
-
-	public MoveRemove() {
-		super();
-	}
-
-	public MoveRemove(ILevelController lc) {
+public class MoveRemove extends BoardController implements IMove {
+	
+	BoardController prev;
+	
+	public MoveRemove(ILevelController lc, BoardController prev) {
 		super(lc);
-		this.lc = lc;
+		this.prev = prev;
 	}
-
+	
 	@Override
 	public void mouseClicked(MouseEvent e){
 		try {
@@ -35,29 +31,24 @@ public class MoveRemove extends BoardController implements IMove {
 			.println("Out of bound error in BoardColumnController::mouseClicked!");
 		}
 	}
-
+	
 	@Override
 	public boolean doMove() {
-		Level level = lc.getLevel();
+		Level level = lvlCtrl.getLevel();
 		if (this.getSelectedTile().isEmpty()) return false;
 		//System.out.println(level.getMode());
 		if (!level.getMode().isValid(this)){
 			setBoardController(new MoveSelection());
 			return false;
 		}
-
+		
 		Point p = this.getPoint(this.getSelectedTile().peek());
 		this.board.remove(p);
-
-		//TODO remove the instance of later....
-		if (this.lvlCtrl.getLevel().getMode() instanceof Release)
-			this.board.releasePack();
-		else
-			this.board.pack();
+		this.board.pack();
 		this.board.fill();
-
-		setBoardController(new MoveSelection());
-
+		
+		setBoardController(prev);
+		
 		return true;
 	}
 
@@ -66,7 +57,7 @@ public class MoveRemove extends BoardController implements IMove {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	protected void selectionHandler(MouseEvent e) {
 		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
