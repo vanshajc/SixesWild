@@ -38,7 +38,7 @@ public class DisplayBoardController implements ActionListener {
 		// setBoardView(b);
 		// blm.switchToBuilderBoard();
 		String[][] b = LevelBuilderView.getBoard();
-		Board b1 = setBoardView(b);
+		Board b1 = setBoardView(b,lbv);
 		blm.switchToScreen(LevelBuilderView.boardPanel);
 		LevelBuilderView.boardPanel.getBoard().copy(b1);
 		LevelBuilderView.boardPanel.addMouseListener(new MouseAdapter() {
@@ -50,7 +50,7 @@ public class DisplayBoardController implements ActionListener {
 		// bbp.setBoardView(b);
 	}
 
-	public static Board setBoardView(String[][] b) {
+	public static Board setBoardView(String[][] b,LevelBuilderView lbv) {
 		Board b1 = new Board();
 		Tile t1;
 		int mult = -1;
@@ -65,6 +65,9 @@ public class DisplayBoardController implements ActionListener {
 					mult = Integer.parseInt(mul);
 				}
 				if (mul.equals("*") || val.equals("*")) {
+					if(lbv.getModeList().equals("Release")){
+						
+					}
 					CreateButtonController.board.getSquare(p1).setTile(null);
 					CreateButtonController.board.getSquare(p1).setOnlySix(true);
 				} else if (value == 0 || mult == 0) {
