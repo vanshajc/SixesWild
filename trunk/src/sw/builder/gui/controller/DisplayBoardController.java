@@ -41,11 +41,9 @@ public class DisplayBoardController implements ActionListener {
 		Board b1 = setBoardView(b);
 		blm.switchToScreen(LevelBuilderView.boardPanel);
 		LevelBuilderView.boardPanel.getBoard().copy(b1);
-		System.out.println("here");
 		LevelBuilderView.boardPanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				System.out.println("in click event");
 				blm.switchToLevelBuilder();
 			}
 		});
@@ -74,23 +72,13 @@ public class DisplayBoardController implements ActionListener {
 				} else if(value != -1 || mult != -1) {
 					t1 = new Tile(value, mult);
 					CreateButtonController.board.getSquare(p1).setTile(t1);
+					System.out.println(CreateButtonController.board.getSquare(p1).getTile());
+				} else {
+					
 				}
 			}
 		}
 		b1 = CreateButtonController.board;
 		return b1;
-		// b.copy(b1);
-
-		// boardPanel.setBoard(b1);
-		// boardPanel.initialize();
-
-		// for (int i = 0; i < 9; i++) {
-		// for (int j = 0; j < 9; j++) {
-		// Point p1 = new Point(i, j);
-		// System.out.print(b1.getSquare(p1).getTile().getValue() + " ");
-		// }
-		// System.out.println("");
-		// }
-
 	}
 }

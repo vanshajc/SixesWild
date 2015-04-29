@@ -90,6 +90,9 @@ public class LoadButtonController extends JPanel implements ActionListener,IView
 		String oneM = input.get(13);
 		String twoM = input.get(14);
 		String threeM = input.get(15);
+		String oneStar = input.get(25);
+		String twoStar = input.get(26);
+		String threeStar = input.get(27);
 		ArrayList<String> board = new ArrayList<String>();
 		board.add(input.get(16));
 		board.add(input.get(17));
@@ -118,6 +121,9 @@ public class LoadButtonController extends JPanel implements ActionListener,IView
 		lbv.setmTwoPercent(twoM);
 		lbv.setmThreePercent(threeM);
 		lbv.setBoard(board);
+		lbv.setOneStar(oneStar);
+		lbv.setTwoStar(twoStar);
+		lbv.setThreeStar(threeStar);
 		
 	}
 

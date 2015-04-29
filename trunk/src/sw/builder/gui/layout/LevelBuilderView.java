@@ -69,6 +69,12 @@ public class LevelBuilderView extends JPanel {
 	JTextField twoMultPercent;
 	JLabel threeMult;
 	JTextField threeMultPercent;
+	JLabel oneStar;
+	JTextField oneStarScore;
+	JLabel twoStar;
+	JTextField twoStarScore;
+	JLabel threeStar;
+	JTextField threeStarScore;
 	static JTextField textFields[][];
 
 	public void initialize() {
@@ -233,6 +239,36 @@ public class LevelBuilderView extends JPanel {
 		threeMultPercent.setBounds(340, 140, 35, 20);
 		threeMultPercent.setBorder(null);
 		add(threeMultPercent);
+
+		oneStar = new JLabel();
+		oneStar.setBorder(null);
+		oneStar.setBounds(620, 20, 100, 20);
+		oneStar.setText("oneStarScore:");
+		add(oneStar);
+		oneStarScore = new JTextField();
+		oneStarScore.setBounds(705, 20, 40, 20);
+		oneStarScore.setBorder(null);
+		add(oneStarScore);
+
+		twoStar = new JLabel();
+		twoStar.setBorder(null);
+		twoStar.setBounds(620, 50, 100, 20);
+		twoStar.setText("twoStarScore:");
+		add(twoStar);
+		twoStarScore = new JTextField();
+		twoStarScore.setBounds(710, 50, 40, 20);
+		twoStarScore.setBorder(null);
+		add(twoStarScore);
+
+		threeStar = new JLabel();
+		threeStar.setBorder(null);
+		threeStar.setBounds(620, 80, 100, 20);
+		threeStar.setText("threeStarScore:");
+		add(threeStar);
+		threeStarScore = new JTextField();
+		threeStarScore.setBounds(715, 80, 40, 20);
+		threeStarScore.setBorder(null);
+		add(threeStarScore);
 
 		textFields = new JTextField[9][9];
 		for (int i = 0; i < 9; i++) {
@@ -529,6 +565,51 @@ public class LevelBuilderView extends JPanel {
 		this.threeMultPercent.setText(s);
 	}
 
+	public int getOneStar() {
+		int score;
+		try {
+			score = Integer.parseInt(this.oneStarScore.getText());
+		} catch (NumberFormatException e) {
+			this.oneStarScore.setText("");
+			return -1;
+		}
+		return score;
+	}
+
+	public void setOneStar(String s) {
+		this.oneStarScore.setText(s);
+	}
+
+	public int getTwoStar() {
+		int score;
+		try {
+			score = Integer.parseInt(this.twoStarScore.getText());
+		} catch (NumberFormatException e) {
+			this.twoStarScore.setText("");
+			return -1;
+		}
+		return score;
+	}
+
+	public void setTwoStar(String s) {
+		this.twoStarScore.setText(s);
+	}
+
+	public int getThreeStar() {
+		int score;
+		try {
+			score = Integer.parseInt(this.threeStarScore.getText());
+		} catch (NumberFormatException e) {
+			this.threeStarScore.setText("");
+			return -1;
+		}
+		return score;
+	}
+
+	public void setThreeStar(String s) {
+		this.threeStarScore.setText(s);
+	}
+
 	public static String[][] getBoard() {
 		String[][] board1 = new String[9][9];
 		for (int i = 0; i < 9; i++) {
@@ -548,12 +629,11 @@ public class LevelBuilderView extends JPanel {
 	public void setBoard(ArrayList<String> s) {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-					textFields[i][j].setText(s.get(i).substring(j * 3,
-							j * 3 + 3));
+				textFields[i][j].setText(s.get(i).substring(j * 3, j * 3 + 3));
 			}
 		}
 	}
-	
+
 	public void setBoardRandom(ArrayList<String> s) {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -586,21 +666,23 @@ public class LevelBuilderView extends JPanel {
 		}
 		return false;
 	}
-	
+
 	public class LevelBuilderBoardPanel extends BoardPanel {
 
 		public LevelBuilderBoardPanel(Board board) {
 			super(board);
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see sw.app.gui.view.board.BoardPanel#cleanup()
 		 */
 		@Override
 		public void cleanup() {
 
 		}
-		
+
 	}
 
 }

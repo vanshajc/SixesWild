@@ -38,12 +38,16 @@ public class SaveButtonController implements ActionListener {
 		int mtwoPer = lbv.getTwoMultPercent();
 		int mthreePer = lbv.getThreeMultPercent();
 		String[][] board = lbv.getBoard();
+		int oneStar = lbv.getOneStar();
+		int twoStar = lbv.getTwoStar();
+		int threeStar = lbv.getThreeStar();
 
 		if (level == -1 || moves == -1 || time == -1 || swap == -1
 				|| shuffle == -1 || remove == -1 || onePer == -1
 				|| twoPer == -1 || threePer == -1 || fourPer == -1
 				|| fivePer == -1 || sixPer == -1 || monePer == -1
-				|| mtwoPer == -1 || mthreePer == -1) {
+				|| mtwoPer == -1 || mthreePer == -1 || oneStar == -1
+				|| twoStar == -1 || threeStar == -1) {
 			return;
 		}
 		try {
@@ -72,6 +76,9 @@ public class SaveButtonController implements ActionListener {
 				}
 				save.println("");
 			}
+			save.println(oneStar);
+			save.println(twoStar);
+			save.println(threeStar);
 			save.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
