@@ -108,7 +108,8 @@ public class ScorePanel extends JPanel implements IScorePanel {
 	@Override
 	public void setScore(int score) {
 		this.score.setValue(score);
-		this.score.setString(reverse(Integer.toString(score)));
+		//this.score.setString(reverse(Integer.toString(score)));
+		this.score.setString(Integer.toString(score));
 	}
 	
 	String reverse(String s){
