@@ -202,6 +202,9 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 					b.getSquare(curr).setSelectable(false);
 					continue;
 				}
+				if (this.getSquare(curr).getMarked()){
+					b.getSquare(curr).setMarked(true);
+				}
 				if (!this.getSquare(curr).isSelectable()){
 					b.replace(curr, this.getTile(curr));
 					b.getSquare(curr).setSelectable(false);
