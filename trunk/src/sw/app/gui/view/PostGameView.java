@@ -109,7 +109,7 @@ public class PostGameView extends JPanel implements IView {
 		lblScore.setForeground(new Color(184, 134, 11));
 		lblScore.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		
-		JLabel lblLevelDisplay = new JLabel("LevelDisplay");
+		lblLevelDisplay = new JLabel("LevelDisplay");
 		lblLevelDisplay.setBounds(300, 301, 250, 36);
 		lblLevelDisplay.setForeground(new Color(184, 134, 11));
 		lblLevelDisplay.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
