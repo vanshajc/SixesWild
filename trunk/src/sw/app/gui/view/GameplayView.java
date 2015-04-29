@@ -53,8 +53,7 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 	String quitBtnPath = "/sw/resource/image/button_quit.png";
 	ImageIcon quitBtnImg;	
 	
-	// Background image
-	Image background = new ImageIcon(SplashScreenView.class.getResource("/sw/resource/image/SplashScreenResizedtest.png")).getImage();
+	
 	
 	private JButton btnPostgamemenutest;
 	
@@ -71,6 +70,7 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		this.quitButton    = new JButton();
 		this.mmc           = new MainMenuController();
 		this.quitBtnImg    = new ImageIcon(GameplayView.class.getResource(quitBtnPath));
+		setLayout(null);
 	}
 	
 	//////////////////////////////////////////////////////////
@@ -237,8 +237,10 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		ImageIcon background = new ImageIcon(GameplayView.class.getResource("/sw/resource/image/firstBackground.png"));
+		ImageIcon newBackground = new ImageIcon(background.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
 		super.paintComponent(g);
-		g.drawImage(background, 0, 0, null);
+		g.drawImage(newBackground.getImage(), 0, 0, null);
 	}	
 	
 }
