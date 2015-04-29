@@ -202,14 +202,15 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 					b.getSquare(curr).setSelectable(false);
 					continue;
 				}
-				if (this.getSquare(curr).getMarked()){
-					b.getSquare(curr).setMarked(true);
-				}
 				if (!this.getSquare(curr).isSelectable()){
 					b.replace(curr, this.getTile(curr));
 					b.getSquare(curr).setSelectable(false);
 					continue;
 				}
+				if (this.getSquare(curr).getMarked()){
+					b.getSquare(curr).setMarked(true);
+				}
+				
 				if (this.getTile(curr)!=null && this.getTile(curr).getValue() == 6){
 					b.replace(curr, this.getTile(curr));
 					continue;
@@ -221,11 +222,18 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 					newP = new Point(newX, newY);
 				}
 				b.replace(curr, this.getTile(newP));
+				b.getSquare(curr).setSelectable(true);
 				points.add(newP);
 			}
 		}
 		
 		this.copy(b);
+		for (Column c : this.grid){
+			for (int i = 0; i<9; i++){
+				System.out.print(c.getTile(i));
+			}
+			System.out.println();
+		}
 		
 	}
 	

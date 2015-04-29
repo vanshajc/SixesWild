@@ -5,7 +5,6 @@
 package sw.common.model.controller;
 
 import java.awt.Point;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
 import sw.common.model.entity.Level;
@@ -38,7 +37,7 @@ public class MoveRemove extends BoardController implements IMove {
 		if (this.getSelectedTile().isEmpty()) return false;
 		//System.out.println(level.getMode());
 		if (!level.getMode().isValid(this)){
-			setBoardController(new MoveSelection());
+			setBoardController(prev);
 			return false;
 		}
 		
