@@ -117,6 +117,8 @@ public class MementoManager {
 			lvl.getGame().getPwrUps()[Game.PWRUP_SWAP]    = Integer.valueOf(swaps);
 			lvl.getGame().getPwrUps()[Game.PWRUP_SHUFFLE] = Integer.valueOf(shuffle);
 			lvl.getGame().getPwrUps()[Game.PWRUP_REMOVE]  = Integer.valueOf(remove);
+			
+			//lvl.getGame().getStats().copy(winStats);
 		}
 		
 		return lvl;
@@ -137,7 +139,6 @@ public class MementoManager {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

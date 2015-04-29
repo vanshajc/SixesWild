@@ -6,6 +6,7 @@
 package sw.common.system.manager;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.util.HashMap;
 
 import sw.common.model.entity.Square;
@@ -30,6 +31,9 @@ public interface IResourceManager {
 	
 	/** Get image file path for a particular Tile */
 	String getImage(Tile tile);
+	
+	/** Get the Image for a given file path, must exist */
+	Image getImage(String path);
 	
 	/**
 	 * @return size of the common icon square image

@@ -41,8 +41,7 @@ public class Puzzle extends AbstractMode {
 	
 	@Override
 	public boolean hasFinished(Game g, Statistics winStat) {
-		return (g.getStats().getNumMoves() >= winStat.getNumMoves());
-		//return g.getStats().getScore() >= 100;  // test
+		return g.getStats().getNumMoves() == 0;
 	}
 
 	/* (non-Javadoc)
@@ -55,11 +54,12 @@ public class Puzzle extends AbstractMode {
 	}
 
 	/* (non-Javadoc)
-	 * @see sw.common.model.controller.IMode#getTimePolicy()
+	 * @see sw.mode.AbstractMode#getMovePolicy()
 	 */
 	@Override
-	public TIMER_POLICY getTimerPolicy() {
-		return TIMER_POLICY.COUNT_UP;
-	}
+	public MOVE_POLICY getMovePolicy() {
+		// TODO Auto-generated method stub
+		return MOVE_POLICY.COUNT_DOWN;
+	}	
 
 }

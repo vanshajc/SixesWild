@@ -97,6 +97,10 @@ public class Level {
 			gc.setTime(winStats.getTime(), false);
 		}
 		
+		game.stats.setNumMoves(winStats.getNumMoves());
+		
+		//lc.getMovePanel().setMove(winStats.numMoves);
+		
 		mode.initializeGame(gc);
 		
 		game.board.copy(initBoard);

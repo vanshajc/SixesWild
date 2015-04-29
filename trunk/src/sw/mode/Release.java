@@ -25,13 +25,6 @@ import sw.common.model.entity.Tile;
  */
 public class Release extends AbstractMode {
 
-	/**
-	 * Default Constructor for Release Mode.
-	 */
-	public Release(){
-
-	}
-
 	/** (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

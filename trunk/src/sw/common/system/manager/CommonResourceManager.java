@@ -6,7 +6,12 @@
 package sw.common.system.manager;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+
+import javax.swing.ImageIcon;
 
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
@@ -17,17 +22,17 @@ import sw.common.system.factory.TileFactory;
  */
 public class CommonResourceManager implements IResourceManager {
 	
-	HashMap<Tile, String> tileMap = new HashMap<Tile, String>();
+	static HashMap<Tile, String> tileMap = new HashMap<Tile, String>();
+	static HashMap<Square, String> squareMap = new HashMap<Square, String>();
 	
-	Dimension imgSize = new Dimension(50,50);
+	static HashMap<String, Image> imageMap = new HashMap<String, Image>();
 	
-	String imagePath = "/sw/resource/image/";
-
-	/* (non-Javadoc)
-	 * @see sw.common.system.manager.IResourceManager#getImage()
-	 */
-	@Override
-	public HashMap<Tile, String> getTileImage() {
+	static Dimension imgSize = new Dimension(50,50);
+	
+	static String imagePath = "/sw/resource/image/";
+	
+	public CommonResourceManager() {
+		// initialize the tile map
 		for (int i = Tile.minValue; i <= Tile.maxValue; i++) {
 			for (int m = Tile.minMultiplier; m <= Tile.maxMultiplier; m++) {
 				Tile t = TileFactory.getTile(i, m);
@@ -36,7 +41,28 @@ public class CommonResourceManager implements IResourceManager {
 				}
 			}
 		}
+		
+		// TODO: initialize square map
+		
+		// load all images
+		Collection<String> c = tileMap.values();
+		for (String s : c) {
+			getImage(s);
+		}		
+	}
+
+	/* (non-Javadoc)
+	 * @see sw.common.system.manager.IResourceManager#getImage()
+	 */
+	@Override
+	public HashMap<Tile, String> getTileImage() {		
 		return tileMap;
+	}
+	
+	@Override
+	public HashMap<Square, String> getSquareImage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -58,9 +84,6 @@ public class CommonResourceManager implements IResourceManager {
 		return imagePath.concat(String.format("tile_%dx%d.png", val, mul));
 	}
 
-	/* (non-Javadoc)
-	 * @see sw.common.system.manager.IResourceManager#getImageSize()
-	 */
 	@Override
 	public Dimension getImageSize() {
 		return imgSize;
@@ -68,18 +91,26 @@ public class CommonResourceManager implements IResourceManager {
 	
 	public String getStarImage() {
 		return imagePath.concat("star.png");
+	}	
+	
+	public String getPowerUpImage(String name) {
+		return imagePath.concat("button_"+name+".png");
 	}
 
 	@Override
-	public HashMap<Square, String> getSquareImage() {
-		// TODO Auto-generated method stub
+	public Image getImage(String path) {
+		if (imageMap.containsKey(path)) {
+			return imageMap.get(path);
+		} else {
+			try {
+				Image img = new ImageIcon(CommonResourceManager.class.getResource(path)).getImage();
+				imageMap.put(path, img);
+				return img;
+			} catch (Exception e) {
+				System.err.println("Cannot load image!");
+			}
+		}
 		return null;
-	}
-	
-	
-	public String getPowerUpImage(String name){
-		return imagePath.concat("button_"+name+".png");
-	}
-	
+	}	
 
 }

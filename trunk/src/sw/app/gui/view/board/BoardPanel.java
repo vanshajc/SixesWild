@@ -35,6 +35,9 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 	/** The Board to manage */
 	Board board;
 	Dimension boardSize;
+	
+	/** The current board controller */
+	BoardController boardCtrl = null;
 
 	/** Timer to update columns */
 	final String refreshTask = "BoardPanelRefresh";
@@ -42,7 +45,7 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 
 	/** Map of icon images to use */
 	IResourceManager resManager;
-	HashMap<String, Image> imageMap = new HashMap<String, Image>();
+	//HashMap<String, Image> imageMap = new HashMap<String, Image>();
 
 	/** The columns to paint */
 	ArrayList<BoardColumn> columns = new ArrayList<BoardColumn>();
@@ -100,17 +103,17 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 	void setResouceManager(IResourceManager resManager) {
 		this.resManager = resManager;
 
-		Iterator<String> si = resManager.getTileImage().values().iterator();
-		while (si.hasNext()) {
-			String path = si.next();
-			if (!imageMap.containsKey(path)) {
-				Image img = new ImageIcon(BoardPanel.class.getResource(path))
-						.getImage();
-				if (img != null) {
-					imageMap.put(path, img); // Store the image
-				}
-			}
-		}
+//		Iterator<String> si = resManager.getTileImage().values().iterator();
+//		while (si.hasNext()) {
+//			String path = si.next();
+//			if (!imageMap.containsKey(path)) {
+//				Image img = new ImageIcon(BoardPanel.class.getResource(path))
+//						.getImage();
+//				if (img != null) {
+//					imageMap.put(path, img); // Store the image
+//				}
+//			}
+//		}
 	}
 
 	public void setBoardController(BoardController bc) {
@@ -128,6 +131,8 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 			addMouseListener(bc);
 			addMouseMotionListener(bc);
 		}
+		
+		boardCtrl = bc;  // okay to be null
 	}
 
 	void initializeLayout() {
@@ -325,6 +330,11 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 			repaint();
 		}
 
+	}
+
+	@Override
+	public BoardController getBoardController() {
+		return boardCtrl;
 	}
 
 }

@@ -3,14 +3,17 @@ package sw.app.gui.view;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JFrame;
 
+import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.LevelManager;
 
 public class SixesWildJFrame extends JFrame {
 	
 	static LevelManager lvlm = new LevelManager();
 	static LayoutManager lm  = null;
+	static CommonResourceManager crm = new CommonResourceManager();
 	
 	SplashScreenView ssv;
 	
@@ -27,7 +30,8 @@ public class SixesWildJFrame extends JFrame {
 		initialize();
 	}
 
-	void initialize() {		
+	void initialize() {
+		
 		ssv = new SplashScreenView();
 		getContentPane().add(ssv);
 		ssv.addMouseListener(new MouseAdapter() {			
@@ -44,6 +48,10 @@ public class SixesWildJFrame extends JFrame {
 	
 	public static LayoutManager getLayoutManager() {
 		return lm;
+	}
+	
+	public static CommonResourceManager getCommonResourceManager() {
+		return crm;
 	}
 }
 

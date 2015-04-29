@@ -27,14 +27,36 @@ public class PwrUpSwapActionListener implements ActionListener {
 		
 		int pwrUps[] = lc.getLevel().getGame().getPwrUps();
 		if (pwrUps[Game.PWRUP_SWAP] > 0) {
-			pwrUps[Game.PWRUP_SWAP]--;
-			BoardController bc = new MoveSwap(lc);
-			lc.getBoardPanel().setBoardController(bc);
+			BoardController bc = new PwrUpSwap(lc, lc.getBoardPanel().getBoardController(), (JButton)e.getSource());
+			lc.getBoardPanel().setBoardController(bc);			
+		}
+	}
+	
+	private class PwrUpSwap extends MoveSwap {
+
+		JButton btn;
+		
+		public PwrUpSwap(ILevelController lc, BoardController prev, JButton btn) {
+			super(lc, prev);
+			this.btn = btn;
+		}
+		
+		public boolean doMove() {
+			boolean ret = swap(p1, p2);
 			
-			// disable button
-			if (pwrUps[Game.PWRUP_SWAP] == 0) {
-				((JButton) e.getSource()).setEnabled(false);
+			if (ret) {
+				int pwrUps[] = lvlCtrl.getLevel().getGame().getPwrUps();
+				if (pwrUps[Game.PWRUP_SWAP] > 0) {
+					pwrUps[Game.PWRUP_SWAP]--;
+				}
+				// disable button
+				if (pwrUps[Game.PWRUP_SWAP] == 0) {
+					btn.setEnabled(false);
+				}
 			}
+			
+			setBoardController(prev);			
+			return ret;
 		}
 	}
 

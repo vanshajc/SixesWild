@@ -5,12 +5,20 @@
  */
 package sw.mode;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import sw.common.model.controller.BoardController;
 import sw.common.model.controller.IGameController;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Board;
+import sw.common.model.entity.Column;
 import sw.common.model.entity.Game;
+import sw.common.model.entity.Level;
+import sw.common.model.entity.Square;
 import sw.common.model.entity.Statistics;
+import sw.common.model.entity.Tile;
 
 /**
  * Class for respresenting the Elimination Mode
@@ -29,7 +37,7 @@ public class Elimination extends AbstractMode {
 	 */
 	@Override
 	public BoardController getBoardController() {
-		return new MoveSelection();
+		return new EliminationMoveSelection();
 	}	
 
 	/* (non-Javadoc)
@@ -58,5 +66,31 @@ public class Elimination extends AbstractMode {
 		
 	}
 
-	
+	private class EliminationMoveSelection extends MoveSelection {
+		
+		@Override
+		public boolean doMove() {
+			if (!isValid()) return false; 
+			
+			int score = 0;
+			Iterator<Square> selected = getSelectedSquare().iterator();
+			
+			while (selected.hasNext()) {
+				Square s = selected.next();
+				s.setMarked(true);
+				
+				Tile t = s.getTile();
+				score += t.getValue() * t.getMultiplier();
+				
+				Point p = getPoint(t);
+				boardRemove(p);
+			}		
+			boardPack();
+			boardFill();
+			
+			updateScore(score);
+			clearSelection();
+			return true;
+		}
+	}
 }

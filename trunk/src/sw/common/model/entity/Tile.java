@@ -66,6 +66,15 @@ public class Tile {
 				.format("Value : %d, Multiplier : %d\n", value, multiplier);
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return (value + 142) * multiplier; 
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
