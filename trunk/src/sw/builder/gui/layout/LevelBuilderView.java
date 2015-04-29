@@ -279,16 +279,6 @@ public class LevelBuilderView extends JPanel {
 				add(textFields[i][j]);
 			}
 		}
-		/*
-		 * JLabel lblStartingBoarduse = new JLabel(
-		 * "Starting Board: use a / to break up squares, return at the end of a row, use a"
-		 * );
-		 * 
-		 * JLabel lblAndUseA = new JLabel(
-		 * "comma between the value and the multiplier of the square,");
-		 * 
-		 * JLabel lblAndInput = new JLabel("and input 0,0 for a blank square");
-		 */
 
 		JButton btnSave = new JButton("Save");
 		btnSave.setBorder(null);
@@ -363,6 +353,10 @@ public class LevelBuilderView extends JPanel {
 			this.moveField.setText("");
 			return -1;
 		}
+		if(!this.getModeList().equals("Puzzle")){
+			moves = 0;
+			setMoveField("");
+		}
 		return moves;
 	}
 
@@ -377,6 +371,10 @@ public class LevelBuilderView extends JPanel {
 		} catch (NumberFormatException e) {
 			this.timeField.setText("");
 			return -1;
+		}
+		if(!this.getModeList().equals("Lightning")){
+			time = 0;
+			setTimeField("");
 		}
 		return time;
 	}
