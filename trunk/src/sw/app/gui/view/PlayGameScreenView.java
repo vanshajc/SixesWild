@@ -56,10 +56,14 @@ public class PlayGameScreenView extends JPanel implements IView{
 		levelList.setBackground(Color.WHITE);
 		add(levelList);
 		
-		// Load all available levels to the combobox
+		// Load all unlocked levels to the combobox
+		int highest = lvlm.getHighestLevel().getLevelNum();
 		for (int i = 0; i < lvlList.size(); i++) {
-			String name = lvlList.get(i).toString();
-			levelList.addItem(name);
+			Level l = lvlList.get(i);
+			if (l.getLevelNum() <= highest) {
+				String name = lvlList.get(i).toString();
+				levelList.addItem(name);
+			}
 		}		
 //		levelList.setRenderer(new DisabledItemsRenderer<String>());
 

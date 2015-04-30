@@ -17,11 +17,19 @@ public class Statistics {
 	int score = 0;
 	int stars = 0;
 	
+	int scoreOneStar = 0;
+	int scoreTwoStar = 0;
+	int scoreThreeStar = 0;
+	
 	public void copy(Statistics s) {
 		this.current = s.current;
 		this.numMoves = s.numMoves;
 		this.score = s.score;
 		this.stars = s.stars;
+		
+		this.scoreOneStar = s.scoreOneStar;
+		this.scoreTwoStar = s.scoreTwoStar;
+		this.scoreThreeStar = s.scoreThreeStar;
 	}
 	
 	/**
@@ -63,6 +71,30 @@ public class Statistics {
 	 */
 	public int getScore() {
 		return score;
+	}
+
+	public int getScoreOneStar() {
+		return scoreOneStar;
+	}
+
+	public int getScoreTwoStar() {
+		return scoreTwoStar;
+	}
+
+	public int getScoreThreeStar() {
+		return scoreThreeStar;
+	}
+
+	public void setScoreOneStar(int scoreOneStar) {
+		this.scoreOneStar = scoreOneStar;
+	}
+
+	public void setScoreTwoStar(int scoreTwoStar) {
+		this.scoreTwoStar = scoreTwoStar;
+	}
+
+	public void setScoreThreeStar(int scoreThreeStar) {
+		this.scoreThreeStar = scoreThreeStar;
 	}	
 	
 	

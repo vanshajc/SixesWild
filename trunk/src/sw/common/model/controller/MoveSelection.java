@@ -69,20 +69,14 @@ public class MoveSelection extends BoardController implements IMove {
 		}
 	}
 
-	
 	protected void selectionHandler(MouseEvent e) {
-//		if (manager.hasFinished()) {
-//			if (!panel.isAnimating()) {
-//				manager.finishGame();
-//			}
-//		} else 
 		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
 				Point p = panel.xyToPoint(e.getPoint());
 				
 				Square s = getSquare(p);
 				if (s.isSelectable()) {
-					if (this.board.getTile(p) == null) {
+					if (s.isEmpty()) {
 						clearSelection();
 						return;
 					}
