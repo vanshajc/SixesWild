@@ -66,11 +66,12 @@ public class Release extends AbstractMode {
 			Column c = b.getColumn(i);
 			for (int j = 0; j<9; j++){
 				if (c.getSquare(j).isOnlySix()){
-					if (c.getTile(j) ==null)
+					if (c.getTile(j) == null)
 						return false;
 				}
 			}
 		}
+		System.out.println("finished??");
 		return true;
 	}
 

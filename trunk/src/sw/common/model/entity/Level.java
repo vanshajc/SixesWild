@@ -28,10 +28,10 @@ public class Level {
 	
 	int levelNum;
 
-	/** */
+	/** Holds the Frequencies for each Tile. */
 	TileFrequency freq;
 	
-	/** */
+	/** Holds the board for the level. */
 	Board initBoard;
 
 	public Level(int levelNum, Board initBoard, Statistics winStats, IMode mode, TileFrequency freq) {
@@ -65,6 +65,9 @@ public class Level {
 		return mode;
 	}
 
+	/**
+	 * @return the stars earned for the level
+	 */
 	public int getStars() {
 		if (game.stats.score >= winStats.scoreThreeStar) {
 			return 3;
@@ -76,18 +79,31 @@ public class Level {
 		return 0;
 	}
 	
+	/**
+	 * @return the board of level
+	 */
 	public Board getInitBoard() {
 		return initBoard;
 	}
 
+	/**
+	 * @return the frequencies of the tiles
+	 */
 	public TileFrequency getTileFrequency() {
 		return freq;
 	}
 	
+	/**
+	 * @return the level number
+	 */
 	public int getLevelNum() {
 		return levelNum;
 	}
 
+	/**
+	 * Initializes the level.
+	 * @param lc the level controller
+	 */
 	public void initialize(ILevelController lc) {
 		IGameController gc = lc.getGameController();
 		
@@ -121,9 +137,7 @@ public class Level {
 		return mode.hasFinished(game, winStats) && this.getStars()>0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**(non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
