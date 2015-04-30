@@ -110,9 +110,9 @@ public class MementoManager {
 			String scoreOneStar = lines.get(25);
 			String scoreTwoStar = lines.get(26);
 			String scoreThreeStar = lines.get(27);
-			winStats.setScoreOneStar(Integer.valueOf(scoreOneStar));
-			winStats.setScoreTwoStar(Integer.valueOf(scoreTwoStar));
-			winStats.setScoreThreeStar(Integer.valueOf(scoreThreeStar));
+			winStats.setScoreOneStar(Integer.parseInt(scoreOneStar));
+			winStats.setScoreTwoStar(Integer.parseInt(scoreTwoStar));
+			winStats.setScoreThreeStar(Integer.parseInt(scoreThreeStar));
 			
 			// Tile value and multiplier percentage
 			String one = lines.get(7);
@@ -258,6 +258,10 @@ public class MementoManager {
 		return lines;
 	}
 
+	/**
+	 * @param s arraylist containing the value,multiplier for each tile
+	 * @return the board created
+	 */
 	static Board setBoard(ArrayList<String> s) {
 		Board b = new Board(false);
 

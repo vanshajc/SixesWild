@@ -1,3 +1,7 @@
+/**
+ * @file StartGameController.java
+ * @author Vanshaj Chowdhary, Tony Vu
+ */
 package sw.app.gui.controller;
 
 import java.awt.event.ActionEvent;
@@ -22,7 +26,6 @@ public class StartGameController implements ActionListener {
 		if (current instanceof PlayGameScreenView) {
 			l = ((PlayGameScreenView) current).getSelectedLevel();
 		}
-		System.out.println(l);
 		LayoutManager.switchToGameplayView(false);		
 		lvlm.setCurrent(l);
 		LayoutManager.initCurrentView();

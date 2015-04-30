@@ -8,12 +8,10 @@ package sw.common.system.manager;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import sw.app.gui.view.GameplayView;
 import sw.app.gui.view.LayoutManager;
@@ -36,6 +34,9 @@ public class LevelManager {
 	/** The current level controller */
 	protected LevelController lCtrl;
 	
+	/**
+	 * Constructor for the level manager.
+	 */
 	public LevelManager() {
 		
 		// Load available levels from resource classpath		
@@ -55,6 +56,10 @@ public class LevelManager {
 		}		
 	}
 	
+	/**
+	 * Adds a level to the list of levels.
+	 * @param lvl the level to be added.
+	 */
 	void addLevel(Level lvl) {
 		if (lvl != null && !list.containsKey(lvl.getLevelNum())) {
 			sortedLevel.add(lvl.getLevelNum());
@@ -64,14 +69,23 @@ public class LevelManager {
 		}
 	}
 	
+	/**
+	 * Remove all levels.
+	 */
 	void clear() {
 		list.clear();
 	}
 	
+	/**
+	 * @return the current level being played
+	 */
 	public Level getCurrent() {
 		return list.get(current);
 	}
 	
+	/**
+	 * @return the next level
+	 */
 	public Level getNext() {
 		// if current is not the last level available...
 		if (current < sortedLevel.get(sortedLevel.size() - 1)) {
@@ -81,6 +95,10 @@ public class LevelManager {
 		}
 	}
 	
+	/**
+	 * @param l the level
+	 * @return the number of the level, null if level is not in list.
+	 */
 	public Integer getLevelNum(Level l) {
 		for (Entry<Integer, Level> entry : list.entrySet()) {
 			if (entry.getValue() == l) {
@@ -90,10 +108,16 @@ public class LevelManager {
 		return null;
 	}
 	
+	/**
+	 * @return the highest level reached by player.
+	 */
 	public Level getHighestLevel() {
 		return list.get(highest);
 	}
 	
+	/**
+	 * @return all the levels
+	 */
 	public ArrayList<Level> getLevels() {
 		ArrayList<Level> l = new ArrayList<Level>();
 		
@@ -104,16 +128,27 @@ public class LevelManager {
 		return l;
 	}
 	
+	/**
+	 * Sets the highest level reached
+	 * @param level the level to be set as highest
+	 */
 	public void setHighest(Level level) {
 		if (list.containsKey(level.getLevelNum())) {
 			highest = level.getLevelNum();
 		}
 	}
 	
+	/**
+	 * @return the level controller.
+	 */
 	public ILevelController getLevelController() {
 		return lCtrl;
 	}
 	
+	/**
+	 * Sets the current level
+	 * @param lvl the level to be set as current.
+	 */
 	public void setCurrent(Level lvl) {
 		if (list.containsValue(lvl)) {
 			current = getLevelNum(lvl);
@@ -128,12 +163,18 @@ public class LevelManager {
 		}
 	}
 	
+	/**
+	 * Starts the current level.
+	 */
 	public void startLevel() {
 		if (lCtrl != null) {
 			lCtrl.startGame();
 		}
 	}
 	
+	/**
+	 * Unlocks the next level.
+	 */
 	public void unlockNextLevel() {
 		Level next = getNext();
 		if (next != null) {

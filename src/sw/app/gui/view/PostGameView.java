@@ -1,34 +1,24 @@
 /**
  * @file PostGameView.java
- * @author Vanshaj Chowdhary, ANDREW PUT YOUR NAME HERE
+ * @author Vanshaj Chowdhary
  */
 package sw.app.gui.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.PostGameController;
 import sw.app.gui.controller.StartGameController;
 import sw.common.model.entity.Level;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class PostGameView extends JPanel implements IView {
