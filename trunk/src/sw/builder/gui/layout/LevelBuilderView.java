@@ -608,13 +608,14 @@ public class LevelBuilderView extends JPanel {
 		this.threeStarScore.setText(s);
 	}
 
-	public static String[][] getBoard() {
+	public String[][] getBoard() {
 		String[][] board1 = new String[9][9];
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				String input = textFields[i][j].getText();
-				if (isValid(input))
-					board1[j][i] = input;
+				if (isValid(input)){
+					board1[j][i] = input;					
+				}
 				else {
 					textFields[i][j].setText("");
 				}
@@ -646,7 +647,7 @@ public class LevelBuilderView extends JPanel {
 		}
 	}
 
-	public static boolean isValid(String s) {
+	public boolean isValid(String s) {
 		if (s.length() == 3) {
 
 			if (s.charAt(0) == '0' || s.charAt(0) == '1' || s.charAt(0) == '2'
@@ -657,6 +658,9 @@ public class LevelBuilderView extends JPanel {
 					if (s.charAt(2) == '0' || s.charAt(2) == '1'
 							|| s.charAt(2) == '2' || s.charAt(2) == '3'
 							|| s.charAt(2) == '*') {
+						if(s.charAt(0) == '6' && getModeList().equals("Elimination")) {
+							return false;
+						}
 						return true;
 					}
 				}
