@@ -13,10 +13,12 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.plaf.ComboBoxUI;
 
 import sw.app.gui.controller.MainMenuController;
 import sw.app.gui.controller.StartGameController;
@@ -48,6 +50,7 @@ public class PlayGameScreenView extends JPanel implements IView{
 		lblLevel.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		add(lblLevel);
 		
+		//JButton arrowbutton = getButtonSubComponent(levelList);
 		levelList = new JComboBox<String>();
 		((JLabel)levelList.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		levelList.setBounds(280, 124, 400, 45);
@@ -157,6 +160,10 @@ public class PlayGameScreenView extends JPanel implements IView{
 	public Level getSelectedLevel() {
 		return lvlm.getLevels().get(levelList.getSelectedIndex());
 	}
+	
+	//public static ComboBoxUI createUI(JComponent c) {
+	//	return new ColorArrowUI();
+	//}
 
 //	private class DisabledItemsRenderer<String> extends BasicComboBoxRenderer {
 //		public Component getListCellRendererComponent(JList list, Object value,
