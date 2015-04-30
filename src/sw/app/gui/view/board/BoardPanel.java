@@ -91,6 +91,10 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		initializeLayout();
 	}
 
+	/**
+	 * Sets the board to given board.
+	 * @param board the new board.
+	 */
 	public void setBoard(Board board) {
 		if (board == null) {
 			throw new IllegalArgumentException("Board is null!");
@@ -116,6 +120,9 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 //		}
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.board.IBoardPanel#setBoardController(sw.common.model.controller.BoardController)
+	 */
 	public void setBoardController(BoardController bc) {
 		MouseListener[] ml = this.getMouseListeners();
 		for (int i = 0; i < ml.length; i++) {
@@ -135,6 +142,9 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		boardCtrl = bc;  // okay to be null
 	}
 
+	/**
+	 * Initializies the layout.
+	 */
 	void initializeLayout() {
 		setLayout(null);
 		setDoubleBuffered(true);
