@@ -73,25 +73,25 @@ public class ScoreBoardView extends JPanel implements IView {
 		JLabel lblLevel = new JLabel("Level");
 		lblLevel.setForeground(new Color(184, 134, 11));
 		lblLevel.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		lblLevel.setBounds(50, 80, 77, 36);
+		lblLevel.setBounds(50, 80, 100, 36);
 		add(lblLevel);
 
 		JLabel lblStars = new JLabel("Stars");
 		lblStars.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		lblStars.setForeground(new Color(184, 134, 11));
-		lblStars.setBounds(250, 80, 81, 36);
+		lblStars.setBounds(250, 80, 100, 36);
 		add(lblStars);
 
 		JLabel lblTime = new JLabel("Time");
 		lblTime.setForeground(new Color(184, 134, 11));
 		lblTime.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		lblTime.setBounds(450, 80, 74, 36);
+		lblTime.setBounds(450, 80, 100, 36);
 		add(lblTime);
 
 		JLabel lblScore = new JLabel("Score");
 		lblScore.setForeground(new Color(184, 134, 11));
 		lblScore.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		lblScore.setBounds(650, 80, 87, 36);
+		lblScore.setBounds(650, 80, 100, 36);
 		add(lblScore);
 		
 	}
