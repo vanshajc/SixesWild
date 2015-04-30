@@ -33,7 +33,7 @@ public class DisplayBoardController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		String[][] b = LevelBuilderView.getBoard();
+		String[][] b = lbv.getBoard();
 		Board b1;
 		try {
 			b1 = setBoardView(b,lbv);
