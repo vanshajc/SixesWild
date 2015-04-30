@@ -1,6 +1,7 @@
 package sw.app.gui.view;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
+
 import java.awt.Font;
 
 public class ScoreBoardView extends JPanel implements IView {
@@ -32,7 +34,7 @@ public class ScoreBoardView extends JPanel implements IView {
 	int moveX  = 420;
 	int timeX  = 610;
 	
-	Dimension fieldSize = new Dimension(150,15);
+	Dimension fieldSize = new Dimension(150,20);
 	
 	public ScoreBoardView() {
 		initialize();
@@ -71,34 +73,27 @@ public class ScoreBoardView extends JPanel implements IView {
 		JLabel lblLevel = new JLabel("Level");
 		lblLevel.setForeground(new Color(184, 134, 11));
 		lblLevel.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		lblLevel.setBounds(42, 96, 77, 36);
+		lblLevel.setBounds(50, 80, 77, 36);
 		add(lblLevel);
 
 		JLabel lblStars = new JLabel("Stars");
 		lblStars.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		lblStars.setForeground(new Color(184, 134, 11));
-		lblStars.setBounds(220, 103, 81, 23);
+		lblStars.setBounds(250, 80, 81, 36);
 		add(lblStars);
 
 		JLabel lblTime = new JLabel("Time");
 		lblTime.setForeground(new Color(184, 134, 11));
 		lblTime.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		lblTime.setBounds(425, 103, 74, 23);
+		lblTime.setBounds(450, 80, 74, 36);
 		add(lblTime);
 
 		JLabel lblScore = new JLabel("Score");
 		lblScore.setForeground(new Color(184, 134, 11));
 		lblScore.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		lblScore.setBounds(647, 103, 87, 23);
+		lblScore.setBounds(650, 80, 87, 36);
 		add(lblScore);
 		
-		ImageIcon backgroundImg = new ImageIcon(ScoreBoardView.class.getResource("/sw/resource/image/secondBackground.png"));
-		ImageIcon newBackground = new ImageIcon(backgroundImg.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
-		JLabel background = new JLabel(newBackground);
-		background.setVerticalAlignment(SwingConstants.TOP);
-		background.setBackground(Color.WHITE);
-		background.setBounds(0, 0, 800, 600);
-		add(background);
 	}
 	
 	public Dimension getPrefferredSize() {
@@ -110,18 +105,25 @@ public class ScoreBoardView extends JPanel implements IView {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	public void paintComponent(Graphics g) {
+
+		ImageIcon backgroundImg = new ImageIcon(ScoreBoardView.class.getResource("/sw/resource/image/secondBackground.png"));
+		ImageIcon newBackground = new ImageIcon(backgroundImg.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
+		super.paintComponent(g);;
+		g.drawImage(newBackground.getImage(), 0, 0, null);
+	}
 	public void addLevelStats(Level level) {
 		
 		// Limit to 25 entries
-		if (count > 25) {
+		if (count > 20) {
 			return;
 		}
-		
 		// Add new entry
 		count++;
 		
 		JLabel levelNum = new JLabel();
+		levelNum.setForeground(new Color(184, 134, 11));
+		levelNum.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		levelNum.setText(level.toString());		
 		levelNum.setHorizontalAlignment(SwingConstants.CENTER);
 		levelNum.setSize(fieldSize);
@@ -129,6 +131,8 @@ public class ScoreBoardView extends JPanel implements IView {
 		add(levelNum);
 		
 		JLabel score = new JLabel();
+		score.setForeground(new Color(184, 134, 11));
+		score.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		score.setText(Integer.toString(level.getGame().getStats().getScore()));		
 		score.setHorizontalAlignment(SwingConstants.CENTER);
 		score.setSize(fieldSize);
@@ -136,6 +140,8 @@ public class ScoreBoardView extends JPanel implements IView {
 		add(score);
 		
 		JLabel move = new JLabel();
+		move.setForeground(new Color(184, 134, 11));
+		move.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		move.setText(Integer.toString(level.getGame().getStats().getNumMoves()));		
 		move.setHorizontalAlignment(SwingConstants.CENTER);
 		move.setSize(fieldSize);
@@ -143,6 +149,8 @@ public class ScoreBoardView extends JPanel implements IView {
 		add(move);
 		
 		JLabel time = new JLabel();
+		time.setForeground(new Color(184, 134, 11));
+		time.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		time.setText(level.getGame().getStats().getTime().toString());		
 		time.setHorizontalAlignment(SwingConstants.CENTER);
 		time.setSize(fieldSize);
