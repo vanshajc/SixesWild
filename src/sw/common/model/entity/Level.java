@@ -66,12 +66,11 @@ public class Level {
 	}
 
 	public int getStars() {
-		//TODO REPLACE THESE WITH ACTUAL SCORES.... FROM WIN STATS.. PUT THIS IN LEVEL BUILDER
-		if (game.stats.score >= 75000) {
+		if (game.stats.score >= winStats.scoreThreeStar) {
 			return 3;
-		} else if (game.stats.score >= 5000) {
+		} else if (game.stats.score >= winStats.scoreTwoStar) {
 			return 2;
-		} else if (game.stats.score >= 2000) {
+		} else if (game.stats.score >= winStats.scoreOneStar) {
 			return 1;
 		}			
 		return 0;

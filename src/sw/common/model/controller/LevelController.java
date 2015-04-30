@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 import sw.app.gui.view.IGameplayView;
 import sw.app.gui.view.LayoutManager;
+import sw.app.gui.view.SixesWildJFrame;
 import sw.app.gui.view.board.IBoardPanel;
 import sw.app.gui.view.board.IMovePanel;
 import sw.app.gui.view.board.IScorePanel;
@@ -116,6 +117,8 @@ public class LevelController implements ILevelController, IGameController, IMove
 			lvl.getGame().getStats().setTime(t);
 			
 			if (lvl.hasWon()) {
+				SixesWildJFrame.getLevelManager().unlockNextLevel();
+				
 				LayoutManager.switchToPostGameView(true, lvl);
 			} else {
 				LayoutManager.switchToPostGameView(true, lvl);
