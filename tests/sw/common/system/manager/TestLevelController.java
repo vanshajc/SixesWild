@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import common.CommonSwTest;
+
 import sw.app.Application;
 import sw.app.gui.view.LayoutManager;
 import sw.app.gui.view.SixesWildJFrame;
@@ -24,7 +26,7 @@ import sw.common.system.factory.LevelFactory;
  */
 
 /** Test for the LevelController class */
-public class TestLevelController {
+public class TestLevelController extends CommonSwTest {
 	
 	Level testLevel;
 	Board testBoard;

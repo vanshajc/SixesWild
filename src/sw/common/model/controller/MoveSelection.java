@@ -35,6 +35,10 @@ public class MoveSelection extends BoardController implements IMove {
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if (manager.hasFinished()) {
+			manager.finishGame();
+		}
+		
 		try {
 			selectionHandler(e);
 		} catch (IndexOutOfBoundsException e1) {
@@ -70,7 +74,7 @@ public class MoveSelection extends BoardController implements IMove {
 	}
 
 	protected void selectionHandler(MouseEvent e) {
-		if (!panel.isAnimating()) {  // If column is still moving, don't do anything
+		if (!manager.hasFinished() && !panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
 				Point p = panel.xyToPoint(e.getPoint());
 				

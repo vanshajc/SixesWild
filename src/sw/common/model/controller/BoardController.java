@@ -59,11 +59,12 @@ public abstract class BoardController extends MouseAdapter implements ActionList
 	}
 	
 	protected void requestPushMove(IMove m) {
-		if (manager.pushMove(m) && manager.hasFinished()) {
-			while (panel.isAnimating()){}
-			
-			manager.finishGame();
-		}
+//		if (manager.pushMove(m) && manager.hasFinished()) {
+//			while (panel.isAnimating()){}
+//			
+//			manager.finishGame();
+//		}
+		manager.pushMove(m);
 	}
 	
 	protected void requestUndoMove() {
