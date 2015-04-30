@@ -1,14 +1,10 @@
 package sw.common.system.manager;
-import static org.junit.Assert.*;
-
 import java.awt.Dimension;
 import java.awt.Point;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import common.CommonSwTest;
 
 import sw.app.Application;
 import sw.app.gui.view.LayoutManager;
@@ -18,6 +14,8 @@ import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
+
+import common.CommonSwTest;
 
 /**
  *  @file   TestLevelController.java
