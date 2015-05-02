@@ -7,11 +7,11 @@ import sw.app.ApplicationLevelBuilder;
 
 public class TestBuilderLayoutManager extends TestCase{
 	LevelBuilderJFrame lbjf;
-	
+	BuilderLayoutManager blm;
 	protected void setUp(){
 	ApplicationLevelBuilder.main(null);
 	lbjf = new LevelBuilderJFrame();
-	BuilderLayoutManager blm = new BuilderLayoutManager(lbjf);
+	blm = new BuilderLayoutManager(lbjf);
 	
 	
 	}
@@ -22,7 +22,9 @@ public class TestBuilderLayoutManager extends TestCase{
 	}
 	
 	public void testSwitchToScreen(){
-		
+		blm.initailize();
+		blm.switchToLevelBuilder();
+		blm.switchToLevelBuilderMenu();
 	}
 	
 	

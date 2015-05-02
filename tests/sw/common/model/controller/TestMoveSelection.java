@@ -23,6 +23,7 @@ public class TestMoveSelection extends TestCase{
 	Board testBoard;
 	Statistics testWinStats;
 	BoardPanel boardPanel;
+	ILevelController lc;
 	protected void setUp(){
 		Application.main(null);
 		
@@ -54,8 +55,8 @@ public class TestMoveSelection extends TestCase{
 
 
 	public void testIsValid() {
-		ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
-		
+
+		lc = SixesWildJFrame.getLevelManager().getLevelController();
 		// The level info and win statistics should match
 		assertEquals(testLevel.toString(), lc.getLevel().toString());
 		assertEquals(testWinStats, lc.getLevel().getWinStats());
@@ -97,6 +98,31 @@ public class TestMoveSelection extends TestCase{
 //		s.clearSelection();
 		
 
+	}
+	
+	public void testDoMove(){
+
+		lc = SixesWildJFrame.getLevelManager().getLevelController();
+		// The level info and win statistics should match
+		
+		Tile t = TileFactory.getTile(2, 1);
+		IBoard b = lc.getBoardPanel().getBoard();
+		b.replace(new Point(0,0), t);
+		Tile t1 = TileFactory.getTile(1, 1);
+		b.replace(new Point(0,1), t1);
+		Tile t2 = TileFactory.getTile(3, 1);
+		b.replace(new Point(0,2), t2);
+
+		IBoardSelectionManager s = lc.getBoardSelector();
+
+		s.select(new Point(0,0));
+		s.select(new Point(0,1));
+		s.select(new Point(0,2));
+		
+		MoveSelection moveTester = new MoveSelection(lc);
+		assertTrue(moveTester.doMove());
+		
+		
 	}
 		
 	
