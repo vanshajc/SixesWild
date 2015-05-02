@@ -10,11 +10,10 @@ import sw.app.gui.view.SixesWildJFrame;
 
 public class Application {
 
+	/** Instance of the Sixes Wild game application */
 	SixesWildJFrame app;
 
-	/**
-	 * Launch the application.
-	 */
+	/** Launch the application. */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -22,26 +21,20 @@ public class Application {
 					Application window = new Application();
 					window.app.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.err.println("What the hell happened???");
 				}
 			}
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	/** Create the application. */
 	public Application() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	/** Initialize the contents of the frame. */
 	private void initialize() {
 		app = new SixesWildJFrame();
-		//app.setBounds(100, 100, 450, 300);
-		//app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }
