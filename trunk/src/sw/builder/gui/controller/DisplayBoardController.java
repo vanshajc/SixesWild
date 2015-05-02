@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
 import sw.app.gui.view.board.BoardPanel;
-import sw.builder.gui.layout.BuilderBoardPanel;
 import sw.builder.gui.layout.BuilderLayoutManager;
 import sw.builder.gui.layout.LevelBuilderView;
 import sw.common.model.entity.Board;
@@ -24,7 +23,7 @@ public class DisplayBoardController implements ActionListener {
 
 	BuilderLayoutManager blm;
 	LevelBuilderView lbv;
-	BuilderBoardPanel bbp = new BuilderBoardPanel(blm);
+	//BuilderBoardPanel bbp = new BuilderBoardPanel(blm);
 
 	public DisplayBoardController(BuilderLayoutManager blm, LevelBuilderView lbv) {
 		this.blm = blm;
