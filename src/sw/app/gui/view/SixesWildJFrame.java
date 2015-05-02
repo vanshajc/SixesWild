@@ -5,9 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import javax.swing.JFrame;
 
@@ -15,14 +13,16 @@ import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.LevelManager;
 import sw.common.system.manager.MementoManager;
 
+/** The main Sixes Wild application frame */
 public class SixesWildJFrame extends JFrame {
 	
-	static LevelManager lvlm = null;
+	static LevelManager lvlm = new LevelManager();
 	static LayoutManager lm  = null;
 	static CommonResourceManager crm = null;
 	
 	SplashScreenView ssv;
 	
+	/** Application constructor and early initialization tasks */
 	public SixesWildJFrame() {
 		setTitle("Sixes Wild");		
 		setSize(800,600);
@@ -38,8 +38,7 @@ public class SixesWildJFrame extends JFrame {
 				System.out.println("Sixes Wild is started!");
 				
 				System.out.println("Loading progress...");
-				MementoManager.initialize();
-				lvlm = new LevelManager();
+				lvlm.initialize();
 				
 				System.out.println("Loading resources...");
 				try {
@@ -72,8 +71,8 @@ public class SixesWildJFrame extends JFrame {
 		initialize();
 	}
 
-	void initialize() {
-		
+	/** Initialize the application */
+	void initialize() {		
 		ssv = new SplashScreenView();
 		getContentPane().add(ssv);
 		ssv.addMouseListener(new MouseAdapter() {			
@@ -84,14 +83,23 @@ public class SixesWildJFrame extends JFrame {
 		});		
 	}
 	
+	/**
+	 * @return the level manager instance
+	 */
 	public static LevelManager getLevelManager() {
 		return lvlm;
 	}
 	
+	/**
+	 * @return the layout manager instance
+	 */
 	public static LayoutManager getLayoutManager() {
 		return lm;
 	}
 	
+	/**
+	 * @return the common resource manager instance
+	 */
 	public static CommonResourceManager getCommonResourceManager() {
 		return crm;
 	}

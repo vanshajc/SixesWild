@@ -24,85 +24,89 @@ public class LevelManager {
 	/** List of available levels */
 	protected ArrayList<Integer> sortedLevel = new ArrayList<Integer>();
 	protected HashMap<Integer, Level> list = new HashMap<Integer, Level>();
-	
+
 	/** List of highscore */
 	protected HashMap<Integer, Level> hiScore;
-	
+
 	/** Current and highest level reached */
 	protected int current;
 	protected int highest;
-	
+
 	/** The current level controller */
 	protected LevelController lCtrl;
-	
-	/**
-	 * Constructor for the level manager.
-	 */
-	public LevelManager() {
-		
+
+	/** Load progress and initialize levels */
+	public void initialize() {
+		MementoManager.initialize();
+
 		highest = MementoManager.getHighestLevel();
 		hiScore = MementoManager.loadProgress();
-		
+
 		List<Level> levels = MementoManager.loadPlayableLevel();
 		if (levels != null && !levels.isEmpty()) {
 			for (Level l : levels) {
 				addLevel(l);
 			}
-			
+
 			// first level is the current level by default
 			current = sortedLevel.get(0);
 		}
-
 	}
-	
+
+	/**
+	 * @return list of high score achieved on previous levels
+	 */
 	/**
 	 * @return list of highscores for all completed levels
 	 */
 	public List<Level> getHighScore() {
 		return new ArrayList<Level>(hiScore.values());
 	}
-	
+
 	/**
 	 * Adds a level to the list of levels.
-	 * @param lvl the level to be added.
+	 * 
+	 * @param lvl
+	 *            the level to be added.
 	 */
 	public void addLevel(Level lvl) {
 		if (lvl != null && !list.containsKey(lvl.getLevelNum())) {
 			sortedLevel.add(lvl.getLevelNum());
 			Collections.sort(sortedLevel);
-			
+
 			list.put(lvl.getLevelNum(), lvl);
 		}
 	}
-	
+
 	/**
 	 * Remove all levels.
 	 */
 	public void clear() {
 		list.clear();
 	}
-	
+
 	/**
 	 * @return the current level being played
 	 */
 	public Level getCurrent() {
 		return list.get(current);
 	}
-	
+
 	/**
 	 * @return the next level
 	 */
 	public Level getNext() {
 		// if current is not the last level available...
 		if (current < sortedLevel.get(sortedLevel.size() - 1)) {
-			return list.get(current + 1);			
+			return list.get(current + 1);
 		} else {
 			return null;
 		}
 	}
-	
+
 	/**
-	 * @param l the level
+	 * @param l
+	 *            the level
 	 * @return the number of the level, null if level is not in list.
 	 */
 	public Integer getLevelNum(Level l) {
@@ -113,36 +117,32 @@ public class LevelManager {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @return the highest level reached by player.
 	 */
 	public Level getHighestLevel() {
 		return list.get(highest);
 	}
-	
+
 	/**
 	 * @return all the levels
 	 */
 	public ArrayList<Level> getLevels() {
 		ArrayList<Level> l = new ArrayList<Level>();
-		
+
 		for (Integer i : sortedLevel) {
 			l.add(list.get(i));
 		}
-		
+
 		return l;
 	}
-	
-	public void setHighest(Integer levelNum) {
-		if (list.containsKey(levelNum)) {
-			highest = levelNum;
-		}
-	}
-	
+
 	/**
 	 * Sets the highest level reached
-	 * @param level the level to be set as highest
+	 * 
+	 * @param level
+	 *            the level to be set as highest
 	 */
 	public void setHighest(Level level) {
 		if (list.containsKey(level.getLevelNum())) {
@@ -150,32 +150,36 @@ public class LevelManager {
 			MementoManager.setHighestLevel(highest);
 		}
 	}
-	
+
 	/**
 	 * @return the level controller.
 	 */
 	public ILevelController getLevelController() {
 		return lCtrl;
 	}
-	
+
 	/**
 	 * Sets the current level
-	 * @param lvl the level to be set as current.
+	 * 
+	 * @param lvl
+	 *            the level to be set as current.
 	 */
 	public void setCurrent(Level lvl) {
 		if (list.containsValue(lvl)) {
 			current = getLevelNum(lvl);
 			if (LayoutManager.getCurrentView() instanceof GameplayView) {
-				GameplayView gpv = (GameplayView) LayoutManager.getCurrentView();
+				GameplayView gpv = (GameplayView) LayoutManager
+						.getCurrentView();
 				Level l = LevelFactory.copyLevel(getCurrent());
 				lCtrl = new LevelController(l, gpv);
 			} else {
 				lCtrl = null;
-				throw new IllegalStateException("Hasn't switched to gameplay view!");
+				throw new IllegalStateException(
+						"Hasn't switched to gameplay view!");
 			}
 		}
 	}
-	
+
 	/**
 	 * Starts the current level.
 	 */
@@ -184,9 +188,9 @@ public class LevelManager {
 			lCtrl.startGame();
 		}
 	}
-	
+
 	/**
-	 * Unlocks the next level.
+	 * Unlocks the next level and save progress.
 	 */
 	public void unlockNextLevel() {
 		// Unlock next level
@@ -194,13 +198,14 @@ public class LevelManager {
 		if (next != null) {
 			setHighest(next);
 		}
-		
+
 		// Save high score
 		Level c = getLevelController().getLevel();
 		if (hiScore.containsKey(c.getLevelNum())) {
 			Level p = hiScore.get(c.getLevelNum());
-			//Level p = 
-			if (c.getGame().getStats().getScore() > p.getGame().getStats().getScore()) {
+			// Level p =
+			if (c.getGame().getStats().getScore() > p.getGame().getStats()
+					.getScore()) {
 				hiScore.remove(c.getLevelNum());
 			}
 		}
