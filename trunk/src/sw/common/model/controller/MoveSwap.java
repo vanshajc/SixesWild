@@ -60,6 +60,9 @@ public class MoveSwap extends BoardController implements IMove {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.IMove#doMove()
+	 */
 	@Override
 	public boolean doMove() {
 		setBoardController(prev);

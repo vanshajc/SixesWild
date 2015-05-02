@@ -32,6 +32,9 @@ public class PwrUpShuffleActionListener implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Class for the Shuffle powerup.
+	 */
 	private class PwrUpShuffle implements IMove {
 		
 		JButton btn;

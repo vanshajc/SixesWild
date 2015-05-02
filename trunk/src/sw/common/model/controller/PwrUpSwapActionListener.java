@@ -32,6 +32,9 @@ public class PwrUpSwapActionListener implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Class for the Swap powerup.
+	 */
 	private class PwrUpSwap extends MoveSwap {
 
 		JButton btn;

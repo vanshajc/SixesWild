@@ -120,6 +120,9 @@ public class MoveSelection extends BoardController implements IMove {
 		return true;
 	}	
 
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.IMove#undoMove()
+	 */
 	@Override
 	public boolean undoMove() {
 		// TODO Auto-generated method stub
