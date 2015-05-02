@@ -21,6 +21,7 @@ public class TestControllers extends TestCase{
 		Application.main(null);
 		lm = SixesWildJFrame.getLayoutManager();
 		lvlm = SixesWildJFrame.getLevelManager();
+		System.out.println("Level manager is "+lvlm);
 		board = new Board();
 		Level testLevel = LevelFactory.getPuzzleLevel(90, board, new Statistics(), null);
 		lvlm.getLevels().add(testLevel);
