@@ -32,10 +32,19 @@ public class PwrUpRemoveActionListener implements ActionListener {
 		}			
 	}
 
+	/**
+	 * Class for the Remove powerup.
+	 */
 	private class PwrUpRemove extends MoveRemove {
 
 		JButton btn;
 		
+		/**
+		 * Construct a Remove powerup. 
+		 * @param lc the level controller.
+		 * @param prev the previous board controller
+		 * @param btn the button
+		 */
 		public PwrUpRemove(ILevelController lc, BoardController prev, JButton btn) {
 			super(lc, prev);
 			this.btn = btn;

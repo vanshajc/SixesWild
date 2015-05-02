@@ -1,7 +1,7 @@
 /**
  * @file LevelController.java
  * @date Apr 23, 2015 11:05:49 PM
- * @author Tony Vu (quangvu@wpi.edu)
+ * @author Tony Vu (quangvu@wpi.edu), Vanshaj Chowdhary
  */
 package sw.common.model.controller;
 
@@ -26,7 +26,7 @@ import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
 import sw.common.system.manager.TimerTaskManager;
 /**
- *
+ * Class for the level contorller.
  */
 public class LevelController implements ILevelController, IGameController, IMoveManager, IGameplayView {
 
@@ -46,12 +46,20 @@ public class LevelController implements ILevelController, IGameController, IMove
 	//Boolean hasFinished = false;
 	Stack<IMove> moves = new Stack<IMove>();
 	
+	/**
+	 * Construct a level controller.
+	 * @param level the current level
+	 * @param gpv the view for the level
+	 */
 	public LevelController(Level level, IGameplayView gpv) {		
 		this.gpv = gpv;
 		System.out.println(level);
 		setLevel(level);		
 	}
 	
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.IGameplayView#setLevel(sw.common.model.entity.Level)
+	 */
 	public void setLevel(Level lvl) {
 		this.lvl = lvl;
 		game = this.lvl.getGame();
@@ -196,21 +204,33 @@ public class LevelController implements ILevelController, IGameController, IMove
 	// ILevelController methods
 	//
 	
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.ILevelController#getMoveManager()
+	 */
 	@Override
 	public IMoveManager getMoveManager() {
 		return this;
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.ILevelController#getBoardLocator()
+	 */
 	@Override
 	public IBoardLocationManager getBoardLocator() {
 		return game.getBoard();
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.ILevelController#getBoardSelector()
+	 */
 	@Override
 	public IBoardSelectionManager getBoardSelector() {
 		return game.getBoard();
 	}
 	
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.ILevelController#setBoardController(sw.common.model.controller.BoardController)
+	 */
 	@Override
 	public void setBoardController(BoardController bc) {
 		if (bc == null) {
@@ -221,6 +241,9 @@ public class LevelController implements ILevelController, IGameController, IMove
 		gpv.getBoardPanel().setBoardController(bc);		
 	}	
 	
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.ILevelController#getGameController()
+	 */
 	@Override
 	public IGameController getGameController() {
 		return this;
