@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -50,10 +51,11 @@ public class PlayGameScreenView extends JPanel implements IView{
 		lblLevel.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		add(lblLevel);
 		
-		//JButton arrowbutton = getButtonSubComponent(levelList);
 		levelList = new JComboBox<String>();
+		levelList.setUI(new MyComboBoxUI());
 		((JLabel)levelList.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		levelList.setBounds(280, 124, 400, 45);
+		levelList.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		levelList.setForeground(new Color(184, 134, 11));
 		levelList.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		levelList.setBackground(Color.WHITE);
@@ -160,10 +162,6 @@ public class PlayGameScreenView extends JPanel implements IView{
 	public Level getSelectedLevel() {
 		return lvlm.getLevels().get(levelList.getSelectedIndex());
 	}
-	
-	//public static ComboBoxUI createUI(JComponent c) {
-	//	return new ColorArrowUI();
-	//}
 
 //	private class DisabledItemsRenderer<String> extends BasicComboBoxRenderer {
 //		public Component getListCellRendererComponent(JList list, Object value,
