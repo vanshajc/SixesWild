@@ -77,7 +77,10 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		
 		boardPanel.setLevel(level);
 		
+		scorePanel.setMinimum(0);
+		scorePanel.setMaximum(level.getWinStats().getScoreThreeStar());
 		scorePanel.setScore(level.getGame().getStats().getScore());
+		
 		timeMovePanel.setMove(level.getGame().getStats().getNumMoves());
 		powerUpPanel.setPwrUp(level.getGame());
 		
