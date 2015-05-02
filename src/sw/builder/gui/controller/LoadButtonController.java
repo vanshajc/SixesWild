@@ -73,7 +73,7 @@ public class LoadButtonController extends JPanel implements ActionListener,IView
 		
 	}
 
-	private void setFields(ArrayList<String> input) {
+	public void setFields(ArrayList<String> input) {
 		String level = input.get(0);
 		String mode = input.get(1);
 		String move = input.get(2);
