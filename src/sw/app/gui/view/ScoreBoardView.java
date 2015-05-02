@@ -114,7 +114,7 @@ public class ScoreBoardView extends JPanel implements IView {
 				li.remove();
 			}
 		}
-		
+	
 	}
 	
 	public Dimension getPrefferredSize() {
