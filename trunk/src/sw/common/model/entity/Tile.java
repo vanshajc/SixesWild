@@ -11,15 +11,21 @@ package sw.common.model.entity;
  */
 public class Tile {
 
+	/** Holds the value and multiplier for the tile. */
 	int value = 0;
 	int multiplier = 0;
 
+	/** Holds the max and min value and multipliers.  */
 	public static final int minValue = 1;
 	public static final int maxValue = 6;
-	
 	public static final int minMultiplier = 1;
 	public static final int maxMultiplier = 3;	
-	
+
+	/**
+	 * Construct a Tile.
+	 * @param value the value for the tile.
+	 * @param multiplier the multilplier for the tile.
+	 */
 	public Tile(int value, int multiplier) {		
 		if ((value >= minValue && value <= maxValue) &&
 				(multiplier >= minMultiplier && multiplier <= maxMultiplier)) {
@@ -46,7 +52,7 @@ public class Tile {
 	public int getMultiplier() {
 		return multiplier;
 	}
-	
+
 	/**
 	 * @param t the Tile to copy
 	 */
@@ -55,9 +61,7 @@ public class Tile {
 		multiplier = t.multiplier;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/** (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -66,8 +70,8 @@ public class Tile {
 				.format("Value : %d, Multiplier : %d\n", value, multiplier);
 	}
 
-	
-	/* (non-Javadoc)
+
+	/** (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -75,7 +79,7 @@ public class Tile {
 		return (value + 142) * multiplier; 
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

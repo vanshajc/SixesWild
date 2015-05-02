@@ -22,6 +22,9 @@ public class TileFrequency {
 	/** Random number generator */
 	static Random rand = new Random();
 	
+	/**
+	 * Construct a tile frequency with equal chance for all values.
+	 */
 	public TileFrequency() {		
 		double val  = 100.0 / Tile.maxValue;      // Equal frequency for each value
 		double mult = 100.0 / Tile.maxMultiplier; // Equal frequency for each multiplier
@@ -40,11 +43,20 @@ public class TileFrequency {
 		setMulFreq(mhm);
 	}
 	
+	/**
+	 * Construct a TileFrequency with the given value and multiplier frequency
+	 * @param valFreq the map for each tile value to the frequency
+	 * @param mulFreq the map for each multiplier to the frequency
+	 */
 	public TileFrequency(HashMap<Integer, Double> valFreq, HashMap<Integer, Double> mulFreq) {
 		setValFreq(valFreq);
 		setMulFreq(mulFreq);
 	}
 	
+	/**
+	 * @param valFreq the map from each value to frequency
+	 * @return if valid set.
+	 */
 	public boolean setValFreq(HashMap<Integer, Double> valFreq) {
 		double sum = 0;
 		
@@ -71,6 +83,10 @@ public class TileFrequency {
 		return true;
 	}
 	
+	/**
+	 * @param mulFreq map from each multiplier to its frequency
+	 * @return if the set was valid
+	 */
 	public boolean setMulFreq(HashMap<Integer, Double> mulFreq) {
 		double sum = 0;
 		

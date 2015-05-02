@@ -1,6 +1,6 @@
 /**
  *  @file   Square.java
- *  @author Tony Vu
+ *  @author Tony Vu, Vanshaj Chowdhary
  *  @since  Apr 11, 2015
  */
 package sw.common.model.entity;
@@ -30,15 +30,20 @@ public class Square {
 
 	/** Constructors */
 	public Square() {}
-	
-	
-	public void Reset(){
-		this.selected=false;
-		this.marked=false;	
-	}
-	
+	/**
+	 * Constructs a Square.
+	 * @param tile the tile the square is holding
+	 */
 	public Square(Tile tile) {
 		this.tile = tile;
+	}
+	
+	/**
+	 * Resets the square.
+	 */
+	public void reset(){
+		this.selected=false;
+		this.marked=false;	
 	}
 	
 	/**

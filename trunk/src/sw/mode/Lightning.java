@@ -13,13 +13,18 @@ import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Game;
 import sw.common.model.entity.Statistics;
 
+/**
+ * Class for representing the Lightning mode.
+ */
 public class Lightning extends AbstractMode {
 
+	/** Whether time has ran out. */
 	boolean timeOut = false;
 	
+	/** Holds the Current Game Controller. */
 	IGameController gc;
 	
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -27,31 +32,40 @@ public class Lightning extends AbstractMode {
 		return "Lightning";
 	}
 
+	/** (non-Javadoc)
+	 * @see sw.mode.AbstractMode#getBoardController()
+	 */
 	@Override
 	public BoardController getBoardController() {
 		return new MoveSelection();
 	}
 
+	/** (non-Javadoc)
+	 * @see sw.mode.AbstractMode#isValid(sw.common.model.controller.IMove)
+	 */
 	@Override
 	public boolean isValid(IMove m) {
 		return true;
 	}
 	
+	/** (non-Javadoc)
+	 * @see sw.common.model.controller.IMode#initializeGame(sw.common.model.controller.IGameController)
+	 */
+	@Override
+	public void initializeGame(IGameController g) {
+		this.gc = g;
+		
+	}
 
+	/** (non-Javadoc)
+	 * @see sw.mode.AbstractMode#hasFinished(sw.common.model.entity.Game, sw.common.model.entity.Statistics)
+	 */
 	@Override
 	public boolean hasFinished(Game g, Statistics winStats) {
 		return timeOut;
 	}
 
-	/* (non-Javadoc)
-	 * @see sw.common.model.controller.IMode#initializeGame(sw.common.model.controller.IGameController)
-	 */
-	@Override
-	public void initializeGame(IGameController g) {
-		gc = g;		
-	}
-
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see sw.common.model.controller.IMode#getTimePolicy()
 	 */
 	@Override
@@ -59,7 +73,7 @@ public class Lightning extends AbstractMode {
 		return TIMER_POLICY.COUNT_DOWN;
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see sw.mode.AbstractMode#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override

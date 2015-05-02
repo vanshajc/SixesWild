@@ -26,6 +26,7 @@ public class Level {
 	/** Holds the mode of the level. */
 	IMode mode;
 	
+	/** Holds the level number. */
 	int levelNum;
 
 	/** Holds the Frequencies for each Tile. */
@@ -34,6 +35,14 @@ public class Level {
 	/** Holds the board for the level. */
 	Board initBoard;
 
+	/**
+	 * Constructs a level with the given parameters.
+	 * @param levelNum the level number
+	 * @param initBoard the initial board.
+	 * @param winStats the winning conditions
+	 * @param mode the mode
+	 * @param freq the tile frequencies
+	 */
 	public Level(int levelNum, Board initBoard, Statistics winStats, IMode mode, TileFrequency freq) {
 		this.winStats = winStats;
 		this.mode = mode;

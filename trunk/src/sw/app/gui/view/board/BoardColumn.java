@@ -77,7 +77,7 @@ public class BoardColumn extends JPanel {
 		// Load the images we need, will add in more as needed
 		for (int y = 0; y < column.size(); y++) {
 			Square s = column.getSquare(y); // better not be null here...
-			s.Reset();
+			s.reset();
 			if (s != null && !s.isEmpty()) {
 				Tile t = s.getTile();
 //				String str = rm.getImage(t);

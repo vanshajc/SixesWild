@@ -6,7 +6,6 @@
 package sw.mode;
 
 import sw.common.model.controller.BoardController;
-import sw.common.model.controller.IGameController;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Game;
@@ -25,32 +24,28 @@ public class Puzzle extends AbstractMode {
 		return "Puzzle";
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.mode.AbstractMode#getBoardController()
+	 */
 	@Override
 	public BoardController getBoardController() {
 		return new MoveSelection();
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.mode.AbstractMode#isValid(sw.common.model.controller.IMove)
+	 */
 	@Override
 	public boolean isValid(IMove m) {
 		return true;
 	}
 	
-	public boolean doMove(IMove m){
-		return true;
-	}
-	
+	/* (non-Javadoc)
+	 * @see sw.mode.AbstractMode#hasFinished(sw.common.model.entity.Game, sw.common.model.entity.Statistics)
+	 */
 	@Override
 	public boolean hasFinished(Game g, Statistics winStat) {
 		return g.getStats().getNumMoves() == 0;
-	}
-
-	/* (non-Javadoc)
-	 * @see sw.common.model.controller.IMode#initializeGame(sw.common.model.controller.IGameController)
-	 */
-	@Override
-	public void initializeGame(IGameController g) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/* (non-Javadoc)

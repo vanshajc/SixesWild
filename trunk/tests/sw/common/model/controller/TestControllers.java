@@ -23,6 +23,7 @@ public class TestControllers extends TestCase{
 		lvlm = SixesWildJFrame.getLevelManager();
 		board = new Board();
 		Level testLevel = LevelFactory.getPuzzleLevel(90, board, new Statistics(), null);
+		lvlm.getLevels().add(testLevel);
 		lvlm.setCurrent(testLevel);
 		lvlm.startLevel();
 		LayoutManager.switchToGameplayView(false);
@@ -37,6 +38,21 @@ public class TestControllers extends TestCase{
 		quit.doClick();
 		assertTrue(LayoutManager.getCurrentView() instanceof MainMenuView);
 	}
+	
+//	public void testPowerup(){
+//		JButton shuff = new JButton();
+//		shuff.addActionListener(new PwrUpShuffleActionListener());
+//		shuff.doClick();
+//		
+//		JButton rem = new JButton();
+//		rem.addActionListener(new PwrUpRemoveActionListener());
+//		rem.doClick();
+//		
+//		JButton swap = new JButton();
+//		swap.addActionListener(new PwrUpSwapActionListener());
+//		swap.doClick();
+//		
+//	}
 	
 	
 }
