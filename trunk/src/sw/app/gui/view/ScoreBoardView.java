@@ -154,8 +154,8 @@ public class ScoreBoardView extends JPanel implements IView {
 		levelNum.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		levelNum.setText(level.toString());		
 		levelNum.setHorizontalAlignment(SwingConstants.CENTER);
-		levelNum.setSize(fieldSize);
-		levelNum.setLocation(new Point(levelX, yPos + (fieldSize.height * count) + gap));
+		levelNum.setSize(175, 36);
+		levelNum.setLocation(new Point(levelX-35, yPos + (fieldSize.height * count) + gap));
 		add(levelNum);
 		
 		JLabel score = new JLabel();

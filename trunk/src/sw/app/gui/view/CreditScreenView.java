@@ -52,42 +52,49 @@ public class CreditScreenView extends JPanel implements IView{
 		lbl1.setBounds(210, 100, 400, 36);
 		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl1.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		lbl1.setForeground(new Color(184, 134, 11));
 		add(lbl1);
 		
 		JLabel lbl2 = new JLabel("Trung-Nghia Ngo Huynh");
 		lbl2.setBounds(210, 150, 400, 36);
 		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl2.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		lbl2.setForeground(new Color(184, 134, 11));
 		add(lbl2);
 		
 		JLabel lbl3 = new JLabel("Jessie Greg Johnson");
 		lbl3.setBounds(210, 200, 400, 36);
 		lbl3.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl3.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		lbl3.setForeground(new Color(184, 134, 11));
 		add(lbl3);
 		
 		JLabel lbl4 = new JLabel("Tuan Quang Vu");
 		lbl4.setBounds(210, 250, 400, 36);
 		lbl4.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl4.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		lbl4.setForeground(new Color(184, 134, 11));
 		add(lbl4);
 		
 		JLabel lbl5 = new JLabel("Steven Yevchak");
 		lbl5.setBounds(210, 300, 400, 36);
 		lbl5.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl5.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		lbl5.setForeground(new Color(184, 134, 11));
 		add(lbl5);
 		
 		JLabel lbl6 = new JLabel("Dr. George Heineman");
-		lbl6.setBounds(210, 350, 400, 36);
+		lbl6.setBounds(210, 450, 400, 36);
 		lbl6.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl6.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		lbl6.setForeground(new Color(184, 134, 11));
 		add(lbl6);
 		
 		JLabel lbl7 = new JLabel("Special Thanks to");
-		lbl7.setBounds(210, 400, 400, 36);
+		lbl7.setBounds(210, 375, 400, 36);
 		lbl7.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl7.setFont(new Font("Forte", Font.PLAIN, 35));
+		lbl7.setForeground(new Color(184, 134, 11));
 		add(lbl7);
 		
 		/*

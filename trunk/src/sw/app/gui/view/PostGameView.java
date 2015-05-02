@@ -52,6 +52,7 @@ public class PostGameView extends JPanel implements IView {
 		btnMainMenu.setBounds(86, 500, 152, 64);
 		btnMainMenu.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnMainMenu.setBorder(null);
+		btnMainMenu.setContentAreaFilled(false);
 		btnMainMenu.addActionListener(new MainMenuController());
 		btnMainMenu.setRolloverEnabled(true);
 		btnMainMenu.setRolloverIcon(newBtnMainMenuRollover);
@@ -68,6 +69,7 @@ public class PostGameView extends JPanel implements IView {
 		btnNext.setBorderPainted(false);
 		btnNext.setBounds(562, 500, 152, 64);
 		btnNext.setBorder(null);
+		btnNext.setContentAreaFilled(false);
 		btnNext.addActionListener(new PostGameController());
 		btnNext.setRolloverEnabled(true);
 		btnNext.setRolloverIcon(newBtnNextRollover);
@@ -84,6 +86,7 @@ public class PostGameView extends JPanel implements IView {
 		btnReplay.setBorderPainted(false);
 		btnReplay.setBounds(324, 500, 152, 64);
 		btnReplay.setBorder(null);
+		btnReplay.setContentAreaFilled(false);
 		btnReplay.addActionListener(new StartGameController());
 		btnReplay.setRolloverEnabled(true);
 		btnReplay.setRolloverIcon(newBtnReplayRollover);
