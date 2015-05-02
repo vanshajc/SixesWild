@@ -9,7 +9,6 @@ import java.awt.Point;
 import java.util.Iterator;
 
 import sw.common.model.controller.BoardController;
-import sw.common.model.controller.IGameController;
 import sw.common.model.controller.MoveSelection;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Game;
@@ -21,7 +20,7 @@ import sw.common.model.entity.Tile;
  * Class for respresenting the Elimination Mode
  */
 public class Elimination extends AbstractMode {
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -29,7 +28,7 @@ public class Elimination extends AbstractMode {
 		return "Elimination";
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see sw.mode.AbstractMode#getBoardController()
 	 */
 	@Override
@@ -37,7 +36,7 @@ public class Elimination extends AbstractMode {
 		return new EliminationMoveSelection();
 	}	
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see sw.mode.AbstractMode#hasFinished(sw.common.model.entity.Game, sw.common.model.entity.Statistics)
 	 */
 	@Override
@@ -53,17 +52,14 @@ public class Elimination extends AbstractMode {
 		}
 		return true;
 	}	
-	
-	/* (non-Javadoc)
-	 * @see sw.common.model.controller.IMode#initializeGame(sw.common.model.controller.IGameController)
-	 */
-	@Override
-	public void initializeGame(IGameController g) {
-		// TODO Auto-generated method stub
-		
-	}
 
+	/**
+	 * Class for handling selection moves for the elimination mode.
+	 */
 	private class EliminationMoveSelection extends MoveSelection {
+		/** (non-Javadoc)
+		 * @see sw.common.model.controller.MoveSelection#doMove()
+		 */
 		@Override
 		public boolean doMove() {
 			if (!isValid()) return false; 

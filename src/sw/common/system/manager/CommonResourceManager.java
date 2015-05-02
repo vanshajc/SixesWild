@@ -10,7 +10,6 @@ import java.awt.Image;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 
@@ -23,18 +22,23 @@ import sw.common.system.factory.TileFactory;
  */
 public class CommonResourceManager implements IResourceManager {
 
+	/** Holds the file name for the picture of each tile. */
 	static HashMap<Tile, String> tileMap = new HashMap<Tile, String>();
+	
+	/** Holds the file name for the picture of a square. */
 	static HashMap<Square, String> squareMap = new HashMap<Square, String>();
 
+	/** Holds the image for each file name. */
 	static HashMap<String, Image> imageMap = new HashMap<String, Image>();
 
-	static Dimension imgSize = new Dimension(50, 50);
+	/** Holds the default image size. */
+	static final Dimension imgSize = new Dimension(50, 50);
 
-	static String imagePath = "/sw/resource/image/";
+	/** Holds the base location for all images. */
+	static final String imagePath = "/sw/resource/image/";
 
 	/**
-	 * @throws IOException 
-	 * @throws Exception
+	 * Constructor for the Manager.
 	 */
 	public CommonResourceManager() throws IOException {
 		// initialize the tile map
@@ -66,9 +70,7 @@ public class CommonResourceManager implements IResourceManager {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/** (non-Javadoc) 
 	 * @see sw.common.system.manager.IResourceManager#getImage()
 	 */
 	@Override
@@ -76,12 +78,18 @@ public class CommonResourceManager implements IResourceManager {
 		return tileMap;
 	}
 
+	/** (non-Javadoc)
+	 * @see sw.common.system.manager.IResourceManager#getSquareImage()
+	 */
 	@Override
 	public HashMap<Square, String> getSquareImage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** (non-Javadoc)
+	 * @see sw.common.system.manager.IResourceManager#getImage(sw.common.model.entity.Square)
+	 */
 	@Override
 	public String getImage(Square square) {
 		if (square.isOnlySix())
@@ -89,31 +97,56 @@ public class CommonResourceManager implements IResourceManager {
 		return getUnusedImage(square.getTile().getValue());
 	}
 
+	/** (non-Javadoc)
+	 * @see sw.common.system.manager.IResourceManager#getImage(sw.common.model.entity.Tile)
+	 */
 	public String getImage(Tile tile) {
 		return getTileImage(tile.getValue(), tile.getMultiplier());
 	}
 
+	/**
+	 * @param i the tile value
+	 * @return the string location of the image
+	 */
 	String getUnusedImage(int i) {
 		return imagePath.concat(String.format("%d_unused.png", i));
 	}
 
+	/**
+	 * @param val the tile value
+	 * @param mul the tile multiplier
+	 * @return the string location of the image
+	 */
 	String getTileImage(int val, int mul) {
 		return imagePath.concat(String.format("tile_%dx%d.png", val, mul));
 	}
 
+	/** (non-Javadoc)
+	 * @see sw.common.system.manager.IResourceManager#getImageSize()
+	 */
 	@Override
 	public Dimension getImageSize() {
 		return imgSize;
 	}
 
+	/** (non-Javadoc)
+	 * @see sw.common.system.manager.IResourceManager#getStarImage()
+	 */
 	public String getStarImage() {
 		return imagePath.concat("star.png");
 	}
 
+	/**
+	 * @param name the name of the powerup
+	 * @return the stirng location of the powerup
+	 */
 	public String getPowerUpImage(String name) {
 		return imagePath.concat("button_" + name + ".png");
 	}
 
+	/** (non-Javadoc)
+	 * @see sw.common.system.manager.IResourceManager#getImage(java.lang.String)
+	 */
 	@Override
 	public Image getImage(String path) {
 		if (imageMap.containsKey(path)) {

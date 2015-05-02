@@ -17,9 +17,6 @@ import sw.common.model.entity.Tile;
  */
 public class MoveSelection extends BoardController implements IMove {
 	
-	/**
-	 * TODO Remove later on.
-	 */
 	public MoveSelection(){}
 
 	/**
@@ -73,6 +70,10 @@ public class MoveSelection extends BoardController implements IMove {
 		}
 	}
 
+	/**
+	 * Selects the square the mouse is over.
+	 * @param e the mouse event
+	 */
 	protected void selectionHandler(MouseEvent e) {
 		if (!manager.hasFinished() && !panel.isAnimating()) {  // If column is still moving, don't do anything
 			try {
@@ -95,6 +96,9 @@ public class MoveSelection extends BoardController implements IMove {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.common.model.controller.IMove#doMove()
+	 */
 	@Override
 	public boolean doMove() {
 		if (!isValid()) return false; 
@@ -122,6 +126,9 @@ public class MoveSelection extends BoardController implements IMove {
 		return false;
 	}
 	
+	/**
+	 * @return if the current move is valid
+	 */
 	protected boolean isValid(){
 		Iterator<Tile> selected = getSelectedTile().iterator();
 		ArrayList<Tile> tiles = new ArrayList<Tile>();

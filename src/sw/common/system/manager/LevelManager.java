@@ -55,6 +55,9 @@ public class LevelManager {
 
 	}
 	
+	/**
+	 * @return list of highscores for all completed levels
+	 */
 	public List<Level> getHighScore() {
 		return new ArrayList<Level>(hiScore.values());
 	}

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import sw.common.model.controller.BoardController;
-import sw.common.model.controller.IGameController;
 import sw.common.model.controller.IMove;
 import sw.common.model.controller.MoveRemove;
 import sw.common.model.controller.MoveSelection;
@@ -75,17 +74,7 @@ public class Release extends AbstractMode {
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see sw.common.model.controller.IMode#initializeGame(sw.common.model.controller.IGameController)
-	 */
-	@Override
-	public void initializeGame(IGameController g) {
-		// TODO Auto-generated method stub
-
-
-	}
-
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see sw.common.model.controller.IMode#getTimePolicy()
 	 */
 	@Override
