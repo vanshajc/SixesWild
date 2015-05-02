@@ -1,13 +1,8 @@
 package sw.common.model.controller;
 
-import java.awt.event.MouseEvent;
-
 import sw.app.Application;
-import sw.app.gui.view.GameplayView;
 import sw.app.gui.view.LayoutManager;
 import sw.app.gui.view.SixesWildJFrame;
-import sw.app.gui.view.board.BoardPanel;
-import sw.app.gui.view.board.IBoardPanel;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
