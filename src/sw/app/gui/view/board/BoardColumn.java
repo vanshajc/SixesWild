@@ -171,7 +171,7 @@ public class BoardColumn extends JPanel {
 					g.setColor(Color.BLACK);
 					g.drawRect(0, idxToY(y), imgSize.width, imgSize.height);
 					if (s.isOnlySix())
-						g.drawImage(loadSquareImg(s), 0, idxToY(y), null);
+						g.drawImage(loadSquareImg(s), 1, idxToY(y) + 3, null);
 				}
 			}
 		}
