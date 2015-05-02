@@ -23,7 +23,12 @@ public class TestViews extends TestCase{
 		pgv.initialize();
 		pgv.setLevel(testLevel);
 		
+		CreditScreenView csv = new CreditScreenView();
+		csv.initialize();
 		
+		PlayGameScreenView pgs = new PlayGameScreenView();
+		pgs.initialize();
+		pgs.addLevel(testLevel);
 	}
 
 }
