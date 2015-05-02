@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -66,7 +67,7 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		setLevel(level);
 	}
 
-	public BoardPanel(Board board) {
+	public BoardPanel(Board board) throws IOException {
 		setBoard(board);
 		setResouceManager(new CommonResourceManager());
 		initializeLayout();

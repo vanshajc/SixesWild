@@ -2,6 +2,7 @@ package sw.app.gui.view.board;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
@@ -37,7 +38,12 @@ public class test extends JFrame {
 		setBounds(100, 100, 450, 300);
 		
 		board = new Board();
-		boardPanel = new BoardPanel(board);
+		try {
+			boardPanel = new BoardPanel(board);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		boardPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		boardPanel.setLayout(new BorderLayout(0, 0));
 		setContentPane(boardPanel);		

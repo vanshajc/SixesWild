@@ -25,7 +25,7 @@ public class CreditScreenView extends JPanel implements IView{
 			.getImage();
 	
 	public CreditScreenView() {
-		initialize();
+		//initialize();
 	}
 	
 	public void initialize() {

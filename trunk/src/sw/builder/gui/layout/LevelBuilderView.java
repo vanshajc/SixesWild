@@ -2,6 +2,7 @@ package sw.builder.gui.layout;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -33,7 +34,12 @@ public class LevelBuilderView extends JPanel {
 		setLayout(null);
 
 		board = new Board();
-		boardPanel = new LevelBuilderBoardPanel(board);
+		try {
+			boardPanel = new LevelBuilderBoardPanel(board);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		initialize();
 	}
@@ -671,7 +677,7 @@ public class LevelBuilderView extends JPanel {
 
 	public class LevelBuilderBoardPanel extends BoardPanel {
 
-		public LevelBuilderBoardPanel(Board board) {
+		public LevelBuilderBoardPanel(Board board) throws IOException {
 			super(board);
 		}
 

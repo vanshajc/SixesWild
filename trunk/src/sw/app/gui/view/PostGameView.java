@@ -34,7 +34,7 @@ public class PostGameView extends JPanel implements IView {
 		setBackground(Color.WHITE);
 		setSize(new Dimension(800, 600));
 		
-		initialize();
+		//initialize();
 	}
 
 	@Override

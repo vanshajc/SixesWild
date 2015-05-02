@@ -5,8 +5,6 @@
  */
 package sw.common.system.manager;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,6 +25,9 @@ public class LevelManager {
 	protected ArrayList<Integer> sortedLevel = new ArrayList<Integer>();
 	protected HashMap<Integer, Level> list = new HashMap<Integer, Level>();
 	
+	/** List of highscore */
+	protected HashMap<Integer, Level> hiScore;
+	
 	/** Current and highest level reached */
 	protected int current;
 	protected int highest;
@@ -39,28 +40,30 @@ public class LevelManager {
 	 */
 	public LevelManager() {
 		
-		// Load available levels from resource classpath		
-		try {
-			List<Level> levels = MementoManager.loadMemento();
-			if (levels != null && !levels.isEmpty()) {
-				for (Level l : levels) {
-					addLevel(l);
-				}
-				
-				// first level is the current level by default
-				current = sortedLevel.get(0);
-				highest = current;
-			}			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
+		highest = MementoManager.getHighestLevel();
+		hiScore = MementoManager.loadProgress();
+		
+		List<Level> levels = MementoManager.loadPlayableLevel();
+		if (levels != null && !levels.isEmpty()) {
+			for (Level l : levels) {
+				addLevel(l);
+			}
+			
+			// first level is the current level by default
+			current = sortedLevel.get(0);
+		}
+
+	}
+	
+	public List<Level> getHighScore() {
+		return new ArrayList<Level>(hiScore.values());
 	}
 	
 	/**
 	 * Adds a level to the list of levels.
 	 * @param lvl the level to be added.
 	 */
-	void addLevel(Level lvl) {
+	public void addLevel(Level lvl) {
 		if (lvl != null && !list.containsKey(lvl.getLevelNum())) {
 			sortedLevel.add(lvl.getLevelNum());
 			Collections.sort(sortedLevel);
@@ -72,7 +75,7 @@ public class LevelManager {
 	/**
 	 * Remove all levels.
 	 */
-	void clear() {
+	public void clear() {
 		list.clear();
 	}
 	
@@ -128,6 +131,12 @@ public class LevelManager {
 		return l;
 	}
 	
+	public void setHighest(Integer levelNum) {
+		if (list.containsKey(levelNum)) {
+			highest = levelNum;
+		}
+	}
+	
 	/**
 	 * Sets the highest level reached
 	 * @param level the level to be set as highest
@@ -135,6 +144,7 @@ public class LevelManager {
 	public void setHighest(Level level) {
 		if (list.containsKey(level.getLevelNum())) {
 			highest = level.getLevelNum();
+			MementoManager.setHighestLevel(highest);
 		}
 	}
 	
@@ -176,17 +186,24 @@ public class LevelManager {
 	 * Unlocks the next level.
 	 */
 	public void unlockNextLevel() {
+		// Unlock next level
 		Level next = getNext();
 		if (next != null) {
 			setHighest(next);
 		}
 		
-		try {
-			MementoManager.saveProgress();
-		} catch (IOException | URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		// Save high score
+		Level c = getLevelController().getLevel();
+		if (hiScore.containsKey(c.getLevelNum())) {
+			Level p = hiScore.get(c.getLevelNum());
+			//Level p = 
+			if (c.getGame().getStats().getScore() > p.getGame().getStats().getScore()) {
+				hiScore.remove(c.getLevelNum());
+			}
 		}
+		hiScore.put(c.getLevelNum(), c);
+
+		MementoManager.saveLevel(c);
 	}
 
 }
