@@ -1,32 +1,21 @@
 package sw.app.gui.view;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Scrollbar;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.List;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import sw.app.gui.controller.MainMenuController;
-import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
-import sw.common.model.entity.Statistics;
-import sw.common.system.factory.LevelFactory;
-
-import java.awt.Font;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.swing.JScrollPane;
 
 public class ScoreBoardView extends JPanel implements IView {
 	
@@ -68,15 +57,6 @@ public class ScoreBoardView extends JPanel implements IView {
 		btnBack.setRolloverIcon(newBtnBackRollover);
 		btnBack.setPressedIcon(newBtnBackPressed);
 		add(btnBack);
-
-		JButton btnNewButton_1 = new JButton("Add score test");
-		btnNewButton_1.setBounds(567, 507, 103, 23);
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {				
-				addLevelStats(LevelFactory.getLightningLevel(0, new Board(), new Statistics(), null));
-			}
-		});
-		add(btnNewButton_1);
 
 		JLabel lblLevel = new JLabel("Level");
 		lblLevel.setForeground(new Color(184, 134, 11));
