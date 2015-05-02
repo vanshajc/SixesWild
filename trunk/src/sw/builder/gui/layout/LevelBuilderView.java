@@ -20,9 +20,10 @@ import sw.builder.gui.controller.RandomizeButtonController;
 import sw.builder.gui.controller.SaveButtonController;
 import sw.common.model.entity.Board;
 import sw.common.system.manager.TimerTaskManager;
+
 /** GUI class for level builder view. */
 public class LevelBuilderView extends JPanel {
-	
+
 	/** The object theat manages views. */
 	BuilderLayoutManager blm;
 	/** The board object that will be set. */
@@ -34,7 +35,9 @@ public class LevelBuilderView extends JPanel {
 
 	/**
 	 * Initializes the level builder view and the board.
-	 * @param blm controls which screens are switched to.
+	 * 
+	 * @param blm
+	 *            controls which screens are switched to.
 	 */
 	public LevelBuilderView(BuilderLayoutManager blm) {
 		this.blm = blm;
@@ -50,6 +53,7 @@ public class LevelBuilderView extends JPanel {
 
 		initialize();
 	}
+
 	/**
 	 * All textfields and labels on the level builder view.
 	 */
@@ -91,10 +95,10 @@ public class LevelBuilderView extends JPanel {
 	JLabel threeStar;
 	JTextField threeStarScore;
 	static JTextField textFields[][];
-	
-/**
- * Initializes all fields on the level builder view.
- */
+
+	/**
+	 * Initializes all fields on the level builder view.
+	 */
 	public void initialize() {
 
 		lvl = new JLabel();
@@ -330,9 +334,11 @@ public class LevelBuilderView extends JPanel {
 				"src/sw/resource/image/levelbuilderbackground.png"));
 
 	}
+
 	/**
+	 * Getter for the Level field.
 	 * 
-	 * @return
+	 * @return The level.
 	 */
 	public int getLvlField() {
 		int level;
@@ -345,14 +351,26 @@ public class LevelBuilderView extends JPanel {
 		return level;
 	}
 
+	/**
+	 * Setter level Field.
+	 * @param s the new value in the Level field.
+	 */
 	public void setLvlField(String s) {
 		this.lvlField.setText(s);
 	}
 
+	/**
+	 * Getter for mode.
+	 * @return the mode selected.
+	 */
 	public String getModeList() {
 		return (String) this.modeList.getSelectedItem();
 	}
-
+	
+	/**
+	 * Setter for the mode.
+	 * @param s the new value of the mode.
+	 */
 	public void setModeList(String s) {
 		int input = -1;
 		if (s.equals("Puzzle"))
@@ -366,6 +384,10 @@ public class LevelBuilderView extends JPanel {
 		this.modeList.setSelectedIndex(input);
 	}
 
+	/**
+	 * Getter for move.
+	 * @return The move.
+	 */
 	public int getMoveField() {
 		int moves;
 		try {
@@ -374,17 +396,25 @@ public class LevelBuilderView extends JPanel {
 			this.moveField.setText("");
 			return -1;
 		}
-		if(!this.getModeList().equals("Puzzle")){
+		if (!this.getModeList().equals("Puzzle")) {
 			moves = 0;
 			setMoveField("");
 		}
 		return moves;
 	}
 
+	/**
+	 * Setter move field.
+	 * @param s The value move field will be set to.
+	 */
 	public void setMoveField(String s) {
 		this.moveField.setText(s);
 	}
 
+	/**
+	 * Getter time field.
+	 * @return The time.
+	 */
 	public int getTimeField() {
 		int time;
 		try {
@@ -393,17 +423,25 @@ public class LevelBuilderView extends JPanel {
 			this.timeField.setText("");
 			return -1;
 		}
-		if(!this.getModeList().equals("Lightning")){
+		if (!this.getModeList().equals("Lightning")) {
 			time = 0;
 			setTimeField("");
 		}
 		return time;
 	}
 
+	/**
+	 * Setter for time field.
+	 * @param s value time field will be set to.
+	 */
 	public void setTimeField(String s) {
 		this.timeField.setText(s);
 	}
 
+	/**
+	 * Getter for the swap field.
+	 * @return The number of swaps.
+	 */
 	public int getSwapField() {
 		int swaps;
 		try {
@@ -415,10 +453,18 @@ public class LevelBuilderView extends JPanel {
 		return swaps;
 	}
 
+	/**
+	 * Setter for swap field.
+	 * @param s the new value of swap field.
+	 */
 	public void setSwapsField(String s) {
 		this.swapField.setText(s);
 	}
 
+	/**
+	 * Getter for the shuffle field.
+	 * @return the value of shuffle field.
+	 */
 	public int getShuffleField() {
 		int shuffle;
 		try {
@@ -430,10 +476,18 @@ public class LevelBuilderView extends JPanel {
 		return shuffle;
 	}
 
+	/**
+	 * Setter for the shuffle field
+	 * @param s the new value of the shuffle field.
+	 */
 	public void setShuffleField(String s) {
 		this.shuffleField.setText(s);
 	}
-
+	
+	/**
+	 * Getter for the remove field.
+	 * @return the number of removes.
+	 */
 	public int getRemoveField() {
 		int remove;
 		try {
@@ -445,10 +499,17 @@ public class LevelBuilderView extends JPanel {
 		return remove;
 	}
 
+	/**
+	 * Setter for the remove field.
+	 * @param s the new value of the remove field.
+	 */
 	public void setRemoveField(String s) {
 		this.removeField.setText(s);
 	}
-
+	/**
+	 * Getter for the one percent field.
+	 * @return the value in one percent field.
+	 */
 	public int getOnePercent() {
 		int one;
 		try {
@@ -460,10 +521,17 @@ public class LevelBuilderView extends JPanel {
 		return one;
 	}
 
+	/**
+	 * Setter for one percent field.
+	 * @param s new value of the one percent field.
+	 */
 	public void setOnePercent(String s) {
 		this.onePercent.setText(s);
 	}
-
+	/**
+	 * Getter for the one percent field.
+	 * @return the value in one percent field.
+	 */
 	public int getTwoPercent() {
 		int one;
 		try {
@@ -474,11 +542,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return one;
 	}
-
+	/**
+	 * Setter for two percent field.
+	 * @param s new value of the two percent field.
+	 */
 	public void setTwoPercent(String s) {
 		this.twoPercent.setText(s);
 	}
-
+	/**
+	 * Getter for the three percent field.
+	 * @return the value in three percent field.
+	 */
 	public int getThreePercent() {
 		int one;
 		try {
@@ -489,11 +563,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return one;
 	}
-
+	/**
+	 * Setter for three percent field.
+	 * @param s new value of the three percent field.
+	 */
 	public void setThreePercent(String s) {
 		this.threePercent.setText(s);
 	}
-
+	/**
+	 * Getter for the four percent field.
+	 * @return the value in four percent field.
+	 */
 	public int getFourPercent() {
 		int one;
 		try {
@@ -504,11 +584,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return one;
 	}
-
+	/**
+	 * Setter for four percent field.
+	 * @param s new value of the four percent field.
+	 */
 	public void setFourPercent(String s) {
 		this.fourPercent.setText(s);
 	}
-
+	/**
+	 * Getter for the five percent field.
+	 * @return the value in five percent field.
+	 */
 	public int getFivePercent() {
 		int one;
 		try {
@@ -519,11 +605,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return one;
 	}
-
+	/**
+	 * Setter for five percent field.
+	 * @param s new value of the five percent field.
+	 */
 	public void setFivePercent(String s) {
 		this.fivePercent.setText(s);
 	}
-
+	/**
+	 * Getter for the six percent field.
+	 * @return the value in five percent field.
+	 */
 	public int getSixPercent() {
 		int one;
 		try {
@@ -534,11 +626,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return one;
 	}
-
+	/**
+	 * Setter for six percent field.
+	 * @param s new value of the six percent field.
+	 */
 	public void setSixPercent(String s) {
 		this.sixPercent.setText(s);
 	}
-
+	/**
+	 * Getter for the one multiplier percent field.
+	 * @return the value in one multiplier percent field.
+	 */
 	public int getOneMultPercent() {
 		int one;
 		try {
@@ -549,11 +647,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return one;
 	}
-
+	/**
+	 * Setter for one multiplier percent field.
+	 * @param s new value of the one multiplier percent field.
+	 */
 	public void setmOnePercent(String s) {
 		this.oneMultPercent.setText(s);
 	}
-
+	/**
+	 * Getter for the two multiplier percent field.
+	 * @return the value in two multiplier percent field.
+	 */
 	public int getTwoMultPercent() {
 		int one;
 		try {
@@ -564,11 +668,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return one;
 	}
-
+	/**
+	 * Setter for two multiplier percent field.
+	 * @param s new value of the two multiplier percent field.
+	 */
 	public void setmTwoPercent(String s) {
 		this.twoMultPercent.setText(s);
 	}
-
+	/**
+	 * Getter for the three multiplier percent field.
+	 * @return the value in three multiplier percent field.
+	 */
 	public int getThreeMultPercent() {
 		int one;
 		try {
@@ -579,11 +689,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return one;
 	}
-
+	/**
+	 * Setter for three multiplier percent field.
+	 * @param s new value of the three multiplier percent field.
+	 */
 	public void setmThreePercent(String s) {
 		this.threeMultPercent.setText(s);
 	}
-
+	/** 
+	 * Getter for one star field.
+	 * @return one star field.
+	 */
 	public int getOneStar() {
 		int score;
 		try {
@@ -594,11 +710,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return score;
 	}
-
+	/**
+	 * Setter one star field.
+	 * @param s new value of one star field.
+	 */
 	public void setOneStar(String s) {
 		this.oneStarScore.setText(s);
 	}
-
+	/** 
+	 * Getter for two star field.
+	 * @return two star field.
+	 */
 	public int getTwoStar() {
 		int score;
 		try {
@@ -609,11 +731,17 @@ public class LevelBuilderView extends JPanel {
 		}
 		return score;
 	}
-
+	/**
+	 * Setter two star field.
+	 * @param s new value of two star field.
+	 */
 	public void setTwoStar(String s) {
 		this.twoStarScore.setText(s);
 	}
-
+	/** 
+	 * Getter for three star field.
+	 * @return three star field.
+	 */
 	public int getThreeStar() {
 		int score;
 		try {
@@ -624,7 +752,10 @@ public class LevelBuilderView extends JPanel {
 		}
 		return score;
 	}
-
+	/**
+	 * Setter three star field.
+	 * @param s new value of three star field.
+	 */
 	public void setThreeStar(String s) {
 		this.threeStarScore.setText(s);
 	}
@@ -634,10 +765,9 @@ public class LevelBuilderView extends JPanel {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				String input = textFields[i][j].getText();
-				if (isValid(input)){
-					board1[j][i] = input;					
-				}
-				else {
+				if (isValid(input)) {
+					board1[j][i] = input;
+				} else {
 					textFields[i][j].setText("");
 				}
 			}
@@ -679,7 +809,8 @@ public class LevelBuilderView extends JPanel {
 					if (s.charAt(2) == '0' || s.charAt(2) == '1'
 							|| s.charAt(2) == '2' || s.charAt(2) == '3'
 							|| s.charAt(2) == '*') {
-						if(s.charAt(0) == '6' && getModeList().equals("Elimination")) {
+						if (s.charAt(0) == '6'
+								&& getModeList().equals("Elimination")) {
 							return false;
 						}
 						return true;
