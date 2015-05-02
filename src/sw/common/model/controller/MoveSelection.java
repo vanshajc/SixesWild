@@ -85,6 +85,8 @@ public class MoveSelection extends BoardController implements IMove {
 						return;
 					}
 					select(p);
+				} else {
+					clearSelection();
 				}
 			} catch (Exception e1) {
 				clearSelection();
