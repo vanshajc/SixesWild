@@ -20,15 +20,22 @@ import sw.builder.gui.controller.RandomizeButtonController;
 import sw.builder.gui.controller.SaveButtonController;
 import sw.common.model.entity.Board;
 import sw.common.system.manager.TimerTaskManager;
-
+/** GUI class for level builder view. */
 public class LevelBuilderView extends JPanel {
-
+	
+	/** The object theat manages views. */
 	BuilderLayoutManager blm;
+	/** The board object that will be set. */
 	public static Board board;
+	/** Collection of Strings representing the board. */
 	public static String[][] boardStr = new String[9][9];
-
+	/** JPanel that holds a representation of the gui of the board. */
 	public static LevelBuilderBoardPanel boardPanel;
 
+	/**
+	 * Initializes the level builder view and the board.
+	 * @param blm controls which screens are switched to.
+	 */
 	public LevelBuilderView(BuilderLayoutManager blm) {
 		this.blm = blm;
 		setLayout(null);
@@ -43,7 +50,9 @@ public class LevelBuilderView extends JPanel {
 
 		initialize();
 	}
-
+	/**
+	 * All textfields and labels on the level builder view.
+	 */
 	JTextField lvlField;
 	JLabel lvl;
 	JComboBox<String> modeList;
@@ -82,7 +91,10 @@ public class LevelBuilderView extends JPanel {
 	JLabel threeStar;
 	JTextField threeStarScore;
 	static JTextField textFields[][];
-
+	
+/**
+ * Initializes all fields on the level builder view.
+ */
 	public void initialize() {
 
 		lvl = new JLabel();
@@ -318,7 +330,10 @@ public class LevelBuilderView extends JPanel {
 				"src/sw/resource/image/levelbuilderbackground.png"));
 
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public int getLvlField() {
 		int level;
 		try {
