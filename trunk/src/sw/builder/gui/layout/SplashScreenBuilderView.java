@@ -34,6 +34,6 @@ public class SplashScreenBuilderView extends JPanel implements IView{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(new ImageIcon(SplashScreenBuilderView.class.getResource("/sw/resource/image/SplashScreenImage.png")).getImage(), 0, 0, null);
+		g.drawImage(new ImageIcon(SplashScreenBuilderView.class.getResource("/sw/resource/image/splashScreenImage.png")).getImage(), 0, 0, null);
 	}
 }
