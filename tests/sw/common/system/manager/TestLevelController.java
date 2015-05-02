@@ -2,6 +2,8 @@ package sw.common.system.manager;
 import java.awt.Dimension;
 import java.awt.Point;
 
+import junit.framework.TestCase;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +17,6 @@ import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
 
-import common.CommonSwTest;
-
 /**
  *  @file   TestLevelController.java
  *  @author Tony Vu
@@ -24,7 +24,7 @@ import common.CommonSwTest;
  */
 
 /** Test for the LevelController class */
-public class TestLevelController extends CommonSwTest {
+public class TestLevelController extends TestCase {
 	
 	Level testLevel;
 	Board testBoard;
