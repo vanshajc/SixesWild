@@ -89,6 +89,12 @@ public class TestMoveSelection extends TestCase{
 		MoveSelection moveTester = new MoveSelection(lc);
 		assertTrue(moveTester.isValid());
 		
+//		s.clearSelection();
+//		s.select(new Point(0,0));
+//		s.select(new Point(0,1));
+//		MoveSwap m = new MoveSwap(lc, new MoveSelection(lc));
+//		assertTrue(m.doMove());
+//		s.clearSelection();
 		
 
 	}
