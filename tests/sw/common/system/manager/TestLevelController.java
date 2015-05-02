@@ -1,6 +1,7 @@
 package sw.common.system.manager;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 
 import junit.framework.TestCase;
 
@@ -9,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sw.app.Application;
+import sw.app.gui.controller.PostGameController;
 import sw.app.gui.view.LayoutManager;
 import sw.app.gui.view.SixesWildJFrame;
 import sw.common.model.controller.ILevelController;
@@ -26,7 +28,7 @@ import sw.common.system.factory.LevelFactory;
 /** Test for the LevelController class */
 public class TestLevelController extends TestCase {
 	
-	Level testLevel;
+	Level testLevel[];
 	Board testBoard;
 	Statistics testWinStats;
 	
@@ -43,12 +45,16 @@ public class TestLevelController extends TestCase {
 		testBoard = new Board();
 		testWinStats = new Statistics();
 		
-		testLevel = LevelFactory.getPuzzleLevel(0, testBoard, testWinStats, null);
-		lm.addLevel(testLevel);
+		testLevel = new Level[2];
+		testLevel[0] = LevelFactory.getPuzzleLevel(0, testBoard, testWinStats, null);
+		lm.addLevel(testLevel[0]);
+		
+		testLevel[1] = LevelFactory.getEliminationLevel(1, testBoard, testWinStats, null);
+		lm.addLevel(testLevel[1]);
 		
 		try {
 			LayoutManager.switchToGameplayView(false);
-			lm.setCurrent(testLevel);
+			lm.setCurrent(testLevel[0]);
 			
 			// This is for runtime testing
 			LayoutManager.initCurrentView();			
@@ -74,7 +80,7 @@ public class TestLevelController extends TestCase {
 		ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
 		
 		// The level info and win statistics should match
-		assertEquals(testLevel.toString(), lc.getLevel().toString());
+		assertEquals(testLevel[0].toString(), lc.getLevel().toString());
 		assertEquals(testWinStats, lc.getLevel().getWinStats());
 		
 		// Initial board layout should match with the one we generated
@@ -87,7 +93,20 @@ public class TestLevelController extends TestCase {
 			}
 		}
 	}
-
 	
+	@Test
+	public void testNextLevel() {
+		LevelManager lvlm = SixesWildJFrame.getLevelManager();
+		
+		Level next = lvlm.getNext();
+		assertEquals(testLevel[1].toString(), next.toString());
+		
+		lvlm.getLevelController().getMoveManager().finishGame();
+		
+		PostGameController pgc = new PostGameController();
+		pgc.actionPerformed(new ActionEvent(this, 0, ""));
+		
+		assertEquals(next.toString(), lvlm.getLevelController().getLevel().toString());
+	}
 
 }
