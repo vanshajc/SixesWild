@@ -7,18 +7,21 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import sw.app.gui.view.IView;
 
+/** JFrame for the Level Builder Application. */
 public class LevelBuilderJFrame extends JFrame implements IView{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	BuilderLayoutManager blm = new BuilderLayoutManager(this);
 	SplashScreenBuilderView ssbv = new SplashScreenBuilderView(blm);
 	
+	/** Holds the frame currently being display. */
 	Container pane = getContentPane();
+	/** Holds the time program was started at. */
 	long startTime;
 	
-	
+	/**
+	 * Constructor, creates JFrame and initializes it. 
+	 */
 	public LevelBuilderJFrame() {
 		this.setSize(800,600);
 		this.setLayout(new BorderLayout());
@@ -31,7 +34,9 @@ public class LevelBuilderJFrame extends JFrame implements IView{
 
 	}
 	
-	
+	/**
+	 * Initializes the splash screen view and the builder layout manager.
+	 */
 	public void initialize() {
 		blm.initailize();
 		ssbv = new SplashScreenBuilderView(blm);
