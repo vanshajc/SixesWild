@@ -23,7 +23,6 @@ public class DisplayBoardController implements ActionListener {
 
 	BuilderLayoutManager blm;
 	LevelBuilderView lbv;
-	//BuilderBoardPanel bbp = new BuilderBoardPanel(blm);
 
 	public DisplayBoardController(BuilderLayoutManager blm, LevelBuilderView lbv) {
 		this.blm = blm;
