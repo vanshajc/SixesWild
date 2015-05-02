@@ -52,7 +52,9 @@ public abstract class AbstractMode implements IMode, ActionListener {
 	 * @see sw.common.model.controller.IMode#initializeGame(sw.common.model.controller.IGameController)
 	 */
 	@Override
-	abstract public void initializeGame(IGameController g);
+	public void initializeGame(IGameController g) {
+		// Do nothing
+	}
 
 	/* (non-Javadoc)
 	 * @see sw.common.model.controller.IMode#getTimerPolicy()
