@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import sw.app.gui.controller.MainMenuController;
+import sw.app.gui.controller.PostGameController;
 import sw.app.gui.controller.PostGameMenuController;
 import sw.app.gui.view.board.BoardPanel;
 import sw.app.gui.view.board.GameInfoPanel;
@@ -97,7 +98,7 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 	
 	private void initializeLayout() {
 		setBackground(Color.WHITE);
-		setPreferredSize(new Dimension(685, 564));
+		setPreferredSize(new Dimension(800, 600)); //was 685, 564
 		setMinimumSize(getPreferredSize());
 		
 		boardPanel.setBackground(Color.WHITE);		
@@ -105,33 +106,67 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		scorePanel.setBackground(Color.WHITE);				
 		gameInfoPanel.setBackground(Color.WHITE);		
 		powerUpPanel.setBackground(Color.WHITE);
-		
-		quitButton.setIcon(quitBtnImg);
+
+		ImageIcon buttonQuit = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_mainMenu.png"));
+		ImageIcon newBtnQuit = new ImageIcon(buttonQuit.getImage().getScaledInstance(114, 48, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon buttonQuitRollover = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_mainMenu_Rollover.png"));
+		ImageIcon newBtnQuitRollover = new ImageIcon(buttonQuitRollover.getImage().getScaledInstance(114, 48, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon buttonQuitPressed = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_mainMenu_Pressed.png"));
+		ImageIcon newBtnQuitPressed = new ImageIcon(buttonQuitPressed.getImage().getScaledInstance(114, 48, java.awt.Image.SCALE_SMOOTH));
+		quitButton = new JButton(newBtnQuit);
+		quitButton.setOpaque(false);
+		quitButton.setBackground(Color.WHITE);
+		quitButton.setBorderPainted(false);
+		quitButton.setBounds(25, 505, 114, 48);
+		quitButton.setBorder(null);
+		quitButton.setContentAreaFilled(false);
 		quitButton.addActionListener(mmc);
+		quitButton.setRolloverEnabled(true);
+		quitButton.setRolloverIcon(newBtnQuitRollover);
+		quitButton.setPressedIcon(newBtnQuitPressed);
+		add(quitButton);
 		
 		btnPostgamemenutest = new JButton("PostGameMenuTest");
-		btnPostgamemenutest.addActionListener(new PostGameMenuController(lvlm));		
+		btnPostgamemenutest.addActionListener(new PostGameMenuController(lvlm));
+		btnPostgamemenutest.setBounds(200, 525, 150, 30);
+		add(btnPostgamemenutest);
 		
+		gameInfoPanel.setBounds(0, 15, 200, 36);
+		add(gameInfoPanel);
+		
+		powerUpPanel.setBounds(40, 100, 77, 300);
+		add(powerUpPanel);
+		
+		timeMovePanel.setBounds(200, 15, 450, 25);
+		add(timeMovePanel);
+		
+		boardPanel.setBounds(170, 65, 450, 450);
+		add(boardPanel);
+		
+		scorePanel.setBounds(650, 65, 102, 450);
+		add(scorePanel);
+		
+		/*
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(50)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
 							.addGap(20)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+							.addGap(70)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGap(20)
 								.addComponent(timeMovePanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(boardPanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
 									.addGap(30)
 									.addComponent(scorePanel, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(250)
-							.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+							.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(239)
 							.addComponent(btnPostgamemenutest)))
@@ -141,23 +176,24 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(10)
-					.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-					.addGap(15)
-					.addComponent(timeMovePanel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(timeMovePanel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(gameInfoPanel, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
 					.addGap(15)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(scorePanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 								.addComponent(powerUpPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+								.addGap(200)
+								.addComponent(quitButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
 							.addComponent(boardPanel, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(0)
 					.addComponent(btnPostgamemenutest)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		setLayout(groupLayout);
+		);*/
+		setLayout(null);
 	}
 	
 	//////////////////////////////////////////////////////////
@@ -237,7 +273,7 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		ImageIcon background = new ImageIcon(GameplayView.class.getResource("/sw/resource/image/firstBackground.png"));
+		ImageIcon background = new ImageIcon(GameplayView.class.getResource("/sw/resource/image/secondBackground.png"));
 		ImageIcon newBackground = new ImageIcon(background.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
 		super.paintComponent(g);
 		g.drawImage(newBackground.getImage(), 0, 0, null);

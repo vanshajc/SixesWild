@@ -19,11 +19,9 @@ import sw.app.gui.controller.MainMenuController;
 @SuppressWarnings("serial")
 public class CreditScreenView extends JPanel implements IView{
 	
-	Image background = new ImageIcon(
-			CreditScreenView.class
-					.getResource("/sw/resource/image/SixesWildMainMenuImage.png"))
-			.getImage();
-	
+	ImageIcon background = new ImageIcon(CreditScreenView.class.getResource("/sw/resource/image/secondBackground.png"));
+	ImageIcon newBackground = new ImageIcon(background.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
+
 	public CreditScreenView() {
 		//initialize();
 	}
@@ -32,36 +30,67 @@ public class CreditScreenView extends JPanel implements IView{
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(800, 600));
 		
-		JButton btnBack = new JButton("Back");
+		ImageIcon buttonBack = new ImageIcon(CreditScreenView.class.getResource("/sw/resource/image/button_back.png"));
+		ImageIcon newBtnBack = new ImageIcon(buttonBack.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnBackRollover = new ImageIcon(CreditScreenView.class.getResource("/sw/resource/image/button_back_Rollover.png"));
+		ImageIcon newBtnBackRollover = new ImageIcon(btnBackRollover.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnBackPressed =  new ImageIcon(CreditScreenView.class.getResource("/sw/resource/image/button_back_Pressed.png"));
+		ImageIcon newBtnBackPressed = new ImageIcon(btnBackPressed.getImage().getScaledInstance(227, 69, java.awt.Image.SCALE_SMOOTH));
+		JButton btnBack = new JButton(newBtnBack);
+		btnBack.setBounds(20, 500, 227, 69);
+		btnBack.setBorderPainted(false);
+		btnBack.setBackground(Color.WHITE);
+		btnBack.setBorder(null);
+		btnBack.setContentAreaFilled(false);
 		btnBack.addActionListener(new MainMenuController());
+		btnBack.setRolloverEnabled(true);
+		btnBack.setRolloverIcon(newBtnBackRollover);
+		btnBack.setPressedIcon(newBtnBackPressed);
+		add(btnBack);
 		
-		JLabel lblNewLabel = new JLabel("Vanshaj Chowdhary");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("French Script MT", Font.PLAIN, 25));
+		JLabel lbl1 = new JLabel("Vanshaj Chowdhary");
+		lbl1.setBounds(210, 100, 400, 36);
+		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl1.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		add(lbl1);
 		
-		JLabel label = new JLabel("Trung-Nghia Ngo Huynh");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("French Script MT", Font.PLAIN, 25));
+		JLabel lbl2 = new JLabel("Trung-Nghia Ngo Huynh");
+		lbl2.setBounds(210, 150, 400, 36);
+		lbl2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl2.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		add(lbl2);
 		
-		JLabel label_1 = new JLabel("Jessie Greg Johnson");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setFont(new Font("French Script MT", Font.PLAIN, 25));
+		JLabel lbl3 = new JLabel("Jessie Greg Johnson");
+		lbl3.setBounds(210, 200, 400, 36);
+		lbl3.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl3.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		add(lbl3);
 		
-		JLabel label_2 = new JLabel("Tuan Quang Vu");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setFont(new Font("French Script MT", Font.PLAIN, 25));
+		JLabel lbl4 = new JLabel("Tuan Quang Vu");
+		lbl4.setBounds(210, 250, 400, 36);
+		lbl4.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl4.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		add(lbl4);
 		
-		JLabel label_3 = new JLabel("Steven Yevchak");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setFont(new Font("French Script MT", Font.PLAIN, 25));
+		JLabel lbl5 = new JLabel("Steven Yevchak");
+		lbl5.setBounds(210, 300, 400, 36);
+		lbl5.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl5.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		add(lbl5);
 		
-		JLabel label_4 = new JLabel("Dr. George Heineman");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setFont(new Font("French Script MT", Font.PLAIN, 25));
+		JLabel lbl6 = new JLabel("Dr. George Heineman");
+		lbl6.setBounds(210, 350, 400, 36);
+		lbl6.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl6.setFont(new Font("French Script MT", Font.PLAIN, 35));
+		add(lbl6);
 		
-		JLabel lblNewLabel_1 = new JLabel("Special Thanks to");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Forte", Font.PLAIN, 35));
+		JLabel lbl7 = new JLabel("Special Thanks to");
+		lbl7.setBounds(210, 400, 400, 36);
+		lbl7.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl7.setFont(new Font("Forte", Font.PLAIN, 35));
+		add(lbl7);
+		
+		/*
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -79,7 +108,7 @@ public class CreditScreenView extends JPanel implements IView{
 								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(325)
-							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(200, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
@@ -100,10 +129,11 @@ public class CreditScreenView extends JPanel implements IView{
 					.addGap(18)
 					.addComponent(label_4)
 					.addGap(55)
-					.addComponent(btnBack)
+					.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
 					.addGap(128))
-		);
-		setLayout(groupLayout);		
+		);*/
+		
+		setLayout(null);	
 	}
 	
 	@Override
@@ -114,6 +144,6 @@ public class CreditScreenView extends JPanel implements IView{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(background, 0, 0, null);
+		g.drawImage(newBackground.getImage(), 0, 0, null);
 	}
 }

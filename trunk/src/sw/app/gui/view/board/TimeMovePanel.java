@@ -1,6 +1,7 @@
 package sw.app.gui.view.board;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
@@ -41,18 +42,26 @@ public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 	public TimeMovePanel() {		
 		setBackground(Color.LIGHT_GRAY);		
 		
-		setPreferredSize(new Dimension(450, 15));
+		setPreferredSize(new Dimension(450, 25));
 		
 		timeLabel = new JLabel("Time");
+		timeLabel.setForeground(new Color(184, 134, 11));
+		timeLabel.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		time = new JLabel();
+		time.setForeground(new Color(184, 134, 11));
+		time.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		time.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		move = new JLabel();
+		move.setForeground(new Color(184, 134, 11));
+		move.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		move.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		moveLabel = new JLabel("Move");
+		moveLabel.setForeground(new Color(184, 134, 11));
+		moveLabel.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		moveLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -61,7 +70,7 @@ public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(timeLabel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(time, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addComponent(time, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
 					.addComponent(moveLabel, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -71,10 +80,10 @@ public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(timeLabel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(time, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(move, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(moveLabel, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+						.addComponent(timeLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(time, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(move, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(moveLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);		
