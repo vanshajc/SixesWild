@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import sw.app.gui.view.LayoutManager;
 
 
+/** Controller for the play game button */
 public class PlayGameScreenController implements ActionListener {	
 	
 	@Override
