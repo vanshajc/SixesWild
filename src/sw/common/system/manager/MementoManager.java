@@ -34,7 +34,7 @@ public class MementoManager {
 	static final int levelFormatCount = 6;
 	
 	static String filePath = "src/sw/resource/levelData/";
-	static String progressFile = "src/sw/resource/levelData/Progress.txt";
+	static String progressFile = "src/sw/resource/progress/Progress.txt";
 
 	/** A cache of the player's progress, will be pushed out when the Level finish
 	 *  Need to override the Window's close method to push this out before exit application 
