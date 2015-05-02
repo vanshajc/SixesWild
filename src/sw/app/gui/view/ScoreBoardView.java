@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,22 +23,29 @@ import sw.common.model.entity.Statistics;
 import sw.common.system.factory.LevelFactory;
 
 import java.awt.Font;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.swing.JScrollPane;
 
 public class ScoreBoardView extends JPanel implements IView {
 	
-	int yPos = 77;
-	int gap = 22;
+	int yPos = 30;
+	int gap = 10;
 	int count = 0;
 	
-	int levelX = 40;
-	int scoreX = 230;
-	int moveX  = 420;
-	int timeX  = 610;
+	int levelX = 50;
+	int scoreX = 250;
+	int moveX  = 450;
+	int timeX  = 650;
 	
-	Dimension fieldSize = new Dimension(150,20);
+	Dimension fieldSize = new Dimension(100, 36);
+	
+	JScrollPane scrollPane;
 	
 	public ScoreBoardView() {
-		initialize();
+		setSize(new Dimension(800, 600));
+		//initialize();
 	}
 	
 	public void initialize(){
@@ -73,26 +81,39 @@ public class ScoreBoardView extends JPanel implements IView {
 		JLabel lblLevel = new JLabel("Level");
 		lblLevel.setForeground(new Color(184, 134, 11));
 		lblLevel.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		lblLevel.setBounds(50, 80, 100, 36);
+		lblLevel.setBounds(levelX, yPos, fieldSize.width, fieldSize.height);
+		lblLevel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblLevel);
 
-		JLabel lblStars = new JLabel("Stars");
+		JLabel lblStars = new JLabel("Score");
 		lblStars.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		lblStars.setForeground(new Color(184, 134, 11));
-		lblStars.setBounds(250, 80, 100, 36);
+		lblStars.setBounds(scoreX, yPos, fieldSize.width, fieldSize.height);
+		lblStars.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblStars);
 
-		JLabel lblTime = new JLabel("Time");
+		JLabel lblTime = new JLabel("Move");
 		lblTime.setForeground(new Color(184, 134, 11));
 		lblTime.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		lblTime.setBounds(450, 80, 100, 36);
+		lblTime.setBounds(moveX, yPos, fieldSize.width, fieldSize.height);
+		lblTime.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblTime);
 
-		JLabel lblScore = new JLabel("Score");
+		JLabel lblScore = new JLabel("Time");
 		lblScore.setForeground(new Color(184, 134, 11));
 		lblScore.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
-		lblScore.setBounds(650, 80, 100, 36);
+		lblScore.setBounds(timeX, yPos, fieldSize.width, fieldSize.height);
+		lblScore.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblScore);
+		
+		List<Level> past = SixesWildJFrame.getLevelManager().getHighScore();
+		if (past != null) {
+			Iterator<Level> li = past.iterator();
+			while (li.hasNext()) {
+				addLevelStats(li.next());
+				li.remove();
+			}
+		}
 		
 	}
 	
@@ -102,9 +123,10 @@ public class ScoreBoardView extends JPanel implements IView {
 
 	@Override
 	public void cleanup() {
-		// TODO Auto-generated method stub
-		
+		removeAll();
+		invalidate();
 	}
+	
 	public void paintComponent(Graphics g) {
 
 		ImageIcon backgroundImg = new ImageIcon(ScoreBoardView.class.getResource("/sw/resource/image/secondBackground.png"));
@@ -112,12 +134,18 @@ public class ScoreBoardView extends JPanel implements IView {
 		super.paintComponent(g);;
 		g.drawImage(newBackground.getImage(), 0, 0, null);
 	}
+	
 	public void addLevelStats(Level level) {
 		
-		// Limit to 25 entries
-		if (count > 20) {
+		if (level == null) {
 			return;
 		}
+		
+		// Limit to 16 entries
+		if (count > 16) {
+			return;
+		}
+		
 		// Add new entry
 		count++;
 		

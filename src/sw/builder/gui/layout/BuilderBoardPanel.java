@@ -2,6 +2,7 @@ package sw.builder.gui.layout;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,7 +33,12 @@ public class BuilderBoardPanel extends JPanel {
 	public BuilderBoardPanel(BuilderLayoutManager blm) {
 		setLayout(null);
 		this.blm = blm;
-		boardPanel  = new BoardPanel(b);
+		try {
+			boardPanel  = new BoardPanel(b);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		boardPanel.setBounds(0, 0, 500, 500);
 		boardPanel.setBorder(null);

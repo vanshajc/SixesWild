@@ -22,7 +22,7 @@ public class MainMenuView extends JPanel implements IView {
 	private static final long serialVersionUID = -1717902879125448300L;	
 
 	public MainMenuView() {		
-		initialize();
+		//initialize();
 	}
 
 	@Override

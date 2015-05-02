@@ -29,7 +29,7 @@ public class PostGameMenuController implements ActionListener {
 		try {
 			SixesWildJFrame.getLevelManager().unlockNextLevel();
 			MementoManager.saveProgress();
-		} catch (IOException | URISyntaxException e1) {
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
