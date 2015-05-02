@@ -9,11 +9,10 @@ import sw.builder.gui.layout.LevelBuilderJFrame;
 
 public class ApplicationLevelBuilder {
 	
+	/** Instance of the level builder application */
 	private LevelBuilderJFrame app;
 
-	/**
-	 * Launch the application.
-	 */
+	/** Launch the application. */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -27,19 +26,14 @@ public class ApplicationLevelBuilder {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	/** Create the application. */
 	public ApplicationLevelBuilder() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	/** Initialize the contents of the frame. */
 	private void initialize() {
 		app = new LevelBuilderJFrame();
-		//app.setBounds(100, 100, 450, 300);
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
