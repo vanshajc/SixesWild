@@ -1,33 +1,21 @@
 package sw.common.model.controller;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
 
+import junit.framework.TestCase;
 import sw.app.Application;
-import sw.app.gui.view.GameplayView;
 import sw.app.gui.view.LayoutManager;
 import sw.app.gui.view.SixesWildJFrame;
 import sw.app.gui.view.board.BoardPanel;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
-import sw.common.model.entity.Square;
 import sw.common.model.entity.Statistics;
 import sw.common.model.entity.Tile;
 import sw.common.system.factory.LevelFactory;
 import sw.common.system.factory.TileFactory;
-import sw.common.system.factory.TileFrequency;
-import sw.common.system.manager.IBoardLocationManager;
 import sw.common.system.manager.IBoardSelectionManager;
 import sw.common.system.manager.LevelManager;
-import sw.mode.Puzzle;
-import junit.framework.TestCase;
 
 public class TestMoveSelection extends TestCase{
 	// testing this is kind of hard.. i dont really want to do this.. 
@@ -63,11 +51,7 @@ public class TestMoveSelection extends TestCase{
 		
 	}
 	
-//	public void testMoves(){
-//		MouseEvent press = new MouseEvent(boardPanel, MouseEvent.MOUSE_PRESSED,System.currentTimeMillis(), 0, 50, 50, 0, false);
-//		//mousePressed(press);
-//		
-//	}
+
 
 	public void testIsValid() {
 		ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
