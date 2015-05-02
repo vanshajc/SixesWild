@@ -27,6 +27,10 @@ public class BoardTest {
 	
 	/** Test IBoard interface */
 	
+	
+	
+	
+	
 	@Test
 	public void testIBoard() {
 		assertEquals(new Dimension(9,9), board.size());		
@@ -137,6 +141,14 @@ public class BoardTest {
 		assertEquals(2, sq.size());		
 		tq = board.getSelectedTile();
 		assertEquals(2, tq.size());
+	}
+	
+	@Test
+	public void testShuffle(){
+		assertTrue(true);
+		board.shuffle();
+		assertTrue(true);
+		
 	}
 
 }
