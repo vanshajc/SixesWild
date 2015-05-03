@@ -1,6 +1,6 @@
 /**
  * @file PowerUpPanel.java
- * @author Vanshaj Chowdhary, ANDREW PUT YOUR NAME HERE
+ * @author Vanshaj Chowdhary, ANDREW PUT YOUR NAME HERE, Tony Vu
  */
 package sw.app.gui.view.board;
 
@@ -13,12 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import sw.app.gui.view.SixesWildJFrame;
 import sw.common.model.controller.PwrUpRemoveActionListener;
 import sw.common.model.controller.PwrUpShuffleActionListener;
 import sw.common.model.controller.PwrUpSwapActionListener;
 import sw.common.model.entity.Game;
-import sw.common.system.manager.CommonResourceManager;
 
 /**
  * Class for the Powerup Panel on the game.
@@ -78,7 +76,7 @@ public class PowerUpPanel extends JPanel {
 		btnSwap.setRolloverEnabled(true);
 		btnSwap.setRolloverIcon(newBtnSwapRollover);
 		btnSwap.setPressedIcon(newBtnSwapPressed);
-		
+		btnSwap.setSelectedIcon(newBtnSwapPressed);
 		
 		//btnShuffle = new JButton(new ImageIcon(PowerUpPanel.class.getResource(crm.getPowerUpImage("shuffle"))));btnShuffle = new JButton(newBtnShuffle);
 		btnShuffle = new JButton(newBtnShuffle);
@@ -90,6 +88,7 @@ public class PowerUpPanel extends JPanel {
 		btnShuffle.setRolloverEnabled(true);
 		btnShuffle.setRolloverIcon(newBtnShuffleRollover);
 		btnShuffle.setPressedIcon(newBtnShufflePressed);
+		btnShuffle.setSelectedIcon(newBtnShufflePressed);
 		
 		//btnRemove = new JButton(new ImageIcon(PowerUpPanel.class.getResource(crm.getPowerUpImage("remove"))));
 		btnRemove = new JButton(newBtnRemove);
@@ -101,6 +100,7 @@ public class PowerUpPanel extends JPanel {
 		btnRemove.setRolloverEnabled(true);
 		btnRemove.setRolloverIcon(newBtnRemoveRollover);
 		btnRemove.setPressedIcon(newBtnRemovePressed);
+		btnRemove.setSelectedIcon(newBtnRemovePressed);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

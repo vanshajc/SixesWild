@@ -28,29 +28,31 @@ import sw.common.system.factory.TileFrequency;
 
 /** Responsible for loading existing levels into the LevelManager */
 public class MementoManager {
-	
-	static final String levelFormat   = "%d,%s,%d,%d,%s,%s";
-	static final String levelRegex    = "(\\d),(\\D+),(\\d+),(\\d+),(\\d{2}):(\\d{2}):(\\d{2}),(\\d+)";
+
+	static final String levelFormat = "%d,%s,%d,%d,%s,%s";
+	static final String levelRegex = "(\\d),(\\D+),(\\d+),(\\d+),(\\d{2}):(\\d{2}):(\\d{2}),(\\d+)";
 	static final int levelFormatCount = 6;
-	
+
 	static String filePath = "src/sw/resource/levelData/";
 	static String progressFile = "src/sw/resource/progress/Progress.txt";
 
-	/** A cache of the player's progress, will be pushed out when the Level finish
-	 *  Need to override the Window's close method to push this out before exit application 
+	/**
+	 * A cache of the player's progress, will be pushed out when the Level
+	 * finish Need to override the Window's close method to push this out before
+	 * exit application
 	 */
 	static ArrayList<String> progress = null;
-	
+
 	/** Load progress into cache */
 	public static void initialize() {
 		progress = readLines(progressFile);
-		
+
 		// Set default highest level to 1
 		if (progress.isEmpty()) {
 			progress.add("1");
 		}
 	}
-	
+
 	/** Save a level to player's progress */
 	public static void saveLevel(Level level) {
 		if (level != null) {
@@ -59,12 +61,12 @@ public class MementoManager {
 				// Search cache to see if level already exists
 				for (int i = 1; i < progress.size(); i++) {
 					Level l = importLevel(progress.get(i));
-					
+
 					// TODO make sure every level number is unique
 					if (l.getLevelNum() == level.getLevelNum()) {
 						Statistics s1 = l.getGame().getStats();
 						Statistics s2 = level.getGame().getStats();
-						
+
 						// Found new high score
 						if (s2.getScore() > s1.getScore()) {
 							progress.set(i, lvlStr);
@@ -72,13 +74,18 @@ public class MementoManager {
 						}
 					}
 				}
-				
+
 				// If did not find the same level, just add it
 				progress.add(lvlStr);
 			}
-		}		
+		}
 	}
-	
+
+	/**
+	 * Save player's progress to a file
+	 * 
+	 * @throws IOException
+	 */
 	public static void saveProgress() throws IOException {
 		try {
 			PrintWriter out = new PrintWriter(progressFile);
@@ -90,38 +97,40 @@ public class MementoManager {
 			out.flush();
 			out.close();
 		} catch (FileNotFoundException e) {
-			// Should not happen here
-			//e.printStackTrace();
-			
 			throw new IOException("Can't find progress file!");
 		}
 	}
-	
+
+	/**
+	 * @return the highest level number unlocked from saved progress
+	 */
 	public static Integer getHighestLevel() {
 		if (!progress.isEmpty()) {
-			String str = progress.get(0);
 			return Integer.valueOf(progress.get(0));
 		}
-		return 1;  // Default highest level is 1
+		return 1; // Default highest level is 1
 	}
 
 	/**
+	 * Set the highest level unlocked
+	 * 
 	 * @param highest
+	 *            the level number to unlock
 	 */
 	public static void setHighestLevel(int highest) {
 		if (highest > getHighestLevel()) {
 			progress.set(0, String.valueOf(highest));
-		}		
+		}
 	}
-	
+
 	/**
 	 * @return a hashmap containing the high score for each Level
 	 * @throws IOException
 	 */
 	public static HashMap<Integer, Level> loadProgress() {
 		HashMap<Integer, Level> list = new HashMap<Integer, Level>();
-		
-		if (!progress.isEmpty() && progress.size() > 1) {			
+
+		if (!progress.isEmpty() && progress.size() > 1) {
 			for (int i = 1; i < progress.size(); i++) {
 				Level l = importLevel(progress.get(i));
 				if (l != null) {
@@ -132,7 +141,14 @@ public class MementoManager {
 
 		return list;
 	}
-	
+
+	/**
+	 * Import a Level progress from exported string
+	 * 
+	 * @param str
+	 *            the level export string
+	 * @return the Level imported
+	 */
 	static Level importLevel(String str) {
 		Level l = null;
 		if (str.matches(levelRegex)) {
@@ -140,53 +156,71 @@ public class MementoManager {
 			if (data.length == levelFormatCount) {
 				int levelNum = Integer.valueOf(data[0]);
 				String levelMode = data[1];
-				
+
 				int levelScore = Integer.valueOf(data[2]);
-				int levelMove  = Integer.valueOf(data[3]);
+				int levelMove = Integer.valueOf(data[3]);
 				Time levelTime = Time.valueOf(data[4]);
 				int levelStars = Integer.valueOf(data[5]);
-				
+
 				switch (levelMode) {
 				case "Puzzle":
-					l = LevelFactory.getPuzzleLevel(levelNum, null , null, null);
+					l = LevelFactory.getPuzzleLevel(levelNum, null, null, null);
 					break;
 				case "Release":
-					l = LevelFactory.getReleaseLevel(levelNum, null, null, null);
+					l = LevelFactory
+							.getReleaseLevel(levelNum, null, null, null);
 					break;
 				case "Lightning":
-					l = LevelFactory.getLightningLevel(levelNum, null, null, null);
+					l = LevelFactory.getLightningLevel(levelNum, null, null,
+							null);
 					break;
 				case "Elimination":
-					l = LevelFactory.getEliminationLevel(levelNum, null, null, null);
+					l = LevelFactory.getEliminationLevel(levelNum, null, null,
+							null);
 					break;
 				}
-				
+
 				Statistics stats = l.getGame().getStats();
 				stats.setScore(levelScore);
 				stats.setNumMoves(levelMove);
 				stats.setTime(levelTime);
 				stats.setStars(levelStars);
-			}			
+			}
 		}
 		return l;
 	}
 
+	/**
+	 * Export a Level statistics to a string
+	 * 
+	 * @param level
+	 *            the Level to export
+	 * @return the exported string
+	 */
 	static String exportLevel(Level level) {
 		if (level != null) {
 			Game g = level.getGame();
 			if (g != null) {
 				Statistics stats = g.getStats();
 				if (stats != null) {
-					return String.format(levelFormat,
-							level.getLevelNum(), level.getMode().toString(),
-							stats.getScore(), stats.getNumMoves(),
-							stats.getTime(), level.getStars());
+					return String.format(levelFormat, level.getLevelNum(),
+							level.getMode().toString(), stats.getScore(),
+							stats.getNumMoves(), stats.getTime(),
+							level.getStars());
 				}
 			}
 		}
 		return null;
 	}
 
+	/**
+	 * Load a playable level from saved text
+	 * 
+	 * @param name
+	 *            the name of the level text
+	 * @return the playable Level
+	 * @throws IOException
+	 */
 	public static Level loadPlayableLevel(String name) throws IOException {
 		Level lvl = null;
 		ArrayList<String> lines = readLines(name);
@@ -201,14 +235,14 @@ public class MementoManager {
 			String time1 = String.format("%02d:%02d:%02d", 0, 0,
 					Integer.parseInt(time));
 			winStats.setTime(Time.valueOf(time1));
-			
+
 			String scoreOneStar = lines.get(25);
 			String scoreTwoStar = lines.get(26);
 			String scoreThreeStar = lines.get(27);
 			winStats.setScoreOneStar(Integer.parseInt(scoreOneStar));
 			winStats.setScoreTwoStar(Integer.parseInt(scoreTwoStar));
 			winStats.setScoreThreeStar(Integer.parseInt(scoreThreeStar));
-			
+
 			// Tile value and multiplier percentage
 			String one = lines.get(7);
 			String two = lines.get(8);
@@ -293,6 +327,11 @@ public class MementoManager {
 		return lvl;
 	}
 
+	/**
+	 * Load all playable levels
+	 * 
+	 * @return a list of all playable levels
+	 */
 	public static List<Level> loadPlayableLevel() {
 		ArrayList<Level> levels = new ArrayList<Level>();
 
@@ -353,7 +392,8 @@ public class MementoManager {
 	}
 
 	/**
-	 * @param s arraylist containing the value,multiplier for each tile
+	 * @param s
+	 *            arraylist containing the value,multiplier for each tile
 	 * @return the board created
 	 */
 	static Board setBoard(ArrayList<String> s) {
