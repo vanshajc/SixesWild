@@ -8,6 +8,8 @@ package sw.common.model.controller;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
+import javax.swing.SwingUtilities;
+
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 import sw.common.system.factory.TileFactory;
@@ -40,23 +42,28 @@ public class MoveSwap extends BoardController implements IMove {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (!panel.isAnimating()) {
-			try {
-				if (!moveStarted) {
-					moveStarted = true;
-					p1 = panel.xyToPoint(e.getPoint());
-					select(p1);
-				} else {
-					moveStarted = false;
-					p2 = panel.xyToPoint(e.getPoint());
-					select(p2);
-					requestPushMove(this);
-					clearSelection();
+		if (SwingUtilities.isLeftMouseButton(e)) {
+			if (!panel.isAnimating()) {
+				try {
+					if (!moveStarted) {
+						moveStarted = true;
+						p1 = panel.xyToPoint(e.getPoint());
+						select(p1);
+					} else {
+						moveStarted = false;
+						p2 = panel.xyToPoint(e.getPoint());
+						select(p2);
+						requestPushMove(this);
+						clearSelection();
+					}
+				} catch (Exception e1) {
+					System.err
+							.println("Out of bound error in MoveSwap::mouseClicked!");
 				}
-			} catch (Exception e1) {				
-				System.err
-				.println("Out of bound error in MoveSwap::mouseClicked!");
 			}
+		} else {
+			moveStarted = false;
+			clearSelection();
 		}
 	}
 

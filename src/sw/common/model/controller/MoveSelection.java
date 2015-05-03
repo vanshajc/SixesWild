@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.SwingUtilities;
+
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
 
@@ -32,15 +34,19 @@ public class MoveSelection extends BoardController implements IMove {
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (manager.hasFinished()) {
-			manager.finishGame();
-		}
-		
-		try {
-			selectionHandler(e);
-		} catch (IndexOutOfBoundsException e1) {
-			System.err
-			.println("Out of bound error in BoardColumnController::mouseClicked!");
+		if (SwingUtilities.isLeftMouseButton(e)) {
+			if (manager.hasFinished()) {
+				manager.finishGame();
+			}
+
+			try {
+				selectionHandler(e);
+			} catch (IndexOutOfBoundsException e1) {
+				System.err
+						.println("Out of bound error in BoardColumnController::mouseClicked!");
+			}
+		} else {
+			clearSelection();
 		}
 	}
 
@@ -49,11 +55,15 @@ public class MoveSelection extends BoardController implements IMove {
 	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		try {
-			selectionHandler(e);
-		} catch (IndexOutOfBoundsException e1) {
-			System.err
-			.println("Out of bound error in BoardColumnController::mouseDragged!");
+		if (SwingUtilities.isLeftMouseButton(e)) {
+			try {
+				selectionHandler(e);
+			} catch (IndexOutOfBoundsException e1) {
+				System.err
+						.println("Out of bound error in BoardColumnController::mouseDragged!");
+			}
+		} else {
+			clearSelection();
 		}
 	}
 
@@ -62,10 +72,14 @@ public class MoveSelection extends BoardController implements IMove {
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		selectionHandler(e);
-		
-		if (!manager.hasFinished()) {
-			requestPushMove(this);
+		if (SwingUtilities.isLeftMouseButton(e)) {
+			selectionHandler(e);
+			
+			if (!manager.hasFinished()) {
+				requestPushMove(this);
+				clearSelection();
+			}
+		} else {
 			clearSelection();
 		}
 	}
