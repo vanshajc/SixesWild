@@ -17,41 +17,48 @@ import sw.common.model.entity.Game;
  * Controller class for the shuffle powerup button.
  */
 public class PwrUpShuffleActionListener implements ActionListener {
-	
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {		
-		ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
-		
+	public void actionPerformed(ActionEvent e) {
+		ILevelController lc = SixesWildJFrame.getLevelManager()
+				.getLevelController();
+
 		IMoveManager mm = lc.getMoveManager();
 		int pwrUps[] = lc.getLevel().getGame().getPwrUps();
 		if (pwrUps[Game.PWRUP_SHUFFLE] > 0) {
-			mm.pushMove(new PwrUpShuffle((JButton) e.getSource()));	
+			mm.pushMove(new PwrUpShuffle((JButton) e.getSource()));
 		}
 	}
-	
+
 	/**
 	 * Class for the Shuffle powerup.
 	 */
 	private class PwrUpShuffle implements IMove {
-		
+
 		JButton btn;
-		
+
 		PwrUpShuffle(JButton btn) {
 			this.btn = btn;
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see sw.common.model.controller.IMove#doMove()
 		 */
 		@Override
 		public boolean doMove() {
-			ILevelController lc = SixesWildJFrame.getLevelManager().getLevelController();
-			
+			ILevelController lc = SixesWildJFrame.getLevelManager()
+					.getLevelController();
+
 			lc.getBoardPanel().getBoard().shuffle();
-			
+
 			int pwrUps[] = lc.getLevel().getGame().getPwrUps();
 			if (pwrUps[Game.PWRUP_SHUFFLE] > 0) {
 				pwrUps[Game.PWRUP_SHUFFLE]--;
@@ -62,7 +69,9 @@ public class PwrUpShuffleActionListener implements ActionListener {
 			return true;
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see sw.common.model.controller.IMove#undoMove()
 		 */
 		@Override
@@ -70,7 +79,7 @@ public class PwrUpShuffleActionListener implements ActionListener {
 			// Cannot undo shuffle
 			return false;
 		}
-		
+
 	}
 
 }
