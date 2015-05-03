@@ -3,9 +3,6 @@ package sw.builder.gui.layout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
-import org.junit.After;
 
 import junit.framework.TestCase;
 import sw.app.ApplicationLevelBuilder;
@@ -15,7 +12,7 @@ import sw.builder.gui.controller.SaveButtonController;
 public class TestControllers extends TestCase{
 	
 	
-	protected void setUp(){
+	public void test1(){
 	LevelBuilderJFrame lbjf;
 	ApplicationLevelBuilder.main(null);
 	lbjf = new LevelBuilderJFrame();
@@ -58,13 +55,6 @@ public class TestControllers extends TestCase{
 	save.doClick();
 	}
 	
-	@After
-	protected void tearDown(){
-		
-	}
-	
-	public void testLoadButton(){
-	}
 	
 	
 

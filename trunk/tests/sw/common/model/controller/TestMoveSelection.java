@@ -1,9 +1,11 @@
 package sw.common.model.controller;
 
 import java.awt.Point;
+import java.awt.event.MouseEvent;
 
 import junit.framework.TestCase;
 import sw.app.Application;
+import sw.app.gui.view.GameplayView;
 import sw.app.gui.view.LayoutManager;
 import sw.app.gui.view.SixesWildJFrame;
 import sw.app.gui.view.board.BoardPanel;
@@ -41,7 +43,8 @@ public class TestMoveSelection extends TestCase{
 			lm.setCurrent(testLevel);
 			
 			// This is for runtime testing
-			LayoutManager.initCurrentView();			
+			LayoutManager.initCurrentView();
+			boardPanel = (BoardPanel) ((GameplayView) LayoutManager.getCurrentView()).getBoardPanel();
 			lm.startLevel();
 		} catch (Exception e) {
 			fail("Should not have failed here!");
@@ -90,12 +93,6 @@ public class TestMoveSelection extends TestCase{
 		MoveSelection moveTester = new MoveSelection(lc);
 		assertTrue(moveTester.isValid());
 		
-//		s.clearSelection();
-//		s.select(new Point(0,0));
-//		s.select(new Point(0,1));
-//		MoveSwap m = new MoveSwap(lc, new MoveSelection(lc));
-//		assertTrue(m.doMove());
-//		s.clearSelection();
 		
 
 	}
@@ -122,7 +119,16 @@ public class TestMoveSelection extends TestCase{
 		MoveSelection moveTester = new MoveSelection(lc);
 		assertTrue(moveTester.doMove());
 		
+		s.clearSelection();
+		MoveSwap swap = new MoveSwap(lc, new MoveSelection(lc));
+		swap.p1 = new Point(0,0);
+		swap.p2 = new Point(0,1);
+		swap.t1 = b.getTile(new Point(0,0));
+		swap.t2 = b.getTile(new Point(0,1));
+		assertTrue(swap.doMove());
 		
+		MouseEvent e = new MouseEvent(boardPanel, MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, 1, false, 0);
+		moveTester.selectionHandler(e);
 	}
 		
 	
