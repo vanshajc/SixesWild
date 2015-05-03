@@ -68,6 +68,7 @@ public class PwrUpRemoveActionListener implements ActionListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (SwingUtilities.isRightMouseButton(e)) {
+				clearSelection();
 				btn.setSelected(false);
 				lvlCtrl.getBoardPanel().setBoardController(prev);
 				e.consume();

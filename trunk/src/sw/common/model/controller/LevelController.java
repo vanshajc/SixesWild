@@ -124,6 +124,8 @@ public class LevelController implements ILevelController, IGameController, IMove
 			Time t = getTimePanel().getTime();
 			lvl.getGame().getStats().setTime(t);
 			
+			
+			
 			if (lvl.hasWon()) {
 				SixesWildJFrame.getLevelManager().unlockNextLevel();
 				

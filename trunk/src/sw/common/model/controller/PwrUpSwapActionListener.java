@@ -5,7 +5,6 @@
  */
 package sw.common.model.controller;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -35,7 +34,6 @@ public class PwrUpSwapActionListener implements ActionListener {
 		int pwrUps[] = lc.getLevel().getGame().getPwrUps();
 		if (pwrUps[Game.PWRUP_SWAP] > 0) {
 			JButton btn = (JButton) e.getSource();
-			btn.setBackground(Color.YELLOW);
 			btn.setSelected(true);
 
 			BoardController bc = new PwrUpSwap(lc, lc.getBoardPanel()
@@ -59,6 +57,7 @@ public class PwrUpSwapActionListener implements ActionListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (SwingUtilities.isRightMouseButton(e)) {
+				clearSelection();
 				btn.setSelected(false);
 				lvlCtrl.getBoardPanel().setBoardController(prev);
 				e.consume();
