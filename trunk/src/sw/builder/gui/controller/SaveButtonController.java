@@ -7,17 +7,27 @@ import java.io.PrintWriter;
 
 import sw.builder.gui.layout.BuilderLayoutManager;
 import sw.builder.gui.layout.LevelBuilderView;
-
+/**
+ * @author scyevchak
+ */
+/** Controller for the save button. */
 public class SaveButtonController implements ActionListener {
-
+	/** The view currently displayed. */
 	BuilderLayoutManager blm;
+	/** The fields to be saved. */
 	LevelBuilderView lbv;
-
+	/**
+	 * Constructor for the save button controller.
+	 * @param blm the current view.
+	 * @param lbv the fields to save.
+	 */
 	public SaveButtonController(BuilderLayoutManager blm, LevelBuilderView lbv) {
 		this.blm = blm;
 		this.lbv = lbv;
 	}
-
+	/**
+	 * Save the current data entered in the fields.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 

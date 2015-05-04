@@ -16,19 +16,29 @@ import javax.swing.JTextArea;
 
 import sw.app.gui.view.IView;
 import sw.builder.gui.layout.LevelBuilderView;
-
+/**
+ * @author scyevchak
+ */
+/** Controller for the load button. */
 public class LoadButtonController extends JPanel implements ActionListener,IView {
-
+	/** the updated field to be saved. */
 	LevelBuilderView lbv;
+	/** required for the file chooser. */
 	JTextArea log;
+	/** Pick which file is to be loaded. */
 	JFileChooser fc;
-	
+	/**
+	 * Constructor for the load button controller
+	 * @param lbv the field to load.
+	 */
 	public LoadButtonController(LevelBuilderView lbv) {
 		this.lbv = lbv;
 		setLayout(null);
 		initialize();
 	}
-	
+	/**
+	 * Opens text box to choose file to open.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		File file;
@@ -59,7 +69,9 @@ public class LoadButtonController extends JPanel implements ActionListener,IView
 		setFields(input);
 	}
 
-
+	/**
+	 * Sets view for the file chooser.
+	 */
 	@Override
 	public void initialize() {
 		File file = new File("./src/sw/resource/levelData/");
@@ -72,7 +84,10 @@ public class LoadButtonController extends JPanel implements ActionListener,IView
 		fc.setSelectedFile(file1);	
 		
 	}
-
+	/**
+	 * Sets field in the level builder.
+	 * @param input all data to be loaded into the level builder.
+	 */
 	public void setFields(ArrayList<String> input) {
 		String level = input.get(0);
 		String mode = input.get(1);

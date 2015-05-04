@@ -7,18 +7,28 @@ import java.util.Random;
 
 import sw.builder.gui.layout.BuilderLayoutManager;
 import sw.builder.gui.layout.LevelBuilderView;
-
+/**
+ * @author scyevchak
+ */
+/** Controller for the randomize button. */
 public class RandomizeButtonController implements ActionListener {
-
+	/** Screen currently displayed. */
 	BuilderLayoutManager blm;
+	/** The view to be changed. */
 	LevelBuilderView lbv;
-
+	/**
+	 * Constructor for randomize button controller.
+	 * @param blm the screen currently displayed.
+	 * @param lbv the view to be updated.
+	 */
 	public RandomizeButtonController(BuilderLayoutManager blm,
 			LevelBuilderView lbv) {
 		this.blm = blm;
 		this.lbv = lbv;
 	}
-
+	/**
+	 * Randomizes the board.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int one = lbv.getOnePercent();

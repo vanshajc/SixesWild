@@ -1,6 +1,7 @@
 package sw.builder.gui.controller;
 
 import java.awt.BorderLayout;
+
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,17 +19,27 @@ import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
 import sw.common.model.entity.Tile;
 import sw.common.system.factory.LevelFactory;
-
+/**
+ * @author scyevchak
+ */
+/** Controller for the display button */
 public class DisplayBoardController implements ActionListener {
-
+	/** Controls which screen is displayed */
 	BuilderLayoutManager blm;
+	/** The view that has the current board */
 	LevelBuilderView lbv;
-
+	/**
+	 * Constructor to display the board created.
+	 * @param blm view currently on.
+	 * @param lbv the data containing the board.
+	 */
 	public DisplayBoardController(BuilderLayoutManager blm, LevelBuilderView lbv) {
 		this.blm = blm;
 		this.lbv = lbv;
 	}
-
+	/**
+	 * Sets the board and displays it in a new view.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		String[][] b = lbv.getBoard();
@@ -48,7 +59,13 @@ public class DisplayBoardController implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
-
+	/**
+	 * Sets the board to be displayed
+	 * @param b the string array containing data about the board.
+	 * @param lbv the level builder containing the board object.
+	 * @return the Board set
+	 * @throws Exception stops invalid boards from being displayed.
+	 */
 	public static Board setBoardView(String[][] b,LevelBuilderView lbv) throws Exception {
 		Board b1 = new Board();
 		Tile t1;

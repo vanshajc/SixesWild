@@ -10,8 +10,10 @@ import sw.builder.gui.layout.SplashScreenBuilderView;
 import sw.builder.gui.layout.LevelBuilderJFrame;
 import sw.builder.gui.layout.LevelBuilderView;
 
-
-
+/**
+ * @author scyevchak
+ */
+/** Constructor for the object that controls which screens are displayed. */
 public class BuilderLayoutManager {
 	LevelBuilderJFrame lbjf;
 	SplashScreenBuilderView ssbv;
@@ -23,28 +25,31 @@ public class BuilderLayoutManager {
 	public BuilderLayoutManager(LevelBuilderJFrame lbjf){
 		this.lbjf = lbjf;
 	}
-	
+	/**
+	 * Initializes all views.
+	 */
 	public void initailize() {
 		lbv = new LevelBuilderView(this);
 		ssbv = new SplashScreenBuilderView(this);
 		lbmv = new LevelBuilderMenuView(this);
-		//bbp = new BuilderBoardPanel(this);
 	}
-	
+	/**
+	 * Switchs to the level builder.
+	 */
 	public void switchToLevelBuilder(){
 		switchToScreen(lbv);
 	}
-	
+	/**
+	 * Switches to the main menu.
+	 */
 	public void switchToLevelBuilderMenu(){
 		switchToScreen(lbmv);
 	}
-
-	//public void switchToBuilderBoard() {
-	//	bbp = new BuilderBoardPanel(this);
-	//	switchToScreen(bbp);
-	//	bbp.setBoardView(LevelBuilderView.boardStr);
-//	}
 	
+	/**
+	 * Generic switch to other screens.
+	 * @param screen the view that will be switched to.
+	 */
 	public void switchToScreen(JPanel screen){
 		System.out.println("Switch to next screen");
 		Container pane = lbjf.getContentPane();
