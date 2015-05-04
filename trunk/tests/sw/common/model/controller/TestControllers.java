@@ -40,20 +40,20 @@ public class TestControllers extends TestCase{
 		assertTrue(LayoutManager.getCurrentView() instanceof MainMenuView);
 	}
 	
-//	public void testPowerup(){
-//		JButton shuff = new JButton();
-//		shuff.addActionListener(new PwrUpShuffleActionListener());
+	public void testPowerup(){
+		JButton shuff = new JButton();
+		shuff.addActionListener(new PwrUpShuffleActionListener());
 //		shuff.doClick();
-//		
-//		JButton rem = new JButton();
-//		rem.addActionListener(new PwrUpRemoveActionListener());
+		
+		JButton rem = new JButton();
+		rem.addActionListener(new PwrUpRemoveActionListener());
 //		rem.doClick();
-//		
-//		JButton swap = new JButton();
-//		swap.addActionListener(new PwrUpSwapActionListener());
+		
+		JButton swap = new JButton();
+		swap.addActionListener(new PwrUpSwapActionListener());
 //		swap.doClick();
-//		
-//	}
+		
+	}
 	
 	
 }

@@ -14,8 +14,8 @@ public class TestControllers extends TestCase{
 	
 	public void test1(){
 	LevelBuilderJFrame lbjf;
-	ApplicationLevelBuilder.main(null);
-	lbjf = new LevelBuilderJFrame();
+	ApplicationLevelBuilder a = new ApplicationLevelBuilder();
+	lbjf = a.getFrame();
 	BuilderLayoutManager blm = new BuilderLayoutManager(lbjf);
 	LevelBuilderView lbv = lbjf.blm.lbv;
 	ArrayList<String> input  = new ArrayList<String>();
