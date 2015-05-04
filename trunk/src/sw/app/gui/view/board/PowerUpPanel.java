@@ -34,12 +34,15 @@ public class PowerUpPanel extends JPanel {
 	String btnSwapPath = "/sw/resource/image/button_swap.png";
 	String btnSwapRolloverPath = "/sw/resource/image/button_swap_Rollover.png";
 	String btnSwapPressedPath = "/sw/resource/image/button_swap_Pressed.png";
+	String btnSwapSelectedPath = "/sw/resource/image/button_swap_Selected.png";
 	ImageIcon buttonSwap = new ImageIcon(PowerUpPanel.class.getResource(btnSwapPath));
 	ImageIcon newBtnSwap = new ImageIcon(buttonSwap.getImage().getScaledInstance(77, 77, java.awt.Image.SCALE_SMOOTH));
 	ImageIcon buttonSwapRollover = new ImageIcon(PowerUpPanel.class.getResource(btnSwapRolloverPath));
 	ImageIcon newBtnSwapRollover = new ImageIcon(buttonSwapRollover.getImage().getScaledInstance(77, 77, java.awt.Image.SCALE_SMOOTH));
 	ImageIcon buttonSwapPressed = new ImageIcon(PowerUpPanel.class.getResource(btnSwapPressedPath));
 	ImageIcon newBtnSwapPressed = new ImageIcon(buttonSwapPressed.getImage().getScaledInstance(77, 77, java.awt.Image.SCALE_SMOOTH));
+	ImageIcon buttonSwapSelected = new ImageIcon(PowerUpPanel.class.getResource(btnSwapSelectedPath));
+	ImageIcon newBtnSwapSelected = new ImageIcon(buttonSwapSelected.getImage().getScaledInstance(77, 77, java.awt.Image.SCALE_SMOOTH));
 	
 	String btnShufflePath = "/sw/resource/image/button_shuffle.png";
 	String btnShuffleRolloverPath = "/sw/resource/image/button_shuffle_Rollover.png";

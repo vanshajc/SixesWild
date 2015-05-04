@@ -14,7 +14,7 @@ public class MyComboBoxUI extends javax.swing.plaf.basic.BasicComboBoxUI {
 		ImageIcon buttonArrowPressed = new ImageIcon(PlayGameScreenView.class.getResource("/sw/resource/image/button_comboBox_Pressed.png"));
 		ImageIcon newBtnArrowPressed = new ImageIcon(buttonArrowPressed.getImage().getScaledInstance(77, 53, java.awt.Image.SCALE_SMOOTH));
 		JButton btnArrow = new JButton(newBtnArrow);
-		
+		btnArrow.setContentAreaFilled(false);;
 		btnArrow.setRolloverEnabled(true);
 		btnArrow.setRolloverIcon(newBtnArrowRollover);
 		btnArrow.setPressedIcon(newBtnArrowPressed);

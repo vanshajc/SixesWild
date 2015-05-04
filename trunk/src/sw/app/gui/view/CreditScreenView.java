@@ -47,6 +47,12 @@ public class CreditScreenView extends JPanel implements IView{
 		btnBack.setRolloverIcon(newBtnBackRollover);
 		btnBack.setPressedIcon(newBtnBackPressed);
 		add(btnBack);
+
+		ImageIcon title = new ImageIcon(CreditScreenView.class.getResource("/sw/resource/image/title_credits.png"));
+		ImageIcon newTitle = new ImageIcon(title.getImage().getScaledInstance(227, 84, java.awt.Image.SCALE_SMOOTH));
+		JLabel lblTitle = new JLabel(newTitle);
+		lblTitle.setBounds(560, 480, 227, 84);
+		add(lblTitle);
 		
 		JLabel lbl1 = new JLabel("Vanshaj Chowdhary");
 		lbl1.setBounds(210, 100, 400, 36);

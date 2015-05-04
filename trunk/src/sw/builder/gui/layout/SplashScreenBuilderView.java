@@ -2,26 +2,20 @@ package sw.builder.gui.layout;
 
 import java.awt.Graphics;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import sw.app.ApplicationLevelBuilder;
 import sw.app.gui.view.IView;
 import sw.common.model.entity.Board;
-/**
- * @author scyevchak
- */
-/** Gui of splash screen */
+
 public class SplashScreenBuilderView extends JPanel implements IView{
-	
-	private static final long serialVersionUID = 1L;
-	/** Controls which screens are viewed */
-	BuilderLayoutManager blm;
 	/**
 	 * 
-	 * @param bblm
 	 */
+	private static final long serialVersionUID = 1L;
+
+	BuilderLayoutManager blm;
 	public SplashScreenBuilderView(BuilderLayoutManager bblm) {
 		
 		this.blm = bblm;
