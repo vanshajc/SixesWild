@@ -14,17 +14,27 @@ import sw.app.gui.view.MainMenuView;
 import sw.builder.gui.controller.CreateButtonController;
 
 @SuppressWarnings("serial")
+/**
+ * @author scyevchak
+ */
+/** Gui class for the builder main menu. */
 public class LevelBuilderMenuView extends JPanel implements IView {
-
+	/** Changes which screens are viewed/ */
 	BuilderLayoutManager blm;
 	
-
+	/**
+	 * Constructor for the main menu gui.
+	 * @param blm changes which screens are viewed.
+	 */
 	public LevelBuilderMenuView(BuilderLayoutManager blm) {
 		this.blm = blm;
 		setLayout(null);
 		initialize();
 	}
 
+	/**
+	 * Creates the view.
+	 */
 	@Override
 	public void initialize() {		
 		
