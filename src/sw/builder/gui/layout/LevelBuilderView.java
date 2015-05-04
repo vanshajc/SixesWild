@@ -1,10 +1,13 @@
 package sw.builder.gui.layout;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import sw.app.gui.controller.MainMenuController;
+import sw.app.gui.view.MainMenuView;
 import sw.app.gui.view.board.BoardPanel;
 import sw.builder.gui.controller.CreateButtonController;
 import sw.builder.gui.controller.DisplayBoardController;
@@ -21,9 +26,6 @@ import sw.builder.gui.controller.SaveButtonController;
 import sw.common.model.entity.Board;
 import sw.common.system.manager.TimerTaskManager;
 
-/**
- * @author scyevchak
- */
 /** GUI class for level builder view. */
 public class LevelBuilderView extends JPanel {
 
@@ -106,73 +108,85 @@ public class LevelBuilderView extends JPanel {
 
 		lvl = new JLabel();
 		lvl.setBorder(null);
-		lvl.setBounds(20, 20, 35, 20);
+		lvl.setBounds(20, 20, 55, 20);
 		lvl.setText("Level:");
+		lvl.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		lvl.setForeground(new Color(184, 134, 11));
 		add(lvl);
-
 		lvlField = new JTextField();
-		lvlField.setBounds(60, 20, 35, 20);
-		lvlField.setBorder(null);
+		lvlField.setBounds(75, 20, 35, 20);
+		lvlField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(lvlField);
 
 		modeList = new JComboBox<>();
-		modeList.setBounds(105, 20, 100, 20);
+		modeList.setBounds(145, 20, 120, 20);
 		modeList.setBorder(null);
 		modeList.addItem("Puzzle");
 		modeList.addItem("Lightning");
 		modeList.addItem("Release");
 		modeList.addItem("Elimination");
+		modeList.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		modeList.setForeground(new Color(184, 134, 11));
 		add(modeList);
 
 		move = new JLabel();
 		move.setBorder(null);
-		move.setBounds(215, 20, 40, 20);
+		move.setBounds(300, 20, 65, 20);
 		move.setText("Moves:");
+		move.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		move.setForeground(new Color(184, 134, 11));
 		add(move);
-
 		moveField = new JTextField();
-		moveField.setBounds(260, 20, 35, 20);
-		moveField.setBorder(null);
+		moveField.setBounds(365, 20, 35, 20);
+		moveField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(moveField);
 
 		time = new JLabel();
 		time.setBorder(null);
-		time.setBounds(310, 20, 35, 20);
+		time.setBounds(435, 20, 55, 20);
 		time.setText("Time:");
+		time.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		time.setForeground(new Color(184, 134, 11));
 		add(time);
 		timeField = new JTextField();
-		timeField.setBounds(345, 20, 35, 20);
-		timeField.setBorder(null);
+		timeField.setBounds(490, 20, 35, 20);
+		timeField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(timeField);
 
 		swap = new JLabel();
 		swap.setBorder(null);
-		swap.setBounds(20, 60, 50, 20);
+		swap.setBounds(20, 60, 65, 20);
 		swap.setText("Swaps:");
+		swap.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		swap.setForeground(new Color(184, 134, 11));
 		add(swap);
 		swapField = new JTextField();
-		swapField.setBounds(70, 60, 35, 20);
-		swapField.setBorder(null);
+		swapField.setBounds(85, 60, 35, 20);
+		swapField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(swapField);
 
 		shuffle = new JLabel();
 		shuffle.setBorder(null);
-		shuffle.setBounds(115, 60, 50, 20);
+		shuffle.setBounds(145, 60, 80, 20);
 		shuffle.setText("Shuffles:");
+		shuffle.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		shuffle.setForeground(new Color(184, 134, 11));
 		add(shuffle);
 		shuffleField = new JTextField();
-		shuffleField.setBounds(170, 60, 35, 20);
-		shuffleField.setBorder(null);
+		shuffleField.setBounds(225, 60, 35, 20);
+		shuffleField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(shuffleField);
 
 		remove = new JLabel();
 		remove.setBorder(null);
-		remove.setBounds(215, 60, 60, 20);
+		remove.setBounds(300, 60, 90, 20);
 		remove.setText("Removes:");
+		remove.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		remove.setForeground(new Color(184, 134, 11));
 		add(remove);
 		removeField = new JTextField();
-		removeField.setBounds(275, 60, 35, 20);
-		removeField.setBorder(null);
+		removeField.setBounds(390, 60, 35, 20);
+		removeField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(removeField);
 
 		one = new JLabel();
@@ -182,7 +196,7 @@ public class LevelBuilderView extends JPanel {
 		add(one);
 		onePercent = new JTextField();
 		onePercent.setBounds(70, 100, 35, 20);
-		onePercent.setBorder(null);
+		onePercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(onePercent);
 
 		two = new JLabel();
@@ -192,47 +206,55 @@ public class LevelBuilderView extends JPanel {
 		add(two);
 		twoPercent = new JTextField();
 		twoPercent.setBounds(165, 100, 35, 20);
-		twoPercent.setBorder(null);
+		twoPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(twoPercent);
 
 		three = new JLabel();
 		three.setBorder(null);
-		three.setBounds(210, 100, 60, 20);
+		three.setBounds(240, 100, 85, 20);
 		three.setText("threePer:");
+		three.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		three.setForeground(new Color(184, 134, 11));
 		add(three);
 		threePercent = new JTextField();
-		threePercent.setBounds(265, 100, 35, 20);
-		threePercent.setBorder(null);
+		threePercent.setBounds(325, 100, 35, 20);
+		threePercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(threePercent);
 
 		four = new JLabel();
 		four.setBorder(null);
-		four.setBounds(310, 100, 60, 20);
+		four.setBounds(375, 100, 75, 20);
 		four.setText("fourPer:");
+		four.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		four.setForeground(new Color(184, 134, 11));
 		add(four);
 		fourPercent = new JTextField();
-		fourPercent.setBounds(360, 100, 35, 20);
-		fourPercent.setBorder(null);
+		fourPercent.setBounds(450, 100, 35, 20);
+		fourPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(fourPercent);
 
 		five = new JLabel();
 		five.setBorder(null);
-		five.setBounds(405, 100, 60, 20);
+		five.setBounds(500, 100, 70, 20);
 		five.setText("fivePer:");
+		five.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		five.setForeground(new Color(184, 134, 11));
 		add(five);
 		fivePercent = new JTextField();
-		fivePercent.setBounds(450, 100, 35, 20);
-		fivePercent.setBorder(null);
+		fivePercent.setBounds(570, 100, 35, 20);
+		fivePercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(fivePercent);
 
 		six = new JLabel();
 		six.setBorder(null);
-		six.setBounds(495, 100, 60, 20);
+		six.setBounds(620, 100, 65, 20);
 		six.setText("sixPer:");
+		six.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		six.setForeground(new Color(184, 134, 11));
 		add(six);
 		sixPercent = new JTextField();
-		sixPercent.setBounds(540, 100, 35, 20);
-		sixPercent.setBorder(null);
+		sixPercent.setBounds(685, 100, 35, 20);
+		sixPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(sixPercent);
 
 		oneMult = new JLabel();
@@ -242,7 +264,7 @@ public class LevelBuilderView extends JPanel {
 		add(oneMult);
 		oneMultPercent = new JTextField();
 		oneMultPercent.setBounds(95, 140, 35, 20);
-		oneMultPercent.setBorder(null);
+		oneMultPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(oneMultPercent);
 
 		twoMult = new JLabel();
@@ -252,7 +274,7 @@ public class LevelBuilderView extends JPanel {
 		add(twoMult);
 		twoMultPercent = new JTextField();
 		twoMultPercent.setBounds(215, 140, 35, 20);
-		twoMultPercent.setBorder(null);
+		twoMultPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(twoMultPercent);
 
 		threeMult = new JLabel();
@@ -262,7 +284,7 @@ public class LevelBuilderView extends JPanel {
 		add(threeMult);
 		threeMultPercent = new JTextField();
 		threeMultPercent.setBounds(340, 140, 35, 20);
-		threeMultPercent.setBorder(null);
+		threeMultPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(threeMultPercent);
 
 		oneStar = new JLabel();
@@ -272,7 +294,7 @@ public class LevelBuilderView extends JPanel {
 		add(oneStar);
 		oneStarScore = new JTextField();
 		oneStarScore.setBounds(705, 20, 40, 20);
-		oneStarScore.setBorder(null);
+		oneStarScore.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(oneStarScore);
 
 		twoStar = new JLabel();
@@ -282,7 +304,7 @@ public class LevelBuilderView extends JPanel {
 		add(twoStar);
 		twoStarScore = new JTextField();
 		twoStarScore.setBounds(710, 50, 40, 20);
-		twoStarScore.setBorder(null);
+		twoStarScore.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(twoStarScore);
 
 		threeStar = new JLabel();
@@ -292,7 +314,7 @@ public class LevelBuilderView extends JPanel {
 		add(threeStar);
 		threeStarScore = new JTextField();
 		threeStarScore.setBounds(715, 80, 40, 20);
-		threeStarScore.setBorder(null);
+		threeStarScore.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(threeStarScore);
 
 		textFields = new JTextField[9][9];
@@ -300,41 +322,90 @@ public class LevelBuilderView extends JPanel {
 			for (int j = 0; j < 9; j++) {
 				textFields[i][j] = new JTextField();
 				textFields[i][j].setBounds(50 + 45 * j, 200 + i * 35, 30, 20);
-				textFields[i][j].setBorder(null);
+				textFields[i][j].setBorder(BorderFactory.createLineBorder(Color.BLUE));
 				add(textFields[i][j]);
 			}
 		}
 
-		JButton btnSave = new JButton("Save");
+		ImageIcon buttonSave = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_save.png"));
+		ImageIcon newBtnSave = new ImageIcon(buttonSave.getImage().getScaledInstance(114, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnSaveRollover = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_save_Rollover.png"));
+		ImageIcon newBtnSaveRollover = new ImageIcon(btnSaveRollover.getImage().getScaledInstance(114, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnSavePressed = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_save_Pressed.png"));
+		ImageIcon newBtnSavePressed = new ImageIcon(btnSavePressed.getImage().getScaledInstance(114, 69, java.awt.Image.SCALE_SMOOTH));
+		JButton btnSave = new JButton(newBtnSave);
+		btnSave.setBounds(20, 510, 114, 69);
+		btnSave.setBorderPainted(false);
+		btnSave.setBackground(Color.WHITE);
 		btnSave.setBorder(null);
-		btnSave.setBounds(20, 510, 150, 40);
-		add(btnSave);
+		btnSave.setContentAreaFilled(false);
 		btnSave.addActionListener(new SaveButtonController(blm, this));
+		btnSave.setRolloverEnabled(true);
+		btnSave.setRolloverIcon(newBtnSaveRollover);
+		btnSave.setPressedIcon(newBtnSavePressed);
+		add(btnSave);
 
-		JButton btnLoad = new JButton("Load");
+		ImageIcon buttonLoad = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_load.png"));
+		ImageIcon newBtnLoad = new ImageIcon(buttonLoad.getImage().getScaledInstance(114, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnLoadRollover = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_load_Rollover.png"));
+		ImageIcon newBtnLoadRollover = new ImageIcon(btnLoadRollover.getImage().getScaledInstance(114, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnLoadPressed = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_load_Pressed.png"));
+		ImageIcon newBtnLoadPressed = new ImageIcon(btnLoadPressed.getImage().getScaledInstance(114, 69, java.awt.Image.SCALE_SMOOTH));
+		JButton btnLoad = new JButton(newBtnLoad);
+		btnLoad.setBounds(150, 510, 114, 69);
+		btnLoad.setBorderPainted(false);
+		btnLoad.setBackground(Color.WHITE);
 		btnLoad.setBorder(null);
-		btnLoad.setBounds(180, 510, 150, 40);
-		add(btnLoad);
+		btnLoad.setContentAreaFilled(false);
 		btnLoad.addActionListener(new LoadButtonController(this));
+		btnLoad.setRolloverEnabled(true);
+		btnLoad.setRolloverIcon(newBtnLoadRollover);
+		btnLoad.setPressedIcon(newBtnLoadPressed);
+		add(btnLoad);
 
-		JButton btnRandomizeBoard = new JButton("Randomize Board");
+		ImageIcon buttonRandomize = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_randomize.png"));
+		ImageIcon newBtnRandomize = new ImageIcon(buttonRandomize.getImage().getScaledInstance(322, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnRandomizeRollover = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_randomize_Rollover.png"));
+		ImageIcon newBtnRandomizeRollover = new ImageIcon(btnRandomizeRollover.getImage().getScaledInstance(322, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnRandomizePressed = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_randomize_Pressed.png"));
+		ImageIcon newBtnRandomizePressed = new ImageIcon(btnRandomizePressed.getImage().getScaledInstance(322, 69, java.awt.Image.SCALE_SMOOTH));
+		JButton btnRandomizeBoard = new JButton(newBtnRandomize);
+		btnRandomizeBoard.setBounds(270, 510, 322, 69);
+		btnRandomizeBoard.setBorderPainted(false);
+		btnRandomizeBoard.setBackground(Color.WHITE);
 		btnRandomizeBoard.setBorder(null);
-		btnRandomizeBoard.setBounds(340, 510, 150, 40);
+		btnRandomizeBoard.setContentAreaFilled(false);
+		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm, this));
+		btnRandomizeBoard.setRolloverEnabled(true);
+		btnRandomizeBoard.setRolloverIcon(newBtnRandomizeRollover);
+		btnRandomizeBoard.setPressedIcon(newBtnRandomizePressed);
 		add(btnRandomizeBoard);
-		btnRandomizeBoard.addActionListener(new RandomizeButtonController(blm,
-				this));
 
-		JButton btnDisplay = new JButton("Display Board");
-		btnDisplay.setBorder(null);
-		btnDisplay.setBounds(500, 510, 150, 40);
-		add(btnDisplay);
-		btnDisplay.addActionListener(new DisplayBoardController(blm, this));
+		ImageIcon buttonDisplay = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_display.png"));
+		ImageIcon newBtnDisplay = new ImageIcon(buttonDisplay.getImage().getScaledInstance(155, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnDisplayRollover = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_display_Rollover.png"));
+		ImageIcon newBtnDisplayRollover = new ImageIcon(btnDisplayRollover.getImage().getScaledInstance(155, 69, java.awt.Image.SCALE_SMOOTH));
+		ImageIcon btnDisplayPressed = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/button_display_Pressed.png"));
+		ImageIcon newBtnDisplayPressed = new ImageIcon(btnDisplayPressed.getImage().getScaledInstance(155, 69, java.awt.Image.SCALE_SMOOTH));
+		JButton btnDisplayBoard = new JButton(newBtnDisplay);
+		btnDisplayBoard.setBounds(595, 510, 155, 69);
+		btnDisplayBoard.setBorderPainted(false);
+		btnDisplayBoard.setBackground(Color.WHITE);
+		btnDisplayBoard.setBorder(null);
+		btnDisplayBoard.setContentAreaFilled(false);
+		btnDisplayBoard.addActionListener(new RandomizeButtonController(blm, this));
+		btnDisplayBoard.setRolloverEnabled(true);
+		btnDisplayBoard.setRolloverIcon(newBtnDisplayRollover);
+		btnDisplayBoard.setPressedIcon(newBtnDisplayPressed);
+		add(btnDisplayBoard);
 
-		JLabel background = new JLabel();
-		add(background);
+		ImageIcon builderBackground = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/builderBackground.png"));
+		ImageIcon newbldBackground = new ImageIcon(builderBackground.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
+		JLabel background = new JLabel(newbldBackground);
 		background.setBounds(0, 0, 800, 600);
-		background.setIcon(new ImageIcon(
-				"src/sw/resource/image/levelbuilderbackground.png"));
+		//background.setIcon(new ImageIcon(
+		//		"src/sw/resource/image/levelbuilderbackground.png"));
+		add(background);
 
 	}
 

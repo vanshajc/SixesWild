@@ -19,7 +19,7 @@ import sw.common.model.entity.Level;
 
 public class ScoreBoardView extends JPanel implements IView {
 	
-	int yPos = 30;
+	int yPos = 10;
 	int gap = 10;
 	int count = 0;
 	
@@ -57,7 +57,13 @@ public class ScoreBoardView extends JPanel implements IView {
 		btnBack.setRolloverIcon(newBtnBackRollover);
 		btnBack.setPressedIcon(newBtnBackPressed);
 		add(btnBack);
-
+		
+		ImageIcon title = new ImageIcon(ScoreBoardView.class.getResource("/sw/resource/image/title_scoreboard.png"));
+		ImageIcon newTitle = new ImageIcon(title.getImage().getScaledInstance(249, 84, java.awt.Image.SCALE_SMOOTH));
+		JLabel lblTitle = new JLabel(newTitle);
+		lblTitle.setBounds(550, 480, 249, 84);
+		add(lblTitle);
+		
 		JLabel lblLevel = new JLabel("Level");
 		lblLevel.setForeground(new Color(184, 134, 11));
 		lblLevel.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
@@ -135,7 +141,7 @@ public class ScoreBoardView extends JPanel implements IView {
 		levelNum.setText(level.toString());		
 		levelNum.setHorizontalAlignment(SwingConstants.CENTER);
 		levelNum.setSize(175, 36);
-		levelNum.setLocation(new Point(levelX-35, yPos + (fieldSize.height * count) + gap));
+		levelNum.setLocation(new Point(levelX-35, yPos - 10 + (fieldSize.height * count) + gap));
 		add(levelNum);
 		
 		JLabel score = new JLabel();
@@ -144,7 +150,7 @@ public class ScoreBoardView extends JPanel implements IView {
 		score.setText(Integer.toString(level.getGame().getStats().getScore()));		
 		score.setHorizontalAlignment(SwingConstants.CENTER);
 		score.setSize(fieldSize);
-		score.setLocation(new Point(scoreX, yPos + (fieldSize.height * count) + gap));
+		score.setLocation(new Point(scoreX, yPos - 10 + (fieldSize.height * count) + gap));
 		add(score);
 		
 		JLabel move = new JLabel();
@@ -153,7 +159,7 @@ public class ScoreBoardView extends JPanel implements IView {
 		move.setText(Integer.toString(level.getGame().getStats().getNumMoves()));		
 		move.setHorizontalAlignment(SwingConstants.CENTER);
 		move.setSize(fieldSize);
-		move.setLocation(new Point(moveX, yPos + (fieldSize.height * count) + gap));
+		move.setLocation(new Point(moveX, yPos - 10 + (fieldSize.height * count) + gap));
 		add(move);
 		
 		JLabel time = new JLabel();
@@ -162,7 +168,7 @@ public class ScoreBoardView extends JPanel implements IView {
 		time.setText(level.getGame().getStats().getTime().toString());		
 		time.setHorizontalAlignment(SwingConstants.CENTER);
 		time.setSize(fieldSize);
-		time.setLocation(new Point(timeX, yPos + (fieldSize.height * count) + gap));
+		time.setLocation(new Point(timeX, yPos - 10 + (fieldSize.height * count) + gap));
 		add(time);
 		
 		invalidate();
