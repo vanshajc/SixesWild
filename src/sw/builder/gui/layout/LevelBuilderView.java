@@ -21,6 +21,9 @@ import sw.builder.gui.controller.SaveButtonController;
 import sw.common.model.entity.Board;
 import sw.common.system.manager.TimerTaskManager;
 
+/**
+ * @author scyevchak
+ */
 /** GUI class for level builder view. */
 public class LevelBuilderView extends JPanel {
 
