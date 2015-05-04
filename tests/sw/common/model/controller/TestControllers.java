@@ -41,6 +41,7 @@ public class TestControllers extends TestCase{
 	}
 	
 	public void testPowerup(){
+		setUp();
 		JButton shuff = new JButton();
 		shuff.addActionListener(new PwrUpShuffleActionListener());
 //		shuff.doClick();
@@ -51,7 +52,7 @@ public class TestControllers extends TestCase{
 		
 		JButton swap = new JButton();
 		swap.addActionListener(new PwrUpSwapActionListener());
-//		swap.doClick();
+	//	swap.doClick();
 		
 	}
 	
