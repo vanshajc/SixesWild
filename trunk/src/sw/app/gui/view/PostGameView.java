@@ -7,6 +7,7 @@ package sw.app.gui.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,7 +29,10 @@ public class PostGameView extends JPanel implements IView {
 	JLabel lblLevelDisplay;
 	JLabel lblTimeDisplay;
 	JLabel lblScoreDisplay;
-	
+
+	ImageIcon background = new ImageIcon(CreditScreenView.class.getResource("/sw/resource/image/secondBackground.png"));
+	ImageIcon newBackground = new ImageIcon(background.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
+
 	public PostGameView(Level level) {
 		this.level = level;
 		setBackground(Color.WHITE);
@@ -155,6 +159,12 @@ public class PostGameView extends JPanel implements IView {
 		setLevel(level);
 	}
 
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(newBackground.getImage(), 0, 0, null);
+	}
+	
 	@Override
 	public void cleanup() {
 		// Nothing to do

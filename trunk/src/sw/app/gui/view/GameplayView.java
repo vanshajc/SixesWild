@@ -1,7 +1,3 @@
-/**
- * @file GameplayView.java
- * @author Vanshaj Chowdhary
- */
 package sw.app.gui.view;
 
 import java.awt.Color;
@@ -26,50 +22,84 @@ import sw.app.gui.view.board.TimeMovePanel;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
 
+/**
+ * Prepare the view for the game.
+ * @file GameplayView.java
+ * @author Vanshaj Chowdhary, Tony Vu, Trung-Nghia N. Huynh
+ * Creation date: April 12, 2015 - 11:16 PM
+ */
+
 @SuppressWarnings("serial")
 public class GameplayView extends JPanel implements IGameplayView, IView {
 	
-	// Panels for displaying the Level
+	/** Panels for displaying the Level. */
 	BoardPanel boardPanel;	
 	ScorePanel scorePanel;
 	GameInfoPanel gameInfoPanel;
 	TimeMovePanel timeMovePanel;
 	PowerUpPanel powerUpPanel;
 	
-	// The Level to display
+	/** The level to display. */
 	Level level = null;	
 	LevelManager lvlm;
 	
-	// Quit button
+	/** Quit button. */
 	JButton quitButton;	
 	MainMenuController mmc;
-	String quitBtnPath = "/sw/resource/image/button_quit.png";
-	ImageIcon quitBtnImg;
+	ImageIcon buttonQuit;
+	ImageIcon newBtnQuit;
+	ImageIcon buttonQuitRollover;
+	ImageIcon newBtnQuitRollover;
+	ImageIcon buttonQuitPressed;
+	ImageIcon newBtnQuitPressed;
+	String quitBtnPath = "/sw/resource/image/button_mainMenu.png";
+	String quitBtnRollover = "/sw/resource/image/button_mainMenu_Rollover.png";
+	String quitBtnPressed = "/sw/resource/image/button_mainMenu_Pressed.png";
 	
+	/** The background for the screen. */
+	ImageIcon background;
+	ImageIcon newBackground;
+	String backgroundPath = "/sw/resource/image/secondBackground.png";
+	
+	/**
+	 * GameplayView constructor.
+	 */
 	public GameplayView() {		
-		this.lvlm          = SixesWildJFrame.getLevelManager();
+		this.lvlm = SixesWildJFrame.getLevelManager();
 		
-		this.boardPanel    = new BoardPanel();
+		this.boardPanel = new BoardPanel();
 		
 		this.timeMovePanel = new TimeMovePanel();
-		this.scorePanel    = new ScorePanel();
+		this.scorePanel = new ScorePanel();
 		this.gameInfoPanel = new GameInfoPanel();
-		this.powerUpPanel  = new PowerUpPanel();
+		this.powerUpPanel = new PowerUpPanel();
 		
-		this.quitButton    = new JButton();
-		this.mmc           = new MainMenuController();
-		this.quitBtnImg    = new ImageIcon(GameplayView.class.getResource(quitBtnPath));
+		this.quitButton = new JButton();
+		this.mmc = new MainMenuController();
+		this.buttonQuit = new ImageIcon(PostGameView.class.getResource(quitBtnPath));
+		this.newBtnQuit = new ImageIcon(buttonQuit.getImage().getScaledInstance(114, 48, java.awt.Image.SCALE_SMOOTH));
+		this.buttonQuitRollover = new ImageIcon(PostGameView.class.getResource(quitBtnRollover));
+		this.newBtnQuitRollover = new ImageIcon(buttonQuitRollover.getImage().getScaledInstance(114, 48, java.awt.Image.SCALE_SMOOTH));
+		this.buttonQuitPressed = new ImageIcon(PostGameView.class.getResource(quitBtnPressed));
+		this.newBtnQuitPressed = new ImageIcon(buttonQuitPressed.getImage().getScaledInstance(114, 48, java.awt.Image.SCALE_SMOOTH));
+		
+		this.background = new ImageIcon(GameplayView.class.getResource(backgroundPath));
+		this.newBackground = new ImageIcon(background.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
+		
 		setLayout(null);
 	}
 	
-	//////////////////////////////////////////////////////////
-	// Initialization methods
-	//
+	/**
+	 * Setup the level for the game.
+	 */
 	public void setLevel(Level lvl) {
 		this.level = lvl;
 		initializeLevel();
 	}
 	
+	/**
+	 * Initialize the information for the current level.
+	 */
 	private void initializeLevel() {		
 		if (level == null) {
 			throw new IllegalStateException("Current level is null!");
@@ -87,6 +117,9 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		gameInfoPanel.setLevelName(level.toString());
 	}
 	
+	/**
+	 * Initialize the view for the current level.
+	 */
 	private void initializeLayout() {
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(800, 600)); //was 685, 564
@@ -97,13 +130,7 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		scorePanel.setBackground(Color.WHITE);				
 		gameInfoPanel.setBackground(Color.WHITE);		
 		powerUpPanel.setBackground(Color.WHITE);
-
-		ImageIcon buttonQuit = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_mainMenu.png"));
-		ImageIcon newBtnQuit = new ImageIcon(buttonQuit.getImage().getScaledInstance(114, 48, java.awt.Image.SCALE_SMOOTH));
-		ImageIcon buttonQuitRollover = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_mainMenu_Rollover.png"));
-		ImageIcon newBtnQuitRollover = new ImageIcon(buttonQuitRollover.getImage().getScaledInstance(114, 48, java.awt.Image.SCALE_SMOOTH));
-		ImageIcon buttonQuitPressed = new ImageIcon(PostGameView.class.getResource("/sw/resource/image/button_mainMenu_Pressed.png"));
-		ImageIcon newBtnQuitPressed = new ImageIcon(buttonQuitPressed.getImage().getScaledInstance(114, 48, java.awt.Image.SCALE_SMOOTH));
+		
 		quitButton = new JButton(newBtnQuit);
 		quitButton.setOpaque(false);
 		quitButton.setBackground(Color.WHITE);
@@ -135,10 +162,9 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		setLayout(null);
 	}
 	
-	//////////////////////////////////////////////////////////
-	// IView methods
-	//
-	
+	/**
+	 * Setup the view for the current game.
+	 */
 	@Override
 	public void initialize() {
 		try {
@@ -151,6 +177,9 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		}
 	}	
 
+	/**
+	 * Remove everything on the screen.
+	 */
 	@Override
 	public void cleanup() {		
 		
@@ -204,14 +233,11 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		return timeMovePanel;
 	}	
 	
-	//////////////////////////////////////////////////////////
-	// Paint the background
-	//
-	
+	/**
+	 * Draw the background for the game.
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
-		ImageIcon background = new ImageIcon(GameplayView.class.getResource("/sw/resource/image/secondBackground.png"));
-		ImageIcon newBackground = new ImageIcon(background.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
 		super.paintComponent(g);
 		g.drawImage(newBackground.getImage(), 0, 0, null);
 	}	

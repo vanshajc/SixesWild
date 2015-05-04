@@ -73,13 +73,14 @@ public class PwrUpSwapActionListener implements ActionListener {
 				int pwrUps[] = lvlCtrl.getLevel().getGame().getPwrUps();
 				if (pwrUps[Game.PWRUP_SWAP] > 0) {
 					pwrUps[Game.PWRUP_SWAP]--;
+					btn.setSelected(false);
 				}
 				// disable button
 				if (pwrUps[Game.PWRUP_SWAP] == 0) {
 					btn.setEnabled(false);
 				}
 			}
-
+			
 			setBoardController(prev);
 			return ret;
 		}

@@ -2,6 +2,7 @@ package sw.builder.gui.layout;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import sw.app.gui.controller.MainMenuController;
+import sw.app.gui.view.GameplayView;
 import sw.app.gui.view.MainMenuView;
 import sw.app.gui.view.board.BoardPanel;
 import sw.builder.gui.controller.CreateButtonController;
@@ -155,165 +157,181 @@ public class LevelBuilderView extends JPanel {
 
 		swap = new JLabel();
 		swap.setBorder(null);
-		swap.setBounds(20, 60, 65, 20);
+		swap.setBounds(20, 70, 65, 20);
 		swap.setText("Swaps:");
 		swap.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		swap.setForeground(new Color(184, 134, 11));
 		add(swap);
 		swapField = new JTextField();
-		swapField.setBounds(85, 60, 35, 20);
+		swapField.setBounds(85, 70, 35, 20);
 		swapField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(swapField);
 
 		shuffle = new JLabel();
 		shuffle.setBorder(null);
-		shuffle.setBounds(145, 60, 80, 20);
+		shuffle.setBounds(145, 70, 80, 20);
 		shuffle.setText("Shuffles:");
 		shuffle.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		shuffle.setForeground(new Color(184, 134, 11));
 		add(shuffle);
 		shuffleField = new JTextField();
-		shuffleField.setBounds(225, 60, 35, 20);
+		shuffleField.setBounds(225, 70, 35, 20);
 		shuffleField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(shuffleField);
 
 		remove = new JLabel();
 		remove.setBorder(null);
-		remove.setBounds(300, 60, 90, 20);
+		remove.setBounds(300, 70, 90, 20);
 		remove.setText("Removes:");
 		remove.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		remove.setForeground(new Color(184, 134, 11));
 		add(remove);
 		removeField = new JTextField();
-		removeField.setBounds(390, 60, 35, 20);
+		removeField.setBounds(390, 70, 35, 20);
 		removeField.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(removeField);
 
 		one = new JLabel();
 		one.setBorder(null);
-		one.setBounds(20, 100, 60, 20);
+		one.setBounds(20, 120, 70, 20);
 		one.setText("onePer:");
+		one.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		one.setForeground(new Color(184, 134, 11));
 		add(one);
 		onePercent = new JTextField();
-		onePercent.setBounds(70, 100, 35, 20);
+		onePercent.setBounds(90, 120, 35, 20);
 		onePercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(onePercent);
 
 		two = new JLabel();
 		two.setBorder(null);
-		two.setBounds(115, 100, 60, 20);
+		two.setBounds(145, 120, 70, 20);
 		two.setText("twoPer:");
+		two.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		two.setForeground(new Color(184, 134, 11));
 		add(two);
 		twoPercent = new JTextField();
-		twoPercent.setBounds(165, 100, 35, 20);
+		twoPercent.setBounds(215, 120, 35, 20);
 		twoPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(twoPercent);
 
 		three = new JLabel();
 		three.setBorder(null);
-		three.setBounds(240, 100, 85, 20);
+		three.setBounds(270, 120, 85, 20);
 		three.setText("threePer:");
 		three.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		three.setForeground(new Color(184, 134, 11));
 		add(three);
 		threePercent = new JTextField();
-		threePercent.setBounds(325, 100, 35, 20);
+		threePercent.setBounds(355, 120, 35, 20);
 		threePercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(threePercent);
 
 		four = new JLabel();
 		four.setBorder(null);
-		four.setBounds(375, 100, 75, 20);
+		four.setBounds(410, 120, 75, 20);
 		four.setText("fourPer:");
 		four.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		four.setForeground(new Color(184, 134, 11));
 		add(four);
 		fourPercent = new JTextField();
-		fourPercent.setBounds(450, 100, 35, 20);
+		fourPercent.setBounds(485, 120, 35, 20);
 		fourPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(fourPercent);
 
 		five = new JLabel();
 		five.setBorder(null);
-		five.setBounds(500, 100, 70, 20);
+		five.setBounds(540, 120, 70, 20);
 		five.setText("fivePer:");
 		five.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		five.setForeground(new Color(184, 134, 11));
 		add(five);
 		fivePercent = new JTextField();
-		fivePercent.setBounds(570, 100, 35, 20);
+		fivePercent.setBounds(610, 120, 35, 20);
 		fivePercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(fivePercent);
 
 		six = new JLabel();
 		six.setBorder(null);
-		six.setBounds(620, 100, 65, 20);
+		six.setBounds(665, 120, 65, 20);
 		six.setText("sixPer:");
 		six.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
 		six.setForeground(new Color(184, 134, 11));
 		add(six);
 		sixPercent = new JTextField();
-		sixPercent.setBounds(685, 100, 35, 20);
+		sixPercent.setBounds(730, 120, 35, 20);
 		sixPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(sixPercent);
 
 		oneMult = new JLabel();
 		oneMult.setBorder(null);
-		oneMult.setBounds(20, 140, 80, 20);
+		oneMult.setBounds(20, 170, 110, 20);
 		oneMult.setText("oneMultPer:");
+		oneMult.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		oneMult.setForeground(new Color(184, 134, 11));
 		add(oneMult);
 		oneMultPercent = new JTextField();
-		oneMultPercent.setBounds(95, 140, 35, 20);
+		oneMultPercent.setBounds(130, 170, 35, 20);
 		oneMultPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(oneMultPercent);
 
 		twoMult = new JLabel();
 		twoMult.setBorder(null);
-		twoMult.setBounds(140, 140, 80, 20);
+		twoMult.setBounds(205, 170, 110, 20);
 		twoMult.setText("twoMultPer:");
+		twoMult.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		twoMult.setForeground(new Color(184, 134, 11));
 		add(twoMult);
 		twoMultPercent = new JTextField();
-		twoMultPercent.setBounds(215, 140, 35, 20);
+		twoMultPercent.setBounds(315, 170, 35, 20);
 		twoMultPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(twoMultPercent);
 
 		threeMult = new JLabel();
 		threeMult.setBorder(null);
-		threeMult.setBounds(260, 140, 80, 20);
+		threeMult.setBounds(390, 170, 125, 20);
 		threeMult.setText("threeMultPer:");
+		threeMult.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		threeMult.setForeground(new Color(184, 134, 11));
 		add(threeMult);
 		threeMultPercent = new JTextField();
-		threeMultPercent.setBounds(340, 140, 35, 20);
+		threeMultPercent.setBounds(515, 170, 35, 20);
 		threeMultPercent.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(threeMultPercent);
 
 		oneStar = new JLabel();
 		oneStar.setBorder(null);
-		oneStar.setBounds(620, 20, 100, 20);
+		oneStar.setBounds(590, 20, 140, 20);
 		oneStar.setText("oneStarScore:");
+		oneStar.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		oneStar.setForeground(new Color(184, 134, 11));
 		add(oneStar);
 		oneStarScore = new JTextField();
-		oneStarScore.setBounds(705, 20, 40, 20);
+		oneStarScore.setBounds(740, 20, 40, 20);
 		oneStarScore.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(oneStarScore);
 
 		twoStar = new JLabel();
 		twoStar.setBorder(null);
-		twoStar.setBounds(620, 50, 100, 20);
+		twoStar.setBounds(590, 50, 140, 20);
 		twoStar.setText("twoStarScore:");
+		twoStar.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		twoStar.setForeground(new Color(184, 134, 11));
 		add(twoStar);
 		twoStarScore = new JTextField();
-		twoStarScore.setBounds(710, 50, 40, 20);
+		twoStarScore.setBounds(740, 50, 40, 20);
 		twoStarScore.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(twoStarScore);
 
 		threeStar = new JLabel();
 		threeStar.setBorder(null);
-		threeStar.setBounds(620, 80, 100, 20);
+		threeStar.setBounds(590, 80, 140, 20);
 		threeStar.setText("threeStarScore:");
+		threeStar.setFont(new Font("Britannic Bold", Font.PLAIN, 20));
+		threeStar.setForeground(new Color(184, 134, 11));
 		add(threeStar);
 		threeStarScore = new JTextField();
-		threeStarScore.setBounds(715, 80, 40, 20);
+		threeStarScore.setBounds(740, 80, 40, 20);
 		threeStarScore.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		add(threeStarScore);
 
@@ -399,16 +417,22 @@ public class LevelBuilderView extends JPanel {
 		btnDisplayBoard.setPressedIcon(newBtnDisplayPressed);
 		add(btnDisplayBoard);
 
+		/*
 		ImageIcon builderBackground = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/builderBackground.png"));
 		ImageIcon newbldBackground = new ImageIcon(builderBackground.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
 		JLabel background = new JLabel(newbldBackground);
 		background.setBounds(0, 0, 800, 600);
-		//background.setIcon(new ImageIcon(
-		//		"src/sw/resource/image/levelbuilderbackground.png"));
-		add(background);
+		add(background);*/
 
 	}
 
+	@Override
+	public void paintComponent (Graphics g) {
+		ImageIcon background = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/builderBackground.png"));
+		ImageIcon newBackground = new ImageIcon(background.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
+		super.paintComponent(g);
+		g.drawImage(newBackground.getImage(), 0, 0, null);
+	}
 	/**
 	 * Getter for the Level field.
 	 * 

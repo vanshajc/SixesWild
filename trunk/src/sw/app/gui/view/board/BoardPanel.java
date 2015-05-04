@@ -1,5 +1,6 @@
 package sw.app.gui.view.board;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,7 +14,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TimerTask;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import sw.common.model.controller.BoardController;
@@ -164,6 +167,7 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 			Rectangle rec = new Rectangle(bc.getPreferredSize());
 			rec.setLocation(x, 0);
 			bc.setBounds(rec);
+			bc.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
 			// Add new component
 			add(bc);
@@ -184,6 +188,7 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 	void initializeColumns() {
 		for (int i = 0; i < boardSize.width; i++) {
 			columns.get(i).initialize(this, i);
+			//columns.get(i).setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		}
 	}
 
