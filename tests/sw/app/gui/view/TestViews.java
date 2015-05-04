@@ -1,6 +1,7 @@
 package sw.app.gui.view;
 
 import junit.framework.TestCase;
+import sw.app.Application;
 import sw.common.model.entity.Board;
 import sw.common.model.entity.Level;
 import sw.common.model.entity.Statistics;
@@ -9,6 +10,8 @@ import sw.common.system.factory.LevelFactory;
 public class TestViews extends TestCase{
 	
 	public void testView(){
+		Application.main(null);
+		
 		ScoreBoardView sbv = new ScoreBoardView();
 		sbv.initialize();
 		
