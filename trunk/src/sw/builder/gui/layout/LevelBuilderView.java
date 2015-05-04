@@ -393,7 +393,7 @@ public class LevelBuilderView extends JPanel {
 		btnDisplayBoard.setBackground(Color.WHITE);
 		btnDisplayBoard.setBorder(null);
 		btnDisplayBoard.setContentAreaFilled(false);
-		btnDisplayBoard.addActionListener(new RandomizeButtonController(blm, this));
+		btnDisplayBoard.addActionListener(new DisplayBoardController(blm, this));
 		btnDisplayBoard.setRolloverEnabled(true);
 		btnDisplayBoard.setRolloverIcon(newBtnDisplayRollover);
 		btnDisplayBoard.setPressedIcon(newBtnDisplayPressed);
@@ -883,10 +883,6 @@ public class LevelBuilderView extends JPanel {
 					if (s.charAt(2) == '0' || s.charAt(2) == '1'
 							|| s.charAt(2) == '2' || s.charAt(2) == '3'
 							|| s.charAt(2) == '*') {
-						if (s.charAt(0) == '6'
-								&& getModeList().equals("Elimination")) {
-							return false;
-						}
 						return true;
 					}
 				}

@@ -22,7 +22,7 @@ public class TestControllers extends TestCase{
 	LevelBuilderView lbv = lbjf.blm.lbv;
 	ArrayList<String> input  = new ArrayList<String>();
 	
-	input.add("20");
+	input.add("42");
 	input.add("Release");
 	input.add("0");
 	input.add("0");
