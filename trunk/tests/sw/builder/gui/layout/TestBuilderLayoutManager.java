@@ -10,7 +10,7 @@ public class TestBuilderLayoutManager extends TestCase{
 	BuilderLayoutManager blm;
 	protected void setUp(){
 	ApplicationLevelBuilder.main(null);
-	lbjf = new LevelBuilderJFrame();
+	//lbjf = new LevelBuilderJFrame();
 	blm = new BuilderLayoutManager(lbjf);
 	
 	
@@ -23,8 +23,8 @@ public class TestBuilderLayoutManager extends TestCase{
 	
 	public void testSwitchToScreen(){
 		blm.initailize();
-		blm.switchToLevelBuilder();
-		blm.switchToLevelBuilderMenu();
+		//blm.switchToLevelBuilder();
+		//blm.switchToLevelBuilderMenu();
 	}
 	
 	
