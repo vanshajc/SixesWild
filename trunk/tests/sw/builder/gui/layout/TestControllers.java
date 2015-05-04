@@ -57,6 +57,7 @@ public class TestControllers extends TestCase{
 	save.doClick();
 	JButton randomize = new JButton();
 	randomize.addActionListener(new RandomizeButtonController(blm, lbv));
+	assertTrue(lbv.getLvlField() == 42);
 	randomize.doClick();
 	JButton display = new JButton();
 	display.addActionListener(new DisplayBoardController(blm, lbv));
