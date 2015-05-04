@@ -128,7 +128,17 @@ public class TestMoveSelection extends TestCase{
 		assertTrue(swap.doMove());
 		
 		MouseEvent e = new MouseEvent(boardPanel, MouseEvent.MOUSE_PRESSED, 0, 0, 0, 0, 1, false, 0);
+		moveTester.mousePressed(e);
+		e = new MouseEvent(boardPanel, MouseEvent.MOUSE_DRAGGED, 0, 0, 0, 0, 1, false, 0);
+		moveTester.mouseDragged(e);
+		e = new MouseEvent(boardPanel, MouseEvent.MOUSE_RELEASED, 0, 0, 0, 0, 1, false, 0);
 		moveTester.selectionHandler(e);
+		
+		e = new MouseEvent(boardPanel, MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, 1, false, 0);
+		MoveRemove rem = new MoveRemove(lc, new MoveSelection(lc));
+		rem.mouseClicked(e);
+		rem.doMove();
+		
 	}
 		
 	

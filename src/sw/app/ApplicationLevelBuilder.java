@@ -10,7 +10,7 @@ import sw.builder.gui.layout.LevelBuilderJFrame;
 public class ApplicationLevelBuilder {
 	
 	/** Instance of the level builder application */
-	private LevelBuilderJFrame app;
+	private static LevelBuilderJFrame app;
 
 	/** Launch the application. */
 	public static void main(String[] args) {
@@ -37,5 +37,11 @@ public class ApplicationLevelBuilder {
 		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	/**
+	 * @return the frame created
+	 */
+	public static LevelBuilderJFrame getFrame(){
+		return app;
+	}
 }
 
