@@ -132,7 +132,7 @@ public class TestMoveSelection extends TestCase{
 		e = new MouseEvent(boardPanel, MouseEvent.MOUSE_DRAGGED, 0, 0, 0, 0, 1, false, 0);
 		moveTester.mouseDragged(e);
 		e = new MouseEvent(boardPanel, MouseEvent.MOUSE_RELEASED, 0, 0, 0, 0, 1, false, 0);
-		moveTester.selectionHandler(e);
+		moveTester.mouseReleased(e);
 		
 		e = new MouseEvent(boardPanel, MouseEvent.MOUSE_CLICKED, 0, 0, 0, 0, 1, false, 0);
 		MoveRemove rem = new MoveRemove(lc, new MoveSelection(lc));

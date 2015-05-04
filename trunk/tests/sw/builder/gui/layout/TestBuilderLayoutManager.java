@@ -8,8 +8,8 @@ public class TestBuilderLayoutManager extends TestCase{
 	BuilderLayoutManager blm;
 	
 	public void testSwitchToScreen(){
-		ApplicationLevelBuilder.main(null);
-		//lbjf = new LevelBuilderJFrame();
+		ApplicationLevelBuilder f = new ApplicationLevelBuilder();
+		lbjf = f.getFrame();
 		blm = new BuilderLayoutManager(lbjf);
 		
 		blm.initailize();
