@@ -6,7 +6,9 @@ import javax.swing.JButton;
 
 import junit.framework.TestCase;
 import sw.app.ApplicationLevelBuilder;
+import sw.builder.gui.controller.DisplayBoardController;
 import sw.builder.gui.controller.LoadButtonController;
+import sw.builder.gui.controller.RandomizeButtonController;
 import sw.builder.gui.controller.SaveButtonController;
 
 public class TestControllers extends TestCase{
@@ -53,6 +55,12 @@ public class TestControllers extends TestCase{
 	JButton save = new JButton();
 	save.addActionListener(new SaveButtonController(blm, lbv));
 	save.doClick();
+	JButton randomize = new JButton();
+	randomize.addActionListener(new RandomizeButtonController(blm, lbv));
+	randomize.doClick();
+	JButton display = new JButton();
+	display.addActionListener(new DisplayBoardController(blm, lbv));
+	display.doClick();
 	}
 	
 	
