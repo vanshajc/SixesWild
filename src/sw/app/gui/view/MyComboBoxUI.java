@@ -1,5 +1,7 @@
 package sw.app.gui.view;
 
+import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -18,6 +20,9 @@ public class MyComboBoxUI extends javax.swing.plaf.basic.BasicComboBoxUI {
 		btnArrow.setRolloverEnabled(true);
 		btnArrow.setRolloverIcon(newBtnArrowRollover);
 		btnArrow.setPressedIcon(newBtnArrowPressed);
+		btnArrow.setFocusPainted(false);
+		btnArrow.setBorderPainted(false);
+		btnArrow.setPreferredSize(new Dimension(100, 53));
 		
 		return btnArrow;
 	}
