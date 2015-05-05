@@ -5,6 +5,7 @@
 package sw.app.gui.view;
 
 
+/** The controlling interface for a view of the application */
 public interface IView {
 
 	/** Initialize the View, this method is called after View is created */
