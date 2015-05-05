@@ -17,7 +17,7 @@ public class GameInfoPanel extends JPanel {
 	
 	public GameInfoPanel() {
 		setBackground(Color.LIGHT_GRAY);
-		setSize(new Dimension(200, 15));
+		setSize(new Dimension(250, 15));
 		info.setForeground(new Color (184, 134, 11));
 		info.setFont(new Font("Britannic Bold", Font.PLAIN, 35));
 		info.setHorizontalAlignment(JLabel.CENTER);
@@ -26,7 +26,7 @@ public class GameInfoPanel extends JPanel {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(info, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+					.addComponent(info, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
