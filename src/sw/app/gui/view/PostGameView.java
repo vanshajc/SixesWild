@@ -1,6 +1,6 @@
 /**
  * @file PostGameView.java
- * @author Vanshaj Chowdhary
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
  */
 package sw.app.gui.view;
 
@@ -30,13 +30,23 @@ public class PostGameView extends JPanel implements IView {
 	
 	Level level;
 	
+	/** Label to display Level. */
 	JLabel lblLevelDisplay;
+	
+	/** Label to display Time. */
 	JLabel lblTimeDisplay;
+	
+	/** Label to display Score. */
 	JLabel lblScoreDisplay;
 
+	/** Loads the image for background. */
 	ImageIcon background = new ImageIcon(CreditScreenView.class.getResource("/sw/resource/image/secondBackground.png"));
 	ImageIcon newBackground = new ImageIcon(background.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
 
+	/**
+	 * PostGameView constructor.
+	 * @param level Level
+	 */
 	public PostGameView(Level level) {
 		this.level = level;
 		setBackground(Color.WHITE);
@@ -45,6 +55,9 @@ public class PostGameView extends JPanel implements IView {
 		//initialize();
 	}
 
+	/**
+	 * Initialize the view for the post-game screen.
+	 */
 	@Override
 	public void initialize() {
 		
@@ -163,6 +176,9 @@ public class PostGameView extends JPanel implements IView {
 		setLevel(level);
 	}
 
+	/**
+	 * Used the loaded image to draw the background.
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -174,6 +190,10 @@ public class PostGameView extends JPanel implements IView {
 		// Nothing to do
 	}
 	
+	/**
+	 * Use the just finished level to display on the post-game screen.
+	 * @param l Level to be used.
+	 */
 	public void setLevel(Level l) {
 		lblLevelDisplay.setText(l.toString());
 		lblScoreDisplay.setText(String.valueOf(l.getGame().getStats().getScore()));

@@ -1,5 +1,6 @@
 /**
  * @file MyComboBoxUI.java
+ * @author Trung-Nghia N. Huynh.
  */
 package sw.app.gui.view;
 
@@ -9,10 +10,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- * Class for a specific combo box for the view.
+ * Class for a customized JComboBox for displaying levels.
  */
 public class MyComboBoxUI extends javax.swing.plaf.basic.BasicComboBoxUI {
 
+	/**
+	 * Create a customized PopUpMenu JButton.
+	 */
 	@Override
 	protected JButton createArrowButton() {
 		ImageIcon buttonArrow = new ImageIcon(PlayGameScreenView.class.getResource("/sw/resource/image/button_comboBox.png"));

@@ -1,6 +1,6 @@
 /**
  * @file LayoutManager.java
- * @author Vanshaj Chowdhary
+ * @author Vanshaj Chowdhary, Trung-Nghia Huynh.
  */
 package sw.app.gui.view;
 

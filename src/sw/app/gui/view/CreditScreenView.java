@@ -17,7 +17,6 @@ import sw.app.gui.controller.MainMenuController;
  * Prepare the view for the Credits screen.
  * @file CreditScreenView.java
  * @author Trung-Nghia N. Huynh
- * Creation date: April 13, 2015 - 5:00 PM
  */
 
 @SuppressWarnings("serial")

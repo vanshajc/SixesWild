@@ -13,6 +13,11 @@ import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.LevelManager;
 import sw.common.system.manager.MementoManager;
 
+/**
+ * @file SixesWildJFrame.java
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
+ */
+
 /** The main Sixes Wild application frame */
 public class SixesWildJFrame extends JFrame {
 	

@@ -18,10 +18,16 @@ import sw.app.gui.controller.MainMenuController;
 import sw.common.model.entity.Level;
 
 /**
+ * @file ScoreBoardView.java
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
+ */
+
+/**
  * Class for representing the scoreboard view.
  */
 public class ScoreBoardView extends JPanel implements IView {
 	
+	/** Coordinates of the entries. */
 	int yPos = 10;
 	int gap = 10;
 	int count = 0;
@@ -35,11 +41,17 @@ public class ScoreBoardView extends JPanel implements IView {
 	
 	JScrollPane scrollPane;
 	
+	/**
+	 * ScoreBoardView constructor.
+	 */
 	public ScoreBoardView() {
 		setSize(new Dimension(800, 600));
 		//initialize();
 	}
 	
+	/**
+	 * Initialize the view for the scoreboard screen.
+	 */
 	public void initialize(){
 		setLayout(null);
 		
@@ -106,6 +118,10 @@ public class ScoreBoardView extends JPanel implements IView {
 	
 	}
 	
+	/**
+	 * Set the size of the scoreboard.
+	 * @return Size of the JPanel.
+	 */
 	public Dimension getPrefferredSize() {
 		return new Dimension(800, 600);
 	}
@@ -116,6 +132,9 @@ public class ScoreBoardView extends JPanel implements IView {
 		invalidate();
 	}
 	
+	/**
+	 * Used the loaded image to draw the background.
+	 */
 	public void paintComponent(Graphics g) {
 
 		ImageIcon backgroundImg = new ImageIcon(ScoreBoardView.class.getResource("/sw/resource/image/secondBackground.png"));
@@ -124,6 +143,10 @@ public class ScoreBoardView extends JPanel implements IView {
 		g.drawImage(newBackground.getImage(), 0, 0, null);
 	}
 	
+	/**
+	 * Use the completed levels to display the statistics on the scoreboard screen.
+	 * @param level Level to be used.
+	 */
 	public void addLevelStats(Level level) {
 		
 		if (level == null) {

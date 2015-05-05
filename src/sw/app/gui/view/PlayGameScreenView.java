@@ -1,6 +1,6 @@
 /**
  * @file PlayGameScreenView.java
- * @author Vanshaj Chowdhary
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
  */
 package sw.app.gui.view;
 
@@ -33,14 +33,21 @@ public class PlayGameScreenView extends JPanel implements IView{
 	LevelManager lvlm;
 	ArrayList<Level> lvlList;
 	
+	/** The list of levels to play. */
 	JComboBox<String> levelList;
 	
+	/**
+	 * PlayGameScreenView constructor.
+	 */
 	public PlayGameScreenView() {
 		this.lvlm = SixesWildJFrame.getLevelManager();	
 		this.lvlList = lvlm.getLevels();
 		setLayout(null);
 	}
 	
+	/**
+	 * Initialize the view for game play. 
+	 */
 	public void initialize() {
 		
 		JLabel lblLevel = new JLabel("Level");
@@ -113,50 +120,31 @@ public class PlayGameScreenView extends JPanel implements IView{
 		background.setBackground(Color.WHITE);
 		background.setBounds(0, 0, 800, 600);
 		add(background);
-		/*
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
-					.addComponent(btnStartGame, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(112)
-					.addComponent(lblLevel)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(levelList, 0, 143, Short.MAX_VALUE)
-					.addGap(146))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(124)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblLevel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-						.addComponent(levelList, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnBack)
-						.addComponent(btnStartGame))
-					.addContainerGap())
-		);*/
 		setLayout(null);
 	}
 
+	/**
+	 * Remove all components from the board.
+	 */
 	@Override
 	public void cleanup() {
 		levelList.setSelectedIndex(0);		
 	}
 	
+	/**
+	 * Add a level to the list to play.
+	 * @param level Level to be added
+	 */
 	void addLevel(Level level) {
 		if (level != null) {
 			levelList.addItem(level.toString());
 		}
 	}
 	
+	/**
+	 * Getters for the list of levels.
+	 * @return the level
+	 */
 	public Level getSelectedLevel() {
 		return lvlm.getLevels().get(levelList.getSelectedIndex());
 	}

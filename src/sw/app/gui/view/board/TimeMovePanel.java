@@ -20,11 +20,17 @@ import sw.common.system.manager.TimerTaskManager;
 import java.awt.Color;
 
 /**
+ * @file TimeMovePanel.java
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
+ */
+
+/**
  * Class for representing the panel with the move and time
  */
 @SuppressWarnings("serial")
 public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 	
+	/** Labels for the information. */
 	JLabel timeLabel;
 	JLabel time;
 	JLabel moveLabel;
@@ -42,6 +48,9 @@ public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 	Time alarm;
 	ActionListener listener;	
 	
+	/**
+	 * TimeMovePanel constructor.
+	 */
 	public TimeMovePanel() {		
 		setBackground(Color.LIGHT_GRAY);		
 		
@@ -96,27 +105,45 @@ public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 	// IMovePanel methods
 	//
 	
+	/**
+	 * Get the time.
+	 */
 	public Time getTime() {
 		return Time.valueOf(this.time.getText());
 		//return stats.getTime();
 	}
 	
+	/**
+	 * Get the countdown time.
+	 */
 	public void setCountDown(boolean countDown) {
 		this.countDown = countDown;
 	}
 	
+	/**
+	 * Set the time.
+	 */
 	public void setTime(Time time) {
 		this.time.setText(time.toString());
 	}	
 	
+	/**
+	 * Start the timer.
+	 */
 	public void startTimer() {
 		TimerTaskManager.scheduleTask(timerTask, new timerTask(), timerPeriod);
 	}
 	
+	/**
+	 * Stop the timer.
+	 */
 	public void stopTimer() {
 		TimerTaskManager.cancelTask(timerTask);
 	}
 	
+	/**
+	 * Set the alarm.
+	 */
 	public void setAlarm(Time time, ActionListener al) {
 		listener = al;
 		alarm = time;
@@ -126,10 +153,16 @@ public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 	// IMovePanel methods
 	//
 	
+	/**
+	 * Set the move.
+	 */
 	public void setMove(int move) {
 		this.move.setText(Integer.toString(move));
 	}
 	
+	/**
+	 * Get the move.
+	 */
 	public int getMove() {
 		return Integer.parseInt(this.move.getText());
 	}	
@@ -138,6 +171,10 @@ public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 	// pseudo-IView methods
 	//	
 	
+	/**
+	 * Set the time and move for the game.
+	 * @param stats Statistics
+	 */
 	public void initialize(Statistics stats) {
 		this.stats = stats;
 		

@@ -1,6 +1,6 @@
 /**
  *  @file   PwrUpSwapActionListener.java
- *  @author Tony Vu, Vanshaj Chowdhary
+ *  @author Tony Vu, Vanshaj Chowdhary, Trung-Nghia N. Huynh.
  *  @since  Apr 12, 2015
  */
 package sw.common.model.controller;

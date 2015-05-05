@@ -5,11 +5,16 @@ import java.awt.event.ActionListener;
 
 import sw.app.gui.view.LayoutManager;
 
+/**
+ * @file MainMenuController.java
+ * @author Trung-Nghia N. Huynh
+ */
+
 /** Controller for the main menu button */
 public class MainMenuController implements ActionListener {
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	/**
+	 * Switch the Main Menu.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

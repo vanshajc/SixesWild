@@ -24,6 +24,11 @@ import sw.common.system.manager.IResourceManager;
 import sw.common.system.manager.TimerTaskManager;
 
 /**
+ * @file BoardPanel.java
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
+ */
+
+/**
  * Class for representing the board view.
  */
 public class BoardPanel extends JPanel implements IBoardPanel {
@@ -61,24 +66,33 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 	/** The preferred size */
 	Dimension preferredSize;
 
+	/**
+	 * BoardPanel constructor.
+	 */
 	public BoardPanel() {
 	}
 
+	/**
+	 * BoardPanel constructor
+	 * @param level Level
+	 */
 	public BoardPanel(Level level) {
 		setLevel(level);
 	}
 
+	/**
+	 * BoardPanel constructor
+	 * @param board Board
+	 * @throws IOException
+	 */
 	public BoardPanel(Board board) throws IOException {
 		setBoard(board);
 		setResouceManager(new CommonResourceManager());
 		initializeLayout();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * sw.app.gui.view.board.IBoardPanel#setLevel(sw.common.model.entity.Level)
+	/**
+	 * Setup the board to be played.
 	 */
 	@Override
 	public void setLevel(Level level) {
@@ -106,6 +120,10 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		this.boardSize = board.size();
 	}
 
+	/**
+	 * Setter for ResourceManager
+	 * @param resManager IResourceManager
+	 */
 	void setResouceManager(IResourceManager resManager) {
 		this.resManager = resManager;
 
@@ -122,8 +140,8 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 //		}
 	}
 
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IBoardPanel#setBoardController(sw.common.model.controller.BoardController)
+	/**
+	 * Setter for the BoardController
 	 */
 	public void setBoardController(BoardController bc) {
 		MouseListener[] ml = this.getMouseListeners();
@@ -190,10 +208,8 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sw.app.gui.view.board.IBoardPanel#initialize()
+	/**
+	 * Initialize the view for the columns.
 	 */
 	@Override
 	public void initialize() {
@@ -207,10 +223,8 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 				refreshPeriod);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sw.app.gui.view.board.IBoardPanel#cleanup()
+	/**
+	 * Remove all the components from the board.
 	 */
 	@Override
 	public void cleanup() {
@@ -228,10 +242,8 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		removeAll();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sw.app.gui.view.board.IBoardPanel#clear()
+	/**
+	 * Remove the tiles in each column.
 	 */
 	@Override
 	public void clear() {
@@ -250,10 +262,8 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		return updated;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	/**
+	 * Draw the squares.
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
@@ -301,6 +311,11 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		return null;
 	}
 
+	/**
+	 * Getter for the Column.
+	 * @param i int
+	 * @return Column
+	 */
 	Column getColumn(int i) {
 		return board.getColumn(i);
 	}
@@ -310,10 +325,8 @@ public class BoardPanel extends JPanel implements IBoardPanel {
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sw.app.gui.view.board.IBoardPanel#getBoard()
+	/**
+	 * Getter for the Board.
 	 */
 	@Override
 	public IBoard getBoard() {

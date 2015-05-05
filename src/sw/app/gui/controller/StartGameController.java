@@ -14,11 +14,20 @@ import sw.app.gui.view.PlayGameScreenView;
 import sw.app.gui.view.SixesWildJFrame;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
+
+/**
+ * @file StartGameController.java
+ * @author Trung-Nghia N. Huynh
+ */
+
 /**
  * Controller for switching to the game view.
  */
 public class StartGameController implements ActionListener {
 	
+	/**
+	 * Switch to the view of the chosen level.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JPanel current = LayoutManager.getCurrentView();
@@ -35,7 +44,4 @@ public class StartGameController implements ActionListener {
 		
 		lvlm.startLevel();
 	}
-	
-	
-
 }

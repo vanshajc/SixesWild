@@ -8,9 +8,12 @@ import javax.swing.JPanel;
 import sw.app.ApplicationLevelBuilder;
 import sw.app.gui.view.IView;
 import sw.common.model.entity.Board;
+
 /**
- * @author scyevchak
+ * @file SplashScreenBuilderView.java
+ * @author Steven Yevchak, Trung-Nghia N. Huynh.
  */
+
 /** Gui of splash screen. */
 public class SplashScreenBuilderView extends JPanel implements IView{
 	private static final long serialVersionUID = 1L;

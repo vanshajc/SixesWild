@@ -6,9 +6,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
+ * @file SplashScreenView.java
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
+ */
+
+/**
  * Class for representing the splash screen view.
  */
 public class SplashScreenView extends JPanel implements IView {
+	
+	/**
+	 * SplashScreenView constructor.
+	 */
 	public SplashScreenView() {
 	}
 	
@@ -18,6 +27,9 @@ public class SplashScreenView extends JPanel implements IView {
 
 	public void cleanup() {}
 	
+	/**
+	 * Draw the background of the screen using the pre-drawn image.
+	 */
 	public void paintComponent(Graphics g) {
 		ImageIcon splashScreen = new ImageIcon(SplashScreenView.class.getResource(res));
 		ImageIcon newSplashScreen = new ImageIcon(splashScreen.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));

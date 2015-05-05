@@ -1,6 +1,6 @@
 /**
  * @file IView.java
- * @author Vanshaj Chowdhary, Tony Vu
+ * @author Vanshaj Chowdhary, Tony Vu.
  */
 package sw.app.gui.view;
 

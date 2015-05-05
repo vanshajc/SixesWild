@@ -1,6 +1,6 @@
 /**
  * @file MainMenuView.java
- * @author Vanshaj Chowdhary
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
  */
 package sw.app.gui.view;
 
@@ -31,8 +31,8 @@ public class MainMenuView extends JPanel implements IView {
 		//initialize();
 	}
 
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.IView#initialize()
+	/**
+	 * Initialize the view for the Main Menu.
 	 */
 	@Override
 	public void initialize() {
@@ -113,6 +113,6 @@ public class MainMenuView extends JPanel implements IView {
 	 */
 	@Override
 	public void cleanup() {
-
+		// TODO Auto-generated method stub	
 	}
 }
