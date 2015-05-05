@@ -9,14 +9,29 @@ import sw.common.model.entity.Level;
 /** The interface for displaying the Game */
 public interface IGameplayView {
 	
+	/**
+	 * @param level the level to be set
+	 */
 	void setLevel(Level level);
 	
+	/**
+	 * @return the board panel
+	 */
 	IBoardPanel getBoardPanel();
 	
+	/**
+	 * @return the score panel
+	 */
 	IScorePanel getScorePanel();
 	
+	/**
+	 * @return the time panel
+	 */
 	ITimePanel  getTimePanel();
 	
+	/**
+	 * @return the move panel
+	 */
 	IMovePanel  getMovePanel();
 
 }

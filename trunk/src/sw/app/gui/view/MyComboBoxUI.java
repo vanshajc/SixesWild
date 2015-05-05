@@ -1,3 +1,6 @@
+/**
+ * @file MyComboBoxUI.java
+ */
 package sw.app.gui.view;
 
 import java.awt.Dimension;
@@ -5,6 +8,9 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * Class for a specific combo box for the view.
+ */
 public class MyComboBoxUI extends javax.swing.plaf.basic.BasicComboBoxUI {
 
 	@Override

@@ -5,7 +5,6 @@
 package sw.app.gui.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -22,6 +21,9 @@ import sw.app.gui.controller.StartGameController;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
 
+/**
+ * Class for representing the play game menu view.
+ */
 public class PlayGameScreenView extends JPanel implements IView{
 	/**
 	 * 

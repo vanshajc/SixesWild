@@ -21,6 +21,10 @@ import sw.app.gui.controller.PostGameController;
 import sw.app.gui.controller.StartGameController;
 import sw.common.model.entity.Level;
 
+/**
+ * Class for representing the view for when you win/loss a game.
+ *
+ */
 @SuppressWarnings("serial")
 public class PostGameView extends JPanel implements IView {
 	

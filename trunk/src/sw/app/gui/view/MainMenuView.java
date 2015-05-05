@@ -1,3 +1,7 @@
+/**
+ * @file MainMenuView.java
+ * @author Vanshaj Chowdhary
+ */
 package sw.app.gui.view;
 
 import java.awt.Color;
@@ -7,13 +11,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import sw.app.gui.controller.CreditScreenController;
 import sw.app.gui.controller.PlayGameScreenController;
 import sw.app.gui.controller.ScoreboardScreenController;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.SwingConstants;
 
 public class MainMenuView extends JPanel implements IView {
 	/**
