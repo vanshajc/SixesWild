@@ -8,6 +8,9 @@ import sw.app.gui.view.LayoutManager;
 /** Controller for the main menu button */
 public class MainMenuController implements ActionListener {
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		LayoutManager.switchToMainMenu(true);

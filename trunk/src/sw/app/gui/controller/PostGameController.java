@@ -8,8 +8,14 @@ import sw.app.gui.view.SixesWildJFrame;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
 
+/**
+ * Class for the controller for reaching the post game
+ */
 public class PostGameController implements ActionListener {
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		LevelManager lvlm = SixesWildJFrame.getLevelManager();
