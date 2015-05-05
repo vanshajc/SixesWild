@@ -200,6 +200,9 @@ public class Board implements IBoard, IBoardSelectionManager, IBoardLocationMana
 				if (this.getSquare(curr).isOnlySix()){
 					b.getSquare(curr).setOnlySix(true);
 					b.getSquare(curr).setSelectable(false);
+					if (this.getTile(curr)!=null && this.getTile(curr).getValue() == 6){
+						b.replace(curr, this.getTile(curr));
+					}
 					continue;
 				}
 				if (!this.getSquare(curr).isSelectable()){
