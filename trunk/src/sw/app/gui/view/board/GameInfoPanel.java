@@ -9,6 +9,9 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
 
+/**
+ * Class for representing the game info view.
+ */
 public class GameInfoPanel extends JPanel {
 	JLabel info = new JLabel();
 	

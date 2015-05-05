@@ -5,19 +5,18 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import sw.common.model.entity.Column;
 import sw.common.model.entity.Square;
 import sw.common.model.entity.Tile;
-import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 
+/**
+ * Class for representing the column view.
+ */
 public class BoardColumn extends JPanel {
 
 	/** GENERATED DO NOT CHANGE */

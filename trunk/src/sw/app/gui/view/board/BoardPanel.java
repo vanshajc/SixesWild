@@ -3,20 +3,15 @@ package sw.app.gui.view.board;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import sw.common.model.controller.BoardController;
@@ -28,6 +23,9 @@ import sw.common.system.manager.CommonResourceManager;
 import sw.common.system.manager.IResourceManager;
 import sw.common.system.manager.TimerTaskManager;
 
+/**
+ * Class for representing the board view.
+ */
 public class BoardPanel extends JPanel implements IBoardPanel {
 
 	/** GENERATED DO NOT CHANGE */

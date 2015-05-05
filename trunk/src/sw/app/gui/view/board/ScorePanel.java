@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
+/**
+ * Class for representing the actual score panel.
+ */
 public class ScorePanel extends JPanel implements IScorePanel {
 	
 	JLabel star0;
