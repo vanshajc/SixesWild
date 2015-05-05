@@ -144,7 +144,7 @@ public class GameplayView extends JPanel implements IGameplayView, IView {
 		quitButton.setPressedIcon(newBtnQuitPressed);
 		add(quitButton);
 		
-		gameInfoPanel.setBounds(0, 15, 200, 36);
+		gameInfoPanel.setBounds(0, 15, 250, 36);
 		add(gameInfoPanel);
 		
 		powerUpPanel.setBounds(40, 100, 77, 300);
