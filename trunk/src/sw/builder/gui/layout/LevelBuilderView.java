@@ -28,10 +28,15 @@ import sw.builder.gui.controller.SaveButtonController;
 import sw.common.model.entity.Board;
 import sw.common.system.manager.TimerTaskManager;
 
+/**
+ * @file LevelBuilderView.java
+ * @author Trung-Nghia N. Huynh.
+ */
+
 /** GUI class for level builder view. */
 public class LevelBuilderView extends JPanel {
 
-	/** The object theat manages views. */
+	/** The object that manages views. */
 	BuilderLayoutManager blm;
 	/** The board object that will be set. */
 	public static Board board;
@@ -416,14 +421,6 @@ public class LevelBuilderView extends JPanel {
 		btnDisplayBoard.setRolloverIcon(newBtnDisplayRollover);
 		btnDisplayBoard.setPressedIcon(newBtnDisplayPressed);
 		add(btnDisplayBoard);
-
-		/*
-		ImageIcon builderBackground = new ImageIcon(LevelBuilderView.class.getResource("/sw/resource/image/builderBackground.png"));
-		ImageIcon newbldBackground = new ImageIcon(builderBackground.getImage().getScaledInstance(800, 573, java.awt.Image.SCALE_SMOOTH));
-		JLabel background = new JLabel(newbldBackground);
-		background.setBounds(0, 0, 800, 600);
-		add(background);*/
-
 	}
 
 	@Override
@@ -874,6 +871,10 @@ public class LevelBuilderView extends JPanel {
 		return board1;
 	}
 
+	/**
+	 * Setup the Board.
+	 * @param s ArrayList<String>
+	 */
 	public void setBoard(ArrayList<String> s) {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -882,6 +883,10 @@ public class LevelBuilderView extends JPanel {
 		}
 	}
 
+	/**
+	 * Setup the Board randomly.
+	 * @param s ArrayList<String>
+	 */
 	public void setBoardRandom(ArrayList<String> s) {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {

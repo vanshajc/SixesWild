@@ -11,10 +11,14 @@ import sw.builder.gui.layout.LevelBuilderJFrame;
 import sw.builder.gui.layout.LevelBuilderView;
 
 /**
- * @author scyevchak
+ * @file BuilderLayoutManager.java
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh, Steven Yevchak.
  */
+
 /** Constructor for the object that controls which screens are displayed. */
 public class BuilderLayoutManager {
+	
+	/** The screens to be displayed. */
 	LevelBuilderJFrame lbjf;
 	SplashScreenBuilderView ssbv;
 	LevelBuilderView lbv;
@@ -22,9 +26,14 @@ public class BuilderLayoutManager {
 	//BuilderBoardPanel bbp;
 	JPanel current = null;
 	
+	/**
+	 * BuilderLayoutManager constructor.
+	 * @param lbjf
+	 */
 	public BuilderLayoutManager(LevelBuilderJFrame lbjf){
 		this.lbjf = lbjf;
 	}
+	
 	/**
 	 * Initializes all views.
 	 */
@@ -33,12 +42,14 @@ public class BuilderLayoutManager {
 		ssbv = new SplashScreenBuilderView(this);
 		lbmv = new LevelBuilderMenuView(this);
 	}
+	
 	/**
 	 * Switchs to the level builder.
 	 */
 	public void switchToLevelBuilder(){
 		switchToScreen(lbv);
 	}
+	
 	/**
 	 * Switches to the main menu.
 	 */

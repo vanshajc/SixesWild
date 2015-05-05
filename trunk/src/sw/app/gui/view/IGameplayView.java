@@ -6,6 +6,11 @@ import sw.app.gui.view.board.IScorePanel;
 import sw.app.gui.view.board.ITimePanel;
 import sw.common.model.entity.Level;
 
+/**
+ * @file IGameplayView.java
+ * @author Trung-Nghia N. Huynh, Steven Yevchak.
+ */
+
 /** The interface for displaying the Game */
 public interface IGameplayView {
 	

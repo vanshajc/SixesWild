@@ -1,6 +1,6 @@
 /**
  * @file PowerUpPanel.java
- * @author Vanshaj Chowdhary, ANDREW PUT YOUR NAME HERE, Tony Vu
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh, Tony Vu
  */
 package sw.app.gui.view.board;
 

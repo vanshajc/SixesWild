@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import sw.app.gui.view.LayoutManager;
 
 /**
+ * @file ScoreboardScreenController.java
+ * @author Trung-Nghia N. Huynh
+ */
+
+/**
  * Controller for switching to scoreboard view.
  */
 public class ScoreboardScreenController implements ActionListener {

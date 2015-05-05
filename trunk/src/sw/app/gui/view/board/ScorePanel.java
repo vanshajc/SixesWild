@@ -12,6 +12,11 @@ import javax.swing.JProgressBar;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
 /**
+ * @file ScorePanel.java
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
+ */
+
+/**
  * Class for representing the actual score panel.
  */
 public class ScorePanel extends JPanel implements IScorePanel {
@@ -26,6 +31,9 @@ public class ScorePanel extends JPanel implements IScorePanel {
 	/** default star image */
 	String defaultStar = "/sw/resource/image/star.png";
 	
+	/**
+	 * ScorePanel constructor.
+	 */
 	public ScorePanel() {
 		setStarImage(defaultStar);
 		
@@ -89,24 +97,24 @@ public class ScorePanel extends JPanel implements IScorePanel {
 		setLayout(groupLayout);
 	}
 	
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IScorePanel#setMaximum(int)
+	/**
+	 * Set the maximum score.
 	 */
 	@Override
 	public void setMaximum(int max) {
 		this.score.setMaximum(max);
 	}
 	
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IScorePanel#setMinimum(int)
+	/**
+	 * Set the minimum score.
 	 */
 	@Override
 	public void setMinimum(int min) {
 		this.score.setMinimum(min);
 	}
 	
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IScorePanel#setScore(int)
+	/**
+	 * Set the score.
 	 */
 	@Override
 	public void setScore(int score) {
@@ -119,16 +127,16 @@ public class ScorePanel extends JPanel implements IScorePanel {
 		return (s.length() <=1) ? s : (reverse(s.substring(1)) + s.charAt(0));
 	}
 	
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IScorePanel#setStarImage(java.lang.String)
+	/**
+	 * Set the image for the stars.
 	 */
 	@Override
 	public void setStarImage(String location) {
 		starImg = new ImageIcon(ScorePanel.class.getResource(location));
 	}
 
-	/* (non-Javadoc)
-	 * @see sw.app.gui.view.board.IScorePanel#setStar(int)
+	/**
+	 * Display the stars according to the score.
 	 */
 	@Override
 	public void setStar(int numStar) {

@@ -7,6 +7,11 @@ import sw.common.model.controller.BoardController;
 import sw.common.model.entity.IBoard;
 import sw.common.model.entity.Level;
 
+/**
+ * @file IBoardPanel.java
+ * @author Trung-Nghia N. Huynh, Tony Vu.
+ */
+
 /** Interface for displaying the Board */
 public interface IBoardPanel extends IView {
 

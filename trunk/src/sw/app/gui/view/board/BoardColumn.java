@@ -15,6 +15,11 @@ import sw.common.model.entity.Tile;
 import sw.common.system.manager.IResourceManager;
 
 /**
+ * @file BoardColumn.java
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
+ */
+
+/**
  * Class for representing the column view.
  */
 public class BoardColumn extends JPanel {
@@ -59,6 +64,11 @@ public class BoardColumn extends JPanel {
 		initialize(boardPanel, i);
 	}
 
+	/**
+	 * Initialize the view for the board.
+	 * @param boardPanel BoardPanel
+	 * @param i int
+	 */
 	void initialize(BoardPanel boardPanel, int i) {
 		this.colIdx = i;
 		this.column = boardPanel.board.getColumn(i);
@@ -189,6 +199,9 @@ public class BoardColumn extends JPanel {
 		}
 	}
 
+	/**
+	 * Draw the squares that contain the tiles.
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

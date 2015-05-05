@@ -9,12 +9,20 @@ import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
 
 /**
+ * @file PostGameController.java
+ * @author Trung-Nghia N. Huynh
+ */
+
+/**
  * Class for the controller for reaching the post game
  */
 public class PostGameController implements ActionListener {
 	
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	/**
+	 * Switch to Main Menu screen,
+	 * switch back to the screen of last level,
+	 * or the screen of the next level
+	 * based on the input.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

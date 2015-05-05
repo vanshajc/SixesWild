@@ -7,6 +7,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import sw.app.gui.view.IView;
 
+/**
+ * @file LevelBuilderJFrame.java
+ * @author Trung-Nghia N. Huynh.
+ */
+
 /** JFrame for the Level Builder Application. */
 public class LevelBuilderJFrame extends JFrame implements IView{
 

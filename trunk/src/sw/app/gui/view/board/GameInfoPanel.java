@@ -10,11 +10,19 @@ import java.awt.Color;
 import java.awt.Font;
 
 /**
+ * @file GameInfoPanel.java
+ * @author Trung-Nghia N. Huynh.
+ */
+
+/**
  * Class for representing the game info view.
  */
 public class GameInfoPanel extends JPanel {
 	JLabel info = new JLabel();
 	
+	/**
+	 * GameInfoPanel constructor.
+	 */
 	public GameInfoPanel() {
 		setBackground(Color.LIGHT_GRAY);
 		setSize(new Dimension(250, 15));
@@ -38,6 +46,10 @@ public class GameInfoPanel extends JPanel {
 		setLayout(groupLayout);
 	}
 	
+	/**
+	 * Setter for GameInfroPanel.
+	 * @param name String
+	 */
 	public void setLevelName(String name) {
 		info.setText(name);
 	}

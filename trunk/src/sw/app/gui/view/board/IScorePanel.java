@@ -1,6 +1,11 @@
 package sw.app.gui.view.board;
 
 /**
+ * @file IScorePanel.java
+ * @author Vanshaj Chowdhary, Trung-Nghia N. Huynh.
+ */
+
+/**
  * Interface for the score panel
  */
 public interface IScorePanel {
