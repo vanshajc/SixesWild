@@ -17,6 +17,9 @@ import javax.swing.SwingConstants;
 import sw.app.gui.controller.MainMenuController;
 import sw.common.model.entity.Level;
 
+/**
+ * Class for representing the scoreboard view.
+ */
 public class ScoreBoardView extends JPanel implements IView {
 	
 	int yPos = 10;

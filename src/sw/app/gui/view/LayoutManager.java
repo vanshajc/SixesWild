@@ -107,12 +107,18 @@ public class LayoutManager {
 		
 	}
 
+	/**
+	 * Initializes the current view.
+	 */
 	public static void initCurrentView() {		
 		if (current instanceof IView) {
 			((IView) current).initialize();
 		}
 	}
 
+	/**
+	 * @return the current view
+	 */
 	public static JPanel getCurrentView() {
 		return current;
 	}
