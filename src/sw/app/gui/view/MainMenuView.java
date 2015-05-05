@@ -17,16 +17,23 @@ import sw.app.gui.controller.CreditScreenController;
 import sw.app.gui.controller.PlayGameScreenController;
 import sw.app.gui.controller.ScoreboardScreenController;
 
+/**
+ * Class for representing the Main menu view.
+ */
 public class MainMenuView extends JPanel implements IView {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -1717902879125448300L;	
 
+	/**
+	 * Construct a main menu view.
+	 */
 	public MainMenuView() {		
 		//initialize();
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.IView#initialize()
+	 */
 	@Override
 	public void initialize() {
 		setLayout(null);
@@ -94,10 +101,16 @@ public class MainMenuView extends JPanel implements IView {
 		add(background);
 	}
 
+	/**
+	 * @return the size of the panel
+	 */
 	public Dimension getPrefferredSize() {
 		return new Dimension(800, 600);
 	}
 
+	/* (non-Javadoc)
+	 * @see sw.app.gui.view.IView#cleanup()
+	 */
 	@Override
 	public void cleanup() {
 

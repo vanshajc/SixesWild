@@ -23,14 +23,12 @@ import sw.common.model.entity.Game;
  */
 public class PowerUpPanel extends JPanel {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4058514218265371590L;
 	JButton btnSwap;
 	JButton btnShuffle;
 	JButton btnRemove;
 	
+	/** Variables for the location of the images */
 	String btnSwapPath = "/sw/resource/image/button_swap.png";
 	String btnSwapRolloverPath = "/sw/resource/image/button_swap_Rollover.png";
 	String btnSwapPressedPath = "/sw/resource/image/button_swap_Pressed.png";
@@ -64,6 +62,9 @@ public class PowerUpPanel extends JPanel {
 	ImageIcon buttonRemovePressed = new ImageIcon(PowerUpPanel.class.getResource(btnRemovePressedPath));
 	ImageIcon newBtnRemovePressed = new ImageIcon(buttonRemovePressed.getImage().getScaledInstance(77, 77, java.awt.Image.SCALE_SMOOTH));
 	
+	/**
+	 * Constructs a powerup panel
+	 */
 	public PowerUpPanel() {
 		setOpaque(false);
 		setBorder(null);
@@ -128,6 +129,10 @@ public class PowerUpPanel extends JPanel {
 		setLayout(groupLayout);
 	}
 	
+	/**
+	 * Sets the powerups
+	 * @param game the current game
+	 */
 	public void setPwrUp(Game game) {
 		if (game.getPwrUps()[Game.PWRUP_REMOVE] == 0) {
 			btnRemove.setEnabled(false);

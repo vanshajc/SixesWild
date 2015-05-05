@@ -19,6 +19,9 @@ import sw.common.system.manager.TimerTaskManager;
 
 import java.awt.Color;
 
+/**
+ * Class for representing the panel with the move and time
+ */
 @SuppressWarnings("serial")
 public class TimeMovePanel extends JPanel implements ITimePanel, IMovePanel {
 	
