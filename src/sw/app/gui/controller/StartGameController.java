@@ -14,6 +14,9 @@ import sw.app.gui.view.PlayGameScreenView;
 import sw.app.gui.view.SixesWildJFrame;
 import sw.common.model.entity.Level;
 import sw.common.system.manager.LevelManager;
+/**
+ * Controller for switching to the game view.
+ */
 public class StartGameController implements ActionListener {
 	
 	@Override
